@@ -30,6 +30,7 @@
           "settings": {
             "tier": "green",
             "featured": false,
+            "image": "shopify://shop_images/coffee-beat.webp",
             "title": "Green Line",
             "text": "Everyday espresso, always on. The dependable base of the range.",
             "button_label": "See Our Farms",
@@ -41,6 +42,7 @@
           "settings": {
             "tier": "gold",
             "featured": true,
+            "image": "shopify://shop_images/gold.webp",
             "title": "Gold Line",
             "text": "Rare allocation lots, the microlots that carry the story.",
             "button_label": "See Our Farms",
@@ -52,6 +54,7 @@
           "settings": {
             "tier": "silver",
             "featured": false,
+            "image": "shopify://shop_images/silver.webp",
             "title": "Silver Line",
             "text": "Seasonal specialty from named producers, roasted for filter.",
             "button_label": "See Our Farms",
@@ -78,7 +81,7 @@
           "type": "heading",
           "settings": {
             "heading": "More than a bag of coffee.",
-            "heading_size": "h1"
+            "heading_size": "hxxl"
           }
         },
         "text": {
@@ -109,8 +112,8 @@
         "image_behavior": "none",
         "content_layout": "no-overlap",
         "desktop_content_position": "middle",
-        "desktop_content_alignment": "left",
-        "mobile_content_alignment": "left",
+        "desktop_content_alignment": "center",
+        "mobile_content_alignment": "center",
         "section_color_scheme": "scheme-3",
         "color_scheme": "scheme-3",
         "padding_top": 0,
@@ -153,7 +156,8 @@
         "text": "Taste what process alone can do to a single lot — Bourbon Rosado finished four ways: washed, natural, honey and anaerobic. Four 100g bags, one story.",
         "button_label": "Shop The Flight",
         "link": "",
-        "color_scheme": "scheme-1"
+        "color_scheme": "scheme-1",
+        "image": "shopify://shop_images/banner-3.webp"
       }
     },
     "origin_and_roast": {
@@ -206,7 +210,7 @@
           "type": "heading",
           "settings": {
             "heading": "Never run out",
-            "heading_size": "h1"
+            "heading_size": "hxxl"
           }
         },
         "text": {
@@ -231,7 +235,7 @@
         "button"
       ],
       "settings": {
-        "height": "medium",
+        "height": "large",
         "desktop_image_width": "medium",
         "layout": "text_first",
         "image_behavior": "none",
@@ -301,6 +305,7 @@
       ],
       "settings": {
         "heading": "",
+        "image": "shopify://shop_images/banner-main.webp",
         "image_position": "right",
         "color_scheme": "scheme-1"
       }
