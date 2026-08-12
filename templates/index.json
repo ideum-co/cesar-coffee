@@ -42,6 +42,7 @@
           "settings": {
             "tier": "gold",
             "featured": true,
+            "image": "shopify://shop_images/gold.webp",
             "title": "Gold Line",
             "text": "Rare allocation lots, the microlots that carry the story.",
             "button_label": "See Our Farms",
@@ -53,6 +54,7 @@
           "settings": {
             "tier": "silver",
             "featured": false,
+            "image": "shopify://shop_images/silver.webp",
             "title": "Silver Line",
             "text": "Seasonal specialty from named producers, roasted for filter.",
             "button_label": "See Our Farms",
