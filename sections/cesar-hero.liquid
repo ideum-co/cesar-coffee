@@ -1,6 +1,33 @@
 {{ 'cesar-hero.css' | asset_url | stylesheet_tag }}
 
-<div class="cesar-hero color-{{ section.settings.color_scheme }}">
+<div class="cesar-hero cesar-hero--text-{{ section.settings.text_color }} color-{{ section.settings.color_scheme }}">
+  {%- if section.settings.image != blank -%}
+    <div class="cesar-hero__media">
+      {{
+        section.settings.image
+        | image_url: width: 3200
+        | image_tag:
+          loading: 'eager',
+          fetchpriority: 'high',
+          sizes: '100vw',
+          widths: '600, 900, 1200, 1600, 2000, 2600, 3200',
+          class: 'cesar-hero__image',
+          alt: section.settings.image.alt
+      }}
+      {%- if section.settings.overlay_opacity > 0 -%}
+        {%- comment -%}
+          Velo sobre la foto. No es decoración: sin él, el titular en terracota
+          sobre una imagen cualquiera puede quedar por debajo del contraste
+          mínimo legible.
+        {%- endcomment -%}
+        <div
+          class="cesar-hero__scrim"
+          style="opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"
+        ></div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
   <div class="cesar-hero__inner cc-container">
     <div class="cesar-hero__content">
       {%- if section.settings.heading != blank -%}
@@ -33,21 +60,6 @@
       {%- endif -%}
     </div>
 
-    {%- if section.settings.image != blank -%}
-      <div class="cesar-hero__media">
-        {{
-          section.settings.image
-          | image_url: width: 1600
-          | image_tag:
-            loading: 'eager',
-            fetchpriority: 'high',
-            sizes: '(min-width: 990px) 50vw, 100vw',
-            widths: '400, 600, 800, 1000, 1200, 1600',
-            class: 'cesar-hero__image',
-            alt: section.settings.image.alt
-        }}
-      </div>
-    {%- endif -%}
   </div>
 </div>
 
@@ -72,8 +84,29 @@
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Imagen",
-      "info": "PNG con fondo transparente (granos de café) para el efecto flotante del diseño."
+      "label": "Imagen de fondo",
+      "info": "Cubre todo el hero. El texto va encima, así que conviene una foto con zona despejada a la izquierda."
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "label": "Velo sobre la imagen",
+      "default": 100,
+      "info": "Cubre la zona del texto y se desvanece hacia la derecha, dejando ver la foto. Con el titular en terracota conviene dejarlo al 100%: por debajo, el texto no llega al contraste mínimo sobre una foto. Con texto blanco basta un 55%."
+    },
+    {
+      "type": "select",
+      "id": "text_color",
+      "label": "Color del texto",
+      "options": [
+        { "value": "brand", "label": "Terracota (fondo claro)" },
+        { "value": "light", "label": "Blanco (foto oscura)" }
+      ],
+      "default": "brand"
     },
     {
       "type": "header",

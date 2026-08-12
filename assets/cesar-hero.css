@@ -1,15 +1,70 @@
+/**
+ * Hero.
+ * La imagen es el FONDO de toda la sección; el contenido va encima.
+ */
+
 .cesar-hero {
   position: relative;
   overflow: hidden;
   background-color: var(--cc-bg);
+  isolation: isolate;
 }
+
+/* ---------- Imagen de fondo ---------- */
+
+.cesar-hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.cesar-hero__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* Cubre todo el contenedor recortando lo que sobre, en vez de encajar la
+     imagen dentro y dejar franjas. */
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Velo de legibilidad. El color depende del color del texto: se oscurece bajo
+   texto claro y se aclara bajo texto de marca. */
+.cesar-hero__scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* El velo es opaco donde cae el texto y se desvanece hacia la derecha, para que
+   la foto se vea. Así funciona el hero del diseño: fondo de marca a la
+   izquierda, imagen a la derecha.
+
+   El primer tramo tiene que llegar a alfa 1: con 0.96 el terracota se quedaba
+   en 2.97:1 sobre la foto, justo por debajo del 3:1 que pide el texto grande.
+   Sobre el fondo de marca liso da 3.08:1 y cumple. */
+.cesar-hero--text-brand .cesar-hero__scrim {
+  background: linear-gradient(
+    90deg,
+    rgb(235, 235, 237) 0%,
+    rgb(235, 235, 237) 45%,
+    rgba(235, 235, 237, 0) 78%
+  );
+}
+
+/* Con texto blanco el velo oscuro necesita al menos un 55% para pasar de 4.5:1
+   sobre una foto clara. */
+.cesar-hero--text-light .cesar-hero__scrim {
+  background: linear-gradient(90deg, rgb(20, 8, 3) 0%, rgba(20, 8, 3, 0.75) 45%, rgba(20, 8, 3, 0) 80%);
+}
+
+/* ---------- Contenido ---------- */
 
 .cesar-hero__inner {
   position: relative;
+  z-index: 1;
   display: grid;
-  grid-template-columns: 1fr;
   align-items: center;
-  gap: var(--cc-space-8);
   box-sizing: border-box;
   /* Ocupa la pantalla completa al entrar. dvh en vez de vh: en móvil vh cuenta
      la barra del navegador y deja el hero cortado.
@@ -19,7 +74,6 @@
   padding-block: calc(var(--header-height, 88px) + var(--cc-space-8)) var(--cc-space-12);
 }
 
-/* Reserva para navegadores sin dvh */
 @supports not (height: 100dvh) {
   .cesar-hero__inner {
     min-height: 100vh;
@@ -28,12 +82,28 @@
 
 .cesar-hero__content {
   position: relative;
-  z-index: 2;
-  max-width: 20ch;
+  /* El texto ocupa la mitad izquierda: la foto se ve por la derecha. */
+  max-width: 46rem;
+}
+
+@media screen and (min-width: 990px) {
+  .cesar-hero__content {
+    max-width: 52%;
+  }
+
+  /* En el diseño el titular cae en tres líneas cortas. Sólo en desktop: en
+     móvil debe usar todo el ancho. */
+  .cesar-hero__heading {
+    max-width: 14ch;
+  }
 }
 
 .cesar-hero__heading {
   color: var(--cc-terracotta);
+}
+
+.cesar-hero--text-light .cesar-hero__heading {
+  color: #fff;
 }
 
 .cesar-hero__subheading {
@@ -48,6 +118,10 @@
   color: var(--cc-terracotta-text);
 }
 
+.cesar-hero--text-light .cesar-hero__subheading {
+  color: rgba(255, 255, 255, 0.92);
+}
+
 .cesar-hero__actions {
   display: flex;
   flex-wrap: wrap;
@@ -55,58 +129,14 @@
   margin-top: var(--cc-space-8);
 }
 
-.cesar-hero__media {
-  position: relative;
-  z-index: 1;
-  justify-self: end;
-  width: 100%;
-  /* Ocupa todo el alto de su celda, no sólo el de la imagen. */
-  align-self: stretch;
-  /* En móvil el hero se apila y la celda no tiene alto propio: se le da uno
-     para que la imagen tenga algo que cubrir. */
-  min-height: 42vh;
+.cesar-hero--text-light .cc-btn--secondary {
+  color: #fff;
+  border-color: #fff;
 }
 
-.cesar-hero__image {
-  display: block;
-  width: 100%;
-  height: 100%;
-  /* Cubre el contenedor completo, recortando lo que sobre. La foto del hero
-     lleva fondo propio, así que 'contain' dejaba franjas a los lados. */
-  object-fit: cover;
-  object-position: center;
-}
-
-@media screen and (min-width: 990px) {
-  .cesar-hero__inner {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    padding-block: var(--cc-space-24);
-  }
-
-  .cesar-hero__content {
-    /* el titular pisa la imagen, como en el diseño */
-    grid-column: 1;
-    grid-row: 1;
-    max-width: none;
-    width: 130%;
-  }
-
-  /* En el diseño el titular cae en tres líneas cortas y los granos entran por
-     la derecha. Sólo en desktop: en móvil debe usar todo el ancho. */
-  .cesar-hero__heading {
-    max-width: 14ch;
-  }
-
-  .cesar-hero__media {
-    grid-column: 2;
-    grid-row: 1;
-    /* En desktop la celda ya mide toda la altura del hero: el min-height de
-       móvil sobra y limitaría el recorte. */
-    min-height: 0;
-    /* La imagen llega al borde derecho, como en el diseño. Se compensa el
-       gutter del contenedor. */
-    margin-right: calc(-1 * var(--cc-gutter));
-  }
+.cesar-hero--text-light .cc-btn--secondary:hover {
+  background-color: #fff;
+  color: var(--cc-brown-900);
 }
 
 /* En móvil el hero tiene que caber en una pantalla: con el display al mínimo
@@ -121,5 +151,20 @@
 
   .cesar-hero__subheading {
     font-size: var(--cc-text-body);
+  }
+
+  /* A una columna el velo tiene que cubrir de arriba abajo, no de izquierda a
+     derecha: si no, el texto queda sobre la parte sin proteger. */
+  .cesar-hero--text-light .cesar-hero__scrim {
+    background: linear-gradient(180deg, rgba(20, 8, 3, 0.9) 0%, rgba(20, 8, 3, 0.5) 70%, rgba(20, 8, 3, 0.3) 100%);
+  }
+
+  .cesar-hero--text-brand .cesar-hero__scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(235, 235, 237, 0.95) 0%,
+      rgba(235, 235, 237, 0.75) 70%,
+      rgba(235, 235, 237, 0.5) 100%
+    );
   }
 }
