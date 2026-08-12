@@ -382,6 +382,13 @@ button.shopify-payment-button__button--unbranded {
   padding: var(--cc-space-4) var(--cc-space-4) var(--cc-space-2);
 }
 
+/* El badge de línea se renderiza dentro de .card__inner (el área de imagen),
+   que con este reordenamiento queda debajo del texto: el badge cae sobre la
+   bolsa, como en el diseño, y no interfiere con el título. */
+.card__inner {
+  position: relative;
+}
+
 .card__heading {
   font-family: var(--cc-font-sans, var(--cc-fallback-sans));
   font-size: var(--cc-text-body);
@@ -394,6 +401,14 @@ button.shopify-payment-button__button--unbranded {
   font-variant-numeric: tabular-nums;
   font-weight: 400;
   font-size: var(--cc-text-body);
+}
+
+/* Notas de cata bajo el título de la card */
+.cesar-card__notes {
+  margin: var(--cc-space-1) 0 var(--cc-space-2);
+  font-size: var(--cc-text-sm);
+  line-height: 1.4;
+  color: var(--cc-text-muted);
 }
 
 /* Notas de cata bajo el título */

@@ -165,6 +165,31 @@
               </a>
             </h3>
             <div class="card-information">
+              {%- comment -%}
+                Notas de cata bajo el título, como en el diseño. Salen de
+                cesar.tasting_notes, que admite lista de referencias al
+                metaobjeto `tasting_note` o texto simple (ver
+                design-system/DATA-MODEL.md). Si no hay, no se pinta nada.
+              {%- endcomment -%}
+              {%- liquid
+                assign notes_field = card_product.metafields.cesar.tasting_notes
+                assign notes = ''
+                if notes_field.type == 'list.metaobject_reference'
+                  assign note_names = ''
+                  for note in notes_field.value
+                    assign note_names = note_names | append: note.name.value | append: '|'
+                  endfor
+                  assign notes = note_names | split: '|' | join: ' · '
+                elsif notes_field.type contains 'list.'
+                  assign notes = notes_field.value | join: ' · '
+                elsif notes_field != blank
+                  assign notes = notes_field.value | default: notes_field
+                endif
+              -%}
+              {%- if notes != blank -%}
+                <p class="cesar-card__notes">{{ notes }}</p>
+              {%- endif -%}
+
               {%- if show_vendor -%}
                 <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
                 <div class="caption-with-letter-spacing light">{{ card_product.vendor }}</div>
