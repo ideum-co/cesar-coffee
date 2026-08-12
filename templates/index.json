@@ -183,6 +183,7 @@
         "buttons"
       ],
       "settings": {
+        "image": "shopify://shop_images/banner-3.webp",
         "image_overlay_opacity": 20,
         "image_height": "large",
         "image_behavior": "none",
@@ -245,7 +246,7 @@
           "type": "heading",
           "settings": {
             "heading": "Never run out",
-            "heading_size": "h1"
+            "heading_size": "hxxl"
           }
         },
         "text": {
@@ -270,7 +271,7 @@
         "button"
       ],
       "settings": {
-        "height": "medium",
+        "height": "large",
         "desktop_image_width": "medium",
         "layout": "text_first",
         "image_behavior": "none",
