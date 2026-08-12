@@ -82,8 +82,11 @@
 
 .cesar-hero__content {
   position: relative;
-  /* El texto ocupa la mitad izquierda: la foto se ve por la derecha. */
-  max-width: 46rem;
+  /* Por encima de la imagen de fondo. El z-index del contenedor debería
+     bastar, pero se pone también aquí: cualquier transform o filter en un
+     ancestro crea un contexto de apilado nuevo y el contenido se iría detrás
+     de la foto. */
+  z-index: 1;
 }
 
 @media screen and (min-width: 990px) {
