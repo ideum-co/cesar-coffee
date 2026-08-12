@@ -30,6 +30,7 @@
           "settings": {
             "tier": "green",
             "featured": false,
+            "image": "shopify://shop_images/coffee-beat.webp",
             "title": "Green Line",
             "text": "Everyday espresso, always on. The dependable base of the range.",
             "button_label": "See Our Farms",
