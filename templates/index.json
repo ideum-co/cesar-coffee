@@ -314,68 +314,42 @@
       "type": "cesar-collection-row",
       "settings": {
         "heading": "Retail proof. Trade ready.",
-        "text": "Wholesale roasting to order, white-label roasting, co-roasting and master brews — for cafés, venues and roasters who want what is in the cup.",
+        "text": "Wholesale roast-to-order, white-label roasting, co-roasting and roaster hire — for cafés, venues and roasters who want what's in the bag.",
         "button_label": "Talk To Us About Trade",
         "button_link": "",
-        "collection": "",
-        "products_to_show": 6,
-        "image_ratio": "square",
-        "show_rating": true,
-        "color_scheme": "scheme-5"
-      }
-    },
-    "trade_options": {
-      "type": "multicolumn",
+        "color_scheme": "scheme-3"
+      },
       "blocks": {
-        "wholesale": {
-          "type": "column",
+        "card_1": {
+          "type": "card",
           "settings": {
-            "title": "Wholesale",
-            "text": "<p>Roasted to order for cafés and venues.</p>",
+            "title": "wholesale",
             "link_label": "See Our Farms",
             "link": ""
           }
         },
-        "white_label": {
-          "type": "column",
+        "card_2": {
+          "type": "card",
           "settings": {
-            "title": "White label",
-            "text": "<p>Your brand, our roastery.</p>",
+            "title": "white label",
             "link_label": "How We Roast",
             "link": ""
           }
         },
-        "co_roasting": {
-          "type": "column",
+        "card_3": {
+          "type": "card",
           "settings": {
-            "title": "Co-roasting",
-            "text": "<p>Roast with us on our licensed site.</p>",
+            "title": "co-roasting",
             "link_label": "How We Roast",
             "link": ""
           }
         }
       },
       "block_order": [
-        "wholesale",
-        "white_label",
-        "co_roasting"
-      ],
-      "settings": {
-        "title": "",
-        "heading_size": "h1",
-        "image_width": "full",
-        "image_ratio": "adapt",
-        "button_label": "Button label",
-        "button_link": "",
-        "columns_desktop": 3,
-        "column_alignment": "left",
-        "background_style": "none",
-        "color_scheme": "scheme-1",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 40,
-        "padding_bottom": 72
-      }
+        "card_1",
+        "card_2",
+        "card_3"
+      ]
     }
   },
   "order": [
@@ -387,7 +361,6 @@
     "origin_and_roast",
     "subscription",
     "explore",
-    "trade",
-    "trade_options"
+    "trade"
   ]
 }

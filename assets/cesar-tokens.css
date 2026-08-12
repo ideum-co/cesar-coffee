@@ -114,6 +114,47 @@ body {
   font-size: var(--cc-text-body);
 }
 
+/* ---------- Titulares de las secciones nativas de Dawn ----------
+   Dawn los pinta con --font-heading-weight, que sin ajustes guardados cae a
+   400, y con tamaños de 30-40px. Al lado de las secciones propias (peso 800 y
+   hasta 104px) parecían de otra tipografía. Aquí se alinean con la marca, así
+   que "Image with text", "Multicolumn" y demás nativas quedan iguales que las
+   de Cesar sin tocar cada sección. */
+h1,
+h2,
+h3,
+h4,
+h5,
+.h0,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5 {
+  font-weight: var(--cc-font-heading-weight-black, 800);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.h0 {
+  font-size: var(--cc-text-h1);
+}
+
+h1,
+.h1 {
+  font-size: var(--cc-text-h2);
+}
+
+h2,
+.h2 {
+  font-size: var(--cc-text-h3);
+}
+
+h3,
+.h3 {
+  font-size: var(--cc-text-body-lg);
+}
+
 @media screen and (max-width: 749px) {
   :root {
     --cc-section-gap: var(--cc-space-12);
@@ -364,7 +405,8 @@ button.shopify-payment-button__button--unbranded {
 .card--card {
   border-radius: var(--cc-radius-md);
   overflow: hidden;
-  background-color: var(--cc-surface);
+  /* El fondo lo pone el esquema de color de la card (ajuste del tema). No se
+     fija aquí: hacerlo dejaba el selector de color sin efecto. */
 }
 
 /* En el diseño (y en la referencia) el bloque de texto va ENCIMA de la

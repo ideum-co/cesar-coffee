@@ -92,7 +92,96 @@
 .cesar-collection-row__slider .slider-counter {
   font-size: var(--cc-text-sm);
   font-variant-numeric: tabular-nums;
-  color: var(--cc-text-muted);
+  /* Hereda el color del esquema: fijarlo en marrón lo dejaba ilegible sobre
+     los fondos verde y oscuro. */
+  color: currentColor;
+}
+
+/* ---------- Cards informativas ---------- */
+
+.cesar-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  aspect-ratio: 3 / 4;
+  padding: var(--cc-space-4);
+  border-radius: var(--cc-radius-md);
+  overflow: hidden;
+  isolation: isolate;
+  list-style: none;
+  background-color: var(--cc-brown-700);
+}
+
+.cesar-card__image {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cesar-card__image--empty {
+  background: var(--cc-brown-500);
+}
+
+/* El título va en blanco sobre la foto: sin velo no llega al mínimo de
+   contraste sobre una imagen cualquiera. Se degrada desde abajo para no tapar
+   la fotografía entera. */
+.cesar-card__veil {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(20, 8, 3, 0) 35%, rgba(20, 8, 3, 0.85) 100%);
+  pointer-events: none;
+}
+
+.cesar-card__content {
+  position: relative;
+}
+
+.cesar-card__title {
+  margin: 0 0 var(--cc-space-3);
+  font-family: var(--cc-font-sans, var(--cc-fallback-sans));
+  font-size: var(--cc-text-h3);
+  font-weight: var(--cc-font-heading-weight-black, 800);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.cesar-card__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: var(--cc-cta-padding-y) var(--cc-space-4);
+  border-radius: var(--cc-radius-sm);
+  background-color: var(--cc-green);
+  color: #fff;
+  font-size: var(--cc-text-sm);
+  font-weight: var(--cc-cta-weight);
+  line-height: 1;
+  text-decoration: none;
+  transition: background-color var(--cc-cta-transition) var(--cc-ease);
+}
+
+.cesar-card__link:hover {
+  background-color: var(--cc-green-line);
+}
+
+.cesar-card__link:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+/* La card entera es clicable a través del enlace, manteniendo un solo destino
+   accesible por tarjeta. */
+.cesar-card__link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
 }
 
 @media screen and (min-width: 990px) {
