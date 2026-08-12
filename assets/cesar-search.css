@@ -1,0 +1,247 @@
+/**
+ * Barra de búsqueda del header.
+ *
+ * Se despliega desde el header como una fila a todo el ancho: lupa a la
+ * izquierda, input que ocupa todo el hueco y botón "Search" a la derecha.
+ * Medidas tomadas de la referencia: input y botón de 37px, texto de 16px,
+ * lupa de 17px, fila de 89px de alto.
+ *
+ * Dawn ya usa <details> para abrirla, así que el estado abierto es
+ * details[open] y no hace falta JS adicional.
+ */
+
+/* ---------- Fondo del menú mientras la búsqueda está abierta ----------
+   El header de la portada es transparente. Al abrir la búsqueda tiene que
+   ganar fondo para que el menú siga legible sobre el hero.
+
+   La clase la pone el script del header con el evento 'toggle'. No se usa
+   :has(...) porque al abrir el <details> por código el navegador no siempre
+   reevalúa el selector y el header se quedaba transparente. */
+.header-wrapper--search-open {
+  background-color: var(--cc-bg);
+}
+
+/* ---------- La fila ---------- */
+
+.search-modal__content {
+  /* A sangre y pegada al header, no como diálogo flotante. */
+  position: static;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  min-height: 0;
+  padding: var(--cc-space-6) var(--cc-gutter);
+  background-color: var(--cc-bg);
+  border-top: 1px solid var(--cc-border);
+  border-bottom: 1px solid var(--cc-border);
+  box-shadow: none;
+}
+
+/* El overlay oscuro de Dawn sobra: aquí el menú se queda visible. */
+.header__search .modal-overlay {
+  display: none;
+}
+
+.search-modal {
+  position: absolute;
+  inset-inline: 0;
+  top: 100%;
+  z-index: 4;
+  height: auto;
+  background: transparent;
+}
+
+/* Deslizamiento al abrir. Se usa animation y no transition porque el
+   contenido de un <details> aparece de golpe y no hay estado previo que
+   interpolar. */
+@media (prefers-reduced-motion: no-preference) {
+  .header__search details[open] .search-modal__content {
+    animation: cesar-search-slide 260ms var(--cc-ease, ease-out) both;
+  }
+}
+
+@keyframes cesar-search-slide {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* ---------- Campo ---------- */
+
+.search-modal__form {
+  width: 100%;
+}
+
+.search-modal__content .field {
+  display: flex;
+  align-items: center;
+  gap: var(--cc-space-3);
+  width: 100%;
+  background: transparent;
+  border: 0;
+}
+
+.search-modal__content .field::before,
+.search-modal__content .field::after {
+  display: none;
+}
+
+.search__leading-icon {
+  flex: 0 0 auto;
+  width: 17px;
+  height: 17px;
+  color: var(--cc-brown-900);
+}
+
+.search__leading-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.search-modal__content .search__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 37px;
+  padding: 0 var(--cc-space-3);
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  font-family: inherit;
+  /* 16px: por debajo, iOS hace zoom al enfocar */
+  font-size: var(--cc-text-body);
+  color: var(--cc-brown-900);
+}
+
+.search-modal__content .search__input:focus,
+.search-modal__content .search__input:focus-visible {
+  outline: 0;
+  box-shadow: none;
+}
+
+/* El foco se marca en toda la fila, que es lo que se percibe como el campo. */
+.search-modal__content .field:focus-within {
+  outline: 2px solid var(--cc-brown-900);
+  outline-offset: 6px;
+  border-radius: var(--cc-radius-sm);
+}
+
+.search-modal__content .search__input::placeholder {
+  color: var(--cc-brown-500);
+  opacity: 1;
+}
+
+/* La etiqueta flotante de Dawn sobra: el placeholder ya cumple y el input
+   conserva su label para lectores de pantalla. */
+.search-modal__content .field__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Botón Search ---------- */
+
+.search-modal__content .search__button {
+  flex: 0 0 auto;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 37px;
+  width: auto;
+  padding: var(--cc-cta-padding-y) var(--cc-space-6);
+  background-color: var(--cc-brown-900);
+  color: #fff;
+  border: 0;
+  border-radius: var(--cc-cta-radius);
+  font-family: inherit;
+  font-size: var(--cc-cta-font-size);
+  font-weight: var(--cc-cta-weight);
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color var(--cc-cta-transition) var(--cc-ease, ease);
+}
+
+.search-modal__content .search__button:hover {
+  background-color: var(--cc-brown-700);
+}
+
+.search-modal__content .search__button:focus-visible {
+  outline: 2px solid var(--cc-brown-900);
+  outline-offset: 3px;
+}
+
+/* Igual que el resto de botones: el alto visual es el del diseño y el área
+   táctil se extiende a 44px sin mover el layout. */
+.search-modal__content .search__button::after {
+  content: '';
+  position: absolute;
+  inset: 50% 0 auto;
+  translate: 0 -50%;
+  height: 100%;
+  min-height: 44px;
+}
+
+/* En el botón manda el texto; el icono sólo aparece en móvil, donde no cabe. */
+.search__button-icon {
+  display: none;
+}
+
+.search-modal__content .reset__button {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  color: var(--cc-brown-500);
+}
+
+/* Dawn coloca el botón de cerrar dentro del diálogo; aquí la fila se cierra
+   con el mismo icono del header, así que sobra. */
+.search-modal__close-button {
+  display: none;
+}
+
+/* ---------- Resultados predictivos ---------- */
+
+.search-modal__content .predictive-search {
+  inset-inline: 0;
+  top: calc(100% + var(--cc-space-6));
+  border: 1px solid var(--cc-border);
+  border-radius: var(--cc-radius-md);
+  background-color: var(--cc-surface);
+}
+
+@media screen and (max-width: 749px) {
+  .search-modal__content {
+    padding: var(--cc-space-4) var(--cc-gutter);
+  }
+
+  /* En móvil el texto del botón se come el ancho del input: se deja la lupa. */
+  .search__button-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .search__button-icon {
+    display: block;
+    width: 18px;
+    height: 18px;
+  }
+
+  .search-modal__content .search__button {
+    width: 44px;
+    padding: 0;
+  }
+}

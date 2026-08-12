@@ -1,4 +1,5 @@
 {{ 'cesar-header.css' | asset_url | stylesheet_tag }}
+{{ 'cesar-search.css' | asset_url | stylesheet_tag }}
 <link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -464,6 +465,25 @@
 
   customElements.define('sticky-header', StickyHeader);
 {% endjavascript %}
+
+<script>
+  // Marca el header mientras la barra de búsqueda está abierta, para que
+  // recupere fondo y el menú siga legible sobre el hero.
+  //
+  // Se hace con una clase y no con :has(...) en CSS: al abrir el <details>
+  // por código (tecla Escape, clic fuera, el propio componente de Dawn) el
+  // navegador no siempre reevalúa :has, y el header se quedaba transparente.
+  // El evento 'toggle' es nativo y siempre dispara.
+  (function () {
+    document.querySelectorAll('.header__search details').forEach(function (details) {
+      var wrapper = details.closest('.header-wrapper');
+      if (!wrapper) return;
+      details.addEventListener('toggle', function () {
+        wrapper.classList.toggle('header-wrapper--search-open', details.open);
+      });
+    });
+  })();
+</script>
 
 <script type="application/ld+json">
   {

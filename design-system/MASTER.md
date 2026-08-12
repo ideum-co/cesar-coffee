@@ -216,31 +216,32 @@ Sin parallax. `prefers-reduced-motion` desactiva toda animación de entrada
 
 ---
 
-## 7. Limitación conocida: `config/settings_data.json`
+## 7. `config/settings_data.json`: cómo desplegarlo
 
-**Este archivo no se puede desplegar.** Está comprobado sobre la tienda:
+El sync de GitHub **no** aplica este archivo (Shopify lo trata como dato del
+comerciante: sólo va de la tienda al repo). Sí se puede escribir con el CLI,
+pero es quisquilloso con el contenido:
 
-| Vía | Resultado |
+| Intento | Resultado |
 |---|---|
-| Commit a `main` (sync de GitHub) | no se aplica |
-| `shopify theme push --only config/settings_data.json` | **rechazado** |
-| `shopify theme push` de `settings_schema.json` o de un asset | correcto |
+| Commit a `main` | no se aplica |
+| `push` reemplazando el archivo entero | **rechazado** |
+| `push` partiendo del archivo de la tienda + `color_schemes` | **correcto** |
+| `push` añadiendo además los ~117 ajustes globales | rechazado |
 
-Shopify protege `settings_data.json` en los temas conectados a GitHub: es dato
-del comerciante y sólo se escribe desde el editor de temas. El flujo es de la
-tienda al repo, nunca al revés.
+La regla que funciona: **partir del archivo que ya tiene la tienda y añadir sólo
+lo que falta**, conservando sus claves (`logo`, `content_for_index`). Reemplazarlo
+de golpe o meterle todos los ajustes lo hace fallar.
 
-**Consecuencia:** los `color_schemes`, la tipografía y el resto de ajustes
-globales del repo no llegan a la tienda. El editor muestra *"Unable to display
-color schemes"* porque el `current` de la tienda quedó reducido a
-`{logo, content_for_index}`.
+```bash
+shopify theme pull --only config/settings_data.json   # partir de lo que hay
+# añadir encima lo que falte
+shopify theme push --only config/settings_data.json --allow-live
+```
 
-**Salida recomendada:** crear un tema nuevo desde el repo (Admin → Temas →
-Añadir → GitHub, rama `main`) y publicarlo. Al crearse, Shopify inicializa
-`settings_data.json` desde el repositorio, con los esquemas ya dentro.
-
-Mientras tanto, el tema no depende de esos ajustes para verse bien: los colores
-y las tipografías de marca viven en `assets/cesar-tokens.css`, que sí despliega.
+Los `color_schemes` ya están desplegados así. El resto de ajustes globales
+(radios, estilos de card) siguen sin subir, pero no hacen falta: esos valores
+viven en `assets/cesar-tokens.css`, que despliega sin problema.
 
 ## 8. Decisiones abiertas
 

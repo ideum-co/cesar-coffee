@@ -4,17 +4,26 @@
  * el ajuste está activado.
  */
 
+/* La fila de búsqueda se ancla al header (top: 100%), así que el wrapper tiene
+   que ser su contenedor de posicionamiento. */
+.header-wrapper {
+  position: relative;
+}
+
 .header-wrapper--transparent {
   position: absolute;
   inset-inline: 0;
   z-index: 3;
-  background: transparent;
   border-bottom: 0;
 }
 
-/* Dawn pinta el fondo en el wrapper (.gradient) y en el propio header. */
-.header-wrapper--transparent.gradient,
-.header-wrapper--transparent .header {
+/* Transparente sólo mientras la búsqueda está cerrada. Al abrirla el header
+   recupera fondo para que el menú siga legible (ver cesar-search.css).
+   La condición va aquí, en la propia regla, en vez de sobrescribirla después:
+   'background' es un shorthand y ganaba a los background-color posteriores. */
+.header-wrapper--transparent:not(.header-wrapper--search-open),
+.header-wrapper--transparent:not(.header-wrapper--search-open).gradient,
+.header-wrapper--transparent:not(.header-wrapper--search-open) .header {
   background: transparent;
 }
 
