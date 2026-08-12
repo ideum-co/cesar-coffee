@@ -32,7 +32,8 @@
 .cesar-tiers__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--cc-space-4);
+  /* mismo valor que el gutter y que el grid de producto */
+  gap: var(--cc-gutter);
   margin: 0;
   padding: 0;
   list-style: none;

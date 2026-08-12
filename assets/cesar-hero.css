@@ -22,6 +22,9 @@
 
 .cesar-hero__heading {
   color: var(--cc-terracotta);
+  /* En el diseño el titular cae en tres líneas cortas y los granos entran por
+     la derecha. Se limita la medida para que rompa igual con este texto. */
+  max-width: 14ch;
 }
 
 .cesar-hero__subheading {

@@ -3,26 +3,49 @@
   "type": "footer",
   "sections": {
     "footer": {
-      "type": "footer",
-      "blocks": {},
-      "block_order": [],
+      "type": "cesar-footer",
+      "blocks": {
+        "brand": {
+          "type": "brand",
+          "settings": {
+            "address": "<p>19 Churchill St,<br/>North Williamstown,<br/>VIC 3016<br/>Mon–Fri 8:00 AM–5:00 PM</p>",
+            "show_social": true,
+            "social_heading": "Follow Us"
+          }
+        },
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {
+            "email_label": "Email Address",
+            "show_phone": false,
+            "phone_label": "Mobile Number",
+            "legal": "<p>By submitting this form, you agree to receive recurring automated marketing emails from Cesar's Coffee Cup at the address you provide. Consent is not a condition of purchase. We may share your info with service providers per our Privacy Policy. Unsubscribe at any time.</p>",
+            "button_label": "Subscribe"
+          }
+        },
+        "menu_story": {
+          "type": "menu",
+          "settings": {
+            "heading": "Our Story",
+            "menu": "footer"
+          }
+        },
+        "menu_help": {
+          "type": "menu",
+          "settings": {
+            "heading": "Help Center"
+          }
+        }
+      },
+      "block_order": ["brand", "newsletter", "menu_story", "menu_help"],
       "settings": {
         "color_scheme": "scheme-4",
-        "newsletter_enable": true,
-        "newsletter_heading": "Subscribe",
-        "enable_follow_on_shop": true,
-        "show_social": true,
-        "enable_country_selector": false,
-        "enable_language_selector": false,
-        "payment_enable": true,
-        "show_policy": true,
-        "margin_top": 0,
-        "padding_top": 56,
-        "padding_bottom": 40
+        "bottom_color_scheme": "scheme-3",
+        "copyright_name": "Cesar's Coffee Shop",
+        "rights_text": "All Rights Reserved",
+        "disclaimer": "All product names, images and details on this site are for illustrative purposes only and may vary from the final product."
       }
     }
   },
-  "order": [
-    "footer"
-  ]
+  "order": ["footer"]
 }

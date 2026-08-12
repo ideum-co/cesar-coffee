@@ -25,15 +25,16 @@
 
 /* ---------- Filtros como chips ---------- */
 
+/* Medidas tomadas de la referencia: alto 42px, padding 10/21, radio completo,
+   texto de 16px. Se sube a 44px por el mínimo táctil. */
 .facets-pill .facets__summary,
 .facet-filters__sort {
   border-radius: var(--cc-radius-pill);
   background-color: var(--cc-cream);
   border: 1px solid transparent;
-  /* el diseño usa chips bajos; se conserva el alto mínimo táctil */
   min-height: 44px;
-  padding-inline: var(--cc-space-4);
-  font-size: var(--cc-text-sm);
+  padding-inline: var(--cc-space-6);
+  font-size: var(--cc-text-body);
   font-weight: 500;
   color: var(--cc-brown-900);
 }
@@ -56,8 +57,8 @@
   color: #fff;
   border: 0;
   min-height: 44px;
-  padding-inline: var(--cc-space-4);
-  font-size: var(--cc-text-sm);
+  padding-inline: var(--cc-space-6);
+  font-size: var(--cc-text-body);
   font-weight: 500;
 }
 
@@ -76,9 +77,11 @@
   border: 1px solid var(--cc-border);
 }
 
-/* ---------- Grid ---------- */
+/* ---------- Grid ----------
+   Mismo valor para gutter, hueco horizontal y vertical: en la referencia los
+   tres son la misma unidad (~23px a 1920). */
 
 .product-grid {
-  column-gap: var(--cc-space-4);
-  row-gap: var(--cc-space-6);
+  column-gap: var(--cc-gutter);
+  row-gap: var(--cc-gutter);
 }

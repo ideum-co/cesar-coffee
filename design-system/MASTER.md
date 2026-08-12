@@ -106,7 +106,31 @@ Mínimo de 16px en body móvil (evita el auto-zoom de iOS).
 
 ---
 
-## 4. Forma y espaciado
+## 4. Layout, forma y espaciado
+
+### Sistema de layout
+
+El layout es **a sangre, sin tope de ancho**, con gutters constantes. Medido
+sobre la referencia que marcó el cliente ([sunbum.com](https://www.sunbum.com)):
+
+| Medida | 1440px | 1920px | Adoptado |
+|---|---|---|---|
+| Gutter lateral | 21px | 23px | `--cc-gutter: 24px` (20px en móvil) |
+| Hueco del grid (col y fila) | ~21px | 23px | mismo `--cc-gutter` |
+| Columnas de producto | 4 | 4 | 4 desktop / 2 móvil |
+| Ancho de card | 334px | 452px | fluido |
+| Título de página | 88px | 96px | `--cc-text-h1` fluido |
+
+El gutter, el hueco horizontal y el vertical son **la misma unidad**. Esa es la
+clave del ritmo de la referencia: no hay tres valores distintos.
+
+`.cc-container` y el `.page-width` de Dawn comparten ese gutter, para que las
+secciones nativas y las propias se alineen.
+
+### Titulares
+
+Interlineado **0.88** y tracking **-0.03em** en los titulares grandes (la
+referencia usa 0.85 y -0.03em). Peso 800–900.
 
 | Token | Valor | Uso |
 |---|---|---|

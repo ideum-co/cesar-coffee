@@ -1,0 +1,274 @@
+.cesar-footer {
+  background-color: var(--cc-brown-900);
+  color: #fff;
+}
+
+.cesar-footer__top {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--cc-space-12);
+  padding-block: var(--cc-space-16) var(--cc-space-16);
+}
+
+.cesar-footer__heading {
+  margin: 0 0 var(--cc-space-4);
+  font-family: var(--cc-font-sans, var(--cc-fallback-sans));
+  font-size: var(--cc-text-body);
+  font-weight: 700;
+  letter-spacing: 0;
+  color: #fff;
+}
+
+/* ---------- Marca ---------- */
+
+.cesar-footer__logo-frame {
+  display: inline-block;
+  padding: var(--cc-space-3);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: var(--cc-radius-sm);
+}
+
+.cesar-footer__logo {
+  display: block;
+  width: 88px;
+  height: auto;
+}
+
+/* El logo de marca es monocromo oscuro: sobre el footer hay que pasarlo a
+   blanco. brightness(0) lo lleva a negro puro e invert(1) a blanco, así
+   funciona con cualquier logo monocromo que suban. */
+.cesar-footer__logo-frame--invert .cesar-footer__logo {
+  filter: brightness(0) invert(1);
+}
+
+.cesar-footer__address {
+  margin-top: var(--cc-space-6);
+  font-size: var(--cc-text-sm);
+  line-height: 1.6;
+  color: #fff;
+}
+
+.cesar-footer__address p {
+  margin: 0;
+}
+
+.cesar-footer__social-heading {
+  margin: var(--cc-space-4) 0 var(--cc-space-3);
+  font-size: var(--cc-text-sm);
+  font-weight: 600;
+  color: var(--cc-yellow);
+}
+
+.cesar-footer .cesar-footer__social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--cc-space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cesar-footer .cesar-footer__social .list-social__link {
+  /* 44px de área táctil aunque el icono sea de 20px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  color: #fff;
+}
+
+.cesar-footer .cesar-footer__social .list-social__link:hover {
+  color: var(--cc-yellow);
+}
+
+.cesar-footer .cesar-footer__social .svg-wrapper {
+  width: 22px;
+  height: 22px;
+}
+
+/* ---------- Newsletter ---------- */
+
+.cesar-newsletter__field {
+  margin-bottom: var(--cc-space-6);
+}
+
+/* La etiqueta es visible para lectores de pantalla; visualmente el diseño usa
+   el placeholder, así que se oculta sin perder accesibilidad. */
+.cesar-newsletter__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.cesar-newsletter__input {
+  width: 100%;
+  min-height: 44px;
+  padding: var(--cc-space-2) 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 0;
+  color: #fff;
+  /* 16px evita el auto-zoom de iOS */
+  font-size: var(--cc-text-body);
+  font-family: inherit;
+}
+
+.cesar-newsletter__input::placeholder {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.cesar-newsletter__input:focus {
+  outline: none;
+  border-bottom-color: var(--cc-yellow);
+}
+
+.cesar-newsletter__input:focus-visible {
+  outline: 2px solid var(--cc-yellow);
+  outline-offset: 4px;
+}
+
+.cesar-newsletter__legal {
+  margin-bottom: var(--cc-space-6);
+  max-width: 62ch;
+  font-size: var(--cc-text-xs);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.cesar-newsletter__legal p {
+  margin: 0;
+}
+
+.cesar-newsletter__button {
+  min-height: 44px;
+  padding: var(--cc-space-3) var(--cc-space-6);
+  background-color: var(--cc-cream);
+  color: var(--cc-brown-900);
+  border: 0;
+  border-radius: var(--cc-radius-sm);
+  font-family: inherit;
+  font-size: var(--cc-text-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--cc-duration) var(--cc-ease);
+}
+
+.cesar-newsletter__button:hover {
+  background-color: #fff;
+}
+
+.cesar-newsletter__button:focus-visible {
+  outline: 2px solid var(--cc-yellow);
+  outline-offset: 3px;
+}
+
+.cesar-newsletter__error,
+.cesar-newsletter__success {
+  margin: var(--cc-space-3) 0 0;
+  font-size: var(--cc-text-sm);
+}
+
+.cesar-newsletter__error {
+  color: var(--cc-yellow);
+}
+
+/* ---------- Columnas de enlaces ---------- */
+
+.cesar-footer__links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cesar-footer__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  font-size: var(--cc-text-sm);
+  color: #fff;
+  text-decoration: none;
+}
+
+.cesar-footer__link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cesar-footer__link:focus-visible {
+  outline: 2px solid var(--cc-yellow);
+  outline-offset: 2px;
+}
+
+/* ---------- Barra inferior ---------- */
+
+.cesar-footer__bottom {
+  background-color: var(--cc-green);
+  color: #fff;
+}
+
+.cesar-footer__bottom-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cc-space-3);
+  padding-block: var(--cc-space-4);
+}
+
+.cesar-footer__copyright,
+.cesar-footer__disclaimer {
+  margin: 0;
+  font-size: var(--cc-text-xs);
+  line-height: 1.5;
+  color: #fff;
+}
+
+.cesar-footer__disclaimer {
+  margin-top: var(--cc-space-2);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.cesar-footer__policies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--cc-space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cesar-footer__policy-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  font-size: var(--cc-text-xs);
+  color: #fff;
+  text-decoration: none;
+}
+
+.cesar-footer__policy-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cesar-footer__policy-link:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+@media screen and (min-width: 750px) {
+  .cesar-footer__top {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) repeat(2, minmax(0, 0.8fr));
+    gap: var(--cc-space-8);
+  }
+
+  .cesar-footer__bottom-inner {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+}
