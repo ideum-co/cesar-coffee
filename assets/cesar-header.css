@@ -1,0 +1,40 @@
+/**
+ * Header transparente sobre el hero.
+ * La sección añade .header-wrapper--transparent sólo en la portada y sólo si
+ * el ajuste está activado.
+ */
+
+.header-wrapper--transparent {
+  position: absolute;
+  inset-inline: 0;
+  z-index: 3;
+  background: transparent;
+  border-bottom: 0;
+}
+
+/* Dawn pinta el fondo en el wrapper (.gradient) y en el propio header. */
+.header-wrapper--transparent.gradient,
+.header-wrapper--transparent .header {
+  background: transparent;
+}
+
+/* Al hacer sticky el header ya no está sobre el hero, así que recupera fondo
+   para no quedar ilegible sobre el contenido que pasa por debajo. */
+.header-wrapper--transparent.shopify-section-header-sticky,
+.header-wrapper--transparent.shopify-section-header-hidden {
+  background-color: rgb(var(--color-background));
+}
+
+/* Al salir del flujo, el header dejaría de ocupar espacio y taparía el
+   principio del hero: se compensa en la primera sección de la portada.
+   --header-height lo publica el JS de Dawn; el valor de reserva cubre el caso
+   de que el header no sea sticky y ese script no llegue a ejecutarse. */
+body:has(.header-wrapper--transparent) main[data-template='index'] > .shopify-section:first-child {
+  padding-top: var(--header-height, 88px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .header-wrapper--transparent {
+    transition: background-color var(--cc-duration, 220ms) var(--cc-ease, ease);
+  }
+}

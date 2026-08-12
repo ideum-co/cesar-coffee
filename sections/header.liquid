@@ -1,3 +1,4 @@
+{{ 'cesar-header.css' | asset_url | stylesheet_tag }}
 <link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -140,13 +141,19 @@
   if section.settings.sticky_header_type != 'none'
     assign header_tag = 'sticky-header'
   endif
+
+  # Header transparente sobre el hero: sólo en las plantillas elegidas.
+  assign header_transparent = false
+  if section.settings.transparent_on_home and template.name == 'index'
+    assign header_transparent = true
+  endif
 %}
 
 <{{ header_tag }}
   {% if header_tag == 'sticky-header' %}
     data-sticky-type="{{ section.settings.sticky_header_type }}"
   {% endif %}
-  class="header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}"
+  class="header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}{% if header_transparent %} header-wrapper--transparent{% endif %}"
 >
   {%- liquid
     assign social_links = false
@@ -610,6 +617,13 @@
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "transparent_on_home",
+      "label": "Header transparente en la portada",
+      "default": true,
+      "info": "En la portada el header se superpone al hero sin fondo. En el resto de páginas mantiene el color del esquema."
     },
     {
       "type": "color_scheme",

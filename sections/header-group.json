@@ -28,6 +28,7 @@
       "type": "header",
       "settings": {
         "color_scheme": "scheme-1",
+        "transparent_on_home": true,
         "menu_color_scheme": "scheme-1",
         "logo_position": "middle-center",
         "menu": "main-menu",
