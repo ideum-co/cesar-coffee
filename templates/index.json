@@ -341,6 +341,7 @@
       ],
       "settings": {
         "heading": "",
+        "image": "shopify://shop_images/banner-main.webp",
         "image_position": "right",
         "color_scheme": "scheme-1"
       }
