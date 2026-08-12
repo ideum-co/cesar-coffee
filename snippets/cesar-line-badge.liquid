@@ -1,9 +1,18 @@
 {% comment %}
   Badge de línea (Green / Silver / Gold) para cards de producto y PDP.
 
-  La línea se lee del metafield `product.metafields.cesar.line` y, si no existe,
-  cae a las etiquetas del producto (tag "green-line" / "silver-line" / "gold-line").
-  Si el producto no pertenece a ninguna línea, no se renderiza nada.
+  La línea se lee de `product.metafields.cesar.line`, que admite tres formas,
+  en este orden de preferencia:
+
+    1. Referencia al metaobjeto `coffee_line` (lo recomendado, ver
+       design-system/DATA-MODEL.md). Si el metaobjeto trae un campo `badge`
+       con imagen, se usa esa; si no, el SVG del tema según su handle.
+    2. Texto plano: "green", "silver", "gold".
+    3. Etiqueta del producto: `green-line`, `silver-line` o `gold-line`.
+       Es el último recurso, por si se carga catálogo antes de tener los
+       metaobjetos creados.
+
+  Si el producto no pertenece a ninguna línea no se renderiza nada.
 
   Uso:
     {% render 'cesar-line-badge', product: product %}
@@ -16,19 +25,34 @@
 {% endcomment %}
 
 {%- liquid
-  assign line = product.metafields.cesar.line.value | default: product.metafields.cesar.line | downcase | strip
+  assign line_field = product.metafields.cesar.line
+  assign line = ''
+  assign badge_image = null
 
+  # 1. Referencia a metaobjeto
+  if line_field.type == 'metaobject_reference'
+    assign line = line_field.value.system.handle
+    if line_field.value.badge != blank
+      assign badge_image = line_field.value.badge.value
+    endif
+  elsif line_field != blank
+    # 2. Texto plano
+    assign line = line_field.value | default: line_field
+  endif
+
+  # 3. Etiquetas del producto
   if line == blank
     for tag in product.tags
       assign tag_handle = tag | handleize
       if tag_handle == 'green-line' or tag_handle == 'silver-line' or tag_handle == 'gold-line'
-        assign line = tag_handle | remove: '-line'
+        assign line = tag_handle
         break
       endif
     endfor
   endif
 
-  assign line = line | remove: ' line' | remove: '-line' | strip
+  # Normalizar: "Gold Line", "gold-line" y "gold" tienen que acabar igual
+  assign line = line | downcase | strip | remove: '-line' | remove: ' line' | strip
 
   case line
     when 'green'
@@ -44,17 +68,36 @@
       assign badge_asset = blank
   endcase
 
+  # El nombre del metaobjeto manda sobre el de reserva, por si se renombran
+  if line_field.type == 'metaobject_reference' and line_field.value.name != blank
+    assign badge_label = line_field.value.name.value | default: badge_label
+  endif
+
   assign badge_size = size | default: 52
 -%}
 
 {%- if badge_asset != blank -%}
-  <img
-    src="{{ badge_asset | asset_url }}"
-    alt="{{ badge_label }}"
-    width="{{ badge_size }}"
-    height="{{ badge_size }}"
-    loading="lazy"
-    class="cc-line-badge {{ class }}"
-    style="width:{{ badge_size }}px;height:{{ badge_size }}px;"
-  >
+  {%- if badge_image -%}
+    {%- assign badge_class = 'cc-line-badge ' | append: class -%}
+    {{
+      badge_image
+      | image_url: width: 160
+      | image_tag:
+        loading: 'lazy',
+        width: badge_size,
+        height: badge_size,
+        class: badge_class,
+        alt: badge_label
+    }}
+  {%- else -%}
+    <img
+      src="{{ badge_asset | asset_url }}"
+      alt="{{ badge_label }}"
+      width="{{ badge_size }}"
+      height="{{ badge_size }}"
+      loading="lazy"
+      class="cc-line-badge {{ class }}"
+      style="width:{{ badge_size }}px;height:{{ badge_size }}px;"
+    >
+  {%- endif -%}
 {%- endif -%}
