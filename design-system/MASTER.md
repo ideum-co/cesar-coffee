@@ -81,13 +81,23 @@ diferenciada por peso y ancho — no por mezcla de familias.
 
 | Rol | Familia | Peso | Uso |
 |---|---|---|---|
-| Display | Archivo Narrow (condensada) | 700 | Hero. Mayúsculas, `letter-spacing: -0.01em`, `line-height: 0.92`. |
-| Heading | Archivo | 800–900 | Títulos de sección. `letter-spacing: -0.02em`, `line-height: 1.05`. |
-| Body | Archivo | 400 | Texto corrido. `line-height: 1.55`. |
-| Label | Archivo | 500–600 | Nav, botones, chips. Mayúsculas + `letter-spacing: 0.06em` en la nav. |
+| Display | **Bebas Neue** | 400 | Hero. Mayúsculas, `line-height: 0.9`. Sólo tiene un peso: pedirle 700 lo engorda sintéticamente. |
+| Heading | **Helvetica Neue** → Inter | 700–800 | Títulos. `letter-spacing: -0.03em`, `line-height: 0.88`. |
+| Body | **Helvetica Neue** → Inter | 400 | Texto corrido. `line-height: 1.55`. |
+| Label | Helvetica Neue → Inter | 500–700 | Nav, botones, chips. |
 
-Archivo / Archivo Narrow son OFL (auto-hospedables sin coste). Sustituyen a la
-Helvetica Now del mockup, que es de licencia comercial — ver §7.
+Helvetica Neue resuelve en Apple sin descarga. **Inter** es el sustituto en el
+resto de plataformas: grotesca de métrica casi idéntica. Bebas Neue e Inter se
+cargan desde Google Fonts.
+
+### Por qué las fuentes no salen de los ajustes del tema
+
+Helvetica Neue no está en el selector de fuentes de Shopify, y
+`config/settings_data.json` **no se puede escribir en un tema conectado a
+GitHub** (ni por sync ni por CLI; ver §7). Por eso las familias se declaran en
+`assets/cesar-tokens.css`, que carga después del `<style>` de `theme.liquid` y
+sobrescribe también `--font-body-family` y `--font-heading-family` de Dawn,
+para que los componentes nativos usen la misma tipografía.
 
 ### Escala (desktop → móvil)
 
@@ -193,13 +203,38 @@ Sin parallax. `prefers-reduced-motion` desactiva toda animación de entrada
 
 ---
 
-## 7. Decisiones abiertas
+## 7. Limitación conocida: `config/settings_data.json`
 
-1. **Tipografía** — el mockup usa una grotesca de licencia comercial
-   (Helvetica Now / similar). Se implementa con **Archivo + Archivo Narrow**
-   (OFL, gratis, auto-hospedadas). Si se compra la licencia original, el cambio
-   es una sola variable en `assets/cesar-tokens.css`.
-2. **Imágenes de producto** — el mockup muestra bolsas en blanco (placeholder).
-   Falta fotografía real de packaging.
-3. **Suscripciones** — el diseño asume una app de suscripción en la PDP
-   (Recharge, Seal, Awtomic…). Define la integración antes de construir el bloque.
+**Este archivo no se puede desplegar.** Está comprobado sobre la tienda:
+
+| Vía | Resultado |
+|---|---|
+| Commit a `main` (sync de GitHub) | no se aplica |
+| `shopify theme push --only config/settings_data.json` | **rechazado** |
+| `shopify theme push` de `settings_schema.json` o de un asset | correcto |
+
+Shopify protege `settings_data.json` en los temas conectados a GitHub: es dato
+del comerciante y sólo se escribe desde el editor de temas. El flujo es de la
+tienda al repo, nunca al revés.
+
+**Consecuencia:** los `color_schemes`, la tipografía y el resto de ajustes
+globales del repo no llegan a la tienda. El editor muestra *"Unable to display
+color schemes"* porque el `current` de la tienda quedó reducido a
+`{logo, content_for_index}`.
+
+**Salida recomendada:** crear un tema nuevo desde el repo (Admin → Temas →
+Añadir → GitHub, rama `main`) y publicarlo. Al crearse, Shopify inicializa
+`settings_data.json` desde el repositorio, con los esquemas ya dentro.
+
+Mientras tanto, el tema no depende de esos ajustes para verse bien: los colores
+y las tipografías de marca viven en `assets/cesar-tokens.css`, que sí despliega.
+
+## 8. Decisiones abiertas
+
+1. **Imágenes** — las sube el cliente. El mockup usa bolsas en blanco de
+   relleno; falta fotografía real de packaging, y una versión del logo en
+   blanco para el footer.
+2. **Suscripciones** — se usa Shopify Subscriptions (nativa). El selector lo
+   aporta la app como bloque de app en la PDP.
+3. **Catálogo** — aún no hay productos. Ver `DATA-MODEL.md` para lo que hay que
+   crear antes de cargarlos.

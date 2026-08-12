@@ -28,12 +28,15 @@
   --cc-accent: var(--cc-terracotta);
 
   /* ---- Tipografía ----
-     OJO: --cc-font-sans, --cc-font-display y --cc-font-heading-weight-black
-     los define layout/theme.liquid a partir de los ajustes del tema. No se
-     declaran aquí (este archivo carga después y los pisaría). Se usan siempre
-     con fallback en el punto de uso. */
-  --cc-fallback-display: 'Archivo Narrow', 'Helvetica Neue Condensed', 'Arial Narrow', system-ui, sans-serif;
-  --cc-fallback-sans: 'Archivo', 'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif;
+     Las familias de marca se definen aquí, no en los ajustes del tema:
+     Helvetica Neue es una fuente de sistema que no está en el selector de
+     Shopify, y config/settings_data.json no se puede escribir en un tema
+     conectado a GitHub (ver design-system/MASTER.md §7).
+
+     Helvetica Neue resuelve en Apple; Inter cubre el resto de plataformas con
+     una grotesca casi idéntica en métrica. */
+  --cc-fallback-display: 'Bebas Neue', 'Archivo Narrow', 'Helvetica Neue Condensed', 'Arial Narrow', sans-serif;
+  --cc-fallback-sans: 'Helvetica Neue', Inter, Helvetica, Arial, system-ui, sans-serif;
 
   /* Escala medida sobre la referencia (Sun Bum): el h1 va de 40px en móvil a
      96px en desktop, con interlineado 0.85 y tracking -0.03em. */
@@ -92,6 +95,16 @@
   --cc-duration: 220ms;
 }
 
+/* Las familias de marca son las del sitio, también para los componentes
+   nativos de Dawn: si no, convivirían dos tipografías distintas. Este archivo
+   carga después del bloque <style> de theme.liquid, así que gana. */
+:root {
+  --cc-font-sans: var(--cc-fallback-sans);
+  --cc-font-display: var(--cc-fallback-display);
+  --font-body-family: var(--cc-fallback-sans);
+  --font-heading-family: var(--cc-fallback-sans);
+}
+
 @media screen and (max-width: 749px) {
   :root {
     --cc-section-gap: var(--cc-space-12);
@@ -103,10 +116,12 @@
 
 .cc-display {
   font-family: var(--cc-font-display, var(--cc-fallback-display));
-  font-weight: 700;
+  /* Bebas Neue sólo trae un peso: pedir 700 haría que el navegador lo
+     engordara sintéticamente. */
+  font-weight: 400;
   font-size: var(--cc-text-display);
-  line-height: 0.92;
-  letter-spacing: -0.01em;
+  line-height: 0.9;
+  letter-spacing: 0.005em;
   text-transform: uppercase;
   color: var(--cc-terracotta);
   margin: 0;

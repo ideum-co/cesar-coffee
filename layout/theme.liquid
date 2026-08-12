@@ -142,10 +142,10 @@
         --font-heading-style: {{ settings.type_header_font.style }};
         --font-heading-weight: {{ settings.type_header_font.weight }};
 
-        /* Cesar's: familias de marca, alimentadas por los ajustes del tema
-           para que sigan siendo editables desde el editor de temas. */
-        --cc-font-sans: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
-        --cc-font-display: {% if settings.type_display_font %}{{ settings.type_display_font.family }}, {{ settings.type_display_font.fallback_families }}{% else %}var(--cc-font-sans){% endif %};
+        /* Cesar's: las familias de marca NO se definen aquí. Viven en
+           assets/cesar-tokens.css, que carga después. Motivo: Helvetica Neue
+           no está en el selector de fuentes de Shopify y settings_data.json no
+           se puede escribir en un tema conectado a GitHub. */
         --cc-font-heading-weight-black: {% if heading_font_bolder %}{{ heading_font_bolder.weight }}{% else %}{{ settings.type_header_font.weight }}{% endif %};
 
         --font-body-scale: {{ settings.body_scale | divided_by: 100.0 }};
@@ -292,6 +292,27 @@
         }
       }
     {% endstyle %}
+
+    {%- comment -%}
+      Tipografía de marca. Helvetica Neue es de sistema (resuelve en Apple sin
+      descarga); Bebas Neue e Inter se traen de Google Fonts porque no están en
+      el selector de fuentes de Shopify. Inter cubre las plataformas sin
+      Helvetica Neue con una grotesca de métrica casi idéntica.
+    {%- endcomment -%}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap"
+      media="print"
+      onload="this.media='all'"
+    >
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap"
+      >
+    </noscript>
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {%- comment -%} Tokens de marca: debe cargar después de base.css {%- endcomment -%}
