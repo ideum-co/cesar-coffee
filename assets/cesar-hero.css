@@ -60,15 +60,21 @@
   z-index: 1;
   justify-self: end;
   width: 100%;
+  /* Ocupa todo el alto de su celda, no sólo el de la imagen. */
+  align-self: stretch;
+  /* En móvil el hero se apila y la celda no tiene alto propio: se le da uno
+     para que la imagen tenga algo que cubrir. */
+  min-height: 42vh;
 }
 
 .cesar-hero__image {
   display: block;
   width: 100%;
-  height: auto;
-  /* reserva de espacio: evita CLS mientras carga */
-  aspect-ratio: 4 / 3;
-  object-fit: contain;
+  height: 100%;
+  /* Cubre el contenedor completo, recortando lo que sobre. La foto del hero
+     lleva fondo propio, así que 'contain' dejaba franjas a los lados. */
+  object-fit: cover;
+  object-position: center;
 }
 
 @media screen and (min-width: 990px) {
@@ -94,6 +100,12 @@
   .cesar-hero__media {
     grid-column: 2;
     grid-row: 1;
+    /* En desktop la celda ya mide toda la altura del hero: el min-height de
+       móvil sobra y limitaría el recorte. */
+    min-height: 0;
+    /* La imagen llega al borde derecho, como en el diseño. Se compensa el
+       gutter del contenedor. */
+    margin-right: calc(-1 * var(--cc-gutter));
   }
 }
 
