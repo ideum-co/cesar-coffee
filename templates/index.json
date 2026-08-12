@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -5,8 +14,11 @@
       "settings": {
         "heading": "Strong roots. Direct from origin.",
         "subheading": "Colombian coffee, sourced direct from origin and roasted to order in Melbourne.",
+        "image": "shopify://shop_images/hero.webp",
         "button_label": "Shop The Range",
+        "button_link": "",
         "button_label_2": "Our Story",
+        "button_link_2": "",
         "color_scheme": "scheme-1"
       }
     },
@@ -20,7 +32,8 @@
             "featured": false,
             "title": "Green Line",
             "text": "Everyday espresso, always on. The dependable base of the range.",
-            "button_label": "See Our Farms"
+            "button_label": "See Our Farms",
+            "button_link": ""
           }
         },
         "gold": {
@@ -30,7 +43,8 @@
             "featured": true,
             "title": "Gold Line",
             "text": "Rare allocation lots, the microlots that carry the story.",
-            "button_label": "See Our Farms"
+            "button_label": "See Our Farms",
+            "button_link": ""
           }
         },
         "silver": {
@@ -40,14 +54,20 @@
             "featured": false,
             "title": "Silver Line",
             "text": "Seasonal specialty from named producers, roasted for filter.",
-            "button_label": "See Our Farms"
+            "button_label": "See Our Farms",
+            "button_link": ""
           }
         }
       },
-      "block_order": ["green", "gold", "silver"],
+      "block_order": [
+        "green",
+        "gold",
+        "silver"
+      ],
       "settings": {
         "heading": "Three tiers, one clear range",
         "button_label": "Shop All",
+        "button_link": "",
         "color_scheme": "scheme-1"
       }
     },
@@ -72,21 +92,27 @@
           "type": "button",
           "settings": {
             "button_label": "Meet Cesar",
+            "button_link": "",
             "button_style_secondary": true
           }
         }
       },
-      "block_order": ["heading", "text", "button"],
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
       "settings": {
         "height": "large",
         "desktop_image_width": "medium",
         "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
         "desktop_content_position": "middle",
         "desktop_content_alignment": "left",
-        "content_layout": "no-overlap",
         "mobile_content_alignment": "left",
-        "color_scheme": "scheme-3",
         "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-3",
         "padding_top": 0,
         "padding_bottom": 0
       }
@@ -94,20 +120,27 @@
     "the_range": {
       "type": "featured-collection",
       "settings": {
+        "collection": "",
+        "products_to_show": 8,
         "title": "La colección / The Range",
         "heading_size": "h1",
-        "products_to_show": 8,
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
         "columns_desktop": 4,
-        "columns_mobile": "2",
         "enable_desktop_slider": true,
-        "swipe_on_mobile": true,
+        "full_width": false,
         "show_view_all": true,
         "view_all_style": "solid",
-        "image_ratio": "portrait",
-        "show_rating": true,
-        "show_vendor": false,
-        "quick_add": "standard",
         "color_scheme": "scheme-1",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": true,
+        "quick_add": "standard",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
         "padding_top": 72,
         "padding_bottom": 72
       }
@@ -133,20 +166,30 @@
           "type": "buttons",
           "settings": {
             "button_label_1": "Shop The Flight",
-            "button_style_secondary_1": false
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "Button label",
+            "button_link_2": "",
+            "button_style_secondary_2": false
           }
         }
       },
-      "block_order": ["heading", "text", "buttons"],
+      "block_order": [
+        "heading",
+        "text",
+        "buttons"
+      ],
       "settings": {
+        "image_overlay_opacity": 20,
         "image_height": "large",
+        "image_behavior": "none",
         "desktop_content_position": "bottom-left",
         "desktop_content_alignment": "left",
         "show_text_box": false,
-        "image_overlay_opacity": 20,
+        "color_scheme": "scheme-1",
+        "stack_images_on_mobile": true,
         "mobile_content_alignment": "left",
-        "show_text_below": true,
-        "color_scheme": "scheme-1"
+        "show_text_below": true
       }
     },
     "origin_and_roast": {
@@ -157,7 +200,8 @@
           "settings": {
             "title": "Directly from origin",
             "text": "<p>Real relationships with the growers behind every lot.</p>",
-            "link_label": "See Our Farms"
+            "link_label": "See Our Farms",
+            "link": ""
           }
         },
         "roast": {
@@ -165,20 +209,28 @@
           "settings": {
             "title": "Roasted to order in Melbourne",
             "text": "<p>Roasted fresh at our North Williamstown facility and dispatched within days.</p>",
-            "link_label": "How We Roast"
+            "link_label": "How We Roast",
+            "link": ""
           }
         }
       },
-      "block_order": ["origin", "roast"],
+      "block_order": [
+        "origin",
+        "roast"
+      ],
       "settings": {
         "title": "",
+        "heading_size": "h1",
         "image_width": "full",
         "image_ratio": "adapt",
+        "button_label": "Button label",
+        "button_link": "",
         "columns_desktop": 2,
         "column_alignment": "left",
         "background_style": "none",
-        "columns_mobile": "1",
         "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
         "padding_top": 40,
         "padding_bottom": 40
       }
@@ -203,21 +255,28 @@
         "button": {
           "type": "button",
           "settings": {
-            "button_label": "Start Your Subscription"
+            "button_label": "Start Your Subscription",
+            "button_link": "",
+            "button_style_secondary": false
           }
         }
       },
-      "block_order": ["heading", "text", "button"],
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
       "settings": {
         "height": "medium",
         "desktop_image_width": "medium",
         "layout": "text_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
         "desktop_content_position": "middle",
         "desktop_content_alignment": "center",
-        "content_layout": "no-overlap",
         "mobile_content_alignment": "center",
-        "color_scheme": "scheme-1",
         "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-1",
         "padding_top": 72,
         "padding_bottom": 72
       }
@@ -225,15 +284,59 @@
     "explore": {
       "type": "cesar-link-list",
       "blocks": {
-        "green": { "type": "link", "settings": { "label": "Green" } },
-        "silver": { "type": "link", "settings": { "label": "Silver" } },
-        "gold": { "type": "link", "settings": { "label": "Gold" } },
-        "flight": { "type": "link", "settings": { "label": "The Flight" } },
-        "subs": { "type": "link", "settings": { "label": "Subscriptions" } },
-        "wholesale": { "type": "link", "settings": { "label": "Wholesale" } }
+        "green": {
+          "type": "link",
+          "settings": {
+            "label": "Green",
+            "link": ""
+          }
+        },
+        "silver": {
+          "type": "link",
+          "settings": {
+            "label": "Silver",
+            "link": ""
+          }
+        },
+        "gold": {
+          "type": "link",
+          "settings": {
+            "label": "Gold",
+            "link": ""
+          }
+        },
+        "flight": {
+          "type": "link",
+          "settings": {
+            "label": "The Flight",
+            "link": ""
+          }
+        },
+        "subs": {
+          "type": "link",
+          "settings": {
+            "label": "Subscriptions",
+            "link": ""
+          }
+        },
+        "wholesale": {
+          "type": "link",
+          "settings": {
+            "label": "Wholesale",
+            "link": ""
+          }
+        }
       },
-      "block_order": ["green", "silver", "gold", "flight", "subs", "wholesale"],
+      "block_order": [
+        "green",
+        "silver",
+        "gold",
+        "flight",
+        "subs",
+        "wholesale"
+      ],
       "settings": {
+        "heading": "",
         "image_position": "right",
         "color_scheme": "scheme-1"
       }
@@ -259,21 +362,27 @@
           "type": "button",
           "settings": {
             "button_label": "Talk To Us About Trade",
+            "button_link": "",
             "button_style_secondary": true
           }
         }
       },
-      "block_order": ["heading", "text", "button"],
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
       "settings": {
         "height": "medium",
         "desktop_image_width": "medium",
         "layout": "text_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
         "desktop_content_position": "middle",
         "desktop_content_alignment": "left",
-        "content_layout": "no-overlap",
         "mobile_content_alignment": "left",
-        "color_scheme": "scheme-3",
         "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-3",
         "padding_top": 0,
         "padding_bottom": 0
       }
@@ -286,7 +395,8 @@
           "settings": {
             "title": "Wholesale",
             "text": "<p>Roasted to order for cafés and venues.</p>",
-            "link_label": "See Our Farms"
+            "link_label": "See Our Farms",
+            "link": ""
           }
         },
         "white_label": {
@@ -294,7 +404,8 @@
           "settings": {
             "title": "White label",
             "text": "<p>Your brand, our roastery.</p>",
-            "link_label": "How We Roast"
+            "link_label": "How We Roast",
+            "link": ""
           }
         },
         "co_roasting": {
@@ -302,20 +413,29 @@
           "settings": {
             "title": "Co-roasting",
             "text": "<p>Roast with us on our licensed site.</p>",
-            "link_label": "How We Roast"
+            "link_label": "How We Roast",
+            "link": ""
           }
         }
       },
-      "block_order": ["wholesale", "white_label", "co_roasting"],
+      "block_order": [
+        "wholesale",
+        "white_label",
+        "co_roasting"
+      ],
       "settings": {
         "title": "",
+        "heading_size": "h1",
         "image_width": "full",
         "image_ratio": "adapt",
+        "button_label": "Button label",
+        "button_link": "",
         "columns_desktop": 3,
         "column_alignment": "left",
         "background_style": "none",
-        "columns_mobile": "1",
         "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
         "padding_top": 40,
         "padding_bottom": 72
       }
