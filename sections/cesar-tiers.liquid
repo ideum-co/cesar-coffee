@@ -1,0 +1,182 @@
+{{ 'cesar-tiers.css' | asset_url | stylesheet_tag }}
+
+<div class="cesar-tiers cc-section color-{{ section.settings.color_scheme }}">
+  <div class="cc-container">
+    {%- if section.settings.heading != blank or section.settings.button_label != blank -%}
+      <div class="cesar-tiers__header">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="cc-h2 cesar-tiers__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.button_label != blank -%}
+          <a
+            href="{{ section.settings.button_link | default: '#' }}"
+            class="cc-btn cc-btn--primary cesar-tiers__shop-all"
+          >
+            {{ section.settings.button_label }}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <ul class="cesar-tiers__grid" role="list">
+      {%- for block in section.blocks -%}
+        <li
+          class="cesar-tier cesar-tier--{{ block.settings.tier }}{% if block.settings.featured %} cesar-tier--featured{% endif %}"
+          {{ block.shopify_attributes }}
+        >
+          {%- if block.settings.image != blank -%}
+            <div class="cesar-tier__media">
+              {{
+                block.settings.image
+                | image_url: width: 800
+                | image_tag:
+                  loading: 'lazy',
+                  sizes: '(min-width: 990px) 33vw, 100vw',
+                  widths: '300, 500, 700, 800',
+                  class: 'cesar-tier__image',
+                  alt: block.settings.image.alt
+              }}
+            </div>
+          {%- endif -%}
+
+          <div class="cesar-tier__content">
+            {%- if block.settings.title != blank -%}
+              <h3 class="cesar-tier__title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <p class="cesar-tier__text">{{ block.settings.text }}</p>
+            {%- endif -%}
+            {%- if block.settings.button_label != blank -%}
+              <a
+                href="{{ block.settings.button_link | default: '#' }}"
+                class="cc-btn cesar-tier__button"
+              >
+                {{ block.settings.button_label }}
+                <span class="visually-hidden"> — {{ block.settings.title }}</span>
+              </a>
+            {%- endif -%}
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cesar · Tiers",
+  "tag": "section",
+  "class": "cesar-tiers-section",
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Titular",
+      "default": "Three tiers, one clear range"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Botón",
+      "default": "Shop All"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Enlace del botón"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tier",
+      "name": "Línea",
+      "settings": [
+        {
+          "type": "select",
+          "id": "tier",
+          "label": "Línea",
+          "options": [
+            { "value": "green", "label": "Green Line" },
+            { "value": "gold", "label": "Gold Line" },
+            { "value": "silver", "label": "Silver Line" }
+          ],
+          "default": "green"
+        },
+        {
+          "type": "checkbox",
+          "id": "featured",
+          "label": "Destacada (card más alta)",
+          "default": false
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Green Line"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Descripción",
+          "default": "Everyday espresso, always on. The dependable base of the range."
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Botón",
+          "default": "See Our Farms"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Enlace del botón"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cesar · Tiers",
+      "blocks": [
+        {
+          "type": "tier",
+          "settings": {
+            "tier": "green",
+            "title": "Green Line",
+            "text": "Everyday espresso, always on. The dependable base of the range."
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "tier": "gold",
+            "featured": true,
+            "title": "Gold Line",
+            "text": "Rare allocation lots, the microlots that carry the story."
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "tier": "silver",
+            "title": "Silver Line",
+            "text": "Seasonal specialty from named producers, roasted for filter."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

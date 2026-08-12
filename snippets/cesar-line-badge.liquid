@@ -1,0 +1,60 @@
+{% comment %}
+  Badge de línea (Green / Silver / Gold) para cards de producto y PDP.
+
+  La línea se lee del metafield `product.metafields.cesar.line` y, si no existe,
+  cae a las etiquetas del producto (tag "green-line" / "silver-line" / "gold-line").
+  Si el producto no pertenece a ninguna línea, no se renderiza nada.
+
+  Uso:
+    {% render 'cesar-line-badge', product: product %}
+    {% render 'cesar-line-badge', product: product, size: 64 %}
+
+  Acepta:
+    product {Object} - el producto
+    size    {Number} - lado del badge en px (por defecto 52)
+    class   {String} - clases extra
+{% endcomment %}
+
+{%- liquid
+  assign line = product.metafields.cesar.line.value | default: product.metafields.cesar.line | downcase | strip
+
+  if line == blank
+    for tag in product.tags
+      assign tag_handle = tag | handleize
+      if tag_handle == 'green-line' or tag_handle == 'silver-line' or tag_handle == 'gold-line'
+        assign line = tag_handle | remove: '-line'
+        break
+      endif
+    endfor
+  endif
+
+  assign line = line | remove: ' line' | remove: '-line' | strip
+
+  case line
+    when 'green'
+      assign badge_asset = 'cesar-badge-green-line.svg'
+      assign badge_label = 'Green Line'
+    when 'silver'
+      assign badge_asset = 'cesar-badge-silver-line.svg'
+      assign badge_label = 'Silver Line'
+    when 'gold'
+      assign badge_asset = 'cesar-badge-gold-line.svg'
+      assign badge_label = 'Gold Line'
+    else
+      assign badge_asset = blank
+  endcase
+
+  assign badge_size = size | default: 52
+-%}
+
+{%- if badge_asset != blank -%}
+  <img
+    src="{{ badge_asset | asset_url }}"
+    alt="{{ badge_label }}"
+    width="{{ badge_size }}"
+    height="{{ badge_size }}"
+    loading="lazy"
+    class="cc-line-badge {{ class }}"
+    style="width:{{ badge_size }}px;height:{{ badge_size }}px;"
+  >
+{%- endif -%}

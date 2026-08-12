@@ -69,6 +69,9 @@
       assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
       assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
       assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
+      # Los titulares del diseño son de peso "black": se carga un grado extra por
+      # encima del elegido, cuando la familia lo tiene.
+      assign heading_font_bolder = settings.type_header_font | font_modify: 'weight', 'bolder'
     %}
 
     {% style %}
@@ -77,6 +80,12 @@
       {{ body_font_italic | font_face: font_display: 'swap' }}
       {{ body_font_bold_italic | font_face: font_display: 'swap' }}
       {{ settings.type_header_font | font_face: font_display: 'swap' }}
+      {%- if heading_font_bolder %}
+        {{ heading_font_bolder | font_face: font_display: 'swap' }}
+      {%- endif %}
+      {%- if settings.type_display_font %}
+        {{ settings.type_display_font | font_face: font_display: 'swap' }}
+      {%- endif %}
 
       {% for scheme in settings.color_schemes -%}
         {% assign scheme_classes = scheme_classes | append: ', .color-' | append: scheme.id %}
@@ -132,6 +141,12 @@
         --font-heading-family: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
         --font-heading-style: {{ settings.type_header_font.style }};
         --font-heading-weight: {{ settings.type_header_font.weight }};
+
+        /* Cesar's: familias de marca, alimentadas por los ajustes del tema
+           para que sigan siendo editables desde el editor de temas. */
+        --cc-font-sans: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
+        --cc-font-display: {% if settings.type_display_font %}{{ settings.type_display_font.family }}, {{ settings.type_display_font.fallback_families }}{% else %}var(--cc-font-sans){% endif %};
+        --cc-font-heading-weight-black: {% if heading_font_bolder %}{{ heading_font_bolder.weight }}{% else %}{{ settings.type_header_font.weight }}{% endif %};
 
         --font-body-scale: {{ settings.body_scale | divided_by: 100.0 }};
         --font-heading-scale: {{ settings.heading_scale | times: 1.0 | divided_by: settings.body_scale }};
@@ -279,6 +294,8 @@
     {% endstyle %}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
+    {%- comment -%} Tokens de marca: debe cargar después de base.css {%- endcomment -%}
+    {{ 'cesar-tokens.css' | asset_url | stylesheet_tag }}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 
     {%- if settings.cart_type == 'drawer' -%}

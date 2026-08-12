@@ -143,6 +143,20 @@
         "unit": "%",
         "label": "t:settings_schema.typography.settings.body_scale.label",
         "default": 100
+      },
+      {
+        "type": "header",
+        "content": "Display"
+      },
+      {
+        "type": "paragraph",
+        "content": "Fuente condensada de los titulares grandes (hero y listas destacadas)."
+      },
+      {
+        "type": "font_picker",
+        "id": "type_display_font",
+        "default": "archivo_narrow_n7",
+        "label": "Fuente display"
       }
     ]
   },

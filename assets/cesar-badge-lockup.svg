@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 238.4 73.5"><defs><style>
+      .st0 {
+        fill: #e9ecea;
+        stroke: #e9ecea;
+      }
+
+      .st0, .st1, .st2 {
+        font-family: Avigea, Avigea;
+        font-size: 21.8px;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: .2px;
+      }
+
+      .st3 {
+        fill: #5f6a67;
+      }
+
+      .st1 {
+        fill: #e1eae3;
+        stroke: #e1eae3;
+      }
+
+      .st4 {
+        fill: #3e5f49;
+      }
+
+      .st2 {
+        fill: #f6e9c6;
+        stroke: #f6e9c6;
+      }
+
+      .st5 {
+        fill: #c4972e;
+      }
+    </style></defs><circle class="st5" cx="201.8" cy="36.8" r="36.6"/><text class="st2" transform="translate(178.8 37.3)"><tspan x="0" y="0">Gold</tspan></text><text class="st2" transform="translate(180.5 54)"><tspan x="0" y="0">Line</tspan></text><circle class="st3" cx="120.6" cy="36.8" r="36.6"/><text class="st0" transform="translate(92.2 37.3)"><tspan x="0" y="0">Silver</tspan></text><text class="st0" transform="translate(99.3 54)"><tspan x="0" y="0">Line</tspan></text><circle class="st4" cx="36.6" cy="36.6" r="36.6"/><text class="st1" transform="translate(6.2 37.1)"><tspan x="0" y="0">Green</tspan></text><text class="st1" transform="translate(15.4 53.8)"><tspan x="0" y="0">Line</tspan></text></svg>

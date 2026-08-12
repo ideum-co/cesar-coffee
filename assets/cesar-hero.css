@@ -1,0 +1,80 @@
+.cesar-hero {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--cc-bg);
+}
+
+.cesar-hero__inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  gap: var(--cc-space-8);
+  padding-block: var(--cc-space-16) var(--cc-space-12);
+  min-height: 62vh;
+}
+
+.cesar-hero__content {
+  position: relative;
+  z-index: 2;
+  max-width: 20ch;
+}
+
+.cesar-hero__heading {
+  color: var(--cc-terracotta);
+}
+
+.cesar-hero__subheading {
+  margin: var(--cc-space-6) 0 0;
+  max-width: 42ch;
+  font-size: var(--cc-text-sm);
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  /* variante accesible: el terracota de display no llega a 4.5:1 en texto pequeño */
+  color: var(--cc-terracotta-text);
+}
+
+.cesar-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--cc-space-3);
+  margin-top: var(--cc-space-8);
+}
+
+.cesar-hero__media {
+  position: relative;
+  z-index: 1;
+  justify-self: end;
+  width: 100%;
+}
+
+.cesar-hero__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* reserva de espacio: evita CLS mientras carga */
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+}
+
+@media screen and (min-width: 990px) {
+  .cesar-hero__inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    padding-block: var(--cc-space-24);
+  }
+
+  .cesar-hero__content {
+    /* el titular pisa la imagen, como en el diseño */
+    grid-column: 1;
+    grid-row: 1;
+    max-width: none;
+    width: 130%;
+  }
+
+  .cesar-hero__media {
+    grid-column: 2;
+    grid-row: 1;
+  }
+}

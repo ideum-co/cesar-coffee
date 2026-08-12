@@ -1,75 +1,336 @@
 {
   "sections": {
-    "image_banner": {
+    "hero": {
+      "type": "cesar-hero",
+      "settings": {
+        "heading": "Strong roots. Direct from origin.",
+        "subheading": "Colombian coffee, sourced direct from origin and roasted to order in Melbourne.",
+        "button_label": "Shop The Range",
+        "button_label_2": "Our Story",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "tiers": {
+      "type": "cesar-tiers",
+      "blocks": {
+        "green": {
+          "type": "tier",
+          "settings": {
+            "tier": "green",
+            "featured": false,
+            "title": "Green Line",
+            "text": "Everyday espresso, always on. The dependable base of the range.",
+            "button_label": "See Our Farms"
+          }
+        },
+        "gold": {
+          "type": "tier",
+          "settings": {
+            "tier": "gold",
+            "featured": true,
+            "title": "Gold Line",
+            "text": "Rare allocation lots, the microlots that carry the story.",
+            "button_label": "See Our Farms"
+          }
+        },
+        "silver": {
+          "type": "tier",
+          "settings": {
+            "tier": "silver",
+            "featured": false,
+            "title": "Silver Line",
+            "text": "Seasonal specialty from named producers, roasted for filter.",
+            "button_label": "See Our Farms"
+          }
+        }
+      },
+      "block_order": ["green", "gold", "silver"],
+      "settings": {
+        "heading": "Three tiers, one clear range",
+        "button_label": "Shop All",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "more_than_a_bag": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "More than a bag of coffee.",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Built on generations of coffee growing in Colombia. Cesar sources direct from origin and roasts to order in North Williamstown. Traceable, seasonal coffee, in your hands within days.</p>",
+            "text_style": "body"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Meet Cesar",
+            "button_style_secondary": true
+          }
+        }
+      },
+      "block_order": ["heading", "text", "button"],
+      "settings": {
+        "height": "large",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "mobile_content_alignment": "left",
+        "color_scheme": "scheme-3",
+        "section_color_scheme": "scheme-3",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "the_range": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "La colección / The Range",
+        "heading_size": "h1",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "enable_desktop_slider": true,
+        "swipe_on_mobile": true,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "image_ratio": "portrait",
+        "show_rating": true,
+        "show_vendor": false,
+        "quick_add": "standard",
+        "color_scheme": "scheme-1",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "flight_banner": {
       "type": "image-banner",
       "blocks": {
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "heading": "The Bourbon Rosado Flight",
+            "heading_size": "h1"
           }
         },
-        "button": {
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "Taste what process alone can do to a single lot — Bourbon Rosado finished four ways: washed, natural, honey and anaerobic. Four 100g bags, one story.",
+            "text_style": "body"
+          }
+        },
+        "buttons": {
           "type": "buttons",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "button_label_1": "Shop The Flight",
+            "button_style_secondary_1": false
           }
         }
       },
-      "block_order": [
-        "heading",
-        "button"
-      ],
+      "block_order": ["heading", "text", "buttons"],
       "settings": {
-        "image_overlay_opacity": 40,
         "image_height": "large",
-        "desktop_content_position": "bottom-center",
+        "desktop_content_position": "bottom-left",
+        "desktop_content_alignment": "left",
         "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "image_overlay_opacity": 20,
+        "mobile_content_alignment": "left",
+        "show_text_below": true,
+        "color_scheme": "scheme-1"
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
+    "origin_and_roast": {
+      "type": "multicolumn",
+      "blocks": {
+        "origin": {
+          "type": "column",
+          "settings": {
+            "title": "Directly from origin",
+            "text": "<p>Real relationships with the growers behind every lot.</p>",
+            "link_label": "See Our Farms"
+          }
+        },
+        "roast": {
+          "type": "column",
+          "settings": {
+            "title": "Roasted to order in Melbourne",
+            "text": "<p>Roasted fresh at our North Williamstown facility and dispatched within days.</p>",
+            "link_label": "How We Roast"
+          }
+        }
+      },
+      "block_order": ["origin", "roast"],
       "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
+        "title": "",
+        "image_width": "full",
         "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "padding_top": 44,
-        "padding_bottom": 36
+        "columns_desktop": 2,
+        "column_alignment": "left",
+        "background_style": "none",
+        "columns_mobile": "1",
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "subscription": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Never run out",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Build your plan, save 10%. Choose your plan, set your frequency, and skip or pause anytime. Fresh coffee on your schedule, not ours.</p>",
+            "text_style": "body"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Start Your Subscription"
+          }
+        }
+      },
+      "block_order": ["heading", "text", "button"],
+      "settings": {
+        "height": "medium",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "center",
+        "content_layout": "no-overlap",
+        "mobile_content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "section_color_scheme": "scheme-1",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "explore": {
+      "type": "cesar-link-list",
+      "blocks": {
+        "green": { "type": "link", "settings": { "label": "Green" } },
+        "silver": { "type": "link", "settings": { "label": "Silver" } },
+        "gold": { "type": "link", "settings": { "label": "Gold" } },
+        "flight": { "type": "link", "settings": { "label": "The Flight" } },
+        "subs": { "type": "link", "settings": { "label": "Subscriptions" } },
+        "wholesale": { "type": "link", "settings": { "label": "Wholesale" } }
+      },
+      "block_order": ["green", "silver", "gold", "flight", "subs", "wholesale"],
+      "settings": {
+        "image_position": "right",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "trade": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Retail proof. Trade ready.",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Wholesale roasting to order, white-label roasting, co-roasting and master brews — for cafés, venues and roasters who want what is in the cup.</p>",
+            "text_style": "body"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Talk To Us About Trade",
+            "button_style_secondary": true
+          }
+        }
+      },
+      "block_order": ["heading", "text", "button"],
+      "settings": {
+        "height": "medium",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "mobile_content_alignment": "left",
+        "color_scheme": "scheme-3",
+        "section_color_scheme": "scheme-3",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "trade_options": {
+      "type": "multicolumn",
+      "blocks": {
+        "wholesale": {
+          "type": "column",
+          "settings": {
+            "title": "Wholesale",
+            "text": "<p>Roasted to order for cafés and venues.</p>",
+            "link_label": "See Our Farms"
+          }
+        },
+        "white_label": {
+          "type": "column",
+          "settings": {
+            "title": "White label",
+            "text": "<p>Your brand, our roastery.</p>",
+            "link_label": "How We Roast"
+          }
+        },
+        "co_roasting": {
+          "type": "column",
+          "settings": {
+            "title": "Co-roasting",
+            "text": "<p>Roast with us on our licensed site.</p>",
+            "link_label": "How We Roast"
+          }
+        }
+      },
+      "block_order": ["wholesale", "white_label", "co_roasting"],
+      "settings": {
+        "title": "",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "none",
+        "columns_mobile": "1",
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 72
       }
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection"
+    "hero",
+    "tiers",
+    "more_than_a_bag",
+    "the_range",
+    "flight_banner",
+    "origin_and_roast",
+    "subscription",
+    "explore",
+    "trade",
+    "trade_options"
   ]
 }

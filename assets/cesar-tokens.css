@@ -1,0 +1,291 @@
+/**
+ * Cesar's Coffee Cup — design tokens
+ * Fuente de verdad: design-system/MASTER.md
+ * Se carga después de base.css para poder sobrescribir a Dawn.
+ */
+
+:root {
+  /* ---- Color primitivo ---- */
+  --cc-brown-900: #2d1206;
+  --cc-brown-700: #4a3120;
+  --cc-brown-500: #836c59;
+  --cc-terracotta: #ca6c3b; /* solo display >=24px bold (3.08:1) */
+  --cc-terracotta-text: #a1562f; /* texto pequeño y enlaces (4.54:1) */
+  --cc-green: #558066;
+  --cc-green-line: #3e5f49;
+  --cc-gold: #c4972e;
+  --cc-silver: #5f6a67;
+  --cc-yellow: #fdf5a6;
+  --cc-cream: #fbf8ec;
+  --cc-bg: #ebebed;
+  --cc-surface: #ffffff;
+
+  /* ---- Semántico ---- */
+  --cc-text: var(--cc-brown-900);
+  --cc-text-muted: var(--cc-brown-500);
+  --cc-text-on-dark: #ebebed;
+  --cc-border: rgba(45, 18, 6, 0.12);
+  --cc-accent: var(--cc-terracotta);
+
+  /* ---- Tipografía ----
+     OJO: --cc-font-sans, --cc-font-display y --cc-font-heading-weight-black
+     los define layout/theme.liquid a partir de los ajustes del tema. No se
+     declaran aquí (este archivo carga después y los pisaría). Se usan siempre
+     con fallback en el punto de uso. */
+  --cc-fallback-display: 'Archivo Narrow', 'Helvetica Neue Condensed', 'Arial Narrow', system-ui, sans-serif;
+  --cc-fallback-sans: 'Archivo', 'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif;
+
+  --cc-text-display: clamp(3.25rem, 8.5vw, 7rem);
+  --cc-text-h1: clamp(2.375rem, 5vw, 4rem);
+  --cc-text-h2: clamp(1.875rem, 3.4vw, 2.75rem);
+  --cc-text-h3: clamp(1.375rem, 2vw, 1.75rem);
+  --cc-text-body-lg: 1.125rem;
+  --cc-text-body: 1rem;
+  --cc-text-sm: 0.875rem;
+  --cc-text-xs: 0.75rem;
+
+  /* ---- Forma ---- */
+  --cc-radius-sm: 8px;
+  --cc-radius-md: 14px;
+  --cc-radius-lg: 22px;
+  --cc-radius-pill: 999px;
+
+  /* ---- Espaciado (ritmo 4/8) ---- */
+  --cc-space-1: 4px;
+  --cc-space-2: 8px;
+  --cc-space-3: 12px;
+  --cc-space-4: 16px;
+  --cc-space-6: 24px;
+  --cc-space-8: 32px;
+  --cc-space-12: 48px;
+  --cc-space-16: 64px;
+  --cc-space-24: 96px;
+  --cc-space-32: 128px;
+
+  --cc-section-gap: var(--cc-space-24);
+  --cc-content-width: 1400px;
+
+  /* ---- Movimiento ---- */
+  --cc-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --cc-duration: 220ms;
+}
+
+@media screen and (max-width: 749px) {
+  :root {
+    --cc-section-gap: var(--cc-space-12);
+  }
+}
+
+/* ---------- Tipografía base ---------- */
+
+.cc-display {
+  font-family: var(--cc-font-display, var(--cc-fallback-display));
+  font-weight: 700;
+  font-size: var(--cc-text-display);
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--cc-terracotta);
+  margin: 0;
+}
+
+.cc-h1,
+.cc-h2 {
+  font-family: var(--cc-font-sans, var(--cc-fallback-sans));
+  font-weight: var(--cc-font-heading-weight-black, 800);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--cc-brown-700);
+  margin: 0;
+}
+
+.cc-h1 {
+  font-size: var(--cc-text-h1);
+}
+.cc-h2 {
+  font-size: var(--cc-text-h2);
+}
+
+.cc-h3 {
+  font-family: var(--cc-font-sans, var(--cc-fallback-sans));
+  font-weight: 700;
+  font-size: var(--cc-text-h3);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--cc-brown-700);
+  margin: 0;
+}
+
+.cc-body {
+  font-size: var(--cc-text-body);
+  line-height: 1.55;
+  color: var(--cc-text);
+  /* 65-75 caracteres por línea */
+  max-width: 68ch;
+}
+
+.cc-eyebrow {
+  font-size: var(--cc-text-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Cifras tabulares en precios y datos, evita saltos de layout */
+.cc-price,
+.cc-tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Superficies de sección ---------- */
+
+.cc-section {
+  padding-block: var(--cc-section-gap);
+}
+
+.cc-section--green {
+  background-color: var(--cc-green);
+  color: #fff;
+}
+
+.cc-section--green .cc-h2,
+.cc-section--green .cc-h1 {
+  color: var(--cc-yellow);
+}
+
+.cc-section--brown {
+  background-color: var(--cc-brown-900);
+  color: var(--cc-text-on-dark);
+}
+
+.cc-section--yellow {
+  background-color: var(--cc-yellow);
+  color: var(--cc-brown-900);
+}
+
+.cc-container {
+  max-width: var(--cc-content-width);
+  margin-inline: auto;
+  padding-inline: var(--cc-space-6);
+}
+
+@media screen and (min-width: 990px) {
+  .cc-container {
+    padding-inline: var(--cc-space-12);
+  }
+}
+
+/* ---------- Botones ---------- */
+
+.cc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--cc-space-2);
+  /* 44px mínimo de área táctil */
+  min-height: 44px;
+  padding: var(--cc-space-3) var(--cc-space-6);
+  border-radius: var(--cc-radius-sm);
+  font-family: var(--cc-font-sans, var(--cc-fallback-sans));
+  font-size: var(--cc-text-sm);
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition:
+    background-color var(--cc-duration) var(--cc-ease),
+    color var(--cc-duration) var(--cc-ease),
+    border-color var(--cc-duration) var(--cc-ease);
+}
+
+.cc-btn--primary {
+  background-color: var(--cc-brown-900);
+  color: #fff;
+}
+
+.cc-btn--primary:hover {
+  background-color: var(--cc-brown-700);
+}
+
+.cc-btn--secondary {
+  background-color: transparent;
+  color: var(--cc-brown-900);
+  border-color: var(--cc-brown-900);
+}
+
+.cc-btn--secondary:hover {
+  background-color: var(--cc-brown-900);
+  color: #fff;
+}
+
+/* Sobre superficies oscuras/verdes */
+.cc-section--green .cc-btn--secondary,
+.cc-section--brown .cc-btn--secondary {
+  color: #fff;
+  border-color: #fff;
+}
+
+.cc-section--green .cc-btn--secondary:hover,
+.cc-section--brown .cc-btn--secondary:hover {
+  background-color: #fff;
+  color: var(--cc-brown-900);
+}
+
+.cc-btn:focus-visible {
+  outline: 2px solid var(--cc-brown-900);
+  outline-offset: 3px;
+}
+
+.cc-section--green .cc-btn:focus-visible,
+.cc-section--brown .cc-btn:focus-visible {
+  outline-color: var(--cc-yellow);
+}
+
+/* ---------- Chips de filtro ---------- */
+
+.cc-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cc-space-2);
+  min-height: 44px;
+  padding: var(--cc-space-2) var(--cc-space-4);
+  border-radius: var(--cc-radius-pill);
+  background-color: var(--cc-cream);
+  color: var(--cc-brown-900);
+  font-size: var(--cc-text-sm);
+  font-weight: 500;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.cc-chip[aria-pressed='true'],
+.cc-chip--active {
+  background-color: var(--cc-brown-700);
+  color: #fff;
+}
+
+/* ---------- Badges de línea ---------- */
+
+.cc-line-badge {
+  position: absolute;
+  top: var(--cc-space-3);
+  right: var(--cc-space-3);
+  width: 52px;
+  height: 52px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ---------- Movimiento ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
