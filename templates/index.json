@@ -146,50 +146,14 @@
       }
     },
     "flight_banner": {
-      "type": "image-banner",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "The Bourbon Rosado Flight",
-            "heading_size": "h1"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "Taste what process alone can do to a single lot — Bourbon Rosado finished four ways: washed, natural, honey and anaerobic. Four 100g bags, one story.",
-            "text_style": "body"
-          }
-        },
-        "buttons": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Shop The Flight",
-            "button_link_1": "",
-            "button_style_secondary_1": false,
-            "button_label_2": "Button label",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text",
-        "buttons"
-      ],
+      "type": "cesar-banner",
       "settings": {
-        "image_overlay_opacity": 20,
-        "image_height": "large",
-        "image_behavior": "none",
-        "desktop_content_position": "bottom-left",
-        "desktop_content_alignment": "left",
-        "show_text_box": false,
-        "color_scheme": "scheme-1",
-        "stack_images_on_mobile": true,
-        "mobile_content_alignment": "left",
-        "show_text_below": true
+        "ratio": "wide",
+        "heading": "The Bourbon Rosado Flight",
+        "text": "Taste what process alone can do to a single lot — Bourbon Rosado finished four ways: washed, natural, honey and anaerobic. Four 100g bags, one story.",
+        "button_label": "Shop The Flight",
+        "link": "",
+        "color_scheme": "scheme-1"
       }
     },
     "origin_and_roast": {
@@ -342,49 +306,17 @@
       }
     },
     "trade": {
-      "type": "image-with-text",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Retail proof. Trade ready.",
-            "heading_size": "h1"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Wholesale roasting to order, white-label roasting, co-roasting and master brews — for cafés, venues and roasters who want what is in the cup.</p>",
-            "text_style": "body"
-          }
-        },
-        "button": {
-          "type": "button",
-          "settings": {
-            "button_label": "Talk To Us About Trade",
-            "button_link": "",
-            "button_style_secondary": true
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text",
-        "button"
-      ],
+      "type": "cesar-collection-row",
       "settings": {
-        "height": "medium",
-        "desktop_image_width": "medium",
-        "layout": "text_first",
-        "image_behavior": "none",
-        "content_layout": "no-overlap",
-        "desktop_content_position": "middle",
-        "desktop_content_alignment": "left",
-        "mobile_content_alignment": "left",
-        "section_color_scheme": "scheme-3",
-        "color_scheme": "scheme-3",
-        "padding_top": 0,
-        "padding_bottom": 0
+        "heading": "Retail proof. Trade ready.",
+        "text": "Wholesale roasting to order, white-label roasting, co-roasting and master brews — for cafés, venues and roasters who want what is in the cup.",
+        "button_label": "Talk To Us About Trade",
+        "button_link": "",
+        "collection": "",
+        "products_to_show": 6,
+        "image_ratio": "square",
+        "show_rating": true,
+        "color_scheme": "scheme-5"
       }
     },
     "trade_options": {

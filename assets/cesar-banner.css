@@ -1,0 +1,77 @@
+/**
+ * Banner: imagen apaisada a todo el ancho con el texto FUERA, debajo.
+ */
+
+.cesar-banner__media {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--cc-radius-lg);
+  background-color: var(--cc-cream);
+}
+
+/* La proporción se fija en el contenedor y no en la imagen: así el hueco queda
+   reservado antes de que cargue y no hay salto de layout. */
+.cesar-banner__media--wide {
+  aspect-ratio: 21 / 9;
+}
+
+.cesar-banner__media--medium {
+  aspect-ratio: 16 / 9;
+}
+
+.cesar-banner__media--short {
+  aspect-ratio: 3 / 1;
+}
+
+.cesar-banner__media-link {
+  display: block;
+  height: 100%;
+}
+
+.cesar-banner__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ---------- Texto ---------- */
+
+.cesar-banner__content {
+  margin-top: var(--cc-space-8);
+}
+
+.cesar-banner__heading {
+  margin: 0;
+  font-family: var(--cc-font-sans, var(--cc-fallback-sans));
+  font-size: var(--cc-text-h2);
+  font-weight: var(--cc-font-heading-weight-black, 800);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--cc-brown-700);
+}
+
+.cesar-banner__text {
+  margin: var(--cc-space-3) 0 0;
+  max-width: 62ch;
+  font-size: var(--cc-text-body);
+  line-height: 1.5;
+  color: var(--cc-text);
+}
+
+.cesar-banner__button {
+  margin-top: var(--cc-space-6);
+}
+
+@media screen and (max-width: 749px) {
+  /* En móvil una 21:9 deja una franja demasiado estrecha para leerse nada. */
+  .cesar-banner__media--wide,
+  .cesar-banner__media--short {
+    aspect-ratio: 4 / 3;
+  }
+
+  .cesar-banner__media--medium {
+    aspect-ratio: 1 / 1;
+  }
+}

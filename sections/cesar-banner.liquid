@@ -1,0 +1,113 @@
+{{ 'cesar-banner.css' | asset_url | stylesheet_tag }}
+
+<div class="cesar-banner cc-section color-{{ section.settings.color_scheme }}">
+  <div class="cc-container">
+    {%- if section.settings.image != blank -%}
+      <div class="cesar-banner__media cesar-banner__media--{{ section.settings.ratio }}">
+        {%- if section.settings.link != blank -%}
+          <a href="{{ section.settings.link }}" class="cesar-banner__media-link" tabindex="-1" aria-hidden="true">
+        {%- endif -%}
+        {{
+          section.settings.image
+          | image_url: width: 3200
+          | image_tag:
+            loading: 'lazy',
+            sizes: '100vw',
+            widths: '600, 900, 1200, 1600, 2000, 2600, 3200',
+            class: 'cesar-banner__image',
+            alt: section.settings.image.alt
+        }}
+        {%- if section.settings.link != blank -%}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%}
+      El texto va FUERA de la imagen, debajo. En la referencia el titular que se
+      ve sobre la foto forma parte de la propia imagen, no es texto del tema:
+      así no hay que pelear el contraste sobre la fotografía.
+    {%- endcomment -%}
+    <div class="cesar-banner__content">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="cesar-banner__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.text != blank -%}
+        <p class="cesar-banner__text">{{ section.settings.text }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.button_label != blank -%}
+        <a href="{{ section.settings.link | default: '#' }}" class="cc-btn cc-btn--primary cesar-banner__button">
+          {{ section.settings.button_label }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cesar · Banner",
+  "tag": "section",
+  "class": "cesar-banner-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen",
+      "info": "Apaisada y a todo el ancho. Si el diseño lleva un titular sobre la foto, va incrustado en la propia imagen."
+    },
+    {
+      "type": "select",
+      "id": "ratio",
+      "label": "Proporción",
+      "options": [
+        { "value": "wide", "label": "Panorámica (21:9)" },
+        { "value": "medium", "label": "Ancha (16:9)" },
+        { "value": "short", "label": "Muy apaisada (3:1)" }
+      ],
+      "default": "wide"
+    },
+    {
+      "type": "header",
+      "content": "Texto (va debajo de la imagen)"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Titular",
+      "default": "The Flight"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Texto",
+      "default": "Four origins, 100g each. The whole range in one box."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Botón",
+      "default": "Start Now"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Enlace",
+      "info": "Se usa en el botón y hace la imagen clicable."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cesar · Banner"
+    }
+  ]
+}
+{% endschema %}

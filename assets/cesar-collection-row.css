@@ -1,0 +1,104 @@
+/**
+ * Texto a un lado y carrusel de producto al otro.
+ * El carrusel usa el slider-component de Dawn; aquí sólo se ajusta el layout.
+ */
+
+.cesar-collection-row__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--cc-space-8);
+  align-items: center;
+}
+
+/* ---------- Columna de texto ---------- */
+
+.cesar-collection-row__heading {
+  margin: 0;
+  font-family: var(--cc-font-sans, var(--cc-fallback-sans));
+  font-size: var(--cc-text-h2);
+  font-weight: var(--cc-font-heading-weight-black, 800);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--cc-brown-700);
+}
+
+.cesar-collection-row__text {
+  margin: var(--cc-space-4) 0 0;
+  max-width: 42ch;
+  font-size: var(--cc-text-body);
+  line-height: 1.5;
+  color: var(--cc-text);
+}
+
+.cesar-collection-row__button {
+  margin-top: var(--cc-space-6);
+}
+
+/* ---------- Carrusel ---------- */
+
+.cesar-collection-row__slider {
+  position: relative;
+  min-width: 0;
+}
+
+.cesar-collection-row__grid {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Dawn centra los controles bajo el carrusel; en la referencia van así, con
+   las flechas a los lados del contador. */
+.cesar-collection-row__slider .slider-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--cc-space-4);
+  margin-top: var(--cc-space-6);
+}
+
+.cesar-collection-row__slider .slider-button {
+  display: grid;
+  place-items: center;
+  /* área táctil completa aunque el icono sea pequeño */
+  width: 44px;
+  height: 44px;
+  border-radius: var(--cc-radius-pill);
+  background-color: var(--cc-surface);
+  border: 0;
+  color: var(--cc-brown-900);
+  cursor: pointer;
+}
+
+.cesar-collection-row__slider .slider-button:hover {
+  background-color: var(--cc-cream);
+}
+
+.cesar-collection-row__slider .slider-button:focus-visible {
+  outline: 2px solid var(--cc-brown-900);
+  outline-offset: 2px;
+}
+
+.cesar-collection-row__slider .slider-button[disabled] {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.cesar-collection-row__slider .slider-button .svg-wrapper {
+  width: 18px;
+  height: 18px;
+}
+
+.cesar-collection-row__slider .slider-counter {
+  font-size: var(--cc-text-sm);
+  font-variant-numeric: tabular-nums;
+  color: var(--cc-text-muted);
+}
+
+@media screen and (min-width: 990px) {
+  .cesar-collection-row__inner {
+    /* El texto ocupa menos que el carrusel, como en la referencia. */
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 2fr);
+    gap: var(--cc-space-16);
+  }
+}

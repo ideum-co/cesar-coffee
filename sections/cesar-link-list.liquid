@@ -1,7 +1,11 @@
 {{ 'cesar-link-list.css' | asset_url | stylesheet_tag }}
 
-<div class="cesar-link-list cesar-link-list--image-{{ section.settings.image_position }} cc-section color-{{ section.settings.color_scheme }}">
-  <div class="cc-container cesar-link-list__inner">
+{%- comment -%}
+  Va a sangre, sin .cc-container: las dos mitades llegan a los bordes y la
+  imagen ocupa su 50% completo.
+{%- endcomment -%}
+<div class="cesar-link-list cesar-link-list--image-{{ section.settings.image_position }} color-{{ section.settings.color_scheme }}">
+  <div class="cesar-link-list__inner">
     <div class="cesar-link-list__links">
       {%- if section.settings.heading != blank -%}
         <h2 class="cesar-link-list__heading">{{ section.settings.heading }}</h2>
@@ -22,11 +26,11 @@
       <div class="cesar-link-list__media">
         {{
           section.settings.image
-          | image_url: width: 1200
+          | image_url: width: 2000
           | image_tag:
             loading: 'lazy',
             sizes: '(min-width: 990px) 50vw, 100vw',
-            widths: '400, 600, 800, 1200',
+            widths: '400, 600, 800, 1200, 1600, 2000',
             class: 'cesar-link-list__image',
             alt: section.settings.image.alt
         }}

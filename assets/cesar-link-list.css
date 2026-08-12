@@ -1,8 +1,20 @@
+/**
+ * Lista destacada: dos mitades a sangre. Texto en una, imagen en la otra
+ * cubriendo su 50% completo, sin márgenes ni esquinas redondeadas.
+ */
+
 .cesar-link-list__inner {
   display: grid;
   grid-template-columns: 1fr;
-  align-items: center;
-  gap: var(--cc-space-8);
+}
+
+.cesar-link-list__links {
+  /* El padding va aquí y no en un contenedor: la imagen tiene que llegar al
+     borde, y un contenedor común le metería gutter. */
+  padding: var(--cc-section-gap) var(--cc-gutter);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .cesar-link-list__heading {
@@ -42,19 +54,38 @@
   outline-offset: 3px;
 }
 
+/* ---------- Imagen ---------- */
+
+.cesar-link-list__media {
+  position: relative;
+  /* En móvil, a una columna, la celda no tiene alto propio: se le da uno para
+     que la imagen tenga algo que cubrir. */
+  min-height: 60vw;
+}
+
 .cesar-link-list__image {
   display: block;
   width: 100%;
-  height: auto;
-  border-radius: var(--cc-radius-lg);
-  aspect-ratio: 4 / 3;
+  height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
 @media screen and (min-width: 990px) {
   .cesar-link-list__inner {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--cc-space-16);
+    /* Sin gap: las dos mitades se tocan, como en la referencia. */
+    gap: 0;
+    align-items: stretch;
+  }
+
+  .cesar-link-list__links {
+    padding-inline: clamp(var(--cc-gutter), 6vw, 96px);
+  }
+
+  .cesar-link-list__media {
+    /* En desktop la celda ya mide toda la altura de la fila. */
+    min-height: 0;
   }
 
   .cesar-link-list--image-left .cesar-link-list__media {
