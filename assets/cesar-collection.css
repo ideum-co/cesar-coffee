@@ -1,0 +1,84 @@
+/**
+ * Colección — ajustes de marca sobre los componentes de Dawn.
+ * Se carga desde main-collection-banner / main-collection-product-grid.
+ */
+
+/* ---------- Encabezado ---------- */
+
+.collection-hero__title {
+  font-family: var(--cc-font-sans, var(--cc-fallback-sans));
+  font-size: var(--cc-text-h1);
+  font-weight: var(--cc-font-heading-weight-black, 800);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--cc-brown-700);
+  text-transform: none;
+}
+
+.collection-hero__description {
+  margin-top: var(--cc-space-3);
+  max-width: 62ch;
+  font-size: var(--cc-text-body);
+  line-height: 1.55;
+  color: var(--cc-text);
+}
+
+/* ---------- Filtros como chips ---------- */
+
+.facets-pill .facets__summary,
+.facet-filters__sort {
+  border-radius: var(--cc-radius-pill);
+  background-color: var(--cc-cream);
+  border: 1px solid transparent;
+  /* el diseño usa chips bajos; se conserva el alto mínimo táctil */
+  min-height: 44px;
+  padding-inline: var(--cc-space-4);
+  font-size: var(--cc-text-sm);
+  font-weight: 500;
+  color: var(--cc-brown-900);
+}
+
+.facets-pill .facets__disclosure[open] .facets__summary,
+.facets-pill .facets__summary:hover {
+  background-color: #f3ecd8;
+}
+
+.facets__summary:focus-visible,
+.facet-filters__sort:focus-visible {
+  outline: 2px solid var(--cc-brown-900);
+  outline-offset: 2px;
+}
+
+/* Chips de filtros activos */
+.active-facets__button-inner {
+  border-radius: var(--cc-radius-pill);
+  background-color: var(--cc-brown-700);
+  color: #fff;
+  border: 0;
+  min-height: 44px;
+  padding-inline: var(--cc-space-4);
+  font-size: var(--cc-text-sm);
+  font-weight: 500;
+}
+
+.active-facets__button--light .active-facets__button-inner {
+  background-color: var(--cc-brown-700);
+  color: #fff;
+}
+
+.active-facets__button-remove {
+  text-decoration: none;
+}
+
+.facets__display,
+.facets__display-vertical {
+  border-radius: var(--cc-radius-md);
+  border: 1px solid var(--cc-border);
+}
+
+/* ---------- Grid ---------- */
+
+.product-grid {
+  column-gap: var(--cc-space-4);
+  row-gap: var(--cc-space-6);
+}

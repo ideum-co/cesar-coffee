@@ -265,6 +265,38 @@
   color: #fff;
 }
 
+/* ---------- Cards de producto (globales: colección, home, búsqueda) ---------- */
+
+.card__inner {
+  /* ancla de posicionamiento del badge de línea */
+  position: relative;
+}
+
+.card--card {
+  border-radius: var(--cc-radius-md);
+  overflow: hidden;
+}
+
+.card__heading {
+  font-family: var(--cc-font-sans, var(--cc-fallback-sans));
+  font-size: var(--cc-text-body);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.card-information .price {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+/* Notas de cata bajo el título */
+.cesar-card__notes {
+  margin: var(--cc-space-1) 0 0;
+  font-size: var(--cc-text-xs);
+  line-height: 1.4;
+  color: var(--cc-text-muted);
+}
+
 /* ---------- Badges de línea ---------- */
 
 .cc-line-badge {
@@ -275,6 +307,13 @@
   height: 52px;
   z-index: 2;
   pointer-events: none;
+}
+
+@media screen and (max-width: 749px) {
+  .cc-line-badge {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 /* ---------- Movimiento ---------- */

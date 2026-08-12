@@ -53,6 +53,18 @@ El badge lee `product.metafields.cesar.line` y, si no existe, cae a las
 etiquetas `green-line` / `silver-line` / `gold-line`. Si el producto no tiene
 línea, no renderiza nada.
 
+## Suscripciones
+
+Se usa **Shopify Subscriptions** (la app nativa). Dawn no trae selector de
+selling plans en la PDP: lo aporta la app como **bloque de app**.
+
+Para activarlo: Personalizador → plantilla de producto → *Añadir bloque* →
+bloque de Shopify Subscriptions, y se coloca donde toque (en el diseño va
+entre el selector de tamaño y el botón de añadir al carrito).
+
+`assets/cesar-product.css` ya le da el contenedor de marca al widget. Los
+planes (frecuencia y el descuento del 10%) se configuran en la app, no aquí.
+
 ## CSS
 
 `assets/cesar-tokens.css` define los tokens y se carga después de `base.css`.

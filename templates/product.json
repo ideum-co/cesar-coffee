@@ -3,18 +3,24 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "vendor": {
+        "origin": {
           "type": "text",
           "settings": {
-            "text": "{{ product.vendor }}",
+            "text": "Hero varietal · Cauca, Colombia",
             "text_style": "uppercase"
           }
         },
         "title": {
-          "type": "title"
+          "type": "title",
+          "settings": {}
         },
-        "price": {
-          "type": "price"
+        "rating": {
+          "type": "rating",
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
         },
         "variant_picker": {
           "type": "variant_picker",
@@ -24,80 +30,220 @@
           }
         },
         "quantity_selector": {
-          "type": "quantity_selector"
+          "type": "quantity_selector",
+          "settings": {}
         },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
             "show_dynamic_checkout": true,
-            "show_gift_card_recipient": true
+            "show_gift_card_recipient": false
           }
         },
-        "description": {
-          "type": "description"
-        },
-        "share": {
-          "type": "share",
+        "faq_storage": {
+          "type": "collapsible_tab",
           "settings": {
-            "share_label": "Share"
+            "heading": "How should I store this?",
+            "icon": "question_mark",
+            "content": "<p>Keep the bag sealed, out of the sun, at room temperature. Don't refrigerate.</p>"
+          }
+        },
+        "faq_freshness": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "How fresh is it when it arrives?",
+            "icon": "question_mark",
+            "content": "<p>Roasted to order in North Williamstown and dispatched within days of roasting — never off a shelf.</p>"
+          }
+        },
+        "faq_brew": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "What's the best way to brew this?",
+            "icon": "question_mark",
+            "content": "<p>Tasting notes and a suggested recipe are on the bag. Ask us if you want a starting point for your setup.</p>"
           }
         }
       },
       "block_order": [
-        "vendor",
+        "origin",
         "title",
-        "price",
+        "rating",
+        "description",
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
-        "description",
-        "share"
+        "faq_storage",
+        "faq_freshness",
+        "faq_brew"
       ],
       "settings": {
         "enable_sticky_info": true,
         "color_scheme": "scheme-1",
-        "media_position": "left",
-        "gallery_layout": "stacked",
         "media_size": "large",
         "constrain_to_viewport": true,
         "media_fit": "contain",
-        "image_zoom": "lightbox",
+        "gallery_layout": "stacked",
         "mobile_thumbnails": "hide",
-        "hide_variants": true,
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": false,
         "enable_video_looping": false,
-        "padding_top": 36,
+        "padding_top": 24,
         "padding_bottom": 12
       }
     },
-    "disclosures": {
-      "type": "disclosures",
+    "product_features": {
+      "type": "multicolumn",
+      "blocks": {
+        "origin": {
+          "type": "column",
+          "settings": {
+            "title": "Origin & Process",
+            "text": "<p>Washed, clean and floral. Natural, red fruit and wine-like sweetness. Honey, balanced, syrupy body. Anaerobic, funky, fermented depth.</p>"
+          }
+        },
+        "notes": {
+          "type": "column",
+          "settings": {
+            "title": "Tasting Notes",
+            "text": "<p>Taste them side by side to feel what each method does.</p>"
+          }
+        },
+        "roast": {
+          "type": "column",
+          "settings": {
+            "title": "Roast & Dispatch",
+            "text": "<p>Roasted to order in North Williamstown. Ships within days of roasting, never off a shelf.</p>"
+          }
+        }
+      },
+      "block_order": ["origin", "notes", "roast"],
       "settings": {
-        "padding_top": 36,
-        "padding_bottom": 0
+        "title": "More About This Product",
+        "heading_size": "h2",
+        "image_width": "third",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 56
       }
     },
-    "related-products": {
+    "pairs_with": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Pairs Great With",
+        "heading_size": "h1",
+        "products_to_show": 6,
+        "columns_desktop": 3,
+        "columns_mobile": "2",
+        "enable_desktop_slider": true,
+        "swipe_on_mobile": true,
+        "show_view_all": false,
+        "image_ratio": "portrait",
+        "show_rating": true,
+        "show_vendor": false,
+        "quick_add": "standard",
+        "color_scheme": "scheme-3",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "tiers": {
+      "type": "cesar-tiers",
+      "blocks": {
+        "green": {
+          "type": "tier",
+          "settings": {
+            "tier": "green",
+            "featured": false,
+            "title": "Green Line",
+            "text": "Everyday espresso, always on. The dependable base of the range.",
+            "button_label": "See Our Farms"
+          }
+        },
+        "gold": {
+          "type": "tier",
+          "settings": {
+            "tier": "gold",
+            "featured": true,
+            "title": "Gold Line",
+            "text": "Rare allocation lots, the microlots that carry the story.",
+            "button_label": "See Our Farms"
+          }
+        },
+        "silver": {
+          "type": "tier",
+          "settings": {
+            "tier": "silver",
+            "featured": false,
+            "title": "Silver Line",
+            "text": "Seasonal specialty from named producers, roasted for filter.",
+            "button_label": "See Our Farms"
+          }
+        }
+      },
+      "block_order": ["green", "gold", "silver"],
+      "settings": {
+        "heading": "Three tiers, one clear range",
+        "button_label": "Shop All",
+        "color_scheme": "scheme-3"
+      }
+    },
+    "roasted_to_order": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Roasted to order. Every time.",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>No inventory sitting on a shelf. Every bag is roasted after you order it, so what you get is always fresh.</p>"
+          }
+        }
+      },
+      "block_order": ["heading", "text"],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 72,
+        "padding_bottom": 40
+      }
+    },
+    "recommendations": {
       "type": "related-products",
       "settings": {
         "heading": "You may also like",
-        "heading_size": "h2",
         "products_to_show": 4,
         "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "image_ratio": "square",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
         "columns_mobile": "2",
-        "padding_top": 36,
-        "padding_bottom": 28
+        "image_ratio": "portrait",
+        "show_rating": true,
+        "show_vendor": false,
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 72
       }
     }
   },
   "order": [
     "main",
-    "disclosures",
-    "related-products"
+    "product_features",
+    "pairs_with",
+    "tiers",
+    "roasted_to_order",
+    "recommendations"
   ]
 }

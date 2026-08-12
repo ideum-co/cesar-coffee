@@ -4,33 +4,76 @@
       "type": "main-collection-banner",
       "settings": {
         "show_collection_description": true,
-        "show_collection_image": false,
+        "show_collection_image": true,
         "color_scheme": "scheme-1"
       }
     },
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
-        "products_per_page": 16,
+        "products_per_page": 20,
         "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "image_ratio": "adapt",
+        "columns_mobile": "2",
+        "image_ratio": "portrait",
         "image_shape": "default",
-        "show_secondary_image": false,
+        "show_secondary_image": true,
         "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
+        "show_rating": true,
+        "quick_add": "standard",
         "enable_filtering": true,
         "filter_type": "horizontal",
         "enable_sorting": true,
-        "columns_mobile": "2",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "color_scheme": "scheme-1",
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
+    },
+    "faq": {
+      "type": "collapsible-content",
+      "blocks": {
+        "tiers": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What's the difference between Green, Silver and Gold?",
+            "row_content": "<p>Green is the everyday espresso base of the range. Silver is seasonal specialty from named producers, roasted for filter. Gold is rare allocation lots — the microlots that carry the story.</p>"
+          }
+        },
+        "freshness": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How fresh will my coffee be?",
+            "row_content": "<p>Every bag is roasted after you order it, then dispatched within days. Nothing sits on a shelf.</p>"
+          }
+        },
+        "subscription": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Can I skip or pause a subscription order?",
+            "row_content": "<p>Yes. Skip, pause or cancel anytime from your account — no phone calls.</p>"
+          }
+        },
+        "grind": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What grind should I choose?",
+            "row_content": "<p>Whole bean keeps best. If you need it ground, pick the grind that matches your brewer at checkout.</p>"
+          }
+        }
+      },
+      "block_order": ["tiers", "freshness", "subscription", "grind"],
+      "settings": {
+        "caption": "",
+        "heading": "We've Got Answers",
+        "heading_size": "h1",
+        "heading_alignment": "left",
+        "layout": "none",
+        "color_scheme": "scheme-1",
+        "container_color_scheme": "scheme-2",
+        "open_first_collapsible_row": false,
+        "padding_top": 72,
+        "padding_bottom": 72
       }
     }
   },
-  "order": [
-    "banner",
-    "product-grid"
-  ]
+  "order": ["banner", "product-grid", "faq"]
 }

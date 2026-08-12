@@ -1,0 +1,74 @@
+/**
+ * PDP — ajustes de marca sobre main-product de Dawn.
+ */
+
+.product__title > h1,
+.product__title > .h1 {
+  font-family: var(--cc-font-sans, var(--cc-fallback-sans));
+  font-size: var(--cc-text-h1);
+  font-weight: var(--cc-font-heading-weight-black, 800);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--cc-brown-700);
+}
+
+/* Línea de origen sobre el título */
+.product__text.uppercase {
+  font-size: var(--cc-text-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--cc-text-muted);
+}
+
+.product .price {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Selector de tamaño en píldoras */
+.product-form__input .form__label {
+  font-size: var(--cc-text-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cc-text-muted);
+}
+
+/* Add to cart */
+.product-form__submit {
+  border-radius: var(--cc-radius-sm);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* Acordeón "More About This Product" */
+.product__accordion .accordion__title {
+  font-family: var(--cc-font-sans, var(--cc-fallback-sans));
+  font-size: var(--cc-text-body);
+  font-weight: 600;
+  color: var(--cc-brown-900);
+}
+
+.product__accordion summary:focus-visible {
+  outline: 2px solid var(--cc-brown-900);
+  outline-offset: 2px;
+}
+
+/* Galería: esquinas de marca */
+.product__media-wrapper .product__media,
+.product__media-wrapper .media {
+  border-radius: var(--cc-radius-md);
+  overflow: hidden;
+}
+
+/* Bloque de la app de suscripciones (Shopify Subscriptions).
+   Se añade desde el personalizador como bloque de app; aquí sólo se le da
+   el contenedor de marca para que no desentone. */
+.product-form__input--subscription,
+.shopify-subscription-widget,
+[data-subscription-widget] {
+  margin-block: var(--cc-space-4);
+  padding: var(--cc-space-4);
+  border: 1px solid var(--cc-border);
+  border-radius: var(--cc-radius-md);
+  background-color: var(--cc-surface);
+}
