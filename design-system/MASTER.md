@@ -127,6 +127,29 @@ clave del ritmo de la referencia: no hay tres valores distintos.
 `.cc-container` y el `.page-width` de Dawn comparten ese gutter, para que las
 secciones nativas y las propias se alineen.
 
+### Botones
+
+Sistema tomado del `.cta` de la referencia, normalizado a la base de 1440px
+(donde su `font-size` es 16px). **Los colores salen del PDF, no de ahí.**
+
+| Token | Valor | Origen |
+|---|---|---|
+| `--cc-cta-padding-y` | 8px | `1.3rem × (8/20.8)` |
+| `--cc-cta-padding-x` | 10.4px | `0.65rem` |
+| `--cc-cta-radius` | 8px | `1.3rem × (8/20.8)` |
+| `--cc-cta-font-size` | 16px | `--font-size` |
+| `--cc-cta-line` | 1.3 | `--base-line: 1.3rem` |
+| `--cc-cta-weight` | 700 | `--font-bold` |
+| `--cc-cta-transition` | 0.35s | `--transition-speed` |
+
+Da un botón de **37px de alto**, igual que la referencia. Como está por debajo
+del mínimo táctil, `.cc-btn::after` extiende el área de toque a 44px sin tocar
+el tamaño visual ni el layout.
+
+Los botones nativos de Dawn comparten estos tokens. Se les quita el
+`min-width: 120px` que traen (deforma los botones cortos del diseño) y se les
+deja `min-height: 44px`, porque ahí no hay un pseudo-elemento libre que usar.
+
 ### Titulares
 
 Interlineado **0.88** y tracking **-0.03em** en los titulares grandes (la

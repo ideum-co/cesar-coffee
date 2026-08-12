@@ -1,4 +1,10 @@
 import json, re, pathlib, sys
+
+def load_theme_json(path):
+    """Los JSON del tema pueden traer la cabecera de comentario que inyecta el
+    editor de Shopify, que no es JSON valido. Se retira antes de parsear."""
+    raw = pathlib.Path(path).read_text()
+    return json.loads(re.sub(r'^\s*/\*.*?\*/\s*', '', raw, flags=re.S))
 def schema_of(t):
     p = pathlib.Path(f'sections/{t}.liquid')
     if not p.exists(): return 'MISSING'
@@ -17,7 +23,7 @@ def check(defn,key,val,ctx,out):
 out=[]
 files = sorted(pathlib.Path('templates').glob('*.json')) + [pathlib.Path('sections/header-group.json'), pathlib.Path('sections/footer-group.json')]
 for f in files:
-    g=json.load(open(f))
+    g=load_theme_json(f)
     for sid,sec in (g.get('sections') or {}).items():
         sch=schema_of(sec['type'])
         if sch == 'MISSING': out.append(f"[{f.name}:{sid}] seccion inexistente {sec['type']}"); continue
