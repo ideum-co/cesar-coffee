@@ -99,20 +99,33 @@ GitHub** (ni por sync ni por CLI; ver §7). Por eso las familias se declaran en
 sobrescribe también `--font-body-family` y `--font-heading-family` de Dawn,
 para que los componentes nativos usen la misma tipografía.
 
+### Cuidado con `rem` en este tema
+
+Dawn pone `font-size: 62.5%` en `<html>`, así que **1rem son 10px, no 16px**.
+Toda la escala tipográfica está en **px a propósito**: en rem salía a un 62%
+del tamaño previsto y el sitio entero se veía pequeño.
+
+Si algún día se añade un token en rem, hay que multiplicar por 1.6
+(16px = `1.6rem`). Lo mismo aplica al harness de previsualización: tiene que
+replicar ese `62.5%` o miente sobre los tamaños reales.
+
 ### Escala (desktop → móvil)
 
-| Token | Desktop | Móvil |
+| Token | Móvil | Desktop |
 |---|---|---|
-| `--cc-text-display` | 112px | 52px |
-| `--cc-text-h1` | 64px | 38px |
-| `--cc-text-h2` | 44px | 30px |
-| `--cc-text-h3` | 28px | 22px |
-| `--cc-text-body-lg` | 18px | 17px |
+| `--cc-text-display` | 56px | hasta 168px |
+| `--cc-text-h1` | 40px | hasta 104px |
+| `--cc-text-h2` | 32px | hasta 60px |
+| `--cc-text-h3` | 22px | hasta 30px |
+| `--cc-text-body-lg` | 18px | 18px |
 | `--cc-text-body` | 16px | 16px |
 | `--cc-text-sm` | 14px | 14px |
 | `--cc-text-xs` | 12px | 12px |
 
-Mínimo de 16px en body móvil (evita el auto-zoom de iOS).
+Todos con `clamp()`, así que escalan solos entre esos extremos.
+
+El cuerpo se fija en 16px en todos los tamaños: Dawn lo deja en 15px por debajo
+de 750px, y por debajo de 16px iOS hace zoom solo al enfocar un input.
 
 ---
 

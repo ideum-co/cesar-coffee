@@ -10,8 +10,20 @@
   grid-template-columns: 1fr;
   align-items: center;
   gap: var(--cc-space-8);
-  padding-block: var(--cc-space-16) var(--cc-space-12);
-  min-height: 62vh;
+  box-sizing: border-box;
+  /* Ocupa la pantalla completa al entrar. dvh en vez de vh: en móvil vh cuenta
+     la barra del navegador y deja el hero cortado.
+     El padding superior deja hueco al header transparente, y al ir dentro de
+     la altura (border-box) el total sigue siendo una pantalla. */
+  min-height: 100dvh;
+  padding-block: calc(var(--header-height, 88px) + var(--cc-space-8)) var(--cc-space-12);
+}
+
+/* Reserva para navegadores sin dvh */
+@supports not (height: 100dvh) {
+  .cesar-hero__inner {
+    min-height: 100vh;
+  }
 }
 
 .cesar-hero__content {
@@ -22,18 +34,15 @@
 
 .cesar-hero__heading {
   color: var(--cc-terracotta);
-  /* En el diseño el titular cae en tres líneas cortas y los granos entran por
-     la derecha. Se limita la medida para que rompa igual con este texto. */
-  max-width: 14ch;
 }
 
 .cesar-hero__subheading {
   margin: var(--cc-space-6) 0 0;
-  max-width: 42ch;
-  font-size: var(--cc-text-sm);
+  max-width: 46ch;
+  font-size: var(--cc-text-body-lg);
   font-weight: 600;
-  line-height: 1.5;
-  letter-spacing: 0.04em;
+  line-height: 1.45;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
   /* variante accesible: el terracota de display no llega a 4.5:1 en texto pequeño */
   color: var(--cc-terracotta-text);
@@ -76,8 +85,29 @@
     width: 130%;
   }
 
+  /* En el diseño el titular cae en tres líneas cortas y los granos entran por
+     la derecha. Sólo en desktop: en móvil debe usar todo el ancho. */
+  .cesar-hero__heading {
+    max-width: 14ch;
+  }
+
   .cesar-hero__media {
     grid-column: 2;
     grid-row: 1;
+  }
+}
+
+/* En móvil el hero tiene que caber en una pantalla: con el display al mínimo
+   de la escala y el subtítulo en 18px sumaban doce líneas entre los dos.
+   Sólo se ajusta aquí; en desktop se mantiene el tamaño grande.
+   Va al final del archivo: un media query no añade especificidad, así que si
+   fuera antes de las reglas base éstas ganarían por orden. */
+@media screen and (max-width: 749px) {
+  .cesar-hero__heading {
+    font-size: clamp(40px, 12vw, 56px);
+  }
+
+  .cesar-hero__subheading {
+    font-size: var(--cc-text-body);
   }
 }
