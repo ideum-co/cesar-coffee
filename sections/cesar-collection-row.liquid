@@ -36,7 +36,8 @@
       <ul
         id="Slider-{{ section.id }}"
         data-id="{{ section.id }}"
-        class="cesar-collection-row__grid grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down slider slider--desktop slider--tablet grid--peek"
+        class="cesar-collection-row__grid cesar-slider grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down slider slider--desktop slider--tablet"
+        style="--cc-cards: {{ section.settings.columns_desktop }};"
         role="list"
         aria-label="{{ 'general.slider.name' | t }}"
       >

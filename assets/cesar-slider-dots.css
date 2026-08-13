@@ -1,7 +1,32 @@
 /**
- * Puntos de paginación de los carruseles.
- * El activo es una píldora alargada; los demás, círculos apagados.
+ * Carruseles del tema: ancho de los slides y puntos de paginación.
  */
+
+/* ---------- Ancho de los slides ----------
+   Dawn calcula el ancho descontando un margen inicial y cuatro veces el gutter:
+
+     width: calc((100% - var(--desktop-margin-left-first-item)) / 3
+                 - var(--grid-desktop-horizontal-spacing) * 4);
+
+   Está pensado para sus carruseles a sangre, donde el primer slide va indentado
+   y el siguiente asoma. En los de este tema, que viven dentro del contenedor,
+   dejaba las cards muy estrechas. Se sustituye por el reparto exacto: el ancho
+   disponible entre el número de columnas, descontando sólo los huecos reales.
+   --cc-cards lo escribe la sección con su ajuste de columnas. */
+@media screen and (min-width: 990px) {
+  .cesar-slider.slider--desktop .grid__item {
+    width: calc((100% - var(--cc-gutter) * (var(--cc-cards, 3) - 1)) / var(--cc-cards, 3));
+    max-width: none;
+  }
+
+  .cesar-slider.slider--desktop .slider__slide:first-child {
+    margin-left: 0;
+    scroll-margin-left: 0;
+  }
+}
+
+/* ---------- Puntos de paginación ----------
+   El activo es una píldora alargada; los demás, círculos apagados. */
 
 cesar-slider-dots {
   display: flex;

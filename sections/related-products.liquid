@@ -40,7 +40,8 @@
         <ul
           id="Slider-{{ section.id }}"
           data-id="{{ section.id }}"
-          class="grid product-grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down slider slider--desktop slider--tablet grid--peek"
+          class="grid product-grid cesar-slider grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down slider slider--desktop slider--tablet"
+          style="--cc-cards: {{ section.settings.columns_desktop }};"
           role="list"
           aria-label="{{ 'general.slider.name' | t }}"
         >
