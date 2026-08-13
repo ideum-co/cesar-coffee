@@ -151,13 +151,13 @@
     "flight_banner": {
       "type": "cesar-banner",
       "settings": {
+        "image": "shopify://shop_images/banner-3.webp",
         "ratio": "wide",
         "heading": "The Bourbon Rosado Flight",
         "text": "Taste what process alone can do to a single lot — Bourbon Rosado finished four ways: washed, natural, honey and anaerobic. Four 100g bags, one story.",
         "button_label": "Shop The Flight",
         "link": "",
-        "color_scheme": "scheme-1",
-        "image": "shopify://shop_images/banner-3.webp"
+        "color_scheme": "scheme-1"
       }
     },
     "origin_and_roast": {
@@ -166,6 +166,7 @@
         "origin": {
           "type": "column",
           "settings": {
+            "image": "shopify://shop_images/poster-1.webp",
             "title": "Directly from origin",
             "text": "<p>Real relationships with the growers behind every lot.</p>",
             "link_label": "See Our Farms",
@@ -175,6 +176,7 @@
         "roast": {
           "type": "column",
           "settings": {
+            "image": "shopify://shop_images/poster-2.webp",
             "title": "Roasted to order in Melbourne",
             "text": "<p>Roasted fresh at our North Williamstown facility and dispatched within days.</p>",
             "link_label": "How We Roast",
@@ -312,13 +314,6 @@
     },
     "trade": {
       "type": "cesar-collection-row",
-      "settings": {
-        "heading": "Retail proof. Trade ready.",
-        "text": "Wholesale roast-to-order, white-label roasting, co-roasting and roaster hire — for cafés, venues and roasters who want what's in the bag.",
-        "button_label": "Talk To Us About Trade",
-        "button_link": "",
-        "color_scheme": "scheme-3"
-      },
       "blocks": {
         "card_1": {
           "type": "card",
@@ -349,7 +344,16 @@
         "card_1",
         "card_2",
         "card_3"
-      ]
+      ],
+      "settings": {
+        "heading": "Retail proof. Trade ready.",
+        "text": "Wholesale roast-to-order, white-label roasting, co-roasting and roaster hire — for cafés, venues and roasters who want what's in the bag.",
+        "button_label": "Talk To Us About Trade",
+        "button_link": "",
+        "columns_desktop": 3,
+        "columns_mobile": "1",
+        "color_scheme": "scheme-3"
+      }
     }
   },
   "order": [
