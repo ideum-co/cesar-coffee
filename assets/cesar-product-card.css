@@ -40,14 +40,23 @@
    su contenido, y como la imagen va al 100% de ese ancho se retroalimentan a
    cero. Con flex: 1 el contenedor manda y la imagen ya tiene contra qué medir. */
 .card-wrapper .card__media {
+  position: relative;
   flex: 1 1 auto;
   min-width: 0;
-  height: 100%;
+  min-height: 0;
+  align-self: stretch;
 }
 
+/* .media de Dawn saca a sus hijos del flujo y les da alto 100%, así que su
+   propia altura tiene que estar resuelta. En vez de encadenar height: 100% por
+   varios contenedores —que es lo que fallaba y dejaba la bolsa suelta y
+   desbordando— se ancla al hueco de la imagen. */
 .card-wrapper .card__media .media {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  inset: 0;
+  width: auto;
+  height: auto;
+  padding: 0;
 }
 
 .card-wrapper .card__media img {
@@ -55,6 +64,12 @@
   height: 100%;
   /* contain y no cover: la bolsa no se recorta */
   object-fit: contain;
+}
+
+/* Nada se sale de las esquinas redondeadas, ni la imagen ni los badges. */
+.card-wrapper .card,
+.card-wrapper .card__inner {
+  overflow: hidden;
 }
 
 /* ---------- Badge de línea ---------- */
@@ -256,4 +271,19 @@
   .cesar-pcard__hover {
     transition: none;
   }
+}
+
+/* ---------- Badge de estado (agotado / rebaja) ----------
+   Dawn lo coloca como celda de una rejilla dentro del bloque de texto. Con ese
+   bloque reordenado arriba, la celda se salía por el borde derecho. Se ancla al
+   hueco de la imagen, que es donde se espera verlo. */
+.card-wrapper .card > .card__content > .card__badge {
+  position: absolute;
+  z-index: 2;
+  margin: 0;
+  inset: auto auto var(--cc-space-3) var(--cc-space-3);
+}
+
+.card-wrapper .card > .card__content {
+  position: static;
 }

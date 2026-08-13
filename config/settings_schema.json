@@ -1253,7 +1253,7 @@
             "label": "t:settings_schema.badges.settings.position.options__4.label"
           }
         ],
-        "default": "top right",
+        "default": "bottom left",
         "label": "t:settings_schema.badges.settings.position.label"
       },
       {
