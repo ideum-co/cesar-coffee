@@ -10,9 +10,13 @@
 
    Está pensado para sus carruseles a sangre, donde el primer slide va indentado
    y el siguiente asoma. En los de este tema, que viven dentro del contenedor,
-   dejaba las cards muy estrechas. Se sustituye por el reparto exacto: el ancho
-   disponible entre el número de columnas, descontando sólo los huecos reales.
-   --cc-cards lo escribe la sección con su ajuste de columnas. */
+   dejaba las cards demasiado estrechas.
+
+   Esa regla no se sobrescribe: se evita. Vive en component-slider.css, que las
+   secciones cargan en el body, así que con la misma especificidad ganaba por
+   orden a cualquier regla nuestra del head. Las secciones propias no ponen
+   grid--N-col-desktop, de modo que no llega a aplicarse y manda el reparto
+   exacto de aquí. --cc-cards lo escribe la sección con su ajuste. */
 @media screen and (min-width: 990px) {
   .cesar-slider.slider--desktop .grid__item {
     width: calc((100% - var(--cc-gutter) * (var(--cc-cards, 3) - 1)) / var(--cc-cards, 3));
@@ -23,6 +27,76 @@
     margin-left: 0;
     scroll-margin-left: 0;
   }
+}
+
+/* ---------- Flechas flotantes sobre las cards ----------
+   Van dentro del viewport, centradas verticalmente sobre las cards y no en la
+   fila de puntos. Cada una aparece sólo si queda contenido hacia ese lado:
+   Dawn ya marca [disabled] en los extremos, así que basta con ocultarlas. */
+
+.cesar-slider__viewport {
+  position: relative;
+}
+
+.cesar-slider__arrow {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  /* área táctil completa aunque el icono sea pequeño */
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--cc-radius-pill);
+  background-color: var(--cc-surface);
+  color: var(--cc-brown-900);
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(20, 8, 3, 0.18);
+  transition:
+    opacity var(--cc-duration) var(--cc-ease),
+    visibility var(--cc-duration) var(--cc-ease),
+    background-color var(--cc-duration) var(--cc-ease);
+}
+
+.cesar-slider__arrow--prev {
+  left: var(--cc-space-3);
+}
+
+.cesar-slider__arrow--next {
+  right: var(--cc-space-3);
+}
+
+.cesar-slider__arrow:hover {
+  background-color: var(--cc-cream);
+}
+
+.cesar-slider__arrow:focus-visible {
+  outline: 2px solid var(--cc-brown-900);
+  outline-offset: 2px;
+}
+
+/* Sin contenido hacia ese lado, la flecha desaparece. visibility (y no sólo
+   opacity) para que además deje de recibir foco y clics. */
+.cesar-slider__arrow[disabled] {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.cesar-slider__arrow .svg-wrapper {
+  width: 18px;
+  height: 18px;
+}
+
+.cesar-slider__arrow--prev .svg-wrapper {
+  rotate: 90deg;
+}
+
+.cesar-slider__arrow--next .svg-wrapper {
+  rotate: -90deg;
 }
 
 /* ---------- Puntos de paginación ----------

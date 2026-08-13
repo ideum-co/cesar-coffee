@@ -37,10 +37,11 @@
         el mismo indicador de puntos que el resto del sitio.
       {%- endcomment -%}
       <slider-component class="slider-mobile-gutter">
+        <div class="cesar-slider__viewport">
         <ul
           id="Slider-{{ section.id }}"
           data-id="{{ section.id }}"
-          class="grid product-grid cesar-slider grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down slider slider--desktop slider--tablet"
+          class="grid product-grid cesar-slider grid--{{ section.settings.columns_mobile }}-col-tablet-down slider slider--desktop slider--tablet"
           style="--cc-cards: {{ section.settings.columns_desktop }};"
           role="list"
           aria-label="{{ 'general.slider.name' | t }}"
@@ -62,28 +63,29 @@
             {%- assign skip_card_product_styles = true -%}
           {% endfor %}
         </ul>
+          <button
+            type="button"
+            class="slider-button slider-button--prev cesar-slider__arrow cesar-slider__arrow--prev"
+            name="previous"
+            aria-label="{{ 'general.slider.previous_slide' | t }}"
+            aria-controls="Slider-{{ section.id }}"
+          >
+            <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+          </button>
+          <button
+            type="button"
+            class="slider-button slider-button--next cesar-slider__arrow cesar-slider__arrow--next"
+            name="next"
+            aria-label="{{ 'general.slider.next_slide' | t }}"
+            aria-controls="Slider-{{ section.id }}"
+          >
+            <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+          </button>
+        </div>
 
         {%- if recommendations.products_count > section.settings.columns_desktop -%}
           <div class="slider-buttons">
-            <button
-              type="button"
-              class="slider-button slider-button--prev"
-              name="previous"
-              aria-label="{{ 'general.slider.previous_slide' | t }}"
-              aria-controls="Slider-{{ section.id }}"
-            >
-              <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
-            </button>
             <cesar-slider-dots></cesar-slider-dots>
-            <button
-              type="button"
-              class="slider-button slider-button--next"
-              name="next"
-              aria-label="{{ 'general.slider.next_slide' | t }}"
-              aria-controls="Slider-{{ section.id }}"
-            >
-              <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
-            </button>
           </div>
         {%- endif -%}
       </slider-component>

@@ -47,8 +47,7 @@
   list-style: none;
 }
 
-/* Dawn centra los controles bajo el carrusel; en la referencia van así, con
-   las flechas a los lados del contador. */
+/* La fila inferior sólo lleva los puntos: las flechas flotan sobre las cards. */
 .cesar-collection-row__slider .slider-buttons {
   display: flex;
   align-items: center;

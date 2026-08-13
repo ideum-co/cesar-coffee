@@ -29,14 +29,18 @@
     {%- endcomment -%}
     <slider-component class="cesar-collection-row__slider slider-mobile-gutter">
       {%- comment -%}
-        Las clases grid de Dawn son las que dan el ancho a cada slide
-        (.grid--N-col-desktop .grid__item). Sin ellas los slides salen a ancho
-        completo y apilados.
+        Sin grid--N-col-desktop a propósito. Esa clase activa el cálculo de
+        ancho de Dawn, que descuenta un margen inicial y cuatro gutters y deja
+        las cards demasiado estrechas. Como vive en component-slider.css, que
+        la sección carga en el body, ganaba por orden a cualquier regla nuestra
+        del head. Al no ponerla, manda el reparto exacto por --cc-cards.
+        En móvil sí se usa la clase de Dawn, donde su cálculo sí encaja.
       {%- endcomment -%}
+      <div class="cesar-slider__viewport">
       <ul
         id="Slider-{{ section.id }}"
         data-id="{{ section.id }}"
-        class="cesar-collection-row__grid cesar-slider grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down slider slider--desktop slider--tablet"
+        class="cesar-collection-row__grid cesar-slider grid grid--{{ section.settings.columns_mobile }}-col-tablet-down slider slider--desktop slider--tablet"
         style="--cc-cards: {{ section.settings.columns_desktop }};"
         role="list"
         aria-label="{{ 'general.slider.name' | t }}"
@@ -59,29 +63,30 @@
           </li>
         {%- endfor -%}
       </ul>
-
-      {%- if section.blocks.size > 1 -%}
-        <div class="slider-buttons">
           <button
             type="button"
-            class="slider-button slider-button--prev"
+            class="slider-button slider-button--prev cesar-slider__arrow cesar-slider__arrow--prev"
             name="previous"
             aria-label="{{ 'general.slider.previous_slide' | t }}"
             aria-controls="Slider-{{ section.id }}"
           >
             <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
           </button>
-          {%- comment -%} Indicador común de todos los carruseles {%- endcomment -%}
-          <cesar-slider-dots></cesar-slider-dots>
           <button
             type="button"
-            class="slider-button slider-button--next"
+            class="slider-button slider-button--next cesar-slider__arrow cesar-slider__arrow--next"
             name="next"
             aria-label="{{ 'general.slider.next_slide' | t }}"
             aria-controls="Slider-{{ section.id }}"
           >
             <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
           </button>
+      </div>
+
+      {%- if section.blocks.size > 1 -%}
+        <div class="slider-buttons">
+          {%- comment -%} Indicador común de todos los carruseles {%- endcomment -%}
+          <cesar-slider-dots></cesar-slider-dots>
         </div>
       {%- endif -%}
     </slider-component>
