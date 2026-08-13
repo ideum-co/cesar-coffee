@@ -14,6 +14,49 @@
   display: none;
 }
 
+/* ---------- Alto fijo de la card ----------
+   La card no pasa de 413px. El bloque de texto ocupa lo que necesite y la
+   imagen se queda con el espacio restante, así que todas las cards de una fila
+   miden lo mismo aunque el título ocupe una o dos líneas. */
+
+.card-wrapper .card {
+  height: var(--cesar-card-height, 413px);
+}
+
+.card-wrapper .card__inner {
+  flex: 1 1 auto;
+  /* sin esto el contenido impide que la celda flexible se encoja */
+  min-height: 0;
+}
+
+/* Dawn reserva el alto de la imagen con un ::before y --ratio-percent. Con la
+   altura ya fijada ese reservado sobra, y dejarlo empujaría la card más allá
+   de los 413px. */
+.card-wrapper .card__inner.ratio::before {
+  display: none;
+}
+
+/* .card__inner es flex. Sin flex-basis, el ancho de .card__media dependería de
+   su contenido, y como la imagen va al 100% de ese ancho se retroalimentan a
+   cero. Con flex: 1 el contenedor manda y la imagen ya tiene contra qué medir. */
+.card-wrapper .card__media {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+}
+
+.card-wrapper .card__media .media {
+  width: 100%;
+  height: 100%;
+}
+
+.card-wrapper .card__media img {
+  width: 100%;
+  height: 100%;
+  /* contain y no cover: la bolsa no se recorta */
+  object-fit: contain;
+}
+
 /* ---------- Badge de línea ---------- */
 
 .card__inner {

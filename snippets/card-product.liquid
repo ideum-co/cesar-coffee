@@ -61,8 +61,6 @@
           class="card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }} gradient{% endif %}{% if card_product.featured_media or settings.card_style == 'standard' %} ratio{% endif %}"
           style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
         >
-          {%- comment -%} Badge de línea (Green / Silver / Gold) {%- endcomment -%}
-          {% render 'cesar-line-badge', product: card_product %}
           {%- if card_product.featured_media -%}
             <div class="card__media{% if image_shape and image_shape != 'default' %} shape--{{ image_shape }} color-{{ settings.card_color_scheme }} gradient{% endif %}">
               <div class="media media--transparent media--hover-effect">
@@ -598,6 +596,12 @@
           </div>
         </div>
       </div>
+      {%- comment -%}
+        Badge de línea. Va al nivel de .card-wrapper y no dentro de
+        .card__inner: con el texto reordenado encima, ahí abajo caía a media
+        card en vez de en la esquina superior.
+      {%- endcomment -%}
+      {% render 'cesar-line-badge', product: card_product %}
       {%- comment -%}
         Capa de hover: segunda imagen y selector de tamaño. Va como hija directa
         de .card-wrapper para poder cubrir la card entera; dentro de .card__inner
