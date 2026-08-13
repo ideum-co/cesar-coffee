@@ -1,0 +1,86 @@
+/**
+ * Puntos de paginación de los carruseles.
+ * El activo es una píldora alargada; los demás, círculos apagados.
+ */
+
+cesar-slider-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--cc-space-2);
+}
+
+cesar-slider-dots[hidden] {
+  display: none;
+}
+
+.cesar-dot {
+  /* El punto mide 10px, muy por debajo del mínimo táctil: el botón conserva
+     44px y el punto se dibuja con ::after. Así el área de toque es cómoda sin
+     engordar el indicador. */
+  position: relative;
+  width: 22px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  /* Los <button> no heredan color: sin esto los puntos salían negros y no
+     seguían el esquema de la sección. */
+  color: inherit;
+  cursor: pointer;
+  appearance: none;
+}
+
+.cesar-dot::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: 10px;
+  height: 10px;
+  border-radius: var(--cc-radius-pill);
+  /* Apagado, pero no tanto como para desaparecer del fondo. */
+  background-color: currentColor;
+  opacity: 0.4;
+  transition:
+    width var(--cc-duration) var(--cc-ease),
+    opacity var(--cc-duration) var(--cc-ease),
+    background-color var(--cc-duration) var(--cc-ease);
+}
+
+.cesar-dot:hover::after {
+  opacity: 0.7;
+}
+
+/* El activo se alarga en píldora y toma el marrón de marca. */
+.cesar-dot--active {
+  width: 40px;
+}
+
+.cesar-dot--active::after {
+  width: 28px;
+  opacity: 1;
+  background-color: var(--cc-brown-900);
+}
+
+/* Sobre fondos oscuros el marrón no se distingue: ahí manda el color del
+   esquema, que ya contrasta con su fondo. */
+.color-scheme-3 .cesar-dot--active::after,
+.color-scheme-4 .cesar-dot--active::after,
+.cesar-section--green .cesar-dot--active::after,
+.cesar-section--brown .cesar-dot--active::after {
+  background-color: currentColor;
+}
+
+.cesar-dot:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: -6px;
+  border-radius: var(--cc-radius-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cesar-dot::after {
+    transition: none;
+  }
+}

@@ -150,12 +150,8 @@
               {{- 'icon-caret.svg' | inline_asset_content -}}
             </span>
           </button>
-          <div class="slider-counter caption">
-            <span class="slider-counter--current">1</span>
-            <span aria-hidden="true"> / </span>
-            <span class="visually-hidden">{{ 'general.slider.of' | t }}</span>
-            <span class="slider-counter--total">{{ section.settings.post_limit }}</span>
-          </div>
+          {%- comment -%} Indicador común de todos los carruseles {%- endcomment -%}
+          <cesar-slider-dots></cesar-slider-dots>
           <button
             type="button"
             class="slider-button slider-button--next"
