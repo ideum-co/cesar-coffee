@@ -21,6 +21,8 @@
   {% render 'card-product', show_vendor: section.settings.show_vendor %}
 {% endcomment %}
 {%- unless skip_styles -%}
+  {{ 'cesar-product-card.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'cesar-card-picker.js' | asset_url }}" defer="defer"></script>
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
   {{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}
 
@@ -596,6 +598,12 @@
           </div>
         </div>
       </div>
+      {%- comment -%}
+        Capa de hover: segunda imagen y selector de tamaño. Va como hija directa
+        de .card-wrapper para poder cubrir la card entera; dentro de .card__inner
+        sólo taparía la imagen.
+      {%- endcomment -%}
+      {% render 'cesar-card-hover', card_product: card_product, section_id: section_id %}
     </div>
   </product-component>
 {%- else -%}

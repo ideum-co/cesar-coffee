@@ -1,0 +1,124 @@
+{% comment %}
+  Capa que aparece al pasar el ratón (o al enfocar con teclado) sobre la card
+  de producto: la segunda imagen cubre la card y salen los tamaños.
+
+  - Si el producto tiene una opción de talla con más de un valor, se listan como
+    radios. El botón dice "Pick a size" hasta que se elige uno.
+  - Si sólo tiene una variante, no hay lista y el botón añade directamente.
+  - Si no hay segunda imagen, se mantiene la primera: la capa sigue sirviendo
+    para elegir tamaño.
+
+  Acepta:
+    card_product {Object}
+    section_id   {String}
+{% endcomment %}
+
+{%- liquid
+  assign size_option = null
+  for option in card_product.options_with_values
+    assign name_down = option.name | downcase
+    if name_down == 'size' or name_down == 'tamaño' or name_down == 'tamano' or name_down == 'peso'
+      assign size_option = option
+      break
+    endif
+  endfor
+
+  # Sin opción de talla explícita se usa la primera, si aporta algo que elegir
+  if size_option == null and card_product.options_with_values.size == 1
+    assign first_option = card_product.options_with_values[0]
+    if first_option.values.size > 1
+      assign size_option = first_option
+    endif
+  endif
+
+  assign has_sizes = false
+  if size_option != null and size_option.values.size > 1
+    assign has_sizes = true
+  endif
+
+  assign hover_media = card_product.media[1] | default: card_product.featured_media
+  assign form_id = 'CesarCardForm-' | append: section_id | append: '-' | append: card_product.id
+-%}
+
+<div class="cesar-pcard__hover" aria-hidden="true" data-cesar-card-hover>
+  {%- if hover_media != blank -%}
+    {{
+      hover_media
+      | image_url: width: 1200
+      | image_tag:
+        loading: 'lazy',
+        sizes: '(min-width: 990px) 25vw, 60vw',
+        widths: '300, 500, 700, 900, 1200',
+        class: 'cesar-pcard__hover-image',
+        alt: ''
+    }}
+  {%- endif -%}
+
+  <cesar-card-picker class="cesar-pcard__panel" data-url="{{ card_product.url }}">
+    {%- form 'product', card_product, id: form_id, class: 'cesar-pcard__form', novalidate: 'novalidate' -%}
+      <input
+        type="hidden"
+        name="id"
+        value="{{ card_product.selected_or_first_available_variant.id }}"
+        data-variant-id
+      >
+
+      {%- if has_sizes -%}
+        <fieldset class="cesar-pcard__sizes">
+          <legend class="visually-hidden">
+            {{ size_option.name }} — {{ card_product.title | escape }}
+          </legend>
+
+          {%- for value in size_option.values -%}
+            {%- liquid
+              assign input_id = form_id | append: '-' | append: forloop.index
+              # Variante que corresponde a este valor, para saber si hay stock
+              assign match = null
+              for variant in card_product.variants
+                if variant.options contains value
+                  assign match = variant
+                  break
+                endif
+              endfor
+            -%}
+            <label
+              class="cesar-pcard__size{% if match and match.available == false %} cesar-pcard__size--sold-out{% endif %}"
+              for="{{ input_id }}"
+            >
+              <input
+                type="radio"
+                id="{{ input_id }}"
+                name="cesar-size-{{ form_id }}"
+                value="{{ value | escape }}"
+                data-variant="{% if match %}{{ match.id }}{% endif %}"
+                {% if match and match.available == false %}
+                  disabled
+                {% endif %}
+              >
+              <span class="cesar-pcard__size-dot" aria-hidden="true"></span>
+              <span class="cesar-pcard__size-label">{{ value }}</span>
+            </label>
+          {%- endfor -%}
+        </fieldset>
+      {%- endif -%}
+
+      <button
+        type="submit"
+        name="add"
+        class="cesar-pcard__submit"
+        data-submit
+        {% if has_sizes %}
+          data-label-pick="{{ 'products.product.choose_options' | t | default: 'Pick a size' }}"
+          data-label-add="{{ 'products.product.add_to_cart' | t }}"
+          disabled
+        {% endif %}
+      >
+        {%- if has_sizes -%}
+          {{ 'products.product.choose_options' | t | default: 'Pick a size' }}
+        {%- else -%}
+          {{ 'products.product.add_to_cart' | t }}
+        {%- endif -%}
+      </button>
+    {%- endform -%}
+  </cesar-card-picker>
+</div>

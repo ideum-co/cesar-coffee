@@ -1,0 +1,192 @@
+/**
+ * Card de producto: estado normal y capa de hover con tamaños.
+ */
+
+.card-wrapper {
+  position: relative;
+}
+
+/* ---------- Badge de línea ---------- */
+
+.card__inner {
+  position: relative;
+}
+
+/* ---------- Capa de hover ---------- */
+
+.cesar-pcard__hover {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border-radius: var(--cc-radius-md);
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--cc-duration) var(--cc-ease),
+    visibility var(--cc-duration) var(--cc-ease);
+}
+
+/* Se abre al pasar el ratón y también al tabular dentro: sin la parte de
+   focus-within el panel sería inalcanzable con teclado. */
+.card-wrapper:hover .cesar-pcard__hover,
+.card-wrapper:focus-within .cesar-pcard__hover {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cesar-pcard__hover-image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cesar-pcard__panel {
+  position: relative;
+  z-index: 1;
+  display: block;
+  padding: var(--cc-space-4);
+}
+
+/* ---------- Lista de tamaños ---------- */
+
+.cesar-pcard__sizes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cc-space-2);
+  margin: 0 0 var(--cc-space-3);
+  padding: 0;
+  border: 0;
+}
+
+.cesar-pcard__size {
+  display: flex;
+  align-items: center;
+  gap: var(--cc-space-3);
+  /* mínimo táctil */
+  min-height: 44px;
+  padding: var(--cc-space-2) var(--cc-space-4);
+  border-radius: var(--cc-radius-pill);
+  background-color: var(--cc-surface);
+  color: var(--cc-brown-900);
+  font-size: var(--cc-text-body);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color var(--cc-duration) var(--cc-ease);
+}
+
+/* El radio real se oculta pero sigue siendo el que recibe foco y teclado: el
+   círculo de al lado es sólo su representación. */
+.cesar-pcard__size input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cesar-pcard__size-dot {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: var(--cc-bg);
+  display: grid;
+  place-items: center;
+}
+
+.cesar-pcard__size-dot::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: transparent;
+  transition: background-color var(--cc-duration) var(--cc-ease);
+}
+
+.cesar-pcard__size:has(input:checked) {
+  background-color: var(--cc-yellow);
+}
+
+.cesar-pcard__size:has(input:checked) .cesar-pcard__size-dot::after {
+  background-color: var(--cc-brown-900);
+}
+
+/* El foco se dibuja sobre la píldora, ya que el radio está oculto. */
+.cesar-pcard__size:has(input:focus-visible) {
+  outline: 2px solid var(--cc-brown-900);
+  outline-offset: 2px;
+}
+
+.cesar-pcard__size--sold-out {
+  opacity: 0.5;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+/* ---------- Botón ---------- */
+
+.cesar-pcard__submit {
+  width: 100%;
+  min-height: 44px;
+  padding: var(--cc-space-3) var(--cc-space-4);
+  border: 0;
+  border-radius: var(--cc-radius-pill);
+  background-color: var(--cc-yellow);
+  color: var(--cc-brown-900);
+  font-family: inherit;
+  font-size: var(--cc-text-body);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color var(--cc-duration) var(--cc-ease);
+}
+
+.cesar-pcard__submit:hover:not([disabled]) {
+  background-color: #fff;
+}
+
+.cesar-pcard__submit[disabled] {
+  /* Sigue visible y legible: comunica "elige un tamaño", no "no disponible". */
+  cursor: default;
+  opacity: 1;
+}
+
+.cesar-pcard__submit:focus-visible {
+  outline: 2px solid var(--cc-brown-900);
+  outline-offset: 2px;
+}
+
+/* En pantallas táctiles no hay hover: la capa se muestra siempre, porque si no
+   los tamaños quedarían inalcanzables. */
+@media (hover: none) {
+  .cesar-pcard__hover {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    margin-top: var(--cc-space-3);
+  }
+
+  .cesar-pcard__hover-image {
+    display: none;
+  }
+
+  .cesar-pcard__panel {
+    padding: 0;
+  }
+
+  .cesar-pcard__size {
+    background-color: var(--cc-cream);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cesar-pcard__hover {
+    transition: none;
+  }
+}
