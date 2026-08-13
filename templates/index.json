@@ -338,12 +338,30 @@
             "link_label": "How We Roast",
             "link": ""
           }
+        },
+        "card_z9btN7": {
+          "type": "card",
+          "settings": {
+            "title": "co-roasting",
+            "link_label": "How We Roast",
+            "link": ""
+          }
+        },
+        "card_VLcEYV": {
+          "type": "card",
+          "settings": {
+            "title": "co-roasting",
+            "link_label": "How We Roast",
+            "link": ""
+          }
         }
       },
       "block_order": [
         "card_1",
         "card_2",
-        "card_3"
+        "card_3",
+        "card_z9btN7",
+        "card_VLcEYV"
       ],
       "settings": {
         "heading": "Retail proof. Trade ready.",
