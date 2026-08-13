@@ -6,6 +6,14 @@
   position: relative;
 }
 
+/* Dawn pinta su propio botón de compra rápida ("Choose options") entre el
+   precio y la imagen. Aquí esa función la cumple la capa de hover, así que se
+   retira para no tener dos llamadas a la acción compitiendo en la card. */
+.card-wrapper .quick-add,
+.card-wrapper .quick-add-bulk {
+  display: none;
+}
+
 /* ---------- Badge de línea ---------- */
 
 .card__inner {
@@ -124,10 +132,20 @@
   outline-offset: 2px;
 }
 
+/* Agotada: la píldora sigue siendo sólida y legible sobre la foto; se apaga el
+   texto, no el fondo. Con opacity sobre toda la píldora se transparentaba y la
+   imagen de detrás la volvía ilegible. */
 .cesar-pcard__size--sold-out {
-  opacity: 0.5;
   cursor: not-allowed;
+}
+
+.cesar-pcard__size--sold-out .cesar-pcard__size-label {
+  color: var(--cc-text-muted);
   text-decoration: line-through;
+}
+
+.cesar-pcard__size--sold-out .cesar-pcard__size-dot {
+  opacity: 0.45;
 }
 
 /* ---------- Botón ---------- */
@@ -155,6 +173,12 @@
   /* Sigue visible y legible: comunica "elige un tamaño", no "no disponible". */
   cursor: default;
   opacity: 1;
+}
+
+/* Agotado sí es un estado inerte, y se distingue del anterior. */
+.cesar-pcard__submit--sold-out {
+  background-color: var(--cc-cream);
+  color: var(--cc-text-muted);
 }
 
 .cesar-pcard__submit:focus-visible {

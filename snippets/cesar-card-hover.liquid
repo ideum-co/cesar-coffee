@@ -102,22 +102,32 @@
         </fieldset>
       {%- endif -%}
 
+      {%- comment -%}
+        Sin ninguna variante disponible el botón anuncia "Sold out" y queda
+        inerte: ofrecer "Pick a size" sobre tallas todas agotadas sería engañar.
+      {%- endcomment -%}
       <button
         type="submit"
         name="add"
-        class="cesar-pcard__submit"
+        class="cesar-pcard__submit{% if card_product.available == false %} cesar-pcard__submit--sold-out{% endif %}"
         data-submit
-        {% if has_sizes %}
-          data-label-pick="{{ 'products.product.choose_options' | t | default: 'Pick a size' }}"
+        {% if card_product.available == false %}
+          disabled
+        {% elsif has_sizes %}
           data-label-add="{{ 'products.product.add_to_cart' | t }}"
           disabled
         {% endif %}
       >
-        {%- if has_sizes -%}
-          {{ 'products.product.choose_options' | t | default: 'Pick a size' }}
-        {%- else -%}
-          {{ 'products.product.add_to_cart' | t }}
-        {%- endif -%}
+        {%- liquid
+          if card_product.available == false
+            echo 'products.product.sold_out' | t
+          elsif has_sizes
+            # Copy de marca, no la cadena de Dawn ("Choose options")
+            echo 'Pick a size'
+          else
+            echo 'products.product.add_to_cart' | t
+          endif
+        -%}
       </button>
     {%- endform -%}
   </cesar-card-picker>
