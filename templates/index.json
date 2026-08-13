@@ -123,7 +123,7 @@
     "the_range": {
       "type": "featured-collection",
       "settings": {
-        "collection": "",
+        "collection": "frontpage",
         "products_to_show": 8,
         "title": "La colección / The Range",
         "heading_size": "h1",
@@ -166,21 +166,21 @@
         "card_1": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/poster-1.webp",
             "title": "Directly from origin",
             "text": "Real relationships with the growers behind every lot.",
             "link_label": "See Our Farms",
-            "link": "",
-            "image": "shopify://shop_images/poster-1.webp"
+            "link": ""
           }
         },
         "card_2": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/poster-2.webp",
             "title": "Roasted to order in Melbourne",
             "text": "Roasted fresh at our North Williamstown facility and dispatched within days.",
             "link_label": "How We Roast",
-            "link": "",
-            "image": "shopify://shop_images/poster-2.webp"
+            "link": ""
           }
         }
       },
@@ -309,6 +309,7 @@
           "type": "card",
           "settings": {
             "title": "wholesale",
+            "text": "",
             "link_label": "See Our Farms",
             "link": ""
           }
@@ -317,6 +318,7 @@
           "type": "card",
           "settings": {
             "title": "white label",
+            "text": "",
             "link_label": "How We Roast",
             "link": ""
           }
@@ -325,6 +327,7 @@
           "type": "card",
           "settings": {
             "title": "co-roasting",
+            "text": "",
             "link_label": "How We Roast",
             "link": ""
           }
@@ -333,6 +336,7 @@
           "type": "card",
           "settings": {
             "title": "co-roasting",
+            "text": "",
             "link_label": "How We Roast",
             "link": ""
           }
@@ -341,6 +345,7 @@
           "type": "card",
           "settings": {
             "title": "co-roasting",
+            "text": "",
             "link_label": "How We Roast",
             "link": ""
           }
