@@ -27,17 +27,22 @@
       botones, el contador, el arrastre y el manejo de foco y teclado.
     {%- endcomment -%}
     <slider-component class="cesar-collection-row__slider slider-mobile-gutter">
+      {%- comment -%}
+        Las clases grid de Dawn son las que dan el ancho a cada slide
+        (.grid--N-col-desktop .grid__item). Sin ellas los slides salen a ancho
+        completo y apilados.
+      {%- endcomment -%}
       <ul
         id="Slider-{{ section.id }}"
         data-id="{{ section.id }}"
-        class="cesar-collection-row__grid slider slider--desktop slider--tablet grid--peek"
+        class="cesar-collection-row__grid grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down slider slider--desktop slider--tablet grid--peek"
         role="list"
         aria-label="{{ 'general.slider.name' | t }}"
       >
         {%- for block in section.blocks -%}
           <li
             id="Slide-{{ section.id }}-{{ forloop.index }}"
-            class="cesar-card slider__slide"
+            class="grid__item cesar-card slider__slide"
             {{ block.shopify_attributes }}
           >
             {%- if block.settings.image != blank -%}
@@ -139,6 +144,29 @@
       "type": "url",
       "id": "button_link",
       "label": "Enlace del botón"
+    },
+    {
+      "type": "header",
+      "content": "Carrusel"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Cards visibles en escritorio",
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Cards visibles en móvil",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "1"
     },
     {
       "type": "color_scheme",
