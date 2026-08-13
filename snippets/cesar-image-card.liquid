@@ -1,0 +1,61 @@
+{% comment %}
+  Card con imagen de fondo y el texto encima, abajo a la izquierda.
+  La comparten la sección de cards en grid y el carrusel, para no tener dos
+  versiones del mismo componente.
+
+  Acepta:
+    image       {Object} - imagen de fondo (opcional)
+    title       {String} - título
+    text        {String} - descripción (opcional)
+    link_label  {String} - texto del botón (opcional)
+    link        {String} - destino del botón y de la card
+    sizes       {String} - atributo sizes para la imagen
+    ratio       {String} - 'portrait' (3/4), 'square' o 'landscape' (4/3)
+{% endcomment %}
+
+{%- liquid
+  assign card_ratio = ratio | default: 'portrait'
+  assign card_sizes = sizes | default: '(min-width: 990px) 33vw, 90vw'
+-%}
+
+<div class="cesar-card cesar-card--{{ card_ratio }}">
+  {%- if image != blank -%}
+    {{
+      image
+      | image_url: width: 1400
+      | image_tag:
+        loading: 'lazy',
+        sizes: card_sizes,
+        widths: '300, 500, 700, 900, 1200, 1400',
+        class: 'cesar-card__image',
+        alt: image.alt
+    }}
+  {%- else -%}
+    <div class="cesar-card__image cesar-card__image--empty"></div>
+  {%- endif -%}
+
+  {%- comment -%}
+    Velo bajo el texto: en blanco sobre una foto cualquiera no se llega al
+    contraste mínimo. Se degrada desde abajo para no tapar la fotografía.
+  {%- endcomment -%}
+  <div class="cesar-card__veil"></div>
+
+  <div class="cesar-card__content">
+    {%- if title != blank -%}
+      <h3 class="cesar-card__title">{{ title }}</h3>
+    {%- endif -%}
+
+    {%- if text != blank -%}
+      <p class="cesar-card__text">{{ text }}</p>
+    {%- endif -%}
+
+    {%- if link_label != blank -%}
+      <a href="{{ link | default: '#' }}" class="cesar-card__link">
+        {{ link_label }}
+        {%- if title != blank -%}
+          <span class="visually-hidden"> — {{ title }}</span>
+        {%- endif -%}
+      </a>
+    {%- endif -%}
+  </div>
+</div>

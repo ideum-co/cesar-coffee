@@ -161,46 +161,36 @@
       }
     },
     "origin_and_roast": {
-      "type": "multicolumn",
+      "type": "cesar-cards",
       "blocks": {
-        "origin": {
-          "type": "column",
+        "card_1": {
+          "type": "card",
           "settings": {
             "title": "Directly from origin",
-            "text": "<p>Real relationships with the growers behind every lot.</p>",
+            "text": "Real relationships with the growers behind every lot.",
             "link_label": "See Our Farms",
             "link": ""
           }
         },
-        "roast": {
-          "type": "column",
+        "card_2": {
+          "type": "card",
           "settings": {
             "title": "Roasted to order in Melbourne",
-            "text": "<p>Roasted fresh at our North Williamstown facility and dispatched within days.</p>",
+            "text": "Roasted fresh at our North Williamstown facility and dispatched within days.",
             "link_label": "How We Roast",
             "link": ""
           }
         }
       },
       "block_order": [
-        "origin",
-        "roast"
+        "card_1",
+        "card_2"
       ],
       "settings": {
-        "title": "",
-        "heading_size": "h1",
-        "image_width": "full",
-        "image_ratio": "adapt",
-        "button_label": "Button label",
-        "button_link": "",
+        "heading": "",
         "columns_desktop": 2,
-        "column_alignment": "left",
-        "background_style": "none",
-        "color_scheme": "scheme-1",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 40,
-        "padding_bottom": 40
+        "ratio": "tall",
+        "color_scheme": "scheme-1"
       }
     },
     "subscription": {

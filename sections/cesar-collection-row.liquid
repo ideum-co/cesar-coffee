@@ -1,3 +1,4 @@
+{{ 'cesar-card.css' | asset_url | stylesheet_tag }}
 {{ 'cesar-collection-row.css' | asset_url | stylesheet_tag }}
 {{ 'component-slider.css' | asset_url | stylesheet_tag }}
 
@@ -42,44 +43,18 @@
         {%- for block in section.blocks -%}
           <li
             id="Slide-{{ section.id }}-{{ forloop.index }}"
-            class="grid__item cesar-card slider__slide"
+            class="grid__item slider__slide"
             {{ block.shopify_attributes }}
           >
-            {%- if block.settings.image != blank -%}
-              {{
-                block.settings.image
-                | image_url: width: 1200
-                | image_tag:
-                  loading: 'lazy',
-                  sizes: '(min-width: 990px) 25vw, 70vw',
-                  widths: '300, 500, 700, 900, 1200',
-                  class: 'cesar-card__image',
-                  alt: block.settings.image.alt
-              }}
-            {%- else -%}
-              <div class="cesar-card__image cesar-card__image--empty"></div>
-            {%- endif -%}
-
-            {%- comment -%}
-              Velo bajo el texto: sin él, el título en blanco sobre una foto
-              cualquiera no llega al contraste mínimo.
-            {%- endcomment -%}
-            <div class="cesar-card__veil"></div>
-
-            <div class="cesar-card__content">
-              {%- if block.settings.title != blank -%}
-                <h3 class="cesar-card__title">{{ block.settings.title }}</h3>
-              {%- endif -%}
-
-              {%- if block.settings.link_label != blank -%}
-                <a href="{{ block.settings.link | default: '#' }}" class="cesar-card__link">
-                  {{ block.settings.link_label }}
-                  {%- if block.settings.title != blank -%}
-                    <span class="visually-hidden"> — {{ block.settings.title }}</span>
-                  {%- endif -%}
-                </a>
-              {%- endif -%}
-            </div>
+            {% render 'cesar-image-card',
+              image: block.settings.image,
+              title: block.settings.title,
+              text: block.settings.text,
+              link_label: block.settings.link_label,
+              link: block.settings.link,
+              ratio: 'portrait',
+              sizes: '(min-width: 990px) 25vw, 70vw'
+            %}
           </li>
         {%- endfor -%}
       </ul>
@@ -186,6 +161,11 @@
           "id": "title",
           "label": "Título",
           "default": "wholesale"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Descripción"
         },
         {
           "type": "text",

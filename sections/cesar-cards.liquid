@@ -1,0 +1,132 @@
+{{ 'cesar-card.css' | asset_url | stylesheet_tag }}
+{{ 'cesar-cards.css' | asset_url | stylesheet_tag }}
+
+<div class="cesar-cards cc-section color-{{ section.settings.color_scheme }}">
+  <div class="cc-container">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="cesar-cards__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <ul
+      class="cesar-cards__grid cesar-cards__grid--{{ section.settings.columns_desktop }}"
+      role="list"
+    >
+      {%- for block in section.blocks -%}
+        <li class="cesar-cards__item" {{ block.shopify_attributes }}>
+          {% render 'cesar-image-card',
+            image: block.settings.image,
+            title: block.settings.title,
+            text: block.settings.text,
+            link_label: block.settings.link_label,
+            link: block.settings.link,
+            ratio: section.settings.ratio,
+            sizes: '(min-width: 990px) 50vw, 90vw'
+          %}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cesar · Cards",
+  "tag": "section",
+  "class": "cesar-cards-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Titular",
+      "info": "Opcional. Si se deja vacío no se muestra."
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Columnas en escritorio",
+      "default": 2
+    },
+    {
+      "type": "select",
+      "id": "ratio",
+      "label": "Proporción de las cards",
+      "options": [
+        { "value": "portrait", "label": "Vertical (3:4)" },
+        { "value": "tall", "label": "Vertical suave (4:5)" },
+        { "value": "square", "label": "Cuadrada" },
+        { "value": "landscape", "label": "Apaisada (4:3)" }
+      ],
+      "default": "tall"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Directly from origin"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Descripción",
+          "default": "Real relationships with the growers behind every lot."
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Botón",
+          "default": "See Our Farms"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Destino",
+          "info": "Una página o un artículo del blog."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cesar · Cards",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "title": "Directly from origin",
+            "text": "Real relationships with the growers behind every lot.",
+            "link_label": "See Our Farms"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "Roasted to order in Melbourne.",
+            "text": "Roasted fresh at our North Williamstown facility and dispatched within days.",
+            "link_label": "How We Roast"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

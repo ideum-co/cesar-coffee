@@ -1,0 +1,48 @@
+/**
+ * Rejilla de cards con imagen de fondo.
+ * El componente de card vive en cesar-card.css, compartido con el carrusel.
+ */
+
+.cesar-cards__heading {
+  margin: 0 0 var(--cc-space-8);
+  font-family: var(--cc-font-sans, var(--cc-fallback-sans));
+  font-size: var(--cc-text-h2);
+  font-weight: var(--cc-font-heading-weight-black, 800);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--cc-brown-700);
+}
+
+.cesar-cards__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  /* mismo valor que el gutter y que el resto de rejillas del tema */
+  gap: var(--cc-gutter);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cesar-cards__item {
+  min-width: 0;
+}
+
+@media screen and (min-width: 750px) {
+  .cesar-cards__grid--2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cesar-cards__grid--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .cesar-cards__grid--4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .cesar-cards__grid--4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
