@@ -106,6 +106,7 @@
         "button"
       ],
       "settings": {
+        "image": "shopify://shop_images/more-coffee.webp",
         "height": "large",
         "desktop_image_width": "medium",
         "layout": "image_first",
