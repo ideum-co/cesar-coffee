@@ -20,13 +20,38 @@
    miden lo mismo aunque el título ocupe una o dos líneas. */
 
 .card-wrapper .card {
+  display: flex;
+  flex-direction: column;
   height: var(--cesar-card-height, 413px);
 }
 
+/* El bloque de texto va arriba y ocupa sólo lo que necesita. Sin flex: 0 0 auto
+   se repartía la altura con la imagen y acababa midiendo 257px para 92px de
+   texto. */
+.card-wrapper .card > .card__content {
+  order: -1;
+  flex: 0 0 auto;
+}
+
 .card-wrapper .card__inner {
+  position: relative;
   flex: 1 1 auto;
   /* sin esto el contenido impide que la celda flexible se encoja */
   min-height: 0;
+}
+
+/* Dentro de .card__inner, Dawn mete un .card__content que sólo contiene los
+   badges (agotado / rebaja). Como .card__inner es flex en fila, ese contenedor
+   se comía casi la mitad del ancho y dejaba la imagen pequeña y desplazada a la
+   izquierda. Se saca del flujo: son etiquetas superpuestas, no una columna. */
+.card-wrapper .card__inner > .card__content {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.card-wrapper .card__inner > .card__content > * {
+  pointer-events: auto;
 }
 
 /* Dawn reserva el alto de la imagen con un ::before y --ratio-percent. Con la
@@ -286,13 +311,9 @@
    Dawn lo coloca como celda de una rejilla dentro del bloque de texto. Con ese
    bloque reordenado arriba, la celda se salía por el borde derecho. Se ancla al
    hueco de la imagen, que es donde se espera verlo. */
-.card-wrapper .card > .card__content > .card__badge {
+.card-wrapper .card__badge {
   position: absolute;
   z-index: 2;
   margin: 0;
   inset: auto auto var(--cc-space-3) var(--cc-space-3);
-}
-
-.card-wrapper .card > .card__content {
-  position: static;
 }
