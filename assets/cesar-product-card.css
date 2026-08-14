@@ -45,17 +45,26 @@
   min-width: 0;
   min-height: 0;
   align-self: stretch;
+  /* La referencia mete la foto 41.6px por lado en una card de 334 (12.5%). Sin
+     ese margen la imagen se estira a todo el ancho y, al ser 'contain', la
+     altura acaba mandando y el producto se ve pequeño y perdido. */
+  padding-inline: var(--cesar-card-image-inset, 12.5%);
+  padding-bottom: var(--cc-space-2);
 }
 
 /* .media de Dawn saca a sus hijos del flujo y les da alto 100%, así que su
    propia altura tiene que estar resuelta. En vez de encadenar height: 100% por
    varios contenedores —que es lo que fallaba y dejaba la bolsa suelta y
-   desbordando— se ancla al hueco de la imagen. */
+   desbordando— se ancla al hueco de la imagen. Se posiciona respecto al área
+   de contenido, dentro del padding, no respecto al borde. */
 .card-wrapper .card__media .media {
-  position: absolute;
-  inset: 0;
-  width: auto;
-  height: auto;
+  /* relative, no static: Dawn posiciona la <img> en absoluto, y sin contexto
+     propio aquí se anclaba al contenedor saltándose su padding, con lo que la
+     foto volvía a ocupar todo el ancho. */
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
   padding: 0;
 }
 
