@@ -34,7 +34,7 @@
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
-            "picker_type": "button",
+            "picker_type": "dropdown",
             "swatch_shape": "circle"
           }
         },
@@ -45,7 +45,7 @@
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
-            "show_dynamic_checkout": true,
+            "show_dynamic_checkout": false,
             "show_gift_card_recipient": false
           }
         },
@@ -54,7 +54,8 @@
           "settings": {
             "heading": "How should I store this?",
             "icon": "question_mark",
-            "content": "<p>Keep the bag sealed, out of the sun, at room temperature. Don't refrigerate.</p>"
+            "content": "<p>Keep the bag sealed, out of the sun, at room temperature. Don't refrigerate.</p>",
+            "page": ""
           }
         },
         "faq_freshness": {
@@ -62,7 +63,8 @@
           "settings": {
             "heading": "How fresh is it when it arrives?",
             "icon": "question_mark",
-            "content": "<p>Roasted to order in North Williamstown and dispatched within days of roasting — never off a shelf.</p>"
+            "content": "<p>Roasted to order in North Williamstown and dispatched within days of roasting — never off a shelf.</p>",
+            "page": ""
           }
         },
         "faq_brew": {
@@ -70,37 +72,19 @@
           "settings": {
             "heading": "What's the best way to brew this?",
             "icon": "question_mark",
-            "content": "<p>Tasting notes and a suggested recipe are on the bag. Ask us if you want a starting point for your setup.</p>"
-          }
-        },
-        "purchase_options": {
-          "type": "cesar_purchase_options",
-          "settings": {
-            "one_time_label": "Buy One Time",
-            "subscribe_label": "Subscribe & Never Run Out",
-            "savings_word": "Savings",
-            "frequency_label": "Frequency:",
-            "benefits": "Save 10% on every order|Free shipping over $60|Skip, pause or cancel anytime"
-          }
-        },
-        "wholesale": {
-          "type": "cesar_secondary_button",
-          "settings": {
-            "label": "Ask About Wholesale",
-            "link": ""
+            "content": "<p>Tasting notes and a suggested recipe are on the bag. Ask us if you want a starting point for your setup.</p>",
+            "page": ""
           }
         }
       },
       "block_order": [
-        "rating",
         "origin",
         "title",
+        "rating",
         "description",
         "variant_picker",
-        "purchase_options",
         "quantity_selector",
         "buy_buttons",
-        "wholesale",
         "faq_storage",
         "faq_freshness",
         "faq_brew"
@@ -128,21 +112,27 @@
           "type": "column",
           "settings": {
             "title": "Origin & Process",
-            "text": "<p>Washed, clean and floral. Natural, red fruit and wine-like sweetness. Honey, balanced, syrupy body. Anaerobic, funky, fermented depth.</p>"
+            "text": "<p>Washed, clean and floral. Natural, red fruit and wine-like sweetness. Honey, balanced, syrupy body. Anaerobic, funky, fermented depth.</p>",
+            "link_label": "",
+            "link": ""
           }
         },
         "notes": {
           "type": "column",
           "settings": {
             "title": "Tasting Notes",
-            "text": "<p>Taste them side by side to feel what each method does.</p>"
+            "text": "<p>Taste them side by side to feel what each method does.</p>",
+            "link_label": "",
+            "link": ""
           }
         },
         "roast": {
           "type": "column",
           "settings": {
             "title": "Roast & Dispatch",
-            "text": "<p>Roasted to order in North Williamstown. Ships within days of roasting, never off a shelf.</p>"
+            "text": "<p>Roasted to order in North Williamstown. Ships within days of roasting, never off a shelf.</p>",
+            "link_label": "",
+            "link": ""
           }
         }
       },
@@ -156,12 +146,14 @@
         "heading_size": "h2",
         "image_width": "third",
         "image_ratio": "adapt",
+        "button_label": "Button label",
+        "button_link": "",
         "columns_desktop": 3,
         "column_alignment": "left",
         "background_style": "primary",
+        "color_scheme": "scheme-1",
         "columns_mobile": "1",
         "swipe_on_mobile": true,
-        "color_scheme": "scheme-1",
         "padding_top": 40,
         "padding_bottom": 56
       }
@@ -169,19 +161,27 @@
     "pairs_with": {
       "type": "featured-collection",
       "settings": {
+        "collection": "",
+        "products_to_show": 6,
         "title": "Pairs Great With",
         "heading_size": "h1",
-        "products_to_show": 6,
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
         "columns_desktop": 3,
-        "columns_mobile": "2",
         "enable_desktop_slider": true,
-        "swipe_on_mobile": true,
+        "full_width": false,
         "show_view_all": false,
-        "image_ratio": "portrait",
-        "show_rating": true,
-        "show_vendor": false,
-        "quick_add": "standard",
+        "view_all_style": "solid",
         "color_scheme": "scheme-3",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": true,
+        "quick_add": "standard",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
         "padding_top": 56,
         "padding_bottom": 56
       }
@@ -196,7 +196,8 @@
             "featured": false,
             "title": "Green Line",
             "text": "Everyday espresso, always on. The dependable base of the range.",
-            "button_label": "See Our Farms"
+            "button_label": "See Our Farms",
+            "button_link": ""
           }
         },
         "gold": {
@@ -206,7 +207,8 @@
             "featured": true,
             "title": "Gold Line",
             "text": "Rare allocation lots, the microlots that carry the story.",
-            "button_label": "See Our Farms"
+            "button_label": "See Our Farms",
+            "button_link": ""
           }
         },
         "silver": {
@@ -216,7 +218,8 @@
             "featured": false,
             "title": "Silver Line",
             "text": "Seasonal specialty from named producers, roasted for filter.",
-            "button_label": "See Our Farms"
+            "button_label": "See Our Farms",
+            "button_link": ""
           }
         }
       },
@@ -228,6 +231,7 @@
       "settings": {
         "heading": "Three tiers, one clear range",
         "button_label": "Shop All",
+        "button_link": "",
         "color_scheme": "scheme-3"
       }
     },
@@ -265,13 +269,16 @@
       "type": "related-products",
       "settings": {
         "heading": "You may also like",
+        "heading_size": "h1",
         "products_to_show": 4,
         "columns_desktop": 4,
         "columns_mobile": "2",
-        "image_ratio": "portrait",
-        "show_rating": true,
-        "show_vendor": false,
         "color_scheme": "scheme-1",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": true,
         "padding_top": 40,
         "padding_bottom": 72
       }
