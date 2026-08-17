@@ -72,3 +72,204 @@
   border-radius: var(--cc-radius-md);
   background-color: var(--cc-surface);
 }
+
+/* ---------------------------------------------------------------------------
+   Controles de compra: selector de talla, cantidad y botones.
+   --------------------------------------------------------------------------- */
+
+/* La cantidad y "Add to Cart" comparten fila, como en el diseño.
+   Se usa grid y no flex: con flex, para que la talla quede en su propia fila
+   habría que darle base 100%, y eso la estira a todo el ancho. En grid ocupa la
+   fila entera pero conserva el ancho de su contenido con justify-self.
+   El bloque de botones no tiene clase propia, así que se localiza por contener
+   el formulario de producto. */
+.product__info-container {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: var(--cc-space-3);
+}
+
+.product__info-container > * {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
+.product__info-container > .product-form__quantity {
+  grid-column: 1;
+}
+
+.product__info-container > div:has(> .product-form) {
+  grid-column: 2;
+}
+
+/* ---------- Selector de talla ---------- */
+
+/* Ocupa su propia fila pero sólo el ancho de su contenido. */
+.product__info-container > .product-form__input--dropdown {
+  justify-self: start;
+}
+
+.product-form__input--dropdown {
+  display: inline-block;
+  width: auto;
+  padding: var(--cc-space-2) var(--cc-space-4);
+  border-radius: var(--cc-radius-md);
+  background-color: rgba(45, 18, 6, 0.06);
+}
+
+.product-form__input--dropdown .form__label {
+  display: block;
+  margin: 0 0 2px;
+  font-size: var(--cc-text-sm);
+  font-weight: 500;
+  /* Dawn pone la etiqueta en mayúsculas; el diseño la lleva en caja normal. */
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--cc-text-muted);
+}
+
+.product-form__input--dropdown .select {
+  position: relative;
+}
+
+.product-form__input--dropdown .select__select {
+  min-height: 0;
+  padding: 0 var(--cc-space-6) 0 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  font-family: inherit;
+  font-size: var(--cc-text-body-lg);
+  font-weight: 700;
+  color: var(--cc-brown-900);
+  /* el desplegable nativo se sustituye por el chevron de Dawn */
+  appearance: none;
+}
+
+.product-form__input--dropdown .select::after,
+.product-form__input--dropdown .select::before {
+  display: none;
+}
+
+.product-form__input--dropdown .select .svg-wrapper {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  translate: 0 -50%;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+  color: var(--cc-brown-900);
+}
+
+.product-form__input--dropdown .select__select:focus-visible {
+  outline: 2px solid var(--cc-brown-900);
+  outline-offset: 4px;
+}
+
+/* ---------- Cantidad ---------- */
+
+.product-form__quantity .quantity__label {
+  /* El diseño no muestra etiqueta: el control se explica solo. */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* quantity-input es un elemento propio de Dawn: sin display no genera caja y
+   el min-height no llegaba a aplicarse (medía 19px de alto). */
+.product-form__quantity .quantity {
+  display: flex;
+  align-items: center;
+  min-height: 56px;
+  width: auto;
+  border-radius: var(--cc-radius-md);
+  background-color: rgba(45, 18, 6, 0.06);
+  overflow: hidden;
+}
+
+.product-form__quantity .quantity::after {
+  /* Dawn dibuja aquí un borde que no encaja con el bloque relleno. */
+  display: none;
+}
+
+.product-form__quantity .quantity__button,
+.product-form__quantity .quantity__input {
+  background: transparent;
+  border: 0;
+  color: var(--cc-brown-900);
+  font-family: inherit;
+  font-size: var(--cc-text-body-lg);
+  font-weight: 700;
+}
+
+.product-form__quantity .quantity__button {
+  width: 44px;
+  cursor: pointer;
+}
+
+.product-form__quantity .quantity__input {
+  width: 40px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.product-form__quantity .quantity__button:focus-visible,
+.product-form__quantity .quantity__input:focus-visible {
+  outline: 2px solid var(--cc-brown-900);
+  outline-offset: -2px;
+}
+
+/* ---------- Añadir al carrito ---------- */
+
+.product-form__submit {
+  /* Ocupa el ancho de su columna: la clase de Dawn no siempre gana frente a las
+     reglas base del botón. */
+  width: 100%;
+  min-height: 56px;
+  border-radius: var(--cc-radius-md);
+  background-color: var(--cc-brown-700);
+  color: #fff;
+  font-size: var(--cc-text-body-lg);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.product-form__submit::before,
+.product-form__submit::after {
+  /* Dawn pinta borde y sombra con pseudo-elementos; aquí el botón es plano. */
+  display: none;
+}
+
+.product-form__submit:hover:not([disabled]) {
+  background-color: var(--cc-brown-900);
+}
+
+.product-form__submit[disabled] {
+  background-color: rgba(45, 18, 6, 0.25);
+  color: #fff;
+}
+
+/* ---------- Botón secundario (mayoristas) ---------- */
+
+.cesar-product__secondary {
+  display: flex;
+  width: 100%;
+  min-height: 56px;
+  border: 0;
+  border-radius: var(--cc-radius-md);
+  background-color: rgba(45, 18, 6, 0.06);
+  color: var(--cc-brown-900);
+  font-size: var(--cc-text-body-lg);
+  font-weight: 700;
+  padding: var(--cc-space-3) var(--cc-space-6);
+}
+
+.cesar-product__secondary:hover {
+  background-color: rgba(45, 18, 6, 0.12);
+  color: var(--cc-brown-900);
+}
