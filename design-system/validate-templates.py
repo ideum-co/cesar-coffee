@@ -37,6 +37,34 @@ for f in files:
             for k,v in blk.get('settings',{}).items():
                 if k not in bd[blk['type']]: out.append(f"[{f.name}:{sid}#{blk['type']}] setting desconocido {k} (validos: {sorted(bd[blk['type']])})")
                 else: check(bd[blk['type']][k],k,v,f"[{f.name}:{sid}#{blk['type']}]",out)
+
+# ---------------------------------------------------------------------------
+# Longitud de los nombres visibles.
+# Shopify rechaza el tema si un nombre de bloque, preset o seccion pasa de 25
+# caracteres, y `shopify theme check` NO lo detecta: solo salta al sincronizar
+# con GitHub. Las claves de traduccion (t:...) no cuentan, las resuelve Shopify.
+# ---------------------------------------------------------------------------
+LIMITE_NOMBRE = 25
+for f in sorted(pathlib.Path('sections').glob('*.liquid')):
+    m = re.search(r'{% schema %}(.*?){% endschema %}', f.read_text(), re.S)
+    if not m:
+        continue
+    try:
+        sch = json.loads(m.group(1))
+    except Exception:
+        continue
+
+    def largo(nombre, donde, _f=f):
+        if isinstance(nombre, str) and nombre and not nombre.startswith('t:') and len(nombre) > LIMITE_NOMBRE:
+            out.append(f"[{_f.name}] {donde}: \"{nombre}\" tiene {len(nombre)} caracteres (max {LIMITE_NOMBRE})")
+
+    largo(sch.get('name'), 'nombre de seccion')
+    for b in sch.get('blocks', []):
+        largo(b.get('name'), f"bloque {b.get('type')}")
+    for pr in sch.get('presets', []):
+        largo(pr.get('name'), 'preset')
+
 print("PROBLEMAS:" if out else "OK: todas las plantillas y groups validan")
 for p in out: print("  -",p)
 sys.exit(1 if out else 0)
+
