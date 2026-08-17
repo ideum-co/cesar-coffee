@@ -72,16 +72,35 @@
             "icon": "question_mark",
             "content": "<p>Tasting notes and a suggested recipe are on the bag. Ask us if you want a starting point for your setup.</p>"
           }
+        },
+        "purchase_options": {
+          "type": "cesar_purchase_options",
+          "settings": {
+            "one_time_label": "Buy One Time",
+            "subscribe_label": "Subscribe & Never Run Out",
+            "savings_word": "Savings",
+            "frequency_label": "Frequency:",
+            "benefits": "Save 10% on every order|Free shipping over $60|Skip, pause or cancel anytime"
+          }
+        },
+        "wholesale": {
+          "type": "cesar_secondary_button",
+          "settings": {
+            "label": "Ask About Wholesale",
+            "link": ""
+          }
         }
       },
       "block_order": [
+        "rating",
         "origin",
         "title",
-        "rating",
         "description",
         "variant_picker",
+        "purchase_options",
         "quantity_selector",
         "buy_buttons",
+        "wholesale",
         "faq_storage",
         "faq_freshness",
         "faq_brew"
@@ -127,7 +146,11 @@
           }
         }
       },
-      "block_order": ["origin", "notes", "roast"],
+      "block_order": [
+        "origin",
+        "notes",
+        "roast"
+      ],
       "settings": {
         "title": "More About This Product",
         "heading_size": "h2",
@@ -197,7 +220,11 @@
           }
         }
       },
-      "block_order": ["green", "gold", "silver"],
+      "block_order": [
+        "green",
+        "gold",
+        "silver"
+      ],
       "settings": {
         "heading": "Three tiers, one clear range",
         "button_label": "Shop All",
@@ -221,7 +248,10 @@
           }
         }
       },
-      "block_order": ["heading", "text"],
+      "block_order": [
+        "heading",
+        "text"
+      ],
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "center",

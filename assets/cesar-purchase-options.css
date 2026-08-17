@@ -1,0 +1,159 @@
+/**
+ * Compra única frente a suscripción en la ficha de producto.
+ */
+
+.cesar-purchase {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cc-space-3);
+  margin-block: var(--cc-space-6);
+}
+
+.cesar-purchase__option-wrap {
+  border-radius: var(--cc-radius-lg);
+  background-color: rgba(45, 18, 6, 0.06);
+  overflow: hidden;
+}
+
+.cesar-purchase__option {
+  display: flex;
+  align-items: center;
+  gap: var(--cc-space-3);
+  /* mínimo táctil */
+  min-height: 56px;
+  padding: var(--cc-space-3) var(--cc-space-6);
+  border-radius: var(--cc-radius-lg);
+  background-color: rgba(45, 18, 6, 0.06);
+  cursor: pointer;
+}
+
+.cesar-purchase__option-wrap .cesar-purchase__option {
+  background-color: transparent;
+}
+
+/* El radio real se oculta pero conserva foco y teclado; el círculo de al lado
+   es sólo su representación. */
+.cesar-purchase__option input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cesar-purchase__dot {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--cc-surface);
+}
+
+.cesar-purchase__dot::after {
+  content: '';
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background-color: transparent;
+  transition: background-color var(--cc-duration) var(--cc-ease);
+}
+
+.cesar-purchase__option:has(input:checked) .cesar-purchase__dot::after {
+  background-color: var(--cc-brown-900);
+}
+
+/* El foco se dibuja sobre la fila, ya que el radio está oculto. */
+.cesar-purchase__option:has(input:focus-visible) {
+  outline: 2px solid var(--cc-brown-900);
+  outline-offset: 2px;
+}
+
+.cesar-purchase__label {
+  font-size: var(--cc-text-body-lg);
+  font-weight: 700;
+  color: var(--cc-brown-900);
+}
+
+.cesar-purchase__badge {
+  padding: 4px 10px;
+  border-radius: var(--cc-radius-pill);
+  background-color: var(--cc-surface);
+  font-size: var(--cc-text-xs);
+  font-weight: 700;
+  color: var(--cc-brown-900);
+  white-space: nowrap;
+}
+
+.cesar-purchase__price {
+  /* empuja el precio al extremo derecho de la fila */
+  margin-left: auto;
+  font-size: var(--cc-text-body-lg);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--cc-brown-900);
+}
+
+/* ---------- Detalle de la suscripción ---------- */
+
+.cesar-purchase__detail {
+  padding: 0 var(--cc-space-6) var(--cc-space-5);
+}
+
+.cesar-purchase__benefits {
+  margin: 0 0 var(--cc-space-4);
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--cc-space-2);
+}
+
+.cesar-purchase__benefits li {
+  display: flex;
+  align-items: center;
+  gap: var(--cc-space-2);
+  font-size: var(--cc-text-sm);
+  color: var(--cc-text);
+}
+
+.cesar-purchase__check {
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  flex: none;
+  color: var(--cc-brown-700);
+}
+
+.cesar-purchase__check svg {
+  width: 100%;
+  height: 100%;
+}
+
+.cesar-purchase__frequency-label {
+  display: block;
+  margin-bottom: var(--cc-space-2);
+  font-size: var(--cc-text-sm);
+  font-weight: 700;
+  color: var(--cc-brown-900);
+}
+
+.cesar-purchase__select {
+  width: 100%;
+  min-height: 48px;
+  padding: var(--cc-space-2) var(--cc-space-4);
+  border: 1px solid rgba(45, 18, 6, 0.35);
+  border-radius: var(--cc-radius-sm);
+  background-color: var(--cc-surface);
+  color: var(--cc-brown-900);
+  font-family: inherit;
+  /* 16px evita el auto-zoom de iOS al enfocar */
+  font-size: var(--cc-text-body);
+}
+
+.cesar-purchase__select:focus-visible {
+  outline: 2px solid var(--cc-brown-900);
+  outline-offset: 2px;
+}

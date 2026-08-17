@@ -1,0 +1,125 @@
+{% comment %}
+  Compra única frente a suscripción, como en el diseño.
+
+  Lee los planes de venta de la variante seleccionada
+  (variant.selling_plan_allocations), que es lo que publica Shopify
+  Subscriptions. Si el producto no tiene ninguno, no se renderiza nada y la PDP
+  funciona como una compra normal.
+
+  El input que envía el plan es `selling_plan`, el nombre que espera el
+  formulario de producto de Shopify. Va dentro del form de buy_buttons, así que
+  este bloque tiene que ir ANTES de ese bloque en la plantilla.
+
+  Acepta:
+    product   {Object}
+    block     {Object} - ajustes del bloque
+    section_id {String}
+{% endcomment %}
+
+{%- liquid
+  assign variant = product.selected_or_first_available_variant
+  assign allocations = variant.selling_plan_allocations
+  assign has_plans = false
+  if allocations.size > 0
+    assign has_plans = true
+  endif
+
+  # Mejor ahorro entre los planes, para el distintivo
+  assign best_saving = 0
+  for allocation in allocations
+    if allocation.compare_at_price > allocation.price
+      assign diff = allocation.compare_at_price | minus: allocation.price | times: 100.0
+      assign pct = diff | divided_by: allocation.compare_at_price | round
+      if pct > best_saving
+        assign best_saving = pct
+      endif
+    endif
+  endfor
+-%}
+
+{%- if has_plans -%}
+  <cesar-purchase-options
+    class="cesar-purchase"
+    data-section="{{ section_id }}"
+    {{ block.shopify_attributes }}
+  >
+    {%- comment -%} Compra única {%- endcomment -%}
+    <label class="cesar-purchase__option" for="CesarOneTime-{{ section_id }}">
+      <input
+        type="radio"
+        id="CesarOneTime-{{ section_id }}"
+        name="cesar-purchase-{{ section_id }}"
+        value=""
+        checked
+        data-plan=""
+      >
+      <span class="cesar-purchase__dot" aria-hidden="true"></span>
+      <span class="cesar-purchase__label">{{ block.settings.one_time_label }}</span>
+      <span class="cesar-purchase__price">{{ variant.price | money }}</span>
+    </label>
+
+    {%- comment -%} Suscripción {%- endcomment -%}
+    {%- assign first_allocation = allocations[0] -%}
+    <div class="cesar-purchase__option-wrap">
+      <label class="cesar-purchase__option" for="CesarSub-{{ section_id }}">
+        <input
+          type="radio"
+          id="CesarSub-{{ section_id }}"
+          name="cesar-purchase-{{ section_id }}"
+          value="{{ first_allocation.selling_plan.id }}"
+          data-plan="{{ first_allocation.selling_plan.id }}"
+        >
+        <span class="cesar-purchase__dot" aria-hidden="true"></span>
+        <span class="cesar-purchase__label">{{ block.settings.subscribe_label }}</span>
+        {%- if best_saving > 0 -%}
+          <span class="cesar-purchase__badge">{{ best_saving }}% {{ block.settings.savings_word }}</span>
+        {%- endif -%}
+        <span class="cesar-purchase__price" data-sub-price>{{ first_allocation.price | money }}</span>
+      </label>
+
+      {%- comment -%}
+        Detalle de la suscripción. Sólo se muestra al elegirla: enseñarlo siempre
+        recarga el bloque de compra con información que aún no aplica.
+      {%- endcomment -%}
+      <div class="cesar-purchase__detail" data-detail hidden>
+        {%- if block.settings.benefits != blank -%}
+          <ul class="cesar-purchase__benefits" role="list">
+            {%- assign benefits = block.settings.benefits | split: '|' -%}
+            {%- for benefit in benefits -%}
+              <li>
+                <span class="cesar-purchase__check" aria-hidden="true">
+                  {{- 'icon-checkmark.svg' | inline_asset_content -}}
+                </span>
+                {{ benefit | strip }}
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if allocations.size > 1 -%}
+          <div class="cesar-purchase__frequency">
+            <label class="cesar-purchase__frequency-label" for="CesarFreq-{{ section_id }}">
+              {{ block.settings.frequency_label }}
+            </label>
+            <select id="CesarFreq-{{ section_id }}" class="cesar-purchase__select" data-frequency>
+              {%- for allocation in allocations -%}
+                <option
+                  value="{{ allocation.selling_plan.id }}"
+                  data-price="{{ allocation.price | money }}"
+                >
+                  {{ allocation.selling_plan.name }}
+                </option>
+              {%- endfor -%}
+            </select>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- comment -%}
+      Campo que viaja en el formulario de producto. Vacío para compra única.
+      Shopify lo interpreta como suscripción sólo si lleva un id de plan.
+    {%- endcomment -%}
+    <input type="hidden" name="selling_plan" value="" form="{{ product_form_id }}" data-selling-plan>
+  </cesar-purchase-options>
+{%- endif -%}

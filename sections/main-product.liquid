@@ -11,6 +11,8 @@
 >
   {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
   {{ 'cesar-product.css' | asset_url | stylesheet_tag }}
+  {{ 'cesar-purchase-options.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'cesar-purchase-options.js' | asset_url }}" defer="defer"></script>
   {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
   {{ 'component-price.css' | asset_url | stylesheet_tag }}
   {{ 'component-slider.css' | asset_url | stylesheet_tag }}
@@ -492,6 +494,27 @@
                     block: block,
                     product_form_id: product_form_id
                   %}
+                {%- when 'cesar_purchase_options' -%}
+                  {%- comment -%}
+                    No pinta nada si el producto no tiene planes de venta, así
+                    que la ficha funciona igual antes de crear las suscripciones.
+                  {%- endcomment -%}
+                  {% render 'cesar-purchase-options',
+                    product: product,
+                    block: block,
+                    section_id: section.id,
+                    product_form_id: product_form_id
+                  %}
+                {%- when 'cesar_secondary_button' -%}
+                  {%- if block.settings.label != blank -%}
+                    <a
+                      href="{{ block.settings.link | default: '#' }}"
+                      class="cc-btn cc-btn--secondary cesar-product__secondary"
+                      {{ block.shopify_attributes }}
+                    >
+                      {{ block.settings.label }}
+                    </a>
+                  {%- endif -%}
                 {%- when 'buy_buttons' -%}
                   {%- render 'buy-buttons',
                     block: block,
@@ -2143,6 +2166,65 @@
           "default": "t:sections.main-product.blocks.icon_with_text.settings.heading_3.default",
           "label": "t:sections.main-product.blocks.icon_with_text.settings.heading_3.label",
           "info": "t:sections.main-product.blocks.icon_with_text.settings.heading.info"
+        }
+      ]
+    },
+    {
+      "type": "cesar_purchase_options",
+      "name": "Cesar · Compra única / suscripción",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Sólo aparece si el producto tiene planes de venta creados en Shopify Subscriptions. Colócalo ANTES del bloque de botones de compra: el selector viaja dentro de ese formulario."
+        },
+        {
+          "type": "text",
+          "id": "one_time_label",
+          "label": "Texto de compra única",
+          "default": "Buy One Time"
+        },
+        {
+          "type": "text",
+          "id": "subscribe_label",
+          "label": "Texto de suscripción",
+          "default": "Subscribe & Never Run Out"
+        },
+        {
+          "type": "text",
+          "id": "savings_word",
+          "label": "Palabra del distintivo de ahorro",
+          "default": "Savings"
+        },
+        {
+          "type": "text",
+          "id": "frequency_label",
+          "label": "Etiqueta de frecuencia",
+          "default": "Frequency:"
+        },
+        {
+          "type": "textarea",
+          "id": "benefits",
+          "label": "Ventajas",
+          "info": "Una por línea, separadas por |",
+          "default": "Save 10% on every order|Free shipping over $60|Skip, pause or cancel anytime"
+        }
+      ]
+    },
+    {
+      "type": "cesar_secondary_button",
+      "name": "Cesar · Botón secundario",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Texto",
+          "default": "Ask About Wholesale"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Enlace"
         }
       ]
     }
