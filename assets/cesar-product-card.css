@@ -125,6 +125,11 @@
   overflow: hidden;
   opacity: 0;
   visibility: hidden;
+  /* La capa no intercepta clics: Dawn hace la card clicable con un ::after que
+     la cubre entera (z-index 1), y esta capa va por encima. Sin esto, pinchar
+     en la foto no llevaba a la ficha del producto. Los clics se reactivan sólo
+     en el panel de tamaños. */
+  pointer-events: none;
   transition:
     opacity var(--cc-duration) var(--cc-ease),
     visibility var(--cc-duration) var(--cc-ease);
@@ -152,6 +157,15 @@
   z-index: 1;
   display: block;
   padding: var(--cc-space-4);
+  /* El panel tampoco captura: si lo hiciera, los huecos entre píldoras y su
+     propio padding se tragarían el clic y no llevarían a la ficha. Sólo
+     capturan los controles de verdad. */
+  pointer-events: none;
+}
+
+.cesar-pcard__size,
+.cesar-pcard__submit {
+  pointer-events: auto;
 }
 
 /* ---------- Lista de tamaños ---------- */
