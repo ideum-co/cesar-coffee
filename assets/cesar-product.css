@@ -273,3 +273,201 @@
   background-color: rgba(45, 18, 6, 0.12);
   color: var(--cc-brown-900);
 }
+
+/* ---------------------------------------------------------------------------
+   Lista propia del selector de talla.
+   El <select> nativo sigue siendo el que manda; aquí sólo se oculta a la vista
+   y se pinta la lista que sí se puede estilar.
+   --------------------------------------------------------------------------- */
+
+cesar-size-select {
+  position: relative;
+}
+
+/* Se oculta a la vista pero sigue en el flujo de accesibilidad y de formulario:
+   con display: none dejaría de enviarse la opción. */
+cesar-size-select .select {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.cesar-size__trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--cc-space-3);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: var(--cc-text-body-lg);
+  font-weight: 700;
+  color: var(--cc-brown-900);
+  cursor: pointer;
+}
+
+.cesar-size__trigger::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  rotate: 45deg;
+  translate: 0 -25%;
+}
+
+.cesar-size__trigger:focus-visible {
+  outline: 2px solid var(--cc-brown-900);
+  outline-offset: 4px;
+}
+
+/* ---------- Panel ---------- */
+
+.cesar-size__panel {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + var(--cc-space-2));
+  left: 0;
+  /* Se despega del ancho del disparador: la lista necesita sitio para la
+     miniatura y la etiqueta. */
+  min-width: 340px;
+  max-width: min(92vw, 460px);
+  border-radius: var(--cc-radius-lg);
+  background-color: var(--cc-cream);
+  box-shadow: 0 18px 40px rgba(20, 8, 3, 0.18);
+  overflow: hidden;
+}
+
+.cesar-size__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: var(--cc-space-4) var(--cc-space-12);
+}
+
+.cesar-size__title {
+  font-size: var(--cc-text-body-lg);
+  font-weight: 500;
+  color: var(--cc-brown-900);
+}
+
+.cesar-size__close {
+  position: absolute;
+  right: var(--cc-space-3);
+  top: 50%;
+  translate: 0 -50%;
+  display: grid;
+  place-items: center;
+  /* área táctil completa aunque el aspa sea pequeña */
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--cc-brown-900);
+  cursor: pointer;
+}
+
+.cesar-size__close svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+.cesar-size__close:focus-visible {
+  outline: 2px solid var(--cc-brown-900);
+  outline-offset: -4px;
+}
+
+/* ---------- Opciones ---------- */
+
+.cesar-size__option {
+  display: flex;
+  align-items: center;
+  gap: var(--cc-space-4);
+  width: 100%;
+  min-height: 64px;
+  padding: var(--cc-space-2) var(--cc-space-4);
+  border: 0;
+  border-top: 1px solid rgba(45, 18, 6, 0.12);
+  background: transparent;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.cesar-size__option:hover {
+  background-color: rgba(45, 18, 6, 0.04);
+}
+
+/* La fila elegida se marca con un contorno completo, no sólo con el círculo:
+   el color por sí solo no debe ser el único indicador. */
+.cesar-size__option[aria-selected='true'] {
+  border: 2px solid var(--cc-brown-900);
+  background-color: var(--cc-surface);
+}
+
+.cesar-size__option:focus-visible {
+  outline: 2px solid var(--cc-brown-900);
+  outline-offset: -4px;
+}
+
+.cesar-size__thumb {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.cesar-size__thumb--empty {
+  border-radius: var(--cc-radius-sm);
+  background-color: rgba(45, 18, 6, 0.08);
+}
+
+.cesar-size__option-label {
+  flex: 1 1 auto;
+  font-size: var(--cc-text-body-lg);
+  font-weight: 700;
+  color: var(--cc-brown-900);
+}
+
+.cesar-size__radio {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--cc-brown-900);
+  border-radius: 50%;
+}
+
+.cesar-size__radio::after {
+  content: '';
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+.cesar-size__option[aria-selected='true'] .cesar-size__radio::after {
+  background-color: var(--cc-brown-900);
+}
+
+.cesar-size__option--sold-out .cesar-size__option-label {
+  color: var(--cc-text-muted);
+  text-decoration: line-through;
+}
+
+@media screen and (max-width: 749px) {
+  .cesar-size__panel {
+    min-width: 0;
+    width: min(92vw, 380px);
+  }
+}

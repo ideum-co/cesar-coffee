@@ -60,7 +60,14 @@
           %}
         </fieldset>
       {%- else -%}
-        <div class="product-form__input product-form__input--dropdown">
+        {%- comment -%}
+          El desplegable nativo no se puede estilar cuando está abierto: la lista
+          la pinta el sistema operativo. Se envuelve en cesar-size-select, que
+          monta una lista propia y escribe en este mismo <select>, de modo que
+          toda la lógica de variantes de Dawn sigue funcionando igual. Sin JS
+          queda el desplegable nativo, que funciona.
+        {%- endcomment -%}
+        <cesar-size-select class="product-form__input product-form__input--dropdown">
           <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
             {{ option.name }}
           </label>
@@ -90,7 +97,31 @@
               {{- 'icon-caret.svg' | inline_asset_content -}}
             </span>
           </div>
-        </div>
+
+          {%- comment -%}
+            Datos para la lista propia: por cada valor, la imagen de una variante
+            que lo tenga. Se calculan aquí porque la miniatura sólo está
+            disponible en Liquid.
+          {%- endcomment -%}
+          <template data-cesar-options>
+            {%- for value in option.values -%}
+              {%- liquid
+                assign match = null
+                for variant in product.variants
+                  if variant.options contains value
+                    assign match = variant
+                    break
+                  endif
+                endfor
+              -%}
+              <div
+                data-value="{{ value | escape }}"
+                data-available="{% if match and match.available %}true{% else %}false{% endif %}"
+                data-image="{% if match and match.featured_media %}{{ match.featured_media | image_url: width: 160 }}{% endif %}"
+              ></div>
+            {%- endfor -%}
+          </template>
+        </cesar-size-select>
       {%- endif -%}
     {%- endfor -%}
 
