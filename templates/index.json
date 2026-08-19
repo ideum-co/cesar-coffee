@@ -148,7 +148,7 @@
         "title": "La colección / The Range",
         "heading_size": "h0",
         "heading_alignment": "center",
-        "heading_color": "#2D1206",
+        "heading_color": "#2d1206",
         "header_button_label": "Shop All",
         "header_button_link": "shopify://collections/all",
         "header_button_bg": "",
@@ -183,7 +183,13 @@
         "text": "Taste what process alone can do to a single lot — Bourbon Rosado finished four ways: washed, natural, honey and anaerobic. Four 100g bags, one story.",
         "button_label": "Shop The Flight",
         "link": "",
-        "color_scheme": "scheme-1"
+        "color_scheme": "scheme-1",
+        "text_alignment": "left",
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "button_bg": "",
+        "button_text": ""
       }
     },
     "origin_and_roast": {
@@ -327,7 +333,12 @@
         "heading": "",
         "image": "shopify://shop_images/banner-main.webp",
         "image_position": "right",
-        "color_scheme": "scheme-1"
+        "color_scheme": "scheme-1",
+        "text_alignment": "center",
+        "bg_color": "",
+        "heading_color": "",
+        "link_color": "",
+        "link_hover_color": ""
       }
     },
     "trade": {
@@ -393,7 +404,13 @@
         "button_link": "",
         "columns_desktop": 3,
         "columns_mobile": "1",
-        "color_scheme": "scheme-3"
+        "color_scheme": "scheme-3",
+        "text_alignment": "left",
+        "bg_color": "",
+        "heading_color": "#FDF5A6",
+        "text_color": "",
+        "button_bg": "",
+        "button_text": ""
       }
     }
   },
