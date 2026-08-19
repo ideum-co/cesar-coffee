@@ -96,7 +96,7 @@
           "settings": {
             "heading": "More than a bag of coffee.",
             "heading_size": "hxxl",
-            "color": "#FDF5A6"
+            "color": "#fdf5a6"
           }
         },
         "text": {
@@ -113,8 +113,8 @@
             "button_label": "Meet Cesar",
             "button_link": "",
             "button_style_secondary": false,
-            "button_bg": "#FFFFFF",
-            "button_text": "#2D1206"
+            "button_bg": "#ffffff",
+            "button_text": "#2d1206"
           }
         }
       },
@@ -147,6 +147,12 @@
         "products_to_show": 8,
         "title": "La colección / The Range",
         "heading_size": "h0",
+        "heading_alignment": "center",
+        "heading_color": "#2D1206",
+        "header_button_label": "Shop All",
+        "header_button_link": "shopify://collections/all",
+        "header_button_bg": "",
+        "header_button_text": "",
         "description": "",
         "show_description": false,
         "description_style": "body",
@@ -215,55 +221,52 @@
         "color_scheme": "scheme-1"
       }
     },
-    "subscription": {
-      "type": "image-with-text",
+    "image_banner_Bj9xVb": {
+      "type": "image-banner",
       "blocks": {
-        "heading": {
+        "heading_KAymUe": {
           "type": "heading",
           "settings": {
             "heading": "Never run out",
-            "heading_size": "hxxl",
-            "color": ""
+            "heading_size": "hxxl"
           }
         },
-        "text": {
+        "text_TkG4tq": {
           "type": "text",
           "settings": {
-            "text": "<p>Build your plan, save 10%. Choose your plan, set your frequency, and skip or pause anytime. Fresh coffee on your schedule, not ours.</p>",
-            "text_style": "body",
-            "color": ""
+            "text": "Choose your tier, set your frequency, and skip or pause anytime. Fresh coffee on your schedule, not ours.",
+            "text_style": "body"
           }
         },
-        "button": {
-          "type": "button",
+        "buttons_BQWFm3": {
+          "type": "buttons",
           "settings": {
-            "button_label": "Start Your Subscription",
-            "button_link": "",
-            "button_style_secondary": false,
-            "button_bg": "",
-            "button_text": ""
+            "button_label_1": "Start Your Subscription",
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
           }
         }
       },
       "block_order": [
-        "heading",
-        "text",
-        "button"
+        "heading_KAymUe",
+        "text_TkG4tq",
+        "buttons_BQWFm3"
       ],
+      "name": "t:sections.image-banner.presets.name",
       "settings": {
-        "height": "large",
-        "desktop_image_width": "medium",
-        "layout": "text_first",
+        "image_overlay_opacity": 0,
+        "image_height": "medium",
         "image_behavior": "none",
-        "content_layout": "no-overlap",
-        "desktop_content_position": "middle",
+        "desktop_content_position": "middle-center",
         "desktop_content_alignment": "center",
+        "show_text_box": true,
+        "color_scheme": "",
+        "stack_images_on_mobile": true,
         "mobile_content_alignment": "center",
-        "section_color_scheme": "scheme-1",
-        "color_scheme": "scheme-1",
-        "padding_top": 72,
-        "padding_bottom": 72,
-        "full_bleed": false
+        "show_text_below": false
       }
     },
     "explore": {
@@ -401,7 +404,7 @@
     "the_range",
     "flight_banner",
     "origin_and_roast",
-    "subscription",
+    "image_banner_Bj9xVb",
     "explore",
     "trade"
   ]
