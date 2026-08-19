@@ -96,7 +96,7 @@
           "settings": {
             "heading": "More than a bag of coffee.",
             "heading_size": "hxxl",
-            "color": "#FDF5A6"
+            "color": "#fdf5a6"
           }
         },
         "text": {
@@ -113,8 +113,8 @@
             "button_label": "Meet Cesar",
             "button_link": "",
             "button_style_secondary": false,
-            "button_bg": "#FFFFFF",
-            "button_text": "#2D1206"
+            "button_bg": "#ffffff",
+            "button_text": "#2d1206"
           }
         }
       },
@@ -147,6 +147,12 @@
         "products_to_show": 8,
         "title": "La colección / The Range",
         "heading_size": "h0",
+        "heading_alignment": "center",
+        "heading_color": "#2D1206",
+        "header_button_label": "Shop All",
+        "header_button_link": "shopify://collections/all",
+        "header_button_bg": "",
+        "header_button_text": "",
         "description": "",
         "show_description": false,
         "description_style": "body",
