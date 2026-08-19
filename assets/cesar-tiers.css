@@ -69,30 +69,33 @@
 /* ---- Colores por línea ----
    Gold lleva texto marrón: el blanco sobre #C4972E sólo alcanza 2.69:1. */
 
+/* Cada línea define sus colores como valor de reserva. Si el bloque trae
+   colores propios, las variables en línea los sustituyen sin tocar nada más. */
 .cesar-tier--green {
-  background-color: var(--cc-green-line);
-  color: #fff;
+  background-color: var(--cesar-tier-bg, var(--cc-green-line));
+  color: var(--cesar-tier-text, #fff);
 }
 
 .cesar-tier--silver {
-  background-color: var(--cc-silver);
-  color: #fff;
+  background-color: var(--cesar-tier-bg, var(--cc-silver));
+  color: var(--cesar-tier-text, #fff);
 }
 
 .cesar-tier--gold {
-  background-color: var(--cc-gold);
-  color: var(--cc-brown-900);
+  background-color: var(--cesar-tier-bg, var(--cc-gold));
+  /* El dorado lleva texto marrón: el claro se queda en 2.69:1. */
+  color: var(--cesar-tier-text, var(--cc-brown-900));
 }
 
 .cesar-tier--green .cesar-tier__button,
 .cesar-tier--silver .cesar-tier__button {
-  background-color: #fff;
-  color: var(--cc-brown-900);
+  background-color: var(--cesar-tier-btn-bg, #fff);
+  color: var(--cesar-tier-btn-text, var(--cc-brown-900));
 }
 
 .cesar-tier--gold .cesar-tier__button {
-  background-color: var(--cc-brown-900);
-  color: #fff;
+  background-color: var(--cesar-tier-btn-bg, var(--cc-brown-900));
+  color: var(--cesar-tier-btn-text, #fff);
 }
 
 .cesar-tier__button:focus-visible {
@@ -114,4 +117,13 @@
   .cesar-tier--featured {
     min-height: 420px;
   }
+}
+
+/* ---------- Ancho máximo opcional ---------- */
+
+/* Sin el ajuste, la sección hereda el comportamiento a sangre de .cc-container.
+   Con él, se limita y se centra manteniendo los gutters. */
+.cesar-tiers__container--limited {
+  max-width: var(--cesar-tiers-max, none);
+  margin-inline: auto;
 }

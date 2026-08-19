@@ -1,7 +1,17 @@
 {{ 'cesar-tiers.css' | asset_url | stylesheet_tag }}
 
+{%- comment -%}
+  El ancho máximo es opcional. Sin él la sección va a sangre, como el resto del
+  tema; con él se limita y se centra. Se pasa como variable en línea en vez de
+  una clase por cada valor posible.
+{%- endcomment -%}
 <div class="cesar-tiers cc-section color-{{ section.settings.color_scheme }}">
-  <div class="cc-container">
+  <div
+    class="cc-container{% if section.settings.limit_width %} cesar-tiers__container--limited{% endif %}"
+    {% if section.settings.limit_width %}
+      style="--cesar-tiers-max: {{ section.settings.max_width }}px;"
+    {% endif %}
+  >
     {%- if section.settings.heading != blank or section.settings.button_label != blank -%}
       <div class="cesar-tiers__header">
         {%- if section.settings.heading != blank -%}
@@ -20,8 +30,20 @@
 
     <ul class="cesar-tiers__grid" role="list">
       {%- for block in section.blocks -%}
+        {%- comment -%}
+          Los colores elegidos viajan como variables en línea. Cada una sólo se
+          escribe si tiene valor, así que el CSS cae al color de la línea cuando
+          se dejan vacías.
+        {%- endcomment -%}
+        {%- capture tier_style -%}
+          {% if block.settings.bg_color != blank %}--cesar-tier-bg: {{ block.settings.bg_color }};{% endif %}
+          {% if block.settings.text_color != blank %}--cesar-tier-text: {{ block.settings.text_color }};{% endif %}
+          {% if block.settings.button_bg != blank %}--cesar-tier-btn-bg: {{ block.settings.button_bg }};{% endif %}
+          {% if block.settings.button_text != blank %}--cesar-tier-btn-text: {{ block.settings.button_text }};{% endif %}
+        {%- endcapture -%}
         <li
           class="cesar-tier cesar-tier--{{ block.settings.tier }}{% if block.settings.featured %} cesar-tier--featured{% endif %}"
+          {% if tier_style != blank %}style="{{ tier_style | strip_newlines | strip }}"{% endif %}
           {{ block.shopify_attributes }}
         >
           {%- if block.settings.image != blank -%}
@@ -91,6 +113,28 @@
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Ancho"
+    },
+    {
+      "type": "checkbox",
+      "id": "limit_width",
+      "label": "Limitar el ancho",
+      "default": false,
+      "info": "Desactivado, la sección va a sangre como el resto del tema."
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 800,
+      "max": 1600,
+      "step": 50,
+      "unit": "px",
+      "label": "Ancho máximo",
+      "default": 1200,
+      "info": "Sólo se aplica con la opción anterior activada."
     }
   ],
   "blocks": [
@@ -103,9 +147,18 @@
           "id": "tier",
           "label": "Línea",
           "options": [
-            { "value": "green", "label": "Green Line" },
-            { "value": "gold", "label": "Gold Line" },
-            { "value": "silver", "label": "Silver Line" }
+            {
+              "value": "green",
+              "label": "Green Line"
+            },
+            {
+              "value": "gold",
+              "label": "Gold Line"
+            },
+            {
+              "value": "silver",
+              "label": "Silver Line"
+            }
           ],
           "default": "green"
         },
@@ -142,6 +195,34 @@
           "type": "url",
           "id": "button_link",
           "label": "Enlace del botón"
+        },
+        {
+          "type": "header",
+          "content": "Colores"
+        },
+        {
+          "type": "paragraph",
+          "content": "Opcionales. Vacíos, cada línea usa su color de marca. Al cambiarlos, comprueba que el texto siga leyéndose sobre el fondo: el texto claro sobre el dorado no llega al contraste mínimo."
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Fondo de la card"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Texto"
+        },
+        {
+          "type": "color",
+          "id": "button_bg",
+          "label": "Fondo del botón"
+        },
+        {
+          "type": "color",
+          "id": "button_text",
+          "label": "Texto del botón"
         }
       ]
     }
