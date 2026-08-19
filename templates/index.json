@@ -221,57 +221,6 @@
         "color_scheme": "scheme-1"
       }
     },
-    "subscription": {
-      "type": "image-with-text",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Never run out",
-            "heading_size": "hxxl",
-            "color": ""
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Build your plan, save 10%. Choose your plan, set your frequency, and skip or pause anytime. Fresh coffee on your schedule, not ours.</p>",
-            "text_style": "body",
-            "color": ""
-          }
-        },
-        "button": {
-          "type": "button",
-          "settings": {
-            "button_label": "Start Your Subscription",
-            "button_link": "",
-            "button_style_secondary": false,
-            "button_bg": "",
-            "button_text": ""
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text",
-        "button"
-      ],
-      "settings": {
-        "height": "large",
-        "desktop_image_width": "medium",
-        "layout": "text_first",
-        "image_behavior": "none",
-        "content_layout": "no-overlap",
-        "desktop_content_position": "middle",
-        "desktop_content_alignment": "center",
-        "mobile_content_alignment": "center",
-        "section_color_scheme": "scheme-1",
-        "color_scheme": "scheme-1",
-        "padding_top": 72,
-        "padding_bottom": 72,
-        "full_bleed": false
-      }
-    },
     "image_banner_Bj9xVb": {
       "type": "image-banner",
       "blocks": {
@@ -455,7 +404,6 @@
     "the_range",
     "flight_banner",
     "origin_and_roast",
-    "subscription",
     "image_banner_Bj9xVb",
     "explore",
     "trade"
