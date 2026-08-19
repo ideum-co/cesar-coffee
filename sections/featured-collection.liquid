@@ -72,11 +72,32 @@
     id="collection-{{ section.id }}"
     data-id="{{ section.id }}"
   >
-    <div class="collection__title title-wrapper title-wrapper--no-top-margin page-width{% if show_mobile_slider %} title-wrapper--self-padded-tablet-down{% endif %}{% if show_desktop_slider %} collection__title--desktop-slider{% endif %}">
+    <div class="collection__title title-wrapper title-wrapper--no-top-margin page-width cesar-fc__title--{{ section.settings.heading_alignment }}{% if show_mobile_slider %} title-wrapper--self-padded-tablet-down{% endif %}{% if show_desktop_slider %} collection__title--desktop-slider{% endif %}">
       {%- if section.settings.title != blank -%}
-        <h2 class="title inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        <h2
+          class="title inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+          {% if section.settings.heading_color != blank %}style="color: {{ section.settings.heading_color }};"{% endif %}
+        >
           {{ section.settings.title }}
         </h2>
+      {%- endif -%}
+
+      {%- comment -%}
+        Botón opcional justo debajo del titular. El "View all" de Dawn va al pie
+        del carrusel, que es otra posición y otra intención.
+      {%- endcomment -%}
+      {%- if section.settings.header_button_label != blank -%}
+        {%- capture fc_btn_style -%}
+          {% if section.settings.header_button_bg != blank %}--cesar-btn-bg: {{ section.settings.header_button_bg }};{% endif %}
+          {% if section.settings.header_button_text != blank %}--cesar-btn-text: {{ section.settings.header_button_text }};{% endif %}
+        {%- endcapture -%}
+        <a
+          href="{{ section.settings.header_button_link | default: section.settings.collection.url | default: '#' }}"
+          class="cesar-fc__button"
+          {% if fc_btn_style != blank %}style="{{ fc_btn_style | strip_newlines | strip }}"{% endif %}
+        >
+          {{ section.settings.header_button_label }}
+        </a>
       {%- endif -%}
       {%- if section.settings.description != blank
         or section.settings.show_description
@@ -217,7 +238,10 @@
   "tag": "section",
   "class": "section",
   "disabled_on": {
-    "groups": ["header", "footer"]
+    "groups": [
+      "header",
+      "footer"
+    ]
   },
   "settings": [
     {
@@ -233,11 +257,11 @@
       "step": 1,
       "default": 4,
       "label": "t:sections.featured-collection.settings.products_to_show.label"
-    },     
+    },
     {
       "type": "header",
       "content": "t:sections.featured-collection.settings.header_text.content"
-    },   
+    },
     {
       "type": "inline_richtext",
       "id": "title",
@@ -273,6 +297,58 @@
       "label": "t:sections.all.heading_size.label"
     },
     {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Alineación del titular",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Color del titular",
+      "info": "Vacío, usa el del esquema de color."
+    },
+    {
+      "type": "header",
+      "content": "Botón bajo el titular"
+    },
+    {
+      "type": "text",
+      "id": "header_button_label",
+      "label": "Texto",
+      "info": "Vacío, no se muestra."
+    },
+    {
+      "type": "url",
+      "id": "header_button_link",
+      "label": "Enlace",
+      "info": "Vacío, enlaza a la colección elegida."
+    },
+    {
+      "type": "color",
+      "id": "header_button_bg",
+      "label": "Fondo del botón"
+    },
+    {
+      "type": "color",
+      "id": "header_button_text",
+      "label": "Texto del botón"
+    },
+    {
       "type": "richtext",
       "id": "description",
       "label": "t:sections.featured-collection.settings.description.label"
@@ -281,7 +357,7 @@
       "type": "checkbox",
       "id": "show_description",
       "label": "t:sections.featured-collection.settings.show_description.label",
-      "default": false   
+      "default": false
     },
     {
       "type": "select",
@@ -306,7 +382,7 @@
     {
       "type": "header",
       "content": "t:sections.featured-collection.settings.header_collection.content"
-    },    
+    },
     {
       "type": "range",
       "id": "columns_desktop",
@@ -316,7 +392,7 @@
       "default": 4,
       "label": "t:sections.featured-collection.settings.columns_desktop.label"
     },
-        {
+    {
       "type": "checkbox",
       "id": "enable_desktop_slider",
       "label": "t:sections.featured-collection.settings.enable_desktop_slider.label",
@@ -354,7 +430,7 @@
         }
       ],
       "default": "solid"
-    }, 
+    },
     {
       "type": "color_scheme",
       "id": "color_scheme",
@@ -484,13 +560,13 @@
           "label": "t:sections.featured-collection.settings.columns_mobile.options__2.label"
         }
       ]
-    },    
+    },
     {
       "type": "checkbox",
       "id": "swipe_on_mobile",
       "default": false,
       "label": "t:sections.featured-collection.settings.swipe_on_mobile.label"
-    },          
+    },
     {
       "type": "header",
       "content": "t:sections.all.padding.section_padding_heading"

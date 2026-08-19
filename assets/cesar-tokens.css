@@ -517,3 +517,55 @@ button.shopify-payment-button__button--unbranded {
   background-color: var(--cesar-btn-bg, rgba(var(--color-button), 1));
   color: var(--cesar-btn-text, rgb(var(--color-button-text)));
 }
+
+/* ---------- Featured collection: alineación y botón bajo el titular ---------- */
+
+.cesar-fc__title--left {
+  text-align: left;
+}
+
+.cesar-fc__title--center {
+  text-align: center;
+}
+
+.cesar-fc__title--right {
+  text-align: right;
+}
+
+/* La descripción y el botón siguen la alineación del titular, para que el
+   bloque de cabecera se lea como una unidad. */
+.cesar-fc__title--center .collection__description,
+.cesar-fc__title--right .collection__description {
+  margin-inline: auto;
+}
+
+.cesar-fc__title--right .collection__description {
+  margin-right: 0;
+}
+
+.cesar-fc__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--cc-space-4);
+  min-height: 44px;
+  padding: var(--cc-cta-padding-y) var(--cc-space-6);
+  border-radius: var(--cc-cta-radius);
+  /* Sin colores propios usa los del esquema, así que no altera lo configurado. */
+  background-color: var(--cesar-btn-bg, var(--cc-brown-900));
+  color: var(--cesar-btn-text, #fff);
+  font-size: var(--cc-cta-font-size);
+  font-weight: var(--cc-cta-weight);
+  line-height: var(--cc-cta-line);
+  text-decoration: none;
+  transition: background-color var(--cc-cta-transition) var(--cc-ease);
+}
+
+.cesar-fc__button:hover {
+  background-color: var(--cesar-btn-bg, var(--cc-brown-700));
+}
+
+.cesar-fc__button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
