@@ -272,6 +272,54 @@
         "full_bleed": false
       }
     },
+    "image_banner_Bj9xVb": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_KAymUe": {
+          "type": "heading",
+          "settings": {
+            "heading": "Never run out",
+            "heading_size": "hxxl"
+          }
+        },
+        "text_TkG4tq": {
+          "type": "text",
+          "settings": {
+            "text": "Choose your tier, set your frequency, and skip or pause anytime. Fresh coffee on your schedule, not ours.",
+            "text_style": "body"
+          }
+        },
+        "buttons_BQWFm3": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Start Your Subscription",
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_KAymUe",
+        "text_TkG4tq",
+        "buttons_BQWFm3"
+      ],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image_overlay_opacity": 0,
+        "image_height": "medium",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": true,
+        "color_scheme": "",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": false
+      }
+    },
     "explore": {
       "type": "cesar-link-list",
       "blocks": {
@@ -408,6 +456,7 @@
     "flight_banner",
     "origin_and_roast",
     "subscription",
+    "image_banner_Bj9xVb",
     "explore",
     "trade"
   ]
