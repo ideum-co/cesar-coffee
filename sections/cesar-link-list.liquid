@@ -4,7 +4,16 @@
   Va a sangre, sin .cc-container: las dos mitades llegan a los bordes y la
   imagen ocupa su 50% completo.
 {%- endcomment -%}
-<div class="cesar-link-list cesar-link-list--image-{{ section.settings.image_position }} color-{{ section.settings.color_scheme }}">
+{%- capture list_style -%}
+  {% if section.settings.bg_color != blank %}--cesar-sec-bg: {{ section.settings.bg_color }};{% endif %}
+  {% if section.settings.heading_color != blank %}--cesar-sec-heading: {{ section.settings.heading_color }};{% endif %}
+  {% if section.settings.link_color != blank %}--cesar-sec-link: {{ section.settings.link_color }};{% endif %}
+  {% if section.settings.link_hover_color != blank %}--cesar-sec-link-hover: {{ section.settings.link_hover_color }};{% endif %}
+{%- endcapture -%}
+<div
+  class="cesar-link-list cesar-link-list--image-{{ section.settings.image_position }} cesar-sec cesar-sec--align-{{ section.settings.text_alignment }} color-{{ section.settings.color_scheme }}"
+  {% if list_style != blank %}style="{{ list_style | strip_newlines | strip }}"{% endif %}
+>
   <div class="cesar-link-list__inner">
     <div class="cesar-link-list__links">
       {%- if section.settings.heading != blank -%}
@@ -60,8 +69,14 @@
       "id": "image_position",
       "label": "Posición de la imagen",
       "options": [
-        { "value": "left", "label": "Izquierda" },
-        { "value": "right", "label": "Derecha" }
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
       ],
       "default": "right"
     },
@@ -70,6 +85,54 @@
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Alineación del texto",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Colores"
+    },
+    {
+      "type": "paragraph",
+      "content": "Todos opcionales. Vacíos, la sección usa su esquema de color. Al cambiarlos comprueba que el texto siga leyéndose sobre el fondo."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Fondo de la sección"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Titular"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Enlaces"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_color",
+      "label": "Enlaces al pasar el ratón"
     }
   ],
   "blocks": [
@@ -95,12 +158,42 @@
     {
       "name": "Cesar · Lista destacada",
       "blocks": [
-        { "type": "link", "settings": { "label": "Green" } },
-        { "type": "link", "settings": { "label": "Silver" } },
-        { "type": "link", "settings": { "label": "Gold" } },
-        { "type": "link", "settings": { "label": "The Flight" } },
-        { "type": "link", "settings": { "label": "Subscriptions" } },
-        { "type": "link", "settings": { "label": "Wholesale" } }
+        {
+          "type": "link",
+          "settings": {
+            "label": "Green"
+          }
+        },
+        {
+          "type": "link",
+          "settings": {
+            "label": "Silver"
+          }
+        },
+        {
+          "type": "link",
+          "settings": {
+            "label": "Gold"
+          }
+        },
+        {
+          "type": "link",
+          "settings": {
+            "label": "The Flight"
+          }
+        },
+        {
+          "type": "link",
+          "settings": {
+            "label": "Subscriptions"
+          }
+        },
+        {
+          "type": "link",
+          "settings": {
+            "label": "Wholesale"
+          }
+        }
       ]
     }
   ]

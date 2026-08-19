@@ -2,7 +2,21 @@
 {{ 'cesar-collection-row.css' | asset_url | stylesheet_tag }}
 {{ 'component-slider.css' | asset_url | stylesheet_tag }}
 
-<div class="cesar-collection-row cc-section color-{{ section.settings.color_scheme }}">
+{%- comment -%}
+  Los colores y la alineación viajan como variables en línea, y sólo se escriben
+  si tienen valor: sin tocarlas la sección sigue con su esquema de color.
+{%- endcomment -%}
+{%- capture row_style -%}
+  {% if section.settings.bg_color != blank %}--cesar-sec-bg: {{ section.settings.bg_color }};{% endif %}
+  {% if section.settings.heading_color != blank %}--cesar-sec-heading: {{ section.settings.heading_color }};{% endif %}
+  {% if section.settings.text_color != blank %}--cesar-sec-text: {{ section.settings.text_color }};{% endif %}
+  {% if section.settings.button_bg != blank %}--cesar-btn-bg: {{ section.settings.button_bg }};{% endif %}
+  {% if section.settings.button_text != blank %}--cesar-btn-text: {{ section.settings.button_text }};{% endif %}
+{%- endcapture -%}
+<div
+  class="cesar-collection-row cc-section cesar-sec cesar-sec--align-{{ section.settings.text_alignment }} color-{{ section.settings.color_scheme }}"
+  {% if row_style != blank %}style="{{ row_style | strip_newlines | strip }}"{% endif %}
+>
   <div class="cc-container cesar-collection-row__inner">
     {%- comment -%} Columna de texto: titular, texto y una sola llamada a la acción. {%- endcomment -%}
     <div class="cesar-collection-row__intro">
@@ -140,8 +154,14 @@
       "id": "columns_mobile",
       "label": "Cards visibles en móvil",
       "options": [
-        { "value": "1", "label": "1" },
-        { "value": "2", "label": "2" }
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
       ],
       "default": "1"
     },
@@ -150,6 +170,59 @@
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-3"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Alineación del texto",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Colores"
+    },
+    {
+      "type": "paragraph",
+      "content": "Todos opcionales. Vacíos, la sección usa su esquema de color. Al cambiarlos comprueba que el texto siga leyéndose sobre el fondo."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Fondo de la sección"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Titular"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Texto"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Fondo del botón"
+    },
+    {
+      "type": "color",
+      "id": "button_text",
+      "label": "Texto del botón"
     }
   ],
   "blocks": [
@@ -192,9 +265,27 @@
     {
       "name": "Cesar · Texto y carrusel",
       "blocks": [
-        { "type": "card", "settings": { "title": "wholesale", "link_label": "See Our Farms" } },
-        { "type": "card", "settings": { "title": "white-label", "link_label": "How We Roast" } },
-        { "type": "card", "settings": { "title": "co-roasting", "link_label": "How We Roast" } }
+        {
+          "type": "card",
+          "settings": {
+            "title": "wholesale",
+            "link_label": "See Our Farms"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "white-label",
+            "link_label": "How We Roast"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "co-roasting",
+            "link_label": "How We Roast"
+          }
+        }
       ]
     }
   ]

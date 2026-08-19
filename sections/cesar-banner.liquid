@@ -1,6 +1,16 @@
 {{ 'cesar-banner.css' | asset_url | stylesheet_tag }}
 
-<div class="cesar-banner cc-section color-{{ section.settings.color_scheme }}">
+{%- capture banner_style -%}
+  {% if section.settings.bg_color != blank %}--cesar-sec-bg: {{ section.settings.bg_color }};{% endif %}
+  {% if section.settings.heading_color != blank %}--cesar-sec-heading: {{ section.settings.heading_color }};{% endif %}
+  {% if section.settings.text_color != blank %}--cesar-sec-text: {{ section.settings.text_color }};{% endif %}
+  {% if section.settings.button_bg != blank %}--cesar-btn-bg: {{ section.settings.button_bg }};{% endif %}
+  {% if section.settings.button_text != blank %}--cesar-btn-text: {{ section.settings.button_text }};{% endif %}
+{%- endcapture -%}
+<div
+  class="cesar-banner cc-section cesar-sec cesar-sec--align-{{ section.settings.text_alignment }} color-{{ section.settings.color_scheme }}"
+  {% if banner_style != blank %}style="{{ banner_style | strip_newlines | strip }}"{% endif %}
+>
   <div class="cc-container">
     {%- if section.settings.image != blank -%}
       <div class="cesar-banner__media cesar-banner__media--{{ section.settings.ratio }}">
@@ -63,9 +73,18 @@
       "id": "ratio",
       "label": "Proporción",
       "options": [
-        { "value": "wide", "label": "Panorámica (21:9)" },
-        { "value": "medium", "label": "Ancha (16:9)" },
-        { "value": "short", "label": "Muy apaisada (3:1)" }
+        {
+          "value": "wide",
+          "label": "Panorámica (21:9)"
+        },
+        {
+          "value": "medium",
+          "label": "Ancha (16:9)"
+        },
+        {
+          "value": "short",
+          "label": "Muy apaisada (3:1)"
+        }
       ],
       "default": "wide"
     },
@@ -102,6 +121,59 @@
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Alineación del texto",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Colores"
+    },
+    {
+      "type": "paragraph",
+      "content": "Todos opcionales. Vacíos, la sección usa su esquema de color. Al cambiarlos comprueba que el texto siga leyéndose sobre el fondo."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Fondo de la sección"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Titular"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Texto"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Fondo del botón"
+    },
+    {
+      "type": "color",
+      "id": "button_text",
+      "label": "Texto del botón"
     }
   ],
   "presets": [

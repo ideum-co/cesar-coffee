@@ -569,3 +569,77 @@ button.shopify-payment-button__button--unbranded {
   outline: 2px solid currentColor;
   outline-offset: 3px;
 }
+
+/* ---------------------------------------------------------------------------
+   Colores y alineación por sección (.cesar-sec)
+   Las variables las escribe cada sección desde sus ajustes, y sólo si tienen
+   valor. Por eso todas las reglas llevan un valor de reserva: sin tocar nada,
+   la sección se ve exactamente igual que antes.
+   --------------------------------------------------------------------------- */
+
+.cesar-sec[style*='--cesar-sec-bg'] {
+  background-color: var(--cesar-sec-bg);
+}
+
+.cesar-sec--align-left {
+  text-align: left;
+}
+
+.cesar-sec--align-center {
+  text-align: center;
+}
+
+.cesar-sec--align-right {
+  text-align: right;
+}
+
+/* El texto corrido lleva medida máxima; al centrar o alinear a la derecha hay
+   que recolocar ese bloque o se quedaría pegado a la izquierda. */
+.cesar-sec--align-center .cesar-collection-row__text,
+.cesar-sec--align-center .cesar-banner__text {
+  margin-inline: auto;
+}
+
+.cesar-sec--align-right .cesar-collection-row__text,
+.cesar-sec--align-right .cesar-banner__text {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+/* ---- Titulares y textos ---- */
+
+.cesar-sec .cesar-collection-row__heading,
+.cesar-sec .cesar-banner__heading,
+.cesar-sec .cesar-link-list__heading {
+  color: var(--cesar-sec-heading, var(--cc-brown-700));
+}
+
+.cesar-sec .cesar-collection-row__text,
+.cesar-sec .cesar-banner__text {
+  color: var(--cesar-sec-text, var(--cc-text));
+}
+
+/* ---- Enlaces de la lista destacada ---- */
+
+.cesar-sec .cesar-link-list__link {
+  color: var(--cesar-sec-link, var(--cc-terracotta));
+}
+
+.cesar-sec .cesar-link-list__link:hover {
+  color: var(--cesar-sec-link-hover, var(--cc-brown-900));
+}
+
+/* ---- Botones ---- */
+
+.cesar-sec .cesar-collection-row__button,
+.cesar-sec .cesar-banner__button {
+  background-color: var(--cesar-btn-bg, var(--cc-brown-900));
+  color: var(--cesar-btn-text, #fff);
+  border-color: var(--cesar-btn-bg, var(--cc-brown-900));
+}
+
+.cesar-sec .cesar-collection-row__button:hover,
+.cesar-sec .cesar-banner__button:hover {
+  background-color: var(--cesar-btn-bg, var(--cc-brown-700));
+  color: var(--cesar-btn-text, #fff);
+}
