@@ -492,3 +492,28 @@ button.shopify-payment-button__button--unbranded {
     scroll-behavior: auto !important;
   }
 }
+
+/* ---------- Image with text: a sangre y colores por bloque ----------
+   La sección nativa vive dentro de .page-width, que lleva gutter, así que la
+   imagen no llegaba al borde. Con el ajuste se anula ese gutter. */
+.cesar-iwt--bleed > .page-width {
+  padding-inline: 0;
+}
+
+/* Reparto exacto a mitades. Los anchos de Dawn ("medium") dan 60/40, así que la
+   imagen no llegaba a ocupar su mitad aunque el gutter ya no estorbara. */
+@media screen and (min-width: 750px) {
+  .cesar-iwt--bleed .image-with-text__media-item,
+  .cesar-iwt--bleed .image-with-text__text-item {
+    width: 50%;
+    max-width: 50%;
+    flex: 0 0 50%;
+  }
+}
+
+/* Los botones de esa sección aceptan color propio; sin él siguen con el del
+   esquema, así que el ajuste no altera lo ya configurado. */
+.image-with-text .button {
+  background-color: var(--cesar-btn-bg, rgba(var(--color-button), 1));
+  color: var(--cesar-btn-text, rgb(var(--color-button-text)));
+}
