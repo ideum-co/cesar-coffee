@@ -35,10 +35,10 @@
             "text": "Everyday espresso, always on. The dependable base of the range.",
             "button_label": "See Our Farms",
             "button_link": "",
-            "bg_color": "#3E5F49",
+            "bg_color": "#3e5f49",
             "text_color": "",
-            "button_bg": "#5C8A6E",
-            "button_text": "#FFFFFF"
+            "button_bg": "#5c8a6e",
+            "button_text": "#ffffff"
           }
         },
         "gold": {
@@ -51,9 +51,9 @@
             "text": "Rare allocation lots, the microlots that carry the story.",
             "button_label": "See Our Farms",
             "button_link": "",
-            "bg_color": "#C4972E",
-            "text_color": "#FFFFFF",
-            "button_bg": "#5C8A6E",
+            "bg_color": "#c4972e",
+            "text_color": "#ffffff",
+            "button_bg": "#5c8a6e",
             "button_text": ""
           }
         },
@@ -67,10 +67,10 @@
             "text": "Seasonal specialty from named producers, roasted for filter.",
             "button_label": "See Our Farms",
             "button_link": "",
-            "bg_color": "#5F6A67",
+            "bg_color": "#5f6a67",
             "text_color": "",
-            "button_bg": "#5C8A6E",
-            "button_text": "#FFFFFF"
+            "button_bg": "#5c8a6e",
+            "button_text": "#ffffff"
           }
         }
       },
@@ -95,14 +95,16 @@
           "type": "heading",
           "settings": {
             "heading": "More than a bag of coffee.",
-            "heading_size": "hxxl"
+            "heading_size": "hxxl",
+            "color": "#FDF5A6"
           }
         },
         "text": {
           "type": "text",
           "settings": {
             "text": "<p>Built on generations of coffee growing in Colombia. Cesar sources direct from origin and roasts to order in North Williamstown. Traceable, seasonal coffee, in your hands within days.</p>",
-            "text_style": "body"
+            "text_style": "body",
+            "color": ""
           }
         },
         "button": {
@@ -110,7 +112,9 @@
           "settings": {
             "button_label": "Meet Cesar",
             "button_link": "",
-            "button_style_secondary": true
+            "button_style_secondary": false,
+            "button_bg": "#FFFFFF",
+            "button_text": "#2D1206"
           }
         }
       },
@@ -132,7 +136,8 @@
         "section_color_scheme": "scheme-3",
         "color_scheme": "scheme-3",
         "padding_top": 0,
-        "padding_bottom": 0
+        "padding_bottom": 0,
+        "full_bleed": true
       }
     },
     "the_range": {
@@ -141,13 +146,13 @@
         "collection": "frontpage",
         "products_to_show": 8,
         "title": "La colección / The Range",
-        "heading_size": "h1",
+        "heading_size": "h0",
         "description": "",
         "show_description": false,
         "description_style": "body",
         "columns_desktop": 4,
         "enable_desktop_slider": true,
-        "full_width": false,
+        "full_width": true,
         "show_view_all": true,
         "view_all_style": "solid",
         "color_scheme": "scheme-1",
@@ -217,14 +222,16 @@
           "type": "heading",
           "settings": {
             "heading": "Never run out",
-            "heading_size": "hxxl"
+            "heading_size": "hxxl",
+            "color": ""
           }
         },
         "text": {
           "type": "text",
           "settings": {
             "text": "<p>Build your plan, save 10%. Choose your plan, set your frequency, and skip or pause anytime. Fresh coffee on your schedule, not ours.</p>",
-            "text_style": "body"
+            "text_style": "body",
+            "color": ""
           }
         },
         "button": {
@@ -232,7 +239,9 @@
           "settings": {
             "button_label": "Start Your Subscription",
             "button_link": "",
-            "button_style_secondary": false
+            "button_style_secondary": false,
+            "button_bg": "",
+            "button_text": ""
           }
         }
       },
@@ -253,7 +262,8 @@
         "section_color_scheme": "scheme-1",
         "color_scheme": "scheme-1",
         "padding_top": 72,
-        "padding_bottom": 72
+        "padding_bottom": 72,
+        "full_bleed": false
       }
     },
     "explore": {
