@@ -269,7 +269,7 @@
         "button_text": "",
         "arrow_bg": "",
         "arrow_icon": "",
-        "heading_px": 0,
+        "heading_px": 66,
         "text_px": 0,
         "color_scheme": ""
       }
@@ -339,7 +339,7 @@
         "limit_width": true,
         "max_width": 1200,
         "heading_color": "",
-        "heading_px": 0
+        "heading_px": 66
       }
     },
     "cesar_video_ttK3ca": {
