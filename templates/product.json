@@ -95,14 +95,21 @@
         "media_size": "large",
         "constrain_to_viewport": true,
         "media_fit": "contain",
-        "gallery_layout": "stacked",
+        "gallery_layout": "columns",
         "mobile_thumbnails": "hide",
         "media_position": "left",
         "image_zoom": "lightbox",
         "hide_variants": false,
         "enable_video_looping": false,
         "padding_top": 24,
-        "padding_bottom": 12
+        "padding_bottom": 12,
+        "bg_color": "",
+        "heading_color": "#2D1206",
+        "text_color": "#2D1206",
+        "button_bg": "#4E3625",
+        "button_text": "#FFFFFF",
+        "heading_px": 0,
+        "text_px": 0
       }
     },
     "product_features": {
@@ -165,6 +172,12 @@
         "products_to_show": 6,
         "title": "Pairs Great With",
         "heading_size": "h1",
+        "heading_alignment": "center",
+        "heading_color": "",
+        "header_button_label": "",
+        "header_button_link": "",
+        "header_button_bg": "",
+        "header_button_text": "",
         "description": "",
         "show_description": false,
         "description_style": "body",
@@ -197,7 +210,11 @@
             "title": "Green Line",
             "text": "Everyday espresso, always on. The dependable base of the range.",
             "button_label": "See Our Farms",
-            "button_link": ""
+            "button_link": "",
+            "bg_color": "",
+            "text_color": "",
+            "button_bg": "",
+            "button_text": ""
           }
         },
         "gold": {
@@ -208,7 +225,11 @@
             "title": "Gold Line",
             "text": "Rare allocation lots, the microlots that carry the story.",
             "button_label": "See Our Farms",
-            "button_link": ""
+            "button_link": "",
+            "bg_color": "",
+            "text_color": "",
+            "button_bg": "",
+            "button_text": ""
           }
         },
         "silver": {
@@ -219,7 +240,11 @@
             "title": "Silver Line",
             "text": "Seasonal specialty from named producers, roasted for filter.",
             "button_label": "See Our Farms",
-            "button_link": ""
+            "button_link": "",
+            "bg_color": "",
+            "text_color": "",
+            "button_bg": "",
+            "button_text": ""
           }
         }
       },
@@ -232,7 +257,9 @@
         "heading": "Three tiers, one clear range",
         "button_label": "Shop All",
         "button_link": "",
-        "color_scheme": "scheme-3"
+        "color_scheme": "scheme-3",
+        "limit_width": false,
+        "max_width": 1200
       }
     },
     "roasted_to_order": {
