@@ -157,7 +157,7 @@
       ],
       "settings": {
         "title": "More About This Product",
-        "heading_size": "h2",
+        "heading_size": "h0",
         "image_width": "third",
         "image_ratio": "adapt",
         "button_label": "Button label",
