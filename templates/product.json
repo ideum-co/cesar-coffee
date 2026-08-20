@@ -274,41 +274,6 @@
         "color_scheme": ""
       }
     },
-    "pairs_with": {
-      "type": "featured-collection",
-      "settings": {
-        "collection": "",
-        "products_to_show": 6,
-        "title": "Pairs Great With",
-        "heading_size": "h1",
-        "heading_alignment": "left",
-        "heading_color": "#fdf5a6",
-        "header_button_label": "",
-        "header_button_link": "",
-        "header_button_bg": "",
-        "header_button_text": "",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "columns_desktop": 3,
-        "enable_desktop_slider": true,
-        "full_width": false,
-        "show_view_all": false,
-        "view_all_style": "solid",
-        "color_scheme": "scheme-3",
-        "image_ratio": "portrait",
-        "image_shape": "default",
-        "show_secondary_image": false,
-        "show_vendor": false,
-        "show_rating": true,
-        "quick_add": "standard",
-        "columns_mobile": "2",
-        "swipe_on_mobile": true,
-        "padding_top": 56,
-        "padding_bottom": 56,
-        "card_bg": ""
-      }
-    },
     "tiers": {
       "type": "cesar-tiers",
       "blocks": {
@@ -461,7 +426,6 @@
     "cesar_product_faq_UaBRNr",
     "product_features",
     "cesar_suggested_A9fCn4",
-    "pairs_with",
     "tiers",
     "cesar_video_ttK3ca",
     "roasted_to_order",
