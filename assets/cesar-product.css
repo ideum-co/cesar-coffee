@@ -133,6 +133,16 @@
   display: block;
 }
 
+/* Dawn da 2.5rem de margen vertical al formulario y a la descripción desde
+   section-main-product.css. Eso bajaba el botón respecto a la cantidad.
+   El reset de .product__info-container > * no bastaba: aquel selector pesa
+   menos que el de Dawn, y su hoja carga después de esta. El espaciado entre
+   bloques ya lo pone el gap del grid. */
+.product__info-container .cesar-buybox .product-form,
+.product__info-container .cesar-readmore .product__description {
+  margin: 0;
+}
+
 .cesar-buybox .product-form__buttons {
   margin: 0;
 }
