@@ -125,6 +125,7 @@
         "origin": {
           "type": "column",
           "settings": {
+            "image": "shopify://shop_images/icon-colombia.svg",
             "title": "Origin & Process",
             "text": "<p>Washed, clean and floral. Natural, red fruit and wine-like sweetness. Honey, balanced, syrupy body. Anaerobic, funky, fermented depth.</p>",
             "link_label": "",
@@ -134,6 +135,7 @@
         "notes": {
           "type": "column",
           "settings": {
+            "image": "shopify://shop_images/icon-coffee-beans-1.svg",
             "title": "Tasting Notes",
             "text": "<p>Taste them side by side to feel what each method does.</p>",
             "link_label": "",
@@ -143,6 +145,7 @@
         "roast": {
           "type": "column",
           "settings": {
+            "image": "shopify://shop_images/icon-coffee-beans.svg",
             "title": "Roast & Dispatch",
             "text": "<p>Roasted to order in North Williamstown. Ships within days of roasting, never off a shelf.</p>",
             "link_label": "",
