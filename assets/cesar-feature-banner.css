@@ -1,0 +1,200 @@
+/**
+ * Banner de cuerpo: imagen de fondo a sangre y contenido encima.
+ */
+
+.cesar-fbanner {
+  position: relative;
+  display: grid;
+  align-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  background-color: var(--cc-brown-900);
+}
+
+/* ---------- Alto ---------- */
+
+.cesar-fbanner--sm {
+  min-height: 320px;
+}
+
+.cesar-fbanner--md {
+  min-height: 480px;
+}
+
+.cesar-fbanner--lg {
+  min-height: 640px;
+}
+
+/* dvh y no vh: en móvil vh cuenta la barra del navegador y corta la sección */
+.cesar-fbanner--screen {
+  min-height: 100dvh;
+}
+
+@supports not (height: 100dvh) {
+  .cesar-fbanner--screen {
+    min-height: 100vh;
+  }
+}
+
+/* ---------- Fondo ---------- */
+
+.cesar-fbanner__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.cesar-fbanner__image {
+  width: 100%;
+  height: 100%;
+  /* cover: la imagen cubre toda la sección aunque no case la proporción */
+  object-fit: cover;
+  object-position: center;
+}
+
+.cesar-fbanner__veil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* ---------- Contenido ---------- */
+
+.cesar-fbanner__inner {
+  position: relative;
+  /* por encima del velo y de la imagen */
+  z-index: 1;
+  width: 100%;
+  padding-block: var(--cc-section-gap);
+}
+
+.cesar-fbanner__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cc-space-4);
+  max-width: 60ch;
+}
+
+.cesar-fbanner--align-center .cesar-fbanner__content {
+  margin-inline: auto;
+  text-align: center;
+  align-items: center;
+}
+
+.cesar-fbanner--align-right .cesar-fbanner__content {
+  margin-left: auto;
+  text-align: right;
+  align-items: flex-end;
+}
+
+.cesar-fbanner--align-left .cesar-fbanner__content {
+  align-items: flex-start;
+}
+
+/* ---------- Textos ---------- */
+
+.cesar-fbanner__heading {
+  margin: 0;
+  font-family: var(--cc-font-sans, var(--cc-fallback-sans));
+  font-weight: var(--cc-font-heading-weight-black, 800);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: rgb(var(--color-foreground, 255, 255, 255));
+}
+
+.cesar-fbanner__heading--sm {
+  font-size: var(--cc-text-h3);
+}
+.cesar-fbanner__heading--md {
+  font-size: var(--cc-text-h2);
+}
+.cesar-fbanner__heading--lg {
+  font-size: var(--cc-text-h1);
+}
+.cesar-fbanner__heading--xl {
+  font-size: var(--cc-text-display);
+}
+
+.cesar-fbanner__caption {
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgb(var(--color-foreground, 255, 255, 255));
+}
+
+.cesar-fbanner__caption--sm {
+  font-size: var(--cc-text-sm);
+}
+.cesar-fbanner__caption--md {
+  font-size: var(--cc-text-body);
+}
+.cesar-fbanner__caption--lg {
+  font-size: var(--cc-text-body-lg);
+}
+
+.cesar-fbanner__text {
+  line-height: 1.5;
+  color: rgb(var(--color-foreground, 255, 255, 255));
+}
+
+.cesar-fbanner__text > :first-child {
+  margin-top: 0;
+}
+
+.cesar-fbanner__text > :last-child {
+  margin-bottom: 0;
+}
+
+.cesar-fbanner__text--sm {
+  font-size: var(--cc-text-sm);
+}
+.cesar-fbanner__text--md {
+  font-size: var(--cc-text-body);
+}
+.cesar-fbanner__text--lg {
+  font-size: var(--cc-text-body-lg);
+}
+
+/* ---------- Botones ---------- */
+
+.cesar-fbanner__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--cc-space-3);
+  margin-top: var(--cc-space-2);
+}
+
+.cesar-fbanner__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* mínimo táctil */
+  min-height: 44px;
+  padding: var(--cc-cta-padding-y) var(--cc-space-6);
+  border-radius: var(--cc-cta-radius);
+  /* Sin colores propios usa los del esquema de la sección. */
+  background-color: var(--cesar-btn-bg, #fff);
+  color: var(--cesar-btn-text, var(--cc-brown-900));
+  font-size: var(--cc-cta-font-size);
+  font-weight: var(--cc-cta-weight);
+  line-height: var(--cc-cta-line);
+  text-decoration: none;
+  transition: opacity var(--cc-cta-transition) var(--cc-ease);
+}
+
+.cesar-fbanner__button:hover {
+  opacity: 0.85;
+}
+
+.cesar-fbanner__button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+@media screen and (max-width: 749px) {
+  /* A una columna el contenido usa todo el ancho disponible. */
+  .cesar-fbanner__content {
+    max-width: none;
+  }
+}

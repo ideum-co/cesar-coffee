@@ -1,0 +1,272 @@
+{{ 'cesar-feature-banner.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Banner de cuerpo: imagen de fondo a sangre que cubre toda la sección y el
+  contenido encima. Los colores y tamaños se controlan por bloque, y sólo se
+  escriben si tienen valor, así que sin tocarlos manda el esquema de color.
+{%- endcomment -%}
+<div
+  class="cesar-fbanner cesar-fbanner--{{ section.settings.height }} cesar-fbanner--align-{{ section.settings.content_alignment }} color-{{ section.settings.color_scheme }}"
+>
+  {%- if section.settings.image != blank -%}
+    <div class="cesar-fbanner__media">
+      {{
+        section.settings.image
+        | image_url: width: 3200
+        | image_tag:
+          loading: 'lazy',
+          sizes: '100vw',
+          widths: '600, 900, 1200, 1600, 2000, 2600, 3200',
+          class: 'cesar-fbanner__image',
+          alt: section.settings.image.alt
+      }}
+
+      {%- comment -%}
+        Velo sobre la foto. No es decoración: sin él, el texto sobre una imagen
+        cualquiera puede quedar por debajo del contraste legible.
+      {%- endcomment -%}
+      {%- if section.settings.overlay_opacity > 0 -%}
+        <div
+          class="cesar-fbanner__veil"
+          style="background-color: {{ section.settings.overlay_color }}; opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"
+        ></div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="cesar-fbanner__inner cc-container">
+    <div class="cesar-fbanner__content">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign color_style = ''
+          if block.settings.color != blank
+            capture color_style
+              echo 'color: ' | append: block.settings.color | append: ';'
+            endcapture
+          endif
+        -%}
+
+        {%- case block.type -%}
+          {%- when 'heading' -%}
+            <h2
+              class="cesar-fbanner__heading cesar-fbanner__heading--{{ block.settings.text_size }}"
+              {% if color_style != blank %}style="{{ color_style }}"{% endif %}
+              {{ block.shopify_attributes }}
+            >
+              {{ block.settings.heading }}
+            </h2>
+
+          {%- when 'caption' -%}
+            <p
+              class="cesar-fbanner__caption cesar-fbanner__caption--{{ block.settings.text_size }}"
+              {% if color_style != blank %}style="{{ color_style }}"{% endif %}
+              {{ block.shopify_attributes }}
+            >
+              {{ block.settings.caption }}
+            </p>
+
+          {%- when 'text' -%}
+            <div
+              class="cesar-fbanner__text cesar-fbanner__text--{{ block.settings.text_size }}"
+              {% if color_style != blank %}style="{{ color_style }}"{% endif %}
+              {{ block.shopify_attributes }}
+            >
+              {{ block.settings.text }}
+            </div>
+
+          {%- when 'buttons' -%}
+            <div class="cesar-fbanner__buttons" {{ block.shopify_attributes }}>
+              {%- for i in (1..2) -%}
+                {%- liquid
+                  assign label_key = 'button_label_' | append: i
+                  assign link_key = 'button_link_' | append: i
+                  assign bg_key = 'button_bg_' | append: i
+                  assign text_key = 'button_text_' | append: i
+                  assign label = block.settings[label_key]
+                  assign link = block.settings[link_key]
+                  assign bg = block.settings[bg_key]
+                  assign fg = block.settings[text_key]
+                -%}
+                {%- if label != blank -%}
+                  {%- capture btn_style -%}
+                    {% if bg != blank %}--cesar-btn-bg: {{ bg }};{% endif %}
+                    {% if fg != blank %}--cesar-btn-text: {{ fg }};{% endif %}
+                  {%- endcapture -%}
+                  <a
+                    href="{{ link | default: '#' }}"
+                    class="cesar-fbanner__button"
+                    {% if btn_style != blank %}style="{{ btn_style | strip_newlines | strip }}"{% endif %}
+                  >
+                    {{ label }}
+                  </a>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cesar · Banner de cuerpo",
+  "tag": "section",
+  "class": "cesar-feature-banner-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen de fondo",
+      "info": "Cubre toda la sección. El contenido va encima."
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Alto",
+      "options": [
+        { "value": "sm", "label": "Pequeño" },
+        { "value": "md", "label": "Mediano" },
+        { "value": "lg", "label": "Grande" },
+        { "value": "screen", "label": "Pantalla completa" }
+      ],
+      "default": "md"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Posición del contenido",
+      "options": [
+        { "value": "left", "label": "Izquierda" },
+        { "value": "center", "label": "Centro" },
+        { "value": "right", "label": "Derecha" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Velo sobre la imagen"
+    },
+    {
+      "type": "paragraph",
+      "content": "Oscurece o aclara la foto para que el texto se lea. Súbelo si el contenido no contrasta con la imagen."
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Color del velo",
+      "default": "#140803"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "label": "Intensidad",
+      "default": 40
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-4"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Titular",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Titular", "default": "The Bourbon Rosado Flight" },
+        {
+          "type": "select",
+          "id": "text_size",
+          "label": "Tamaño",
+          "options": [
+            { "value": "sm", "label": "Pequeño" },
+            { "value": "md", "label": "Mediano" },
+            { "value": "lg", "label": "Grande" },
+            { "value": "xl", "label": "Muy grande" }
+          ],
+          "default": "lg"
+        },
+        { "type": "color", "id": "color", "label": "Color", "info": "Vacío, usa el del esquema." }
+      ]
+    },
+    {
+      "type": "caption",
+      "name": "Subtítulo",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "caption", "label": "Subtítulo", "default": "Cuatro procesos, un solo origen" },
+        {
+          "type": "select",
+          "id": "text_size",
+          "label": "Tamaño",
+          "options": [
+            { "value": "sm", "label": "Pequeño" },
+            { "value": "md", "label": "Mediano" },
+            { "value": "lg", "label": "Grande" }
+          ],
+          "default": "md"
+        },
+        { "type": "color", "id": "color", "label": "Color" }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Descripción",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Descripción",
+          "default": "<p>Bourbon Rosado terminado de cuatro maneras: lavado, natural, honey y anaeróbico.</p>"
+        },
+        {
+          "type": "select",
+          "id": "text_size",
+          "label": "Tamaño",
+          "options": [
+            { "value": "sm", "label": "Pequeño" },
+            { "value": "md", "label": "Mediano" },
+            { "value": "lg", "label": "Grande" }
+          ],
+          "default": "md"
+        },
+        { "type": "color", "id": "color", "label": "Color" }
+      ]
+    },
+    {
+      "type": "buttons",
+      "name": "Botones",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "button_label_1", "label": "Botón 1", "default": "Shop The Flight" },
+        { "type": "url", "id": "button_link_1", "label": "Enlace 1" },
+        { "type": "color", "id": "button_bg_1", "label": "Fondo del botón 1" },
+        { "type": "color", "id": "button_text_1", "label": "Texto del botón 1" },
+        { "type": "text", "id": "button_label_2", "label": "Botón 2" },
+        { "type": "url", "id": "button_link_2", "label": "Enlace 2" },
+        { "type": "color", "id": "button_bg_2", "label": "Fondo del botón 2" },
+        { "type": "color", "id": "button_text_2", "label": "Texto del botón 2" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cesar · Banner de cuerpo",
+      "blocks": [
+        { "type": "heading" },
+        { "type": "caption" },
+        { "type": "text" },
+        { "type": "buttons" }
+      ]
+    }
+  ]
+}
+{% endschema %}

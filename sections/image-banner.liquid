@@ -116,18 +116,40 @@
     </div>
   {%- endif -%}
   <div class="banner__content banner__content--{{ section.settings.desktop_content_position }} page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-    <div class="banner__box content-container content-container--full-width-mobile color-{{ section.settings.color_scheme }} gradient">
+    {%- comment -%}
+      La caja de contenido lleva fondo propio ("Mostrar contenedor de texto").
+      Con el ajuste de abajo se puede dejar sin fondo para que el texto descanse
+      directamente sobre la imagen.
+    {%- endcomment -%}
+    <div class="banner__box content-container content-container--full-width-mobile color-{{ section.settings.color_scheme }} gradient{% if section.settings.transparent_text_box %} cesar-banner-box--transparent{% endif %}">
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when 'heading' -%}
             <h2
               class="banner__heading inline-richtext {{ block.settings.heading_size }}"
+              {% if block.settings.color != blank %}style="color: {{ block.settings.color }};"{% endif %}
               {{ block.shopify_attributes }}
             >
               {{ block.settings.heading }}
             </h2>
+          {%- comment -%}
+            Subtítulo: va entre el titular y la descripción, que es el orden que
+            pide el diseño. Dawn no traía este bloque.
+          {%- endcomment -%}
+          {%- when 'caption' -%}
+            <p
+              class="banner__caption cesar-banner-caption cesar-banner-caption--{{ block.settings.text_size }}"
+              {% if block.settings.color != blank %}style="color: {{ block.settings.color }};"{% endif %}
+              {{ block.shopify_attributes }}
+            >
+              {{ block.settings.caption }}
+            </p>
           {%- when 'text' -%}
-            <div class="banner__text rte {{ block.settings.text_style }}" {{ block.shopify_attributes }}>
+            <div
+              class="banner__text rte {{ block.settings.text_style }} cesar-banner-text--{{ block.settings.text_size }}"
+              {% if block.settings.color != blank %}style="color: {{ block.settings.color }};"{% endif %}
+              {{ block.shopify_attributes }}
+            >
               <p>{{ block.settings.text }}</p>
             </div>
           {%- when 'buttons' -%}
@@ -172,7 +194,10 @@
   "tag": "section",
   "class": "section",
   "disabled_on": {
-    "groups": ["header", "footer"]
+    "groups": [
+      "header",
+      "footer"
+    ]
   },
   "settings": [
     {
@@ -332,7 +357,7 @@
       "id": "stack_images_on_mobile",
       "default": true,
       "label": "t:sections.image-banner.settings.stack_images_on_mobile.label"
-    },    
+    },
     {
       "type": "select",
       "id": "mobile_content_alignment",
@@ -358,6 +383,13 @@
       "id": "show_text_below",
       "default": true,
       "label": "t:sections.image-banner.settings.show_text_below.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "transparent_text_box",
+      "label": "Contenedor de texto sin fondo",
+      "default": false,
+      "info": "El texto descansa sobre la imagen. Comprueba que se siga leyendo."
     }
   ],
   "blocks": [
@@ -399,6 +431,55 @@
           ],
           "default": "h1",
           "label": "t:sections.all.heading_size.label"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Color del texto",
+          "info": "Vacío, usa el del esquema."
+        }
+      ]
+    },
+    {
+      "type": "caption",
+      "name": "Subtítulo",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Subtítulo",
+          "default": "Cuatro procesos, un solo origen"
+        },
+        {
+          "type": "select",
+          "id": "text_size",
+          "label": "Tamaño del texto",
+          "options": [
+            {
+              "value": "sm",
+              "label": "Pequeño"
+            },
+            {
+              "value": "md",
+              "label": "Mediano"
+            },
+            {
+              "value": "lg",
+              "label": "Grande"
+            },
+            {
+              "value": "xl",
+              "label": "Muy grande"
+            }
+          ],
+          "default": "md"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Color del texto",
+          "info": "Vacío, usa el del esquema."
         }
       ]
     },
@@ -432,6 +513,36 @@
           ],
           "default": "body",
           "label": "t:sections.image-banner.blocks.text.settings.text_style.label"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Color del texto",
+          "info": "Vacío, usa el del esquema."
+        },
+        {
+          "type": "select",
+          "id": "text_size",
+          "label": "Tamaño del texto",
+          "options": [
+            {
+              "value": "sm",
+              "label": "Pequeño"
+            },
+            {
+              "value": "md",
+              "label": "Mediano"
+            },
+            {
+              "value": "lg",
+              "label": "Grande"
+            },
+            {
+              "value": "xl",
+              "label": "Muy grande"
+            }
+          ],
+          "default": "md"
         }
       ]
     },
@@ -441,8 +552,8 @@
       "limit": 1,
       "settings": [
         {
-        "type": "header",
-        "content": "t:sections.image-banner.blocks.buttons.settings.header_1.content"
+          "type": "header",
+          "content": "t:sections.image-banner.blocks.buttons.settings.header_1.content"
         },
         {
           "type": "text",
@@ -463,8 +574,8 @@
           "label": "t:sections.image-banner.blocks.buttons.settings.button_style_secondary_1.label"
         },
         {
-        "type": "header",
-        "content": "t:sections.image-banner.blocks.buttons.settings.header_2.content"
+          "type": "header",
+          "content": "t:sections.image-banner.blocks.buttons.settings.header_2.content"
         },
         {
           "type": "text",
