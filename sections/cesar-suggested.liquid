@@ -5,6 +5,13 @@
 {%- endcomment -%}
 {{ 'component-slider.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
+{%- comment -%}
+  El CSS de la card se pide también aquí y no sólo desde card-product: ese
+  snippet lo carga únicamente en su primera llamada de la página, y si otra
+  sección ya había pintado cards con skip_styles la hoja no llegaba y la card
+  se quedaba sin su alto fijo, con la foto reducida a una franja.
+{%- endcomment -%}
+{{ 'cesar-product-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 {{ 'cesar-suggested.css' | asset_url | stylesheet_tag }}
 {{ 'cesar-slider-dots.css' | asset_url | stylesheet_tag }}
@@ -18,8 +25,20 @@
 {%- endcomment -%}
 
 {%- liquid
-  assign productos = section.settings.collection.products
-  assign total = section.settings.collection.products_count | default: 0
+  comment
+    Por defecto los productos los elige Shopify a partir del que se está viendo.
+    'related' no necesita configuración; 'complementary' usa los productos que se
+    hayan emparejado en la app Search & Discovery.
+  endcomment
+  assign automatico = false
+  if section.settings.source != 'collection'
+    assign automatico = true
+    assign productos = recommendations.products
+    assign total = recommendations.products_count | default: 0
+  else
+    assign productos = section.settings.collection.products
+    assign total = section.settings.collection.products_count | default: 0
+  endif
   if total > section.settings.products_to_show
     assign total = section.settings.products_to_show
   endif
@@ -36,6 +55,19 @@
   class="cesar-sug cesar-sec cc-section color-{{ section.settings.color_scheme }}"
   {% if cesar_style != blank %}style="{{ cesar_style | strip_newlines | strip }}"{% endif %}
 >
+{%- comment -%}
+    product-recommendations pide la sección de nuevo al endpoint de
+    recomendaciones y sustituye su contenido. Por eso todo, titular incluido,
+    tiene que vivir dentro del elemento: lo que quede fuera no se repintaría.
+  {%- endcomment -%}
+  {%- if automatico -%}
+    <product-recommendations
+      class="cesar-sug__recommendations"
+      data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.products_to_show }}&intent={{ section.settings.intent }}"
+      data-section-id="{{ section.id }}"
+      data-product-id="{{ product.id }}"
+    >
+  {%- endif -%}
   <div class="cesar-sug__container cc-container{% if section.settings.limit_width %} cesar-sug__container--limited{% endif %}">
     <div class="cesar-sug__layout cesar-sug__layout--{{ section.settings.heading_position }}">
       {%- if section.settings.heading != blank or section.settings.text != blank -%}
@@ -118,14 +150,15 @@
               </div>
             {%- endif -%}
           </slider-component>
-        {%- else -%}
-          <p class="cesar-sug__empty">
-            {{ 'onboarding.product_title' | t | default: 'Elige una colección en los ajustes de la sección.' }}
-          </p>
+        {%- elsif automatico == false -%}
+          <p class="cesar-sug__empty">Elige una colección en los ajustes de la sección.</p>
         {%- endif -%}
       </div>
     </div>
   </div>
+  {%- if automatico -%}
+    </product-recommendations>
+  {%- endif -%}
 </div>
 
 {% schema %}
@@ -160,8 +193,14 @@
       "id": "heading_position",
       "label": "Posición del titular",
       "options": [
-        { "value": "side", "label": "A un lado del carrusel" },
-        { "value": "top", "label": "Encima del carrusel" }
+        {
+          "value": "side",
+          "label": "A un lado del carrusel"
+        },
+        {
+          "value": "top",
+          "label": "Encima del carrusel"
+        }
       ],
       "default": "side"
     },
@@ -170,9 +209,18 @@
       "id": "text_alignment",
       "label": "Alineación del texto",
       "options": [
-        { "value": "left", "label": "Izquierda" },
-        { "value": "center", "label": "Centro" },
-        { "value": "right", "label": "Derecha" }
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
       ],
       "default": "left"
     },
@@ -181,10 +229,44 @@
       "content": "Productos"
     },
     {
+      "type": "select",
+      "id": "source",
+      "label": "De dónde salen los productos",
+      "options": [
+        {
+          "value": "auto",
+          "label": "Recomendados por Shopify"
+        },
+        {
+          "value": "collection",
+          "label": "Una colección"
+        }
+      ],
+      "default": "auto",
+      "info": "Recomendados cambia solos según el producto que se esté viendo."
+    },
+    {
+      "type": "select",
+      "id": "intent",
+      "label": "Tipo de recomendación",
+      "options": [
+        {
+          "value": "related",
+          "label": "Relacionados (automático)"
+        },
+        {
+          "value": "complementary",
+          "label": "Complementarios (app Search & Discovery)"
+        }
+      ],
+      "default": "related",
+      "info": "Complementarios usa los pares que definas en la app Search & Discovery. Sin definirlos, la sección no muestra nada."
+    },
+    {
       "type": "collection",
       "id": "collection",
       "label": "Colección",
-      "info": "Los productos que se muestran. Para recomendaciones automáticas usa la sección Productos relacionados."
+      "info": "Sólo se usa con el origen puesto en \"Una colección\"."
     },
     {
       "type": "range",
@@ -209,8 +291,14 @@
       "id": "columns_mobile",
       "label": "Cards visibles en móvil",
       "options": [
-        { "value": "1", "label": "1" },
-        { "value": "2", "label": "2" }
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
       ],
       "default": "1"
     },
@@ -219,9 +307,18 @@
       "id": "image_ratio",
       "label": "Proporción de la imagen",
       "options": [
-        { "value": "adapt", "label": "La de la imagen" },
-        { "value": "portrait", "label": "Vertical" },
-        { "value": "square", "label": "Cuadrada" }
+        {
+          "value": "adapt",
+          "label": "La de la imagen"
+        },
+        {
+          "value": "portrait",
+          "label": "Vertical"
+        },
+        {
+          "value": "square",
+          "label": "Cuadrada"
+        }
       ],
       "default": "adapt"
     },
@@ -346,7 +443,12 @@
     }
   ],
   "enabled_on": {
-    "templates": ["product", "index", "page", "collection"]
+    "templates": [
+      "product",
+      "index",
+      "page",
+      "collection"
+    ]
   }
 }
 {% endschema %}
