@@ -338,7 +338,7 @@
         "color_scheme": "scheme-3",
         "limit_width": true,
         "max_width": 1200,
-        "heading_color": "",
+        "heading_color": "#FDF5A6",
         "heading_px": 66
       }
     },
