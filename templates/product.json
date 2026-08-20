@@ -29,7 +29,12 @@
         },
         "description": {
           "type": "description",
-          "settings": {}
+          "settings": {
+            "enable_read_more": true,
+            "collapsed_lines": 1,
+            "read_more_label": "See more",
+            "read_less_label": "See less"
+          }
         },
         "variant_picker": {
           "type": "variant_picker",
@@ -120,6 +125,7 @@
         "origin": {
           "type": "column",
           "settings": {
+            "image": "shopify://shop_images/icon-colombia.svg",
             "title": "Origin & Process",
             "text": "<p>Washed, clean and floral. Natural, red fruit and wine-like sweetness. Honey, balanced, syrupy body. Anaerobic, funky, fermented depth.</p>",
             "link_label": "",
@@ -129,6 +135,7 @@
         "notes": {
           "type": "column",
           "settings": {
+            "image": "shopify://shop_images/icon-coffee-beans-1.svg",
             "title": "Tasting Notes",
             "text": "<p>Taste them side by side to feel what each method does.</p>",
             "link_label": "",
@@ -138,6 +145,7 @@
         "roast": {
           "type": "column",
           "settings": {
+            "image": "shopify://shop_images/icon-coffee-beans.svg",
             "title": "Roast & Dispatch",
             "text": "<p>Roasted to order in North Williamstown. Ships within days of roasting, never off a shelf.</p>",
             "link_label": "",
@@ -152,7 +160,7 @@
       ],
       "settings": {
         "title": "More About This Product",
-        "heading_size": "h2",
+        "heading_size": "h0",
         "image_width": "third",
         "image_ratio": "adapt",
         "button_label": "Button label",
@@ -175,7 +183,7 @@
         "title": "Pairs Great With",
         "heading_size": "h1",
         "heading_alignment": "left",
-        "heading_color": "#FDF5A6",
+        "heading_color": "#fdf5a6",
         "header_button_label": "",
         "header_button_link": "",
         "header_button_bg": "",
@@ -210,6 +218,7 @@
           "settings": {
             "tier": "green",
             "featured": false,
+            "image": "shopify://shop_images/silver.webp",
             "title": "Green Line",
             "text": "Everyday espresso, always on. The dependable base of the range.",
             "button_label": "See Our Farms",
@@ -225,12 +234,13 @@
           "settings": {
             "tier": "gold",
             "featured": true,
+            "image": "shopify://shop_images/gold.webp",
             "title": "Gold Line",
             "text": "Rare allocation lots, the microlots that carry the story.",
             "button_label": "See Our Farms",
             "button_link": "",
             "bg_color": "",
-            "text_color": "",
+            "text_color": "#FFFFFF",
             "button_bg": "",
             "button_text": ""
           }
@@ -240,6 +250,7 @@
           "settings": {
             "tier": "silver",
             "featured": false,
+            "image": "shopify://shop_images/coffee-beat.png",
             "title": "Silver Line",
             "text": "Seasonal specialty from named producers, roasted for filter.",
             "button_label": "See Our Farms",
@@ -261,7 +272,7 @@
         "button_label": "Shop All",
         "button_link": "",
         "color_scheme": "scheme-3",
-        "limit_width": false,
+        "limit_width": true,
         "max_width": 1200
       }
     },
