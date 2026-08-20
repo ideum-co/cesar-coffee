@@ -581,6 +581,12 @@ button.shopify-payment-button__button--unbranded {
   background-color: var(--cesar-sec-bg);
 }
 
+/* El header transparente en portada NO acepta fondo: el ajuste de transparencia
+   manda sobre el color, o la portada perdería el efecto sin previo aviso. */
+.header-wrapper--transparent.cesar-sec[style*='--cesar-sec-bg'] {
+  background-color: transparent;
+}
+
 .cesar-sec--align-left {
   text-align: left;
 }
@@ -642,4 +648,115 @@ button.shopify-payment-button__button--unbranded {
 .cesar-sec .cesar-banner__button:hover {
   background-color: var(--cesar-btn-bg, var(--cc-brown-700));
   color: var(--cesar-btn-text, #fff);
+}
+
+/* ---------------------------------------------------------------------------
+   Secciones nativas de Dawn conectadas al mismo sistema
+   Mismo criterio: cada regla lleva reserva, así que una sección sin configurar
+   se pinta con el esquema de color de siempre. Las de tamaño no llevan reserva
+   en px: sin ajuste la variable no existe y hereda la escala del tema.
+   --------------------------------------------------------------------------- */
+
+/* ---- Portada de colección ---- */
+
+.cesar-sec .collection-hero__title {
+  color: var(--cesar-sec-heading, inherit);
+}
+
+.cesar-sec .collection-hero__description {
+  color: var(--cesar-sec-text, inherit);
+}
+
+/* ---- Rejilla de colección ---- */
+
+/* Encabezados de filtros y contador: es el "titular" visible de esta sección. */
+.cesar-sec .facets__heading,
+.cesar-sec .facets__summary,
+.cesar-sec .product-count__text,
+.cesar-sec .collection__title .title {
+  color: var(--cesar-sec-heading, inherit);
+}
+
+.cesar-sec .card__heading,
+.cesar-sec .card-information .price,
+.cesar-sec .facets__label,
+.cesar-sec .product-count,
+.cesar-sec .pagination__list {
+  color: var(--cesar-sec-text, inherit);
+}
+
+.cesar-sec .facets__label a,
+.cesar-sec .active-facets__button,
+.cesar-sec .pagination__item {
+  color: var(--cesar-sec-link, inherit);
+}
+
+.cesar-sec .facets__label a:hover,
+.cesar-sec .active-facets__button:hover,
+.cesar-sec .pagination__item:hover {
+  color: var(--cesar-sec-link-hover, inherit);
+}
+
+/* ---- Información de producto (PDP) ---- */
+
+.cesar-sec.product__info-container .product__title,
+.cesar-sec.product__info-container .product__title > * {
+  color: var(--cesar-sec-heading, inherit);
+}
+
+.cesar-sec.product__info-container .product__text,
+.cesar-sec.product__info-container .product__description,
+.cesar-sec.product__info-container .product__accordion,
+.cesar-sec.product__info-container .price,
+.cesar-sec.product__info-container .form__label {
+  color: var(--cesar-sec-text, inherit);
+}
+
+/* Sólo el botón principal de compra: los secundarios (mayorista, pago rápido)
+   tienen su propio papel y no deben heredar el color del primario. */
+.cesar-sec.product__info-container .product-form__submit {
+  background-color: var(--cesar-btn-bg, rgb(var(--color-button)));
+  color: var(--cesar-btn-text, rgb(var(--color-button-text)));
+  box-shadow: 0 0 0 var(--buttons-border-width) var(--cesar-btn-bg, rgba(var(--color-button), var(--alpha-button-border)));
+}
+
+/* ---- Header ---- */
+
+.cesar-sec .header__menu-item,
+.cesar-sec .header__heading-link,
+.cesar-sec .header__active-menu-item {
+  color: var(--cesar-sec-link, inherit);
+}
+
+.cesar-sec .header__menu-item:hover,
+.cesar-sec .header__heading-link:hover {
+  color: var(--cesar-sec-link-hover, inherit);
+}
+
+/* Los iconos son SVG con currentColor, así que siguen el color de enlace. */
+.cesar-sec .header__icon {
+  color: var(--cesar-sec-link, inherit);
+}
+
+/* ---------------------------------------------------------------------------
+   Tamaños de texto por sección
+   Van con selector de atributo y no con valor de reserva a propósito: si el
+   ajuste está en 0 la sección no escribe la variable, la regla ni siquiera
+   aplica y el elemento conserva el tamaño de la escala del tema.
+   --------------------------------------------------------------------------- */
+
+.cesar-sec[style*='--cesar-sec-heading-size'] .collection-hero__title,
+.cesar-sec[style*='--cesar-sec-heading-size'] .collection__title .title,
+.cesar-sec[style*='--cesar-sec-heading-size'].product__info-container .product__title,
+.cesar-sec[style*='--cesar-sec-heading-size'].product__info-container .product__title > * {
+  font-size: var(--cesar-sec-heading-size);
+}
+
+.cesar-sec[style*='--cesar-sec-text-size'] .collection-hero__description,
+.cesar-sec[style*='--cesar-sec-text-size'] .card__heading,
+.cesar-sec[style*='--cesar-sec-text-size'] .card-information .price,
+.cesar-sec[style*='--cesar-sec-text-size'].product__info-container .product__description,
+.cesar-sec[style*='--cesar-sec-text-size'] .header__menu-item,
+.cesar-sec[style*='--cesar-sec-text-size'] .header__heading-link {
+  font-size: var(--cesar-sec-text-size);
 }

@@ -41,7 +41,11 @@
   view-event-payload="{{ collection | standard_event_data: 'view' | escape }}"
   data-collection-id="{{ collection.id }}"
 >
-  <div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
+  {%- capture cesar_style -%}{% render 'cesar-section-style', s: section.settings %}{%- endcapture -%}
+  <div
+    class="cesar-sec section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}"
+    {% if cesar_style != blank %}style="{{ cesar_style | strip_newlines | strip }}"{% endif %}
+  >
     {%- paginate collection.products by section.settings.products_per_page -%}
       {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
       {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
@@ -411,6 +415,71 @@
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
       "default": 36
+    },
+    {
+      "type": "header",
+      "content": "Colores y tamaños"
+    },
+    {
+      "type": "paragraph",
+      "content": "Todos opcionales. Vacíos o en 0, la sección usa su esquema de color y la escala tipográfica del tema. Al cambiarlos comprueba que el texto siga leyéndose sobre el fondo."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Fondo"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Titular"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Texto"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Enlaces"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_color",
+      "label": "Enlaces al pasar el ratón"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Fondo del botón"
+    },
+    {
+      "type": "color",
+      "id": "button_text",
+      "label": "Texto del botón"
+    },
+    {
+      "type": "range",
+      "id": "heading_px",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Tamaño del titular",
+      "default": 0,
+      "info": "0 = el del tema."
+    },
+    {
+      "type": "range",
+      "id": "text_px",
+      "min": 0,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño del texto",
+      "default": 0,
+      "info": "0 = el del tema."
     }
   ]
 }

@@ -1,0 +1,45 @@
+{% comment %}
+  Emite las variables de color y tamaño de una sección a partir de sus ajustes.
+
+  Cada variable se escribe SÓLO si su ajuste tiene valor, de modo que una
+  sección sin configurar se ve exactamente igual que antes: las reglas de
+  cesar-tokens.css llevan todas un valor de reserva.
+
+  Se usa así, dentro de la etiqueta de apertura de la sección:
+
+    {%- capture estilo -%}{% render 'cesar-section-style', s: section.settings %}{%- endcapture -%}
+    <div class="... cesar-sec" {% if estilo != blank %}style="{{ estilo }}"{% endif %}>
+
+  Acepta:
+    s {Object} - section.settings (o block.settings)
+{% endcomment %}
+
+{%- liquid
+  if s.bg_color != blank
+    echo '--cesar-sec-bg:' | append: s.bg_color | append: ';'
+  endif
+  if s.heading_color != blank
+    echo '--cesar-sec-heading:' | append: s.heading_color | append: ';'
+  endif
+  if s.text_color != blank
+    echo '--cesar-sec-text:' | append: s.text_color | append: ';'
+  endif
+  if s.link_color != blank
+    echo '--cesar-sec-link:' | append: s.link_color | append: ';'
+  endif
+  if s.link_hover_color != blank
+    echo '--cesar-sec-link-hover:' | append: s.link_hover_color | append: ';'
+  endif
+  if s.button_bg != blank
+    echo '--cesar-btn-bg:' | append: s.button_bg | append: ';'
+  endif
+  if s.button_text != blank
+    echo '--cesar-btn-text:' | append: s.button_text | append: ';'
+  endif
+  if s.heading_px != blank and s.heading_px > 0
+    echo '--cesar-sec-heading-size:' | append: s.heading_px | append: 'px;'
+  endif
+  if s.text_px != blank and s.text_px > 0
+    echo '--cesar-sec-text-size:' | append: s.text_px | append: 'px;'
+  endif
+-%}
