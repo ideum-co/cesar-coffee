@@ -209,11 +209,11 @@
         "roast"
       ],
       "settings": {
-        "title": "More About This Product",
+        "title": "",
         "heading_size": "h0",
         "image_width": "third",
         "image_ratio": "adapt",
-        "button_label": "Button label",
+        "button_label": "",
         "button_link": "",
         "columns_desktop": 3,
         "column_alignment": "left",
@@ -222,7 +222,20 @@
         "columns_mobile": "1",
         "swipe_on_mobile": true,
         "padding_top": 40,
-        "padding_bottom": 56
+        "padding_bottom": 56,
+        "heading_alignment": "left",
+        "bg_color": "",
+        "heading_color": "#4E3625",
+        "card_bg": "#FFFFFF",
+        "card_title_color": "",
+        "card_text_color": "#4E3625",
+        "link_color": "",
+        "link_hover_color": "",
+        "button_bg": "",
+        "button_text": "",
+        "heading_px": 0,
+        "card_title_px": 18,
+        "text_px": 12
       }
     },
     "pairs_with": {
@@ -330,6 +343,7 @@
       "type": "cesar-video",
       "name": "Cesar · Vídeo",
       "settings": {
+        "video_url": "",
         "cover_image": "shopify://shop_images/banner-3.webp",
         "description": "",
         "enable_video_looping": false,
