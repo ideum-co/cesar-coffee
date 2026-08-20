@@ -28,6 +28,8 @@
 {%- capture cesar_style -%}
   {% render 'cesar-section-style', s: section.settings %}
   {% if section.settings.card_title_px > 0 %}--cesar-mc-card-title-size: {{ section.settings.card_title_px }}px;{% endif %}
+  {% if section.settings.custom_radius %}--cesar-mc-card-radius: {{ section.settings.card_radius }}px;{% endif %}
+  {% if section.settings.icon_px > 0 %}--cesar-mc-icon-size: {{ section.settings.icon_px }}px;{% endif %}
   {% if section.settings.card_text_color != blank %}--cesar-mc-card-text: {{ section.settings.card_text_color }};{% endif %}
   {% if section.settings.card_title_color != blank %}--cesar-mc-card-title: {{ section.settings.card_title_color }};{% endif %}
 {%- endcapture -%}
@@ -518,6 +520,39 @@
       "label": "Tamaño del texto de la card",
       "default": 0,
       "info": "0 = el del tema."
+    },
+    {
+      "type": "header",
+      "content": "Forma de la card"
+    },
+    {
+      "type": "checkbox",
+      "id": "custom_radius",
+      "label": "Usar un redondeo propio",
+      "default": false,
+      "info": "Sin marcar, la sección hereda el redondeo global del tema."
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Redondeo de las esquinas",
+      "default": 0,
+      "info": "Sólo se aplica con la casilla de arriba marcada. En 0, esquinas rectas."
+    },
+    {
+      "type": "range",
+      "id": "icon_px",
+      "min": 0,
+      "max": 240,
+      "step": 4,
+      "unit": "px",
+      "label": "Tamaño de la imagen o icono",
+      "default": 0,
+      "info": "0 = el ancho que marque la opción de arriba."
     }
   ],
   "blocks": [

@@ -94,3 +94,27 @@
   margin-left: auto;
   margin-right: 0;
 }
+
+/* ---------- Forma de la card ----------
+   Ambas reglas van tras un selector de atributo: sin el ajuste marcado la
+   variable no existe, la regla no aplica y manda el redondeo global del tema. */
+
+.multicolumn.cesar-sec[style*='--cesar-mc-card-radius'] .multicolumn-card {
+  border-radius: var(--cesar-mc-card-radius);
+}
+
+/* La imagen redondeada por dentro tiene que ir un pelo menos que la card, o
+   asoma una esquina cuadrada sobre la curva del borde. */
+.multicolumn.cesar-sec[style*='--cesar-mc-card-radius']
+  .multicolumn-card
+  > .multicolumn-card__image-wrapper--full-width:not(.multicolumn-card-spacing) {
+  border-top-left-radius: calc(var(--cesar-mc-card-radius) - var(--text-boxes-border-width, 0px));
+  border-top-right-radius: calc(var(--cesar-mc-card-radius) - var(--text-boxes-border-width, 0px));
+}
+
+/* Tamaño de la imagen o icono. Dawn la dimensiona por fracciones de columna
+   (completa, mitad, tercio); esto permite además una medida exacta. */
+.multicolumn.cesar-sec[style*='--cesar-mc-icon-size'] .multicolumn-card__image-wrapper {
+  width: var(--cesar-mc-icon-size);
+  max-width: 100%;
+}

@@ -1,0 +1,112 @@
+/**
+ * Productos sugeridos: titular a un lado y carrusel al otro.
+ */
+
+.cesar-sug__container--limited {
+  max-width: var(--cesar-sug-max, none);
+}
+
+.cesar-sug__layout {
+  display: grid;
+  gap: var(--cc-space-12);
+  align-items: center;
+}
+
+/* El titular ocupa una columna estrecha y el carrusel el resto. En la
+   referencia el texto va en una medida corta de dos o tres palabras por línea,
+   de ahí la columna angosta. */
+.cesar-sug__layout--side {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+}
+
+.cesar-sug__layout--top {
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--cc-space-8);
+}
+
+/* ---------- Texto ---------- */
+
+.cesar-sug__heading {
+  margin: 0;
+  font-family: var(--cc-font-sans, var(--cc-fallback-sans));
+  font-weight: var(--cc-font-heading-weight-black, 800);
+  font-size: var(--cesar-sec-heading-size, var(--cc-text-h1));
+  /* Titular de varias líneas muy juntas, como en la referencia. */
+  line-height: 0.88;
+  letter-spacing: -0.03em;
+  color: var(--cesar-sec-heading, var(--cc-brown-700));
+}
+
+.cesar-sug__text {
+  margin-top: var(--cc-space-4);
+  font-size: var(--cesar-sec-text-size, var(--cc-text-body));
+  line-height: 1.55;
+  color: var(--cesar-sec-text, var(--cc-text));
+}
+
+.cesar-sug__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* mínimo táctil */
+  min-height: 44px;
+  margin-top: var(--cc-space-6);
+  padding: var(--cc-cta-padding-y) var(--cc-space-6);
+  border-radius: var(--cc-cta-radius);
+  background-color: var(--cesar-btn-bg, var(--cc-brown-900));
+  color: var(--cesar-btn-text, #fff);
+  font-size: var(--cc-cta-font-size);
+  font-weight: var(--cc-cta-weight);
+  line-height: var(--cc-cta-line);
+  text-decoration: none;
+  transition: opacity var(--cc-cta-transition) var(--cc-ease);
+}
+
+.cesar-sug__button:hover {
+  opacity: 0.85;
+}
+
+.cesar-sug__button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.cesar-sug__empty {
+  margin: 0;
+  color: var(--cesar-sec-text, var(--cc-text));
+}
+
+/* ---------- Carrusel ----------
+   El viewport no puede recortar: las flechas se salen por los lados y con
+   overflow oculto se perderían. El desplazamiento lo lleva la propia lista. */
+
+.cesar-sug__slider {
+  min-width: 0;
+}
+
+/* ---------- Cards ---------- */
+
+.cesar-sug[style*='--cesar-card-bg'] .card--card,
+.cesar-sug[style*='--cesar-card-bg'] .card--standard .card__inner {
+  /* Abreviada y no background-color: .gradient escribe un background completo,
+     y su imagen de degradado taparía el color elegido. */
+  background: var(--cesar-card-bg);
+}
+
+/* ---------- Flechas ---------- */
+
+.cesar-sug .cesar-slider__arrow {
+  background-color: var(--cesar-sug-arrow-bg, var(--cc-surface));
+  color: var(--cesar-sug-arrow-icon, var(--cc-brown-900));
+}
+
+.cesar-sug .cesar-slider__arrow:hover {
+  background-color: var(--cesar-sug-arrow-bg, var(--cc-cream));
+}
+
+@media screen and (max-width: 989px) {
+  .cesar-sug__layout--side {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--cc-space-8);
+  }
+}

@@ -1,0 +1,352 @@
+{%- comment -%}
+  component-slider.css es la que hace funcionar a slider-component; sin ella la
+  lista no se desplaza. cesar-slider-dots.js no se carga aquí: theme.liquid ya
+  lo incluye para todo el tema.
+{%- endcomment -%}
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'cesar-suggested.css' | asset_url | stylesheet_tag }}
+{{ 'cesar-slider-dots.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Productos sugeridos con el titular en una columna y el carrusel en la otra.
+
+  Los productos salen de una colección que elige el comerciante, no de las
+  recomendaciones automáticas: esta sección es la selección editorial de la
+  ficha. Para las automáticas ya está "Productos relacionados".
+{%- endcomment -%}
+
+{%- liquid
+  assign productos = section.settings.collection.products
+  assign total = section.settings.collection.products_count | default: 0
+  if total > section.settings.products_to_show
+    assign total = section.settings.products_to_show
+  endif
+-%}
+
+{%- capture cesar_style -%}
+  {% render 'cesar-section-style', s: section.settings %}
+  {% if section.settings.limit_width %}--cesar-sug-max: {{ section.settings.max_width }}px;{% endif %}
+  {% if section.settings.arrow_bg != blank %}--cesar-sug-arrow-bg: {{ section.settings.arrow_bg }};{% endif %}
+  {% if section.settings.arrow_icon != blank %}--cesar-sug-arrow-icon: {{ section.settings.arrow_icon }};{% endif %}
+{%- endcapture -%}
+
+<div
+  class="cesar-sug cesar-sec cc-section color-{{ section.settings.color_scheme }}"
+  {% if cesar_style != blank %}style="{{ cesar_style | strip_newlines | strip }}"{% endif %}
+>
+  <div class="cesar-sug__container cc-container{% if section.settings.limit_width %} cesar-sug__container--limited{% endif %}">
+    <div class="cesar-sug__layout cesar-sug__layout--{{ section.settings.heading_position }}">
+      {%- if section.settings.heading != blank or section.settings.text != blank -%}
+        <div class="cesar-sug__intro cesar-sec--align-{{ section.settings.text_alignment }}">
+          {%- if section.settings.heading != blank -%}
+            <h2 class="cesar-sug__heading">{{ section.settings.heading }}</h2>
+          {%- endif -%}
+
+          {%- if section.settings.text != blank -%}
+            <div class="cesar-sug__text rte">{{ section.settings.text }}</div>
+          {%- endif -%}
+
+          {%- if section.settings.button_label != blank -%}
+            <a href="{{ section.settings.button_link | default: '#' }}" class="cesar-sug__button">
+              {{ section.settings.button_label }}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="cesar-sug__slider">
+        {%- if productos.size > 0 -%}
+          <slider-component class="slider-mobile-gutter">
+            {%- comment -%}
+              Las flechas van dentro del viewport para poder centrarse sobre las
+              cards. Fuera de él sólo podrían alinearse con la fila de puntos.
+            {%- endcomment -%}
+            <div class="cesar-slider__viewport">
+              <ul
+                id="Slider-{{ section.id }}"
+                data-id="{{ section.id }}"
+                class="grid product-grid cesar-slider grid--{{ section.settings.columns_mobile }}-col-tablet-down slider slider--desktop slider--tablet"
+                style="--cc-cards: {{ section.settings.columns_desktop }};"
+                role="list"
+                aria-label="{{ 'general.slider.name' | t }}"
+              >
+                {%- assign skip_card_product_styles = false -%}
+                {%- for producto in productos limit: section.settings.products_to_show -%}
+                  <li id="Slide-{{ section.id }}-{{ forloop.index }}" class="grid__item slider__slide">
+                    {% render 'card-product',
+                      card_product: producto,
+                      media_aspect_ratio: section.settings.image_ratio,
+                      show_secondary_image: section.settings.show_secondary_image,
+                      show_vendor: section.settings.show_vendor,
+                      show_rating: section.settings.show_rating,
+                      skip_styles: skip_card_product_styles
+                    %}
+                  </li>
+                  {%- assign skip_card_product_styles = true -%}
+                {%- endfor -%}
+              </ul>
+
+              <button
+                type="button"
+                class="slider-button slider-button--prev cesar-slider__arrow cesar-slider__arrow--prev"
+                name="previous"
+                aria-label="{{ 'general.slider.previous_slide' | t }}"
+                aria-controls="Slider-{{ section.id }}"
+              >
+                <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+              </button>
+              <button
+                type="button"
+                class="slider-button slider-button--next cesar-slider__arrow cesar-slider__arrow--next"
+                name="next"
+                aria-label="{{ 'general.slider.next_slide' | t }}"
+                aria-controls="Slider-{{ section.id }}"
+              >
+                <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+              </button>
+            </div>
+
+            {%- comment -%}
+              Con todo a la vista no hay nada que paginar, así que los puntos
+              sobran y sólo añadirían ruido.
+            {%- endcomment -%}
+            {%- if total > section.settings.columns_desktop -%}
+              <div class="slider-buttons">
+                <cesar-slider-dots></cesar-slider-dots>
+              </div>
+            {%- endif -%}
+          </slider-component>
+        {%- else -%}
+          <p class="cesar-sug__empty">
+            {{ 'onboarding.product_title' | t | default: 'Elige una colección en los ajustes de la sección.' }}
+          </p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cesar · Sugeridos",
+  "tag": "section",
+  "class": "cesar-suggested-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Titular",
+      "default": "Pairs Great With"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto bajo el titular"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Botón"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Enlace del botón"
+    },
+    {
+      "type": "select",
+      "id": "heading_position",
+      "label": "Posición del titular",
+      "options": [
+        { "value": "side", "label": "A un lado del carrusel" },
+        { "value": "top", "label": "Encima del carrusel" }
+      ],
+      "default": "side"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Alineación del texto",
+      "options": [
+        { "value": "left", "label": "Izquierda" },
+        { "value": "center", "label": "Centro" },
+        { "value": "right", "label": "Derecha" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Productos"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Colección",
+      "info": "Los productos que se muestran. Para recomendaciones automáticas usa la sección Productos relacionados."
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "label": "Productos a mostrar",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "label": "Cards visibles en escritorio",
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Cards visibles en móvil",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Proporción de la imagen",
+      "options": [
+        { "value": "adapt", "label": "La de la imagen" },
+        { "value": "portrait", "label": "Vertical" },
+        { "value": "square", "label": "Cuadrada" }
+      ],
+      "default": "adapt"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "label": "Mostrar la segunda imagen al pasar el ratón",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Mostrar valoraciones",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Mostrar la marca",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Ancho"
+    },
+    {
+      "type": "checkbox",
+      "id": "limit_width",
+      "label": "Limitar el ancho del contenido",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 800,
+      "max": 2000,
+      "step": 20,
+      "unit": "px",
+      "label": "Ancho máximo",
+      "default": 1400
+    },
+    {
+      "type": "header",
+      "content": "Colores y tamaños"
+    },
+    {
+      "type": "paragraph",
+      "content": "Todos opcionales. Vacíos o en 0, la sección usa su esquema de color y la escala tipográfica del tema. Al cambiarlos comprueba que el texto siga leyéndose sobre el fondo."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Fondo de la sección"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Titular"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Texto"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Fondo de las cards"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Fondo del botón"
+    },
+    {
+      "type": "color",
+      "id": "button_text",
+      "label": "Texto del botón"
+    },
+    {
+      "type": "color",
+      "id": "arrow_bg",
+      "label": "Fondo de las flechas"
+    },
+    {
+      "type": "color",
+      "id": "arrow_icon",
+      "label": "Icono de las flechas"
+    },
+    {
+      "type": "range",
+      "id": "heading_px",
+      "min": 0,
+      "max": 140,
+      "step": 2,
+      "unit": "px",
+      "label": "Tamaño del titular",
+      "default": 0,
+      "info": "0 = el del tema."
+    },
+    {
+      "type": "range",
+      "id": "text_px",
+      "min": 0,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño del texto",
+      "default": 0,
+      "info": "0 = el del tema."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cesar · Sugeridos"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["product", "index", "page", "collection"]
+  }
+}
+{% endschema %}

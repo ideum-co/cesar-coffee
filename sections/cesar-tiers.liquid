@@ -5,7 +5,11 @@
   tema; con él se limita y se centra. Se pasa como variable en línea en vez de
   una clase por cada valor posible.
 {%- endcomment -%}
-<div class="cesar-tiers cc-section color-{{ section.settings.color_scheme }}">
+{%- capture cesar_style -%}{% render 'cesar-section-style', s: section.settings %}{%- endcapture -%}
+<div
+  class="cesar-tiers cesar-sec cc-section color-{{ section.settings.color_scheme }}"
+  {% if cesar_style != blank %}style="{{ cesar_style | strip_newlines | strip }}"{% endif %}
+>
   <div
     class="cc-container{% if section.settings.limit_width %} cesar-tiers__container--limited{% endif %}"
     {% if section.settings.limit_width %}
@@ -135,6 +139,27 @@
       "label": "Ancho máximo",
       "default": 1200,
       "info": "Sólo se aplica con la opción anterior activada."
+    },
+    {
+      "type": "header",
+      "content": "Titular de la sección"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Color del titular",
+      "info": "Vacío, usa el del esquema de color."
+    },
+    {
+      "type": "range",
+      "id": "heading_px",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Tamaño del titular",
+      "default": 0,
+      "info": "0 = el del tema."
     }
   ],
   "blocks": [

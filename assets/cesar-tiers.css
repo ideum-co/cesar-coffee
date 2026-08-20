@@ -127,3 +127,16 @@
   max-width: var(--cesar-tiers-max, none);
   margin-inline: auto;
 }
+
+/* ---------- Titular de la sección ----------
+   Sobre .cc-h2, que ya fija color y tamaño de marca. La regla de color lleva
+   la misma reserva, y la de tamaño va tras un selector de atributo: sin ajuste
+   guardado no aplica y manda la escala del tema. */
+
+.cesar-tiers.cesar-sec .cesar-tiers__heading {
+  color: var(--cesar-sec-heading, var(--cc-brown-700));
+}
+
+.cesar-tiers.cesar-sec[style*='--cesar-sec-heading-size'] .cesar-tiers__heading {
+  font-size: var(--cesar-sec-heading-size);
+}
