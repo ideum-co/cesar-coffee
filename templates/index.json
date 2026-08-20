@@ -227,59 +227,6 @@
         "color_scheme": "scheme-1"
       }
     },
-    "image_banner_Bj9xVb": {
-      "type": "image-banner",
-      "blocks": {
-        "heading_KAymUe": {
-          "type": "heading",
-          "settings": {
-            "heading": "Never run out",
-            "heading_size": "hxxl",
-            "color": ""
-          }
-        },
-        "text_TkG4tq": {
-          "type": "text",
-          "settings": {
-            "text": "Choose your tier, set your frequency, and skip or pause anytime. Fresh coffee on your schedule, not ours.",
-            "text_style": "body",
-            "color": "",
-            "text_size": "md"
-          }
-        },
-        "buttons_BQWFm3": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Start Your Subscription",
-            "button_link_1": "",
-            "button_style_secondary_1": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "heading_KAymUe",
-        "text_TkG4tq",
-        "buttons_BQWFm3"
-      ],
-      "name": "t:sections.image-banner.presets.name",
-      "settings": {
-        "image": "shopify://shop_images/banner-2.webp",
-        "image_overlay_opacity": 0,
-        "image_height": "large",
-        "image_behavior": "none",
-        "desktop_content_position": "middle-center",
-        "desktop_content_alignment": "center",
-        "show_text_box": true,
-        "color_scheme": "scheme-2",
-        "stack_images_on_mobile": true,
-        "mobile_content_alignment": "center",
-        "show_text_below": false,
-        "transparent_text_box": false
-      }
-    },
     "cesar_feature_banner_GHpwfc": {
       "type": "cesar-feature-banner",
       "blocks": {
@@ -288,7 +235,7 @@
           "settings": {
             "heading": "The Bourbon Rosado Flight",
             "text_size": "lg",
-            "color": "#2D1206"
+            "color": "#2d1206"
           }
         },
         "caption_KnBepe": {
@@ -296,7 +243,7 @@
           "settings": {
             "caption": "Build your plan, save 10%",
             "text_size": "md",
-            "color": "#2D1206"
+            "color": "#2d1206"
           }
         },
         "text_QTR6Fd": {
@@ -304,7 +251,7 @@
           "settings": {
             "text": "<p>Choose your tier, set your frequency, and skip or pause anytime. Fresh coffee on your schedule, not ours.</p>",
             "text_size": "md",
-            "color": "#2D1206"
+            "color": "#2d1206"
           }
         },
         "buttons_jyViay": {
@@ -312,8 +259,8 @@
           "settings": {
             "button_label_1": "Start Your Subscription",
             "button_link_1": "",
-            "button_bg_1": "#2D1206",
-            "button_text_1": "#FFFFFF",
+            "button_bg_1": "#2d1206",
+            "button_text_1": "#ffffff",
             "button_label_2": "",
             "button_link_2": "",
             "button_bg_2": "",
@@ -483,7 +430,6 @@
     "the_range",
     "flight_banner",
     "origin_and_roast",
-    "image_banner_Bj9xVb",
     "cesar_feature_banner_GHpwfc",
     "explore",
     "trade"
