@@ -1,0 +1,158 @@
+/**
+ * Vídeo a todo el ancho con portada y botón de reproducción propio.
+ */
+
+.cesar-video__container--limited {
+  max-width: var(--cesar-video-max, none);
+  margin-inline: auto;
+  padding-inline: var(--cc-gutter);
+}
+
+/* ---------- Texto ---------- */
+
+.cesar-video__intro {
+  padding-inline: var(--cc-gutter);
+  padding-bottom: var(--cc-space-8);
+}
+
+.cesar-video__container--limited .cesar-video__intro {
+  padding-inline: 0;
+}
+
+.cesar-video__heading {
+  margin: 0;
+  font-family: var(--cc-font-sans, var(--cc-fallback-sans));
+  font-weight: var(--cc-font-heading-weight-black, 800);
+  font-size: var(--cesar-sec-heading-size, var(--cc-text-h2));
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--cesar-sec-heading, var(--cc-brown-700));
+}
+
+.cesar-video__text {
+  margin-top: var(--cc-space-4);
+  font-size: var(--cesar-sec-text-size, var(--cc-text-body));
+  line-height: 1.55;
+  color: var(--cesar-sec-text, var(--cc-text));
+}
+
+/* ---------- Marco del vídeo ---------- */
+
+.cesar-video__media {
+  position: relative;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--cc-brown-900);
+}
+
+.cesar-video__media--wide {
+  aspect-ratio: 21 / 9;
+}
+
+.cesar-video__media--video {
+  aspect-ratio: 16 / 9;
+}
+
+/* dvh y no vh: en móvil vh cuenta la barra del navegador y recorta la sección. */
+.cesar-video__media--screen {
+  height: 100dvh;
+}
+
+@supports not (height: 100dvh) {
+  .cesar-video__media--screen {
+    height: 100vh;
+  }
+}
+
+/* deferred-media sustituye el botón por el reproductor al pulsar. El iframe y
+   el vídeo tienen que llenar el marco, no quedarse con su tamaño de origen. */
+.cesar-video__media iframe,
+.cesar-video__media video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ---------- Portada ---------- */
+
+.cesar-video__poster {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.cesar-video__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* cover: la foto llena el marco aunque no coincida la proporción */
+  object-fit: cover;
+  object-position: center;
+}
+
+.cesar-video__poster:focus-visible {
+  outline: 3px solid var(--cesar-video-play-bg, var(--cc-yellow));
+  outline-offset: -3px;
+}
+
+/* ---------- Botón de reproducción ---------- */
+
+.cesar-video__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cc-space-3);
+  /* mínimo táctil */
+  min-height: 44px;
+  padding: var(--cc-space-3) var(--cc-space-6);
+  border-radius: var(--cc-radius-pill);
+  background-color: var(--cesar-video-play-bg, var(--cc-yellow));
+  color: var(--cesar-video-play-text, var(--cc-brown-900));
+  font-size: var(--cesar-video-play-size, var(--cc-text-body-lg));
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  transition:
+    transform var(--cc-duration) var(--cc-ease),
+    box-shadow var(--cc-duration) var(--cc-ease);
+}
+
+/* La escala se compone con el centrado: sin repetir el translate, el botón
+   saltaría a la esquina superior izquierda al pasar el ratón. */
+.cesar-video__poster:hover .cesar-video__play,
+.cesar-video__poster:focus-visible .cesar-video__play {
+  transform: translate(-50%, -50%) scale(1.06);
+  box-shadow: 0 6px 24px rgba(20, 8, 3, 0.28);
+}
+
+.cesar-video__play-icon {
+  width: 10px;
+  height: 12px;
+  flex: 0 0 auto;
+}
+
+@media screen and (max-width: 749px) {
+  /* A pantalla completa en móvil el vídeo tapa toda la ventana y se pierde el
+     contexto de la página; se limita a una proporción alta pero navegable. */
+  .cesar-video__media--screen {
+    height: auto;
+    aspect-ratio: 3 / 4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cesar-video__play {
+    transition: none;
+  }
+}

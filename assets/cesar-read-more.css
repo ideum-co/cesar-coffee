@@ -18,7 +18,6 @@
   max-height: calc(var(--cesar-readmore-lines, 1) * 1.55em);
   max-height: calc(var(--cesar-readmore-lines, 1) * 1lh);
   overflow: hidden;
-  transition: max-height 0.45s var(--cc-ease, cubic-bezier(0.22, 0.61, 0.36, 1));
 }
 
 /* El margen superior del primer párrafo empujaría la línea visible fuera del
@@ -89,7 +88,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cesar-readmore--ready .cesar-readmore__content,
   .cesar-readmore__chevron {
     transition: none;
   }

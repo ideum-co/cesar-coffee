@@ -1,0 +1,218 @@
+{{ 'cesar-product-faq.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'cesar-accordion.js' | asset_url }}" defer="defer"></script>
+
+{%- comment -%}
+  Preguntas frecuentes de la ficha: titular a la izquierda y acordeón a la
+  derecha. Pensada para ir debajo de la información de producto, a todo el
+  ancho, aunque el ancho de contenido se puede limitar desde los ajustes.
+{%- endcomment -%}
+
+{%- capture cesar_style -%}
+  {% render 'cesar-section-style', s: section.settings %}
+  {% if section.settings.limit_width %}--cesar-faq-max: {{ section.settings.max_width }}px;{% endif %}
+  {% if section.settings.divider_color != blank %}--cesar-faq-divider: {{ section.settings.divider_color }};{% endif %}
+  {% if section.settings.question_px > 0 %}--cesar-faq-question-size: {{ section.settings.question_px }}px;{% endif %}
+{%- endcapture -%}
+
+<div
+  class="cesar-faq cesar-sec cc-section color-{{ section.settings.color_scheme }}"
+  {% if cesar_style != blank %}style="{{ cesar_style | strip_newlines | strip }}"{% endif %}
+>
+  <div class="cesar-faq__container cc-container{% if section.settings.limit_width %} cesar-faq__container--limited{% endif %}">
+    {%- if section.settings.heading != blank -%}
+      <div class="cesar-faq__intro">
+        <h2 class="cesar-faq__heading">{{ section.settings.heading }}</h2>
+
+        {%- if section.settings.text != blank -%}
+          <div class="cesar-faq__text rte">{{ section.settings.text }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <cesar-accordion
+        class="cesar-faq__list"
+        {% if section.settings.one_at_a_time %}data-one-at-a-time{% endif %}
+      >
+        {%- for block in section.blocks -%}
+          {%- if block.settings.question != blank -%}
+            <details
+              class="cesar-faq__item"
+              {{ block.shopify_attributes }}
+              {% if block.settings.open_by_default %}open{% endif %}
+            >
+              <summary class="cesar-faq__question">
+                <span class="cesar-faq__question-text">{{ block.settings.question }}</span>
+
+                {%- comment -%}
+                  Dos trazos y no un icono por estado: al abrir sólo gira el
+                  trazo vertical, así el más se convierte en menos con un giro
+                  en vez de un salto entre dos iconos distintos.
+                {%- endcomment -%}
+                <span class="cesar-faq__icon" aria-hidden="true">
+                  <span class="cesar-faq__icon-bar"></span>
+                  <span class="cesar-faq__icon-bar cesar-faq__icon-bar--vertical"></span>
+                </span>
+              </summary>
+
+              <div class="cesar-faq__panel" data-accordion-panel>
+                <div class="cesar-faq__answer rte">{{ block.settings.answer }}</div>
+              </div>
+            </details>
+          {%- endif -%}
+        {%- endfor -%}
+      </cesar-accordion>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cesar · Preguntas ficha",
+  "tag": "section",
+  "class": "cesar-product-faq-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Titular",
+      "default": "More About This Product"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto bajo el titular"
+    },
+    {
+      "type": "checkbox",
+      "id": "one_at_a_time",
+      "label": "Abrir sólo una pregunta a la vez",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Ancho"
+    },
+    {
+      "type": "checkbox",
+      "id": "limit_width",
+      "label": "Limitar el ancho del contenido",
+      "default": false,
+      "info": "Sin marcar, la sección ocupa todo el ancho de la pantalla."
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 800,
+      "max": 2000,
+      "step": 20,
+      "unit": "px",
+      "label": "Ancho máximo",
+      "default": 1400
+    },
+    {
+      "type": "header",
+      "content": "Colores y tamaños"
+    },
+    {
+      "type": "paragraph",
+      "content": "Todos opcionales. Vacíos o en 0, la sección usa su esquema de color y la escala tipográfica del tema."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Fondo"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Titular"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Texto y respuestas"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Líneas separadoras"
+    },
+    {
+      "type": "range",
+      "id": "heading_px",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Tamaño del titular",
+      "default": 0,
+      "info": "0 = el del tema."
+    },
+    {
+      "type": "range",
+      "id": "question_px",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño de las preguntas",
+      "default": 0,
+      "info": "0 = el del tema."
+    },
+    {
+      "type": "range",
+      "id": "text_px",
+      "min": 0,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño de las respuestas",
+      "default": 0,
+      "info": "0 = el del tema."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Pregunta",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Pregunta",
+          "default": "How should I store this?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Respuesta",
+          "default": "<p>Keep the bag sealed, somewhere cool and dark. Away from the fridge — coffee picks up every smell around it.</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_by_default",
+          "label": "Abierta al cargar la página",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cesar · Preguntas ficha",
+      "blocks": [
+        { "type": "question" },
+        { "type": "question" },
+        { "type": "question" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -67,35 +67,23 @@ class CesarReadMore extends HTMLElement {
     if (this.labelMore) this.labelMore.hidden = open;
     if (this.labelLess) this.labelLess.hidden = !open;
 
-    if (!animate || reduce) {
-      // Abierto se suelta el tope; cerrado se devuelve el control a la hoja de
-      // estilos, que es donde vive el alto recortado.
-      this.content.style.maxHeight = open ? 'none' : '';
-      return;
-    }
+    // El estado final se fija ya, no al acabar la animación. Abierto se suelta
+    // el tope —si no, un cambio de ancho recortaría el texto contra un alto
+    // medido para el ancho anterior— y cerrado se devuelve el control a la hoja
+    // de estilos, que es donde vive el alto recortado.
+    this.content.style.maxHeight = open ? 'none' : '';
 
-    this.content.style.maxHeight = `${desde}px`;
+    const hasta = this.content.getBoundingClientRect().height;
+    if (!animate || reduce || desde === hasta || typeof this.content.animate !== 'function') return;
 
-    // Doble rAF: el primero deja asentar el valor de partida y el segundo
-    // aplica el destino. Con uno solo el navegador agrupa ambos cambios en el
-    // mismo fotograma y no hay transición que ver.
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        this.content.style.maxHeight = open ? `${this.content.scrollHeight}px` : '';
-      });
-    });
-
-    if (open) {
-      // Al terminar se suelta el tope: si no, un cambio posterior de ancho
-      // recortaría el texto contra un alto medido para el ancho anterior.
-      this.content.addEventListener(
-        'transitionend',
-        (event) => {
-          if (event.propertyName === 'max-height' && this.open) this.content.style.maxHeight = 'none';
-        },
-        { once: true }
-      );
-    }
+    // Se anima con la API de animaciones y no con requestAnimationFrame: en una
+    // pestaña de fondo rAF no llega a ejecutarse, y entonces el bloque se
+    // quedaba a medio abrir. Aquí lo único que se pierde es el efecto.
+    this.content.getAnimations().forEach((a) => a.cancel());
+    this.content.animate(
+      { maxHeight: [`${desde}px`, `${hasta}px`] },
+      { duration: 450, easing: 'cubic-bezier(0.22, 0.61, 0.36, 1)' }
+    );
   }
 }
 

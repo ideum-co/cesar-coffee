@@ -1,0 +1,144 @@
+/**
+ * Preguntas frecuentes de la ficha: titular a la izquierda, acordeón a la
+ * derecha.
+ */
+
+.cesar-faq__container {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--cc-space-12);
+  align-items: start;
+}
+
+.cesar-faq__container--limited {
+  max-width: var(--cesar-faq-max, none);
+}
+
+.cesar-faq__heading {
+  margin: 0;
+  font-family: var(--cc-font-sans, var(--cc-fallback-sans));
+  font-weight: var(--cc-font-heading-weight-black, 800);
+  font-size: var(--cesar-sec-heading-size, var(--cc-text-h2));
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--cesar-sec-heading, var(--cc-brown-700));
+}
+
+.cesar-faq__text {
+  margin-top: var(--cc-space-4);
+  font-size: var(--cesar-sec-text-size, var(--cc-text-body));
+  line-height: 1.55;
+  color: var(--cesar-sec-text, var(--cc-text));
+}
+
+/* ---------- Acordeón ---------- */
+
+.cesar-faq__list {
+  display: block;
+}
+
+.cesar-faq__item {
+  border-top: 1px solid var(--cesar-faq-divider, var(--cc-border));
+}
+
+.cesar-faq__item:last-child {
+  border-bottom: 1px solid var(--cesar-faq-divider, var(--cc-border));
+}
+
+.cesar-faq__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--cc-space-6);
+  /* mínimo táctil de sobra, y aire suficiente para que la fila respire */
+  min-height: 56px;
+  padding-block: var(--cc-space-4);
+  cursor: pointer;
+  list-style: none;
+}
+
+/* Safari pinta su propio triángulo de details con este pseudo-elemento. */
+.cesar-faq__question::-webkit-details-marker {
+  display: none;
+}
+
+.cesar-faq__question:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: -2px;
+}
+
+.cesar-faq__question-text {
+  font-size: var(--cesar-faq-question-size, var(--cc-text-body));
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--cesar-sec-text, var(--cc-text));
+}
+
+/* ---------- Icono de más / menos ---------- */
+
+.cesar-faq__icon {
+  position: relative;
+  flex: 0 0 auto;
+  width: 14px;
+  height: 14px;
+  color: var(--cesar-sec-text, var(--cc-text));
+}
+
+.cesar-faq__icon-bar {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  margin-top: -0.75px;
+  background-color: currentColor;
+}
+
+/* Sólo gira el trazo vertical: el horizontal se queda, así el más se convierte
+   en menos con un giro continuo en vez de un cambio brusco de icono. */
+.cesar-faq__icon-bar--vertical {
+  transform: rotate(90deg);
+  transition: transform 0.35s var(--cc-ease, cubic-bezier(0.22, 0.61, 0.36, 1));
+}
+
+.cesar-faq__item[open] .cesar-faq__icon-bar--vertical {
+  transform: rotate(0deg);
+}
+
+/* ---------- Panel de respuesta ----------
+   El alto lo anima el script con la API de animaciones, no con transition: así
+   no hacen falta fotogramas para que el estado acabe siendo el correcto.
+   overflow oculto para que el texto no asome mientras se pliega. */
+
+.cesar-faq__panel {
+  overflow: hidden;
+}
+
+.cesar-faq__answer {
+  padding-bottom: var(--cc-space-6);
+  font-size: var(--cesar-sec-text-size, var(--cc-text-body));
+  line-height: 1.55;
+  color: var(--cesar-sec-text, var(--cc-text));
+  max-width: 68ch;
+}
+
+.cesar-faq__answer > :first-child {
+  margin-top: 0;
+}
+
+.cesar-faq__answer > :last-child {
+  margin-bottom: 0;
+}
+
+@media screen and (max-width: 989px) {
+  .cesar-faq__container {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--cc-space-8);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cesar-faq__icon-bar--vertical {
+    transition: none;
+  }
+}
