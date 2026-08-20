@@ -36,10 +36,19 @@
   if s.button_text != blank
     echo '--cesar-btn-text:' | append: s.button_text | append: ';'
   endif
+  if s.card_bg != blank
+    echo '--cesar-card-bg:' | append: s.card_bg | append: ';'
+  endif
   if s.heading_px != blank and s.heading_px > 0
     echo '--cesar-sec-heading-size:' | append: s.heading_px | append: 'px;'
   endif
   if s.text_px != blank and s.text_px > 0
     echo '--cesar-sec-text-size:' | append: s.text_px | append: 'px;'
+  endif
+  if s.price_px != blank and s.price_px > 0
+    echo '--cesar-sec-price-size:' | append: s.price_px | append: 'px;'
+  endif
+  if s.label_px != blank and s.label_px > 0
+    echo '--cesar-sec-label-size:' | append: s.label_px | append: 'px;'
   endif
 -%}

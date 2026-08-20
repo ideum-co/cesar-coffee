@@ -760,3 +760,26 @@ button.shopify-payment-button__button--unbranded {
 .cesar-sec[style*='--cesar-sec-text-size'] .header__heading-link {
   font-size: var(--cesar-sec-text-size);
 }
+
+/* ---- Tamaños del bloque de información de producto (PDP) ----
+   Mismo criterio que arriba: sin ajuste guardado la variable no existe, la
+   regla no aplica y manda la escala del tema. */
+
+.cesar-sec[style*='--cesar-sec-price-size'].product__info-container .price,
+.cesar-sec[style*='--cesar-sec-price-size'].product__info-container .price__container {
+  font-size: var(--cesar-sec-price-size);
+}
+
+.cesar-sec[style*='--cesar-sec-label-size'].product__info-container .form__label,
+.cesar-sec[style*='--cesar-sec-label-size'].product__info-container .product__text,
+.cesar-sec[style*='--cesar-sec-label-size'].product__info-container .product__sku,
+.cesar-sec[style*='--cesar-sec-label-size'].product__info-container .product-form__input label,
+.cesar-sec[style*='--cesar-sec-label-size'].product__info-container .quantity__input {
+  font-size: var(--cesar-sec-label-size);
+}
+
+/* Las cards de las secciones que llevan carrusel de producto heredan el mismo
+   ajuste de texto que la rejilla de colección. */
+.cesar-sec[style*='--cesar-sec-text-size'] .card-information .card__heading {
+  font-size: var(--cesar-sec-text-size);
+}

@@ -67,8 +67,10 @@
 <div
   class="color-{{ section.settings.color_scheme }} isolate gradient"
 >
+  {%- capture cesar_style -%}{% render 'cesar-section-style', s: section.settings %}{%- endcapture -%}
   <div
-    class="collection{% if section.settings.quick_add == 'bulk' %} collection-quick-add-bulk{% endif %} section-{{ section.id }}-padding{% if section.settings.full_width %} collection--full-width{% endif %}"
+    class="cesar-sec collection{% if section.settings.quick_add == 'bulk' %} collection-quick-add-bulk{% endif %} section-{{ section.id }}-padding{% if section.settings.full_width %} collection--full-width{% endif %}"
+    {% if cesar_style != blank %}style="{{ cesar_style | strip_newlines | strip }}"{% endif %}
     id="collection-{{ section.id }}"
     data-id="{{ section.id }}"
   >
@@ -590,6 +592,12 @@
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
       "default": 36
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Fondo de las cards de producto",
+      "info": "Vacío, las cards usan el esquema de color de producto del tema."
     }
   ],
   "presets": [

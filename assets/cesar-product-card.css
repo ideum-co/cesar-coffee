@@ -331,3 +331,16 @@
   margin: 0;
   inset: auto auto var(--cc-space-3) var(--cc-space-3);
 }
+
+/* ---------- Fondo de la card por sección ----------
+   El fondo lo pinta el esquema de color de producto del tema, a través de
+   .gradient. Se sobrescribe con la propiedad abreviada, no con background-color:
+   .gradient escribe un 'background' completo y dejar la imagen de degradado
+   encima taparía el color elegido.
+   Va tras un selector de atributo, así que sin ajuste la regla no aplica y la
+   card conserva el esquema de siempre. */
+
+.cesar-sec[style*='--cesar-card-bg'] .card--card,
+.cesar-sec[style*='--cesar-card-bg'] .card--standard .card__inner {
+  background: var(--cesar-card-bg);
+}
