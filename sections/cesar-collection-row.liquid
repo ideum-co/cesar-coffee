@@ -6,6 +6,25 @@
   Los colores y la alineación viajan como variables en línea, y sólo se escriben
   si tienen valor: sin tocarlas la sección sigue con su esquema de color.
 {%- endcomment -%}
+{%- liquid
+  comment
+    El origen de las cards. Si se pide el blog pero aún no hay ninguno elegido
+    —o el elegido está vacío— se siguen usando los bloques manuales: así la
+    sección nunca aparece en blanco mientras se termina de configurar.
+  endcomment
+  assign usar_blog = false
+  if section.settings.source == 'blog' and section.settings.blog != blank and section.settings.blog.articles_count > 0
+    assign usar_blog = true
+    assign articulos = section.settings.blog.articles
+    assign total_cards = section.settings.blog.articles_count
+    if total_cards > section.settings.articles_to_show
+      assign total_cards = section.settings.articles_to_show
+    endif
+  else
+    assign total_cards = section.blocks.size
+  endif
+-%}
+
 {%- capture row_style -%}
   {% if section.settings.bg_color != blank %}--cesar-sec-bg: {{ section.settings.bg_color }};{% endif %}
   {% if section.settings.heading_color != blank %}--cesar-sec-heading: {{ section.settings.heading_color }};{% endif %}
@@ -59,23 +78,49 @@
         role="list"
         aria-label="{{ 'general.slider.name' | t }}"
       >
-        {%- for block in section.blocks -%}
-          <li
-            id="Slide-{{ section.id }}-{{ forloop.index }}"
-            class="grid__item slider__slide"
-            {{ block.shopify_attributes }}
-          >
-            {% render 'cesar-image-card',
-              image: block.settings.image,
-              title: block.settings.title,
-              text: block.settings.text,
-              link_label: block.settings.link_label,
-              link: block.settings.link,
-              ratio: 'portrait',
-              sizes: '(min-width: 990px) 25vw, 70vw'
-            %}
-          </li>
-        {%- endfor -%}
+        {%- if usar_blog -%}
+          {%- for article in articulos limit: section.settings.articles_to_show -%}
+            {%- liquid
+              assign resumen = ''
+              if section.settings.show_excerpt
+                if article.excerpt != blank
+                  assign resumen = article.excerpt | strip_html | truncatewords: 18
+                else
+                  assign resumen = article.content | strip_html | truncatewords: 18
+                endif
+              endif
+            -%}
+            <li id="Slide-{{ section.id }}-{{ forloop.index }}" class="grid__item slider__slide">
+              {% render 'cesar-image-card',
+                image: article.image,
+                title: article.title,
+                text: resumen,
+                link_label: section.settings.article_button_label,
+                link: article.url,
+                ratio: 'portrait',
+                sizes: '(min-width: 990px) 25vw, 70vw'
+              %}
+            </li>
+          {%- endfor -%}
+        {%- else -%}
+          {%- for block in section.blocks -%}
+            <li
+              id="Slide-{{ section.id }}-{{ forloop.index }}"
+              class="grid__item slider__slide"
+              {{ block.shopify_attributes }}
+            >
+              {% render 'cesar-image-card',
+                image: block.settings.image,
+                title: block.settings.title,
+                text: block.settings.text,
+                link_label: block.settings.link_label,
+                link: block.settings.link,
+                ratio: 'portrait',
+                sizes: '(min-width: 990px) 25vw, 70vw'
+              %}
+            </li>
+          {%- endfor -%}
+        {%- endif -%}
       </ul>
           <button
             type="button"
@@ -97,7 +142,7 @@
           </button>
       </div>
 
-      {%- if section.blocks.size > 1 -%}
+      {%- if total_cards > 1 -%}
         <div class="slider-buttons">
           {%- comment -%} Indicador común de todos los carruseles {%- endcomment -%}
           <cesar-slider-dots></cesar-slider-dots>
@@ -164,6 +209,54 @@
         }
       ],
       "default": "1"
+    },
+    {
+      "type": "header",
+      "content": "Origen de las cards"
+    },
+    {
+      "type": "select",
+      "id": "source",
+      "label": "Qué se muestra",
+      "options": [
+        {
+          "value": "blog",
+          "label": "Entradas del blog"
+        },
+        {
+          "value": "blocks",
+          "label": "Cards escritas a mano"
+        }
+      ],
+      "default": "blog",
+      "info": "Con \"Entradas del blog\", cada card usa la imagen destacada de fondo, el título de la entrada y un botón que lleva a ella. Mientras no elijas blog se siguen viendo las cards escritas a mano."
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Blog"
+    },
+    {
+      "type": "range",
+      "id": "articles_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "label": "Entradas a mostrar",
+      "default": 6
+    },
+    {
+      "type": "text",
+      "id": "article_button_label",
+      "label": "Texto del botón de la entrada",
+      "default": "Read the story"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_excerpt",
+      "label": "Mostrar un resumen bajo el título",
+      "default": false,
+      "info": "En el diseño la card lleva sólo el título y el botón."
     },
     {
       "type": "color_scheme",
