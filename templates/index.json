@@ -234,14 +234,17 @@
           "type": "heading",
           "settings": {
             "heading": "Never run out",
-            "heading_size": "hxxl"
+            "heading_size": "hxxl",
+            "color": ""
           }
         },
         "text_TkG4tq": {
           "type": "text",
           "settings": {
             "text": "Choose your tier, set your frequency, and skip or pause anytime. Fresh coffee on your schedule, not ours.",
-            "text_style": "body"
+            "text_style": "body",
+            "color": "",
+            "text_size": "md"
           }
         },
         "buttons_BQWFm3": {
@@ -273,7 +276,65 @@
         "color_scheme": "scheme-2",
         "stack_images_on_mobile": true,
         "mobile_content_alignment": "center",
-        "show_text_below": false
+        "show_text_below": false,
+        "transparent_text_box": false
+      }
+    },
+    "cesar_feature_banner_GHpwfc": {
+      "type": "cesar-feature-banner",
+      "blocks": {
+        "heading_k8ffVC": {
+          "type": "heading",
+          "settings": {
+            "heading": "The Bourbon Rosado Flight",
+            "text_size": "lg",
+            "color": "#2D1206"
+          }
+        },
+        "caption_KnBepe": {
+          "type": "caption",
+          "settings": {
+            "caption": "Build your plan, save 10%",
+            "text_size": "md",
+            "color": "#2D1206"
+          }
+        },
+        "text_QTR6Fd": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Choose your tier, set your frequency, and skip or pause anytime. Fresh coffee on your schedule, not ours.</p>",
+            "text_size": "md",
+            "color": "#2D1206"
+          }
+        },
+        "buttons_jyViay": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Start Your Subscription",
+            "button_link_1": "",
+            "button_bg_1": "#2D1206",
+            "button_text_1": "#FFFFFF",
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_bg_2": "",
+            "button_text_2": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_k8ffVC",
+        "caption_KnBepe",
+        "text_QTR6Fd",
+        "buttons_jyViay"
+      ],
+      "name": "Cesar · Banner de cuerpo",
+      "settings": {
+        "image": "shopify://shop_images/banner-2.webp",
+        "height": "lg",
+        "content_alignment": "center",
+        "overlay_color": "#140803",
+        "overlay_opacity": 40,
+        "color_scheme": ""
       }
     },
     "explore": {
@@ -408,7 +469,7 @@
         "color_scheme": "scheme-3",
         "text_alignment": "left",
         "bg_color": "",
-        "heading_color": "#FDF5A6",
+        "heading_color": "#fdf5a6",
         "text_color": "",
         "button_bg": "",
         "button_text": ""
@@ -423,6 +484,7 @@
     "flight_banner",
     "origin_and_roast",
     "image_banner_Bj9xVb",
+    "cesar_feature_banner_GHpwfc",
     "explore",
     "trade"
   ]
