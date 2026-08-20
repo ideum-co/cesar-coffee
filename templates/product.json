@@ -104,12 +104,14 @@
         "padding_top": 24,
         "padding_bottom": 12,
         "bg_color": "",
-        "heading_color": "#2D1206",
-        "text_color": "#2D1206",
-        "button_bg": "#4E3625",
-        "button_text": "#FFFFFF",
-        "heading_px": 0,
-        "text_px": 0
+        "heading_color": "#2d1206",
+        "text_color": "#2d1206",
+        "button_bg": "#4e3625",
+        "button_text": "#ffffff",
+        "heading_px": 46,
+        "text_px": 0,
+        "price_px": 0,
+        "label_px": 0
       }
     },
     "product_features": {
@@ -172,8 +174,8 @@
         "products_to_show": 6,
         "title": "Pairs Great With",
         "heading_size": "h1",
-        "heading_alignment": "center",
-        "heading_color": "",
+        "heading_alignment": "left",
+        "heading_color": "#FDF5A6",
         "header_button_label": "",
         "header_button_link": "",
         "header_button_bg": "",
@@ -196,7 +198,8 @@
         "columns_mobile": "2",
         "swipe_on_mobile": true,
         "padding_top": 56,
-        "padding_bottom": 56
+        "padding_bottom": 56,
+        "card_bg": ""
       }
     },
     "tiers": {
@@ -269,7 +272,7 @@
           "type": "heading",
           "settings": {
             "heading": "Roasted to order. Every time.",
-            "heading_size": "h1"
+            "heading_size": "hxl"
           }
         },
         "text": {
@@ -307,7 +310,11 @@
         "show_vendor": false,
         "show_rating": true,
         "padding_top": 40,
-        "padding_bottom": 72
+        "padding_bottom": 72,
+        "bg_color": "",
+        "text_color": "",
+        "card_bg": "",
+        "text_px": 0
       }
     }
   },
