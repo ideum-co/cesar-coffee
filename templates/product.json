@@ -119,6 +119,56 @@
         "label_px": 0
       }
     },
+    "cesar_product_faq_UaBRNr": {
+      "type": "cesar-product-faq",
+      "blocks": {
+        "question_mydECY": {
+          "type": "question",
+          "settings": {
+            "question": "How should I store this?",
+            "answer": "<p>Keep the bag sealed, somewhere cool and dark. Away from the fridge — coffee picks up every smell around it.</p>",
+            "open_by_default": false
+          }
+        },
+        "question_DQWEzm": {
+          "type": "question",
+          "settings": {
+            "question": "How should I store this?",
+            "answer": "<p>Keep the bag sealed, somewhere cool and dark. Away from the fridge — coffee picks up every smell around it.</p>",
+            "open_by_default": false
+          }
+        },
+        "question_TNgbpk": {
+          "type": "question",
+          "settings": {
+            "question": "How should I store this?",
+            "answer": "<p>Keep the bag sealed, somewhere cool and dark. Away from the fridge — coffee picks up every smell around it.</p>",
+            "open_by_default": false
+          }
+        }
+      },
+      "block_order": [
+        "question_mydECY",
+        "question_DQWEzm",
+        "question_TNgbpk"
+      ],
+      "name": "Cesar · Preguntas ficha",
+      "settings": {
+        "heading": "More About This Product",
+        "text": "",
+        "one_at_a_time": true,
+        "limit_width": false,
+        "max_width": 1400,
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "divider_color": "",
+        "heading_px": 0,
+        "question_px": 0,
+        "text_px": 0,
+        "color_scheme": ""
+      }
+    },
     "product_features": {
       "type": "multicolumn",
       "blocks": {
@@ -240,7 +290,7 @@
             "button_label": "See Our Farms",
             "button_link": "",
             "bg_color": "",
-            "text_color": "#FFFFFF",
+            "text_color": "#ffffff",
             "button_bg": "",
             "button_text": ""
           }
@@ -274,6 +324,31 @@
         "color_scheme": "scheme-3",
         "limit_width": true,
         "max_width": 1200
+      }
+    },
+    "cesar_video_ttK3ca": {
+      "type": "cesar-video",
+      "name": "Cesar · Vídeo",
+      "settings": {
+        "cover_image": "shopify://shop_images/banner-3.webp",
+        "description": "",
+        "enable_video_looping": false,
+        "ratio": "video",
+        "play_label": "Play",
+        "play_bg": "",
+        "play_text": "",
+        "play_px": 0,
+        "heading": "",
+        "text": "",
+        "text_alignment": "left",
+        "limit_width": false,
+        "max_width": 1400,
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "heading_px": 0,
+        "text_px": 0,
+        "color_scheme": ""
       }
     },
     "roasted_to_order": {
@@ -331,9 +406,11 @@
   },
   "order": [
     "main",
+    "cesar_product_faq_UaBRNr",
     "product_features",
     "pairs_with",
     "tiers",
+    "cesar_video_ttK3ca",
     "roasted_to_order",
     "recommendations"
   ]
