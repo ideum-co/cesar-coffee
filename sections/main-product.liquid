@@ -200,9 +200,57 @@
                   </p>
                 {%- when 'description' -%}
                   {%- if product.description != blank -%}
-                    <div class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
-                      {{ product.description }}
-                    </div>
+                    {%- if block.settings.enable_read_more -%}
+                      {{ 'cesar-read-more.css' | asset_url | stylesheet_tag }}
+                      <script src="{{ 'cesar-read-more.js' | asset_url }}" defer="defer"></script>
+                      <cesar-read-more
+                        class="cesar-readmore"
+                        style="--cesar-readmore-lines: {{ block.settings.collapsed_lines }};"
+                        {% if block.settings.collapsed_lines > 1 %}data-fade{% endif %}
+                        {{ block.shopify_attributes }}
+                      >
+                        <div
+                          id="ProductDescription-{{ section.id }}"
+                          class="product__description rte quick-add-hidden cesar-readmore__content"
+                          data-readmore-content
+                        >
+                          {{ product.description }}
+                        </div>
+                        {%- comment -%}
+                          Nace oculto y lo destapa el script sólo si el texto no cabe: un
+                          botón visible que no despliega nada es peor que no tenerlo.
+                        {%- endcomment -%}
+                        <button
+                          type="button"
+                          class="cesar-readmore__toggle"
+                          aria-expanded="false"
+                          aria-controls="ProductDescription-{{ section.id }}"
+                          data-readmore-toggle
+                          hidden
+                        >
+                          <span class="cesar-readmore__label" data-readmore-more>
+                            {{- block.settings.read_more_label | default: 'Ver más' -}}
+                          </span>
+                          <span class="cesar-readmore__label" data-readmore-less hidden>
+                            {{- block.settings.read_less_label | default: 'Ver menos' -}}
+                          </span>
+                          <svg class="cesar-readmore__chevron" viewBox="0 0 12 8" aria-hidden="true" focusable="false">
+                            <path
+                              d="M1 1.5 6 6.5 11 1.5"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="1.75"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                          </svg>
+                        </button>
+                      </cesar-read-more>
+                    {%- else -%}
+                      <div class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
+                        {{ product.description }}
+                      </div>
+                    {%- endif -%}
                   {%- endif -%}
                 {%- when 'sku' -%}
                   <p
@@ -973,7 +1021,41 @@
     {
       "type": "description",
       "name": "t:sections.main-product.blocks.description.name",
-      "limit": 1
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Ver más"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_read_more",
+          "label": "Recortar la descripción",
+          "default": true,
+          "info": "Muestra sólo las primeras líneas y despliega el resto con un botón."
+        },
+        {
+          "type": "range",
+          "id": "collapsed_lines",
+          "min": 1,
+          "max": 6,
+          "step": 1,
+          "label": "Líneas visibles",
+          "default": 1
+        },
+        {
+          "type": "text",
+          "id": "read_more_label",
+          "label": "Texto para desplegar",
+          "default": "Ver más"
+        },
+        {
+          "type": "text",
+          "id": "read_less_label",
+          "label": "Texto para plegar",
+          "default": "Ver menos"
+        }
+      ]
     },
     {
       "type": "share",

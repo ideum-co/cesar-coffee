@@ -95,12 +95,46 @@
   margin: 0;
 }
 
+/* ---------- Fila de compra: cantidad + añadir al carrito ----------
+   Los dos van en la misma fila del grid y comparten un alto fijo. Antes cada
+   uno resolvía su propio alto (el botón crecía con el relleno de Dawn y la
+   cantidad se quedaba en su mínimo), así que quedaban desnivelados aunque
+   estuvieran en la misma línea. */
+
+.product__info-container > .product-form__quantity,
+.product__info-container > .cesar-buybox {
+  /* Al tope de la fila: los dos controles miden lo mismo, así que coinciden
+     arriba y abajo. El resto del bloque de compra (recogida en tienda, avisos)
+     cuelga por debajo sin estirar el botón. */
+  align-self: start;
+}
+
 .product__info-container > .product-form__quantity {
   grid-column: 1;
 }
 
-.product__info-container > div:has(> .product-form) {
+.product__info-container > .cesar-buybox {
   grid-column: 2;
+}
+
+.product-form__quantity .quantity,
+.cesar-buybox .product-form__submit {
+  box-sizing: border-box;
+  height: var(--cesar-buy-height, 56px);
+  min-height: var(--cesar-buy-height, 56px);
+  padding-block: 0;
+}
+
+/* product-form es un elemento propio de Dawn. Sin display declarado es inline,
+   y la línea base metía unos píxeles de desfase bajo el botón que descuadraban
+   la fila. */
+.cesar-buybox product-form,
+.cesar-buybox .product-form {
+  display: block;
+}
+
+.cesar-buybox .product-form__buttons {
+  margin: 0;
 }
 
 /* ---------- Selector de talla ---------- */

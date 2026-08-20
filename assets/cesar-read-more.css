@@ -1,0 +1,96 @@
+/**
+ * Texto recortado a N líneas con botón de despliegue.
+ *
+ * El recorte lo aplica sólo la clase --ready, que pone el script al arrancar.
+ * Sin JavaScript el texto se ve entero: es preferible una ficha larga a una
+ * descripción cortada con un botón que no responde.
+ */
+
+.cesar-readmore {
+  display: block;
+}
+
+.cesar-readmore--ready .cesar-readmore__content {
+  /* La unidad lh es exactamente el alto de una línea, así que el corte cae
+     siempre entre renglones y no parte una letra por la mitad.
+     La primera declaración es la reserva para navegadores sin lh: se descarta
+     sola en cuanto la segunda es válida. */
+  max-height: calc(var(--cesar-readmore-lines, 1) * 1.55em);
+  max-height: calc(var(--cesar-readmore-lines, 1) * 1lh);
+  overflow: hidden;
+  transition: max-height 0.45s var(--cc-ease, cubic-bezier(0.22, 0.61, 0.36, 1));
+}
+
+/* El margen superior del primer párrafo empujaría la línea visible fuera del
+   recorte, dejando ver un hueco en vez del texto. */
+.cesar-readmore__content > :first-child {
+  margin-top: 0;
+}
+
+/* ---------- Difuminado del corte ----------
+   Sólo a partir de dos líneas: con una sola el degradado caería sobre el único
+   renglón visible y lo dejaría a medio leer. */
+
+@supports (mask-image: linear-gradient(#000, transparent)) {
+  .cesar-readmore--ready[data-fade]:not([open]) .cesar-readmore__content {
+    mask-image: linear-gradient(to bottom, #000 calc(100% - 1.4em), transparent 100%);
+  }
+}
+
+/* ---------- Botón ---------- */
+
+.cesar-readmore__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cc-space-2, 8px);
+  margin-top: var(--cc-space-2, 8px);
+  /* mínimo táctil sin engordar la caja: el relleno va en vertical negativo
+     mediante el área de pulsación, no en el fondo, que aquí es transparente. */
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--cesar-sec-link, var(--cc-terracotta-text, #a1562f));
+  font-family: inherit;
+  font-size: var(--cc-text-sm, 14px);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.cesar-readmore__toggle[hidden] {
+  display: none;
+}
+
+.cesar-readmore__toggle:hover .cesar-readmore__label {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cesar-readmore__toggle:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.cesar-readmore__label[hidden] {
+  display: none;
+}
+
+.cesar-readmore__chevron {
+  width: 12px;
+  height: 8px;
+  transition: transform 0.45s var(--cc-ease, cubic-bezier(0.22, 0.61, 0.36, 1));
+}
+
+.cesar-readmore[open] .cesar-readmore__chevron {
+  transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cesar-readmore--ready .cesar-readmore__content,
+  .cesar-readmore__chevron {
+    transition: none;
+  }
+}
