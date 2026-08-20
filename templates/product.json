@@ -225,17 +225,20 @@
         "padding_bottom": 56,
         "heading_alignment": "left",
         "bg_color": "",
-        "heading_color": "#4E3625",
-        "card_bg": "#FFFFFF",
+        "heading_color": "#4e3625",
+        "card_bg": "#ffffff",
         "card_title_color": "",
-        "card_text_color": "#4E3625",
+        "card_text_color": "#4e3625",
         "link_color": "",
         "link_hover_color": "",
         "button_bg": "",
         "button_text": "",
         "heading_px": 0,
         "card_title_px": 18,
-        "text_px": 12
+        "text_px": 12,
+        "custom_radius": true,
+        "card_radius": 24,
+        "icon_px": 72
       }
     },
     "pairs_with": {
@@ -336,7 +339,9 @@
         "button_link": "",
         "color_scheme": "scheme-3",
         "limit_width": true,
-        "max_width": 1200
+        "max_width": 1200,
+        "heading_color": "",
+        "heading_px": 0
       }
     },
     "cesar_video_ttK3ca": {
