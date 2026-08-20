@@ -1,0 +1,441 @@
+{{ 'cesar-reviews-tabs.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'cesar-tabs.js' | asset_url }}" defer="defer"></script>
+
+{%- comment -%}
+  Reseñas y preguntas de clientes en dos pestañas.
+
+  Las reseñas las pinta la app: o bien un bloque de app que el comerciante
+  arrastra a la sección, o bien el contenedor de Judge.me. Aquí no se replica
+  su maquetación, que la app cambia por su cuenta.
+
+  Las preguntas son bloques de esta sección: se escriben a mano porque la
+  moderación de una app de Q&A no está instalada.
+{%- endcomment -%}
+
+{%- liquid
+  assign bloques_app = section.blocks | where: 'type', '@app'
+  assign preguntas = section.blocks | where: 'type', 'question'
+  assign etiqueta_reviews = section.settings.reviews_label | default: 'Reviews'
+  assign etiqueta_qa = section.settings.qa_label | default: 'Q&A'
+  assign mostrar_qa = false
+  if preguntas.size > 0 or section.settings.qa_button_label != blank
+    assign mostrar_qa = true
+  endif
+-%}
+
+{%- capture cesar_style -%}
+  {% render 'cesar-section-style', s: section.settings %}
+  {% if section.settings.limit_width %}--cesar-rt-max: {{ section.settings.max_width }}px;{% endif %}
+  {% if section.settings.tabs_bg != blank %}--cesar-rt-tabs-bg: {{ section.settings.tabs_bg }};{% endif %}
+  {% if section.settings.tab_active_bg != blank %}--cesar-rt-tab-active-bg: {{ section.settings.tab_active_bg }};{% endif %}
+  {% if section.settings.tab_active_text != blank %}--cesar-rt-tab-active-text: {{ section.settings.tab_active_text }};{% endif %}
+  {% if section.settings.tab_text != blank %}--cesar-rt-tab-text: {{ section.settings.tab_text }};{% endif %}
+  {% if section.settings.subheading_px > 0 %}--cesar-rt-sub-size: {{ section.settings.subheading_px }}px;{% endif %}
+{%- endcapture -%}
+
+<div
+  class="cesar-rt cesar-sec cc-section color-{{ section.settings.color_scheme }}"
+  {% if cesar_style != blank %}style="{{ cesar_style | strip_newlines | strip }}"{% endif %}
+>
+  <div class="cesar-rt__container cc-container{% if section.settings.limit_width %} cesar-rt__container--limited{% endif %}">
+    {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
+      <div class="cesar-rt__intro cesar-sec--align-{{ section.settings.text_alignment }}">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="cesar-rt__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+
+        {%- if section.settings.subheading != blank -%}
+          <div class="cesar-rt__subheading rte">{{ section.settings.subheading }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <cesar-tabs class="cesar-rt__tabs">
+      {%- comment -%}
+        Con una sola pestaña la fila sobra: no hay nada entre lo que elegir.
+      {%- endcomment -%}
+      {%- if mostrar_qa -%}
+        <div class="cesar-rt__tablist-wrap">
+          <div class="cesar-rt__tablist" role="tablist" aria-label="{{ section.settings.heading | default: etiqueta_reviews | escape }}">
+            <button
+              type="button"
+              class="cesar-rt__tab"
+              role="tab"
+              id="Tab-Reviews-{{ section.id }}"
+              aria-controls="Panel-Reviews-{{ section.id }}"
+              aria-selected="true"
+            >
+              {{ etiqueta_reviews }}
+            </button>
+            <button
+              type="button"
+              class="cesar-rt__tab"
+              role="tab"
+              id="Tab-QA-{{ section.id }}"
+              aria-controls="Panel-QA-{{ section.id }}"
+              aria-selected="false"
+              tabindex="-1"
+            >
+              {{ etiqueta_qa }}
+            </button>
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- comment -%} ---------- Reseñas ---------- {%- endcomment -%}
+      <div
+        class="cesar-rt__panel"
+        role="tabpanel"
+        id="Panel-Reviews-{{ section.id }}"
+        aria-labelledby="Tab-Reviews-{{ section.id }}"
+        tabindex="0"
+      >
+        {%- if section.settings.reviews_title != blank -%}
+          <h3 class="cesar-rt__panel-title">{{ section.settings.reviews_title }}</h3>
+        {%- endif -%}
+
+        {%- if section.settings.reviews_source == 'judgeme' -%}
+          {%- comment -%}
+            Contenedor estándar de Judge.me. La app lo rellena desde su propio
+            script; si la app no está activa no se pinta nada, que es preferible
+            a dejar un hueco con un mensaje de error.
+          {%- endcomment -%}
+          <div
+            id="judgeme_product_reviews"
+            class="jdgm-widget jdgm-review-widget"
+            data-product-title="{{ product.title | escape }}"
+            data-id="{{ product.id }}"
+          ></div>
+        {%- else -%}
+          {%- for block in bloques_app -%}
+            {% render block %}
+          {%- endfor -%}
+
+          {%- if bloques_app.size == 0 -%}
+            <p class="cesar-rt__hint">
+              Añade aquí el bloque de tu app de reseñas, o cambia el origen a Judge.me en los ajustes.
+            </p>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} ---------- Preguntas ---------- {%- endcomment -%}
+      {%- if mostrar_qa -%}
+        <div
+          class="cesar-rt__panel"
+          role="tabpanel"
+          id="Panel-QA-{{ section.id }}"
+          aria-labelledby="Tab-QA-{{ section.id }}"
+          tabindex="0"
+          hidden
+        >
+          <div class="cesar-rt__qa-head">
+            <div>
+              {%- if section.settings.qa_title != blank -%}
+                <h3 class="cesar-rt__panel-title">{{ section.settings.qa_title }}</h3>
+              {%- endif -%}
+
+              {%- if preguntas.size > 0 -%}
+                <p class="cesar-rt__count">
+                  {{ preguntas.size }}
+                  {%- if preguntas.size == 1 %} answered question{% else %} answered questions{% endif -%}
+                </p>
+              {%- endif -%}
+            </div>
+
+            {%- if section.settings.qa_button_label != blank -%}
+              <a href="{{ section.settings.qa_button_link | default: '#' }}" class="cesar-rt__ask">
+                {{ section.settings.qa_button_label }}
+              </a>
+            {%- endif -%}
+          </div>
+
+          {%- if preguntas.size > 0 -%}
+            <ul class="cesar-rt__qa-list" role="list">
+              {%- for block in preguntas -%}
+                <li class="cesar-rt__qa-item" {{ block.shopify_attributes }}>
+                  <div class="cesar-rt__qa-meta">
+                    <div>
+                      {%- if block.settings.author != blank -%}
+                        <p class="cesar-rt__qa-author">{{ block.settings.author }}</p>
+                      {%- endif -%}
+                      {%- if block.settings.verified -%}
+                        <p class="cesar-rt__qa-verified">{{ section.settings.verified_label | default: 'Verified User' }}</p>
+                      {%- endif -%}
+                    </div>
+                    {%- if block.settings.date != blank -%}
+                      <p class="cesar-rt__qa-date">{{ block.settings.date }}</p>
+                    {%- endif -%}
+                  </div>
+
+                  {%- if block.settings.question != blank -%}
+                    <p class="cesar-rt__qa-question">
+                      <span class="cesar-rt__qa-mark" aria-hidden="true">Q:</span>
+                      {{ block.settings.question }}
+                    </p>
+                  {%- endif -%}
+
+                  {%- if block.settings.answer != blank -%}
+                    <div class="cesar-rt__qa-answer">
+                      <div class="rte">
+                        <span class="cesar-rt__qa-mark" aria-hidden="true">A:</span>
+                        {{ block.settings.answer }}
+                      </div>
+                      {%- if block.settings.answered_by != blank -%}
+                        <p class="cesar-rt__qa-by">By {{ block.settings.answered_by }}</p>
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </cesar-tabs>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cesar · Reseñas y Q&A",
+  "tag": "section",
+  "class": "cesar-reviews-tabs-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Titular",
+      "default": "Roasted to order. Every time."
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Texto bajo el titular",
+      "default": "<p>No inventory sitting on a shelf. Every bag is roasted after you order it, so what you get is always fresh.</p>"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Alineación del texto",
+      "options": [
+        { "value": "left", "label": "Izquierda" },
+        { "value": "center", "label": "Centro" },
+        { "value": "right", "label": "Derecha" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Pestaña de reseñas"
+    },
+    {
+      "type": "text",
+      "id": "reviews_label",
+      "label": "Nombre de la pestaña",
+      "default": "Reviews"
+    },
+    {
+      "type": "text",
+      "id": "reviews_title",
+      "label": "Título dentro de la pestaña",
+      "default": "From Our Community"
+    },
+    {
+      "type": "select",
+      "id": "reviews_source",
+      "label": "De dónde salen las reseñas",
+      "options": [
+        { "value": "app_block", "label": "Bloque de app" },
+        { "value": "judgeme", "label": "Widget de Judge.me" }
+      ],
+      "default": "judgeme",
+      "info": "Con \"Bloque de app\" añade el bloque de tu app de reseñas a esta sección y se pintará en esta pestaña."
+    },
+    {
+      "type": "header",
+      "content": "Pestaña de preguntas"
+    },
+    {
+      "type": "paragraph",
+      "content": "La pestaña sólo aparece si hay al menos una pregunta o un botón para preguntar."
+    },
+    {
+      "type": "text",
+      "id": "qa_label",
+      "label": "Nombre de la pestaña",
+      "default": "Q&A"
+    },
+    {
+      "type": "text",
+      "id": "qa_title",
+      "label": "Título dentro de la pestaña",
+      "default": "Questions & Answers"
+    },
+    {
+      "type": "text",
+      "id": "verified_label",
+      "label": "Etiqueta de usuario verificado",
+      "default": "Verified User"
+    },
+    {
+      "type": "text",
+      "id": "qa_button_label",
+      "label": "Botón para preguntar",
+      "default": "Ask a question"
+    },
+    {
+      "type": "url",
+      "id": "qa_button_link",
+      "label": "Enlace del botón",
+      "info": "Por ejemplo la página de contacto."
+    },
+    {
+      "type": "header",
+      "content": "Ancho"
+    },
+    {
+      "type": "checkbox",
+      "id": "limit_width",
+      "label": "Limitar el ancho del contenido",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 800,
+      "max": 2000,
+      "step": 20,
+      "unit": "px",
+      "label": "Ancho máximo",
+      "default": 1400
+    },
+    {
+      "type": "header",
+      "content": "Colores y tamaños"
+    },
+    {
+      "type": "paragraph",
+      "content": "Todos opcionales. Vacíos o en 0, la sección usa su esquema de color y la escala tipográfica del tema. Al cambiarlos comprueba que el texto siga leyéndose sobre el fondo."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Fondo de la sección"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Titular"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Texto"
+    },
+    {
+      "type": "color",
+      "id": "tabs_bg",
+      "label": "Fondo de la barra de pestañas"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_bg",
+      "label": "Fondo de la pestaña activa"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_text",
+      "label": "Texto de la pestaña activa"
+    },
+    {
+      "type": "color",
+      "id": "tab_text",
+      "label": "Texto de la pestaña inactiva"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Fondo del botón de preguntar"
+    },
+    {
+      "type": "color",
+      "id": "button_text",
+      "label": "Texto del botón de preguntar"
+    },
+    {
+      "type": "range",
+      "id": "heading_px",
+      "min": 0,
+      "max": 140,
+      "step": 2,
+      "unit": "px",
+      "label": "Tamaño del titular",
+      "default": 0,
+      "info": "0 = el del tema."
+    },
+    {
+      "type": "range",
+      "id": "subheading_px",
+      "min": 0,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño del texto bajo el titular",
+      "default": 0,
+      "info": "0 = el del tema."
+    },
+    {
+      "type": "range",
+      "id": "text_px",
+      "min": 0,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño del texto de las preguntas",
+      "default": 0,
+      "info": "0 = el del tema."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    }
+  ],
+  "blocks": [
+    { "type": "@app" },
+    {
+      "type": "question",
+      "name": "Pregunta",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Pregunta",
+          "default": "How long does the coffee stay fresh?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Respuesta",
+          "default": "<p>Best within four weeks of the roast date printed on the bag. After that it is still safe to drink, just less aromatic.</p>"
+        },
+        { "type": "text", "id": "author", "label": "Quién pregunta" },
+        { "type": "checkbox", "id": "verified", "label": "Usuario verificado", "default": true },
+        { "type": "text", "id": "date", "label": "Fecha", "info": "Se escribe tal cual, por ejemplo 06/05/23." },
+        { "type": "text", "id": "answered_by", "label": "Quién responde", "default": "Cesar's Coffee Cup" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cesar · Reseñas y Q&A",
+      "blocks": [{ "type": "question" }, { "type": "question" }]
+    }
+  ],
+  "enabled_on": {
+    "templates": ["product"]
+  }
+}
+{% endschema %}

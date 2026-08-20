@@ -1,0 +1,239 @@
+/**
+ * Reseñas y preguntas en dos pestañas.
+ */
+
+.cesar-rt__container--limited {
+  max-width: var(--cesar-rt-max, none);
+}
+
+/* ---------- Encabezado ---------- */
+
+.cesar-rt__intro {
+  margin-bottom: var(--cc-space-12);
+}
+
+.cesar-rt__heading {
+  margin: 0;
+  font-family: var(--cc-font-sans, var(--cc-fallback-sans));
+  font-weight: var(--cc-font-heading-weight-black, 800);
+  font-size: var(--cesar-sec-heading-size, var(--cc-text-h1));
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: var(--cesar-sec-heading, var(--cc-brown-700));
+}
+
+.cesar-rt__subheading {
+  margin-top: var(--cc-space-4);
+  font-size: var(--cesar-rt-sub-size, var(--cc-text-body));
+  line-height: 1.55;
+  color: var(--cesar-sec-text, var(--cc-text));
+}
+
+/* Al centrar hay que recolocar el bloque de texto: lleva medida máxima y si no
+   se quedaría pegado a la izquierda dentro de una caja centrada. */
+.cesar-sec--align-center .cesar-rt__subheading {
+  margin-inline: auto;
+  max-width: 60ch;
+}
+
+.cesar-sec--align-right .cesar-rt__subheading {
+  margin-left: auto;
+  max-width: 60ch;
+}
+
+/* ---------- Barra de pestañas ---------- */
+
+.cesar-rt__tablist-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--cc-space-12);
+}
+
+.cesar-rt__tablist {
+  display: inline-flex;
+  gap: var(--cc-space-1);
+  padding: var(--cc-space-1);
+  border-radius: var(--cc-radius-pill);
+  background-color: var(--cesar-rt-tabs-bg, var(--cc-cream));
+}
+
+.cesar-rt__tab {
+  /* mínimo táctil */
+  min-height: 44px;
+  padding: var(--cc-space-2) var(--cc-space-8);
+  border: 0;
+  border-radius: var(--cc-radius-pill);
+  background-color: transparent;
+  color: var(--cesar-rt-tab-text, var(--cc-brown-900));
+  font-family: inherit;
+  font-size: var(--cc-text-body);
+  font-weight: 600;
+  line-height: 1.3;
+  cursor: pointer;
+  transition:
+    background-color var(--cc-duration) var(--cc-ease),
+    color var(--cc-duration) var(--cc-ease);
+}
+
+/* El estado lo marca aria-selected y no una clase aparte: así el atributo que
+   leen las ayudas técnicas y el que pinta el estilo no pueden desincronizarse. */
+.cesar-rt__tab[aria-selected='true'] {
+  background-color: var(--cesar-rt-tab-active-bg, var(--cc-brown-900));
+  color: var(--cesar-rt-tab-active-text, #fff);
+}
+
+.cesar-rt__tab:focus-visible {
+  outline: 2px solid var(--cesar-rt-tab-active-bg, var(--cc-brown-900));
+  outline-offset: 2px;
+}
+
+/* ---------- Paneles ---------- */
+
+.cesar-rt__panel[hidden] {
+  display: none;
+}
+
+/* El panel es enfocable para que, al llegar con el teclado desde la pestaña,
+   el foco caiga dentro del contenido y no se salte al siguiente bloque. */
+.cesar-rt__panel:focus-visible {
+  outline: 2px solid var(--cesar-sec-heading, var(--cc-brown-900));
+  outline-offset: 4px;
+}
+
+.cesar-rt__panel-title {
+  margin: 0 0 var(--cc-space-2);
+  font-size: var(--cc-text-h3);
+  font-weight: 700;
+  color: var(--cesar-sec-heading, var(--cc-brown-700));
+}
+
+.cesar-rt__hint,
+.cesar-rt__count {
+  margin: 0;
+  font-size: var(--cc-text-sm);
+  color: var(--cesar-sec-text, var(--cc-text-muted));
+}
+
+/* ---------- Cabecera de preguntas ---------- */
+
+.cesar-rt__qa-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--cc-space-6);
+  flex-wrap: wrap;
+  margin-bottom: var(--cc-space-8);
+}
+
+.cesar-rt__ask {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: var(--cc-cta-padding-y) var(--cc-space-6);
+  border-radius: var(--cc-cta-radius);
+  background-color: var(--cesar-btn-bg, var(--cc-brown-900));
+  color: var(--cesar-btn-text, #fff);
+  font-size: var(--cc-cta-font-size);
+  font-weight: var(--cc-cta-weight);
+  line-height: var(--cc-cta-line);
+  text-decoration: none;
+  transition: opacity var(--cc-cta-transition) var(--cc-ease);
+}
+
+.cesar-rt__ask:hover {
+  opacity: 0.85;
+}
+
+.cesar-rt__ask:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* ---------- Lista de preguntas ---------- */
+
+.cesar-rt__qa-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cesar-rt__qa-item {
+  padding-block: var(--cc-space-8);
+  border-top: 1px solid var(--cc-border);
+  color: var(--cesar-sec-text, var(--cc-text));
+  font-size: var(--cesar-sec-text-size, var(--cc-text-body));
+  line-height: 1.55;
+}
+
+.cesar-rt__qa-item:last-child {
+  border-bottom: 1px solid var(--cc-border);
+}
+
+.cesar-rt__qa-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--cc-space-4);
+  margin-bottom: var(--cc-space-4);
+}
+
+.cesar-rt__qa-author {
+  margin: 0;
+  font-weight: 600;
+}
+
+.cesar-rt__qa-verified,
+.cesar-rt__qa-date,
+.cesar-rt__qa-by {
+  margin: 0;
+  font-size: var(--cc-text-sm);
+  opacity: 0.75;
+}
+
+.cesar-rt__qa-question {
+  margin: 0;
+}
+
+/* La marca no se separa con un margen: al ir dentro del párrafo, el texto de
+   varias líneas queda alineado bajo la primera palabra y no bajo la letra. */
+.cesar-rt__qa-mark {
+  font-weight: 700;
+}
+
+.cesar-rt__qa-answer {
+  margin-top: var(--cc-space-4);
+  padding-left: var(--cc-space-4);
+  border-left: 2px solid var(--cc-border);
+}
+
+.cesar-rt__qa-answer .rte > :first-child {
+  margin-top: 0;
+}
+
+.cesar-rt__qa-answer .rte > :last-child {
+  margin-bottom: 0;
+}
+
+.cesar-rt__qa-by {
+  margin-top: var(--cc-space-2);
+}
+
+@media screen and (max-width: 749px) {
+  .cesar-rt__tablist {
+    width: 100%;
+  }
+
+  .cesar-rt__tab {
+    /* A dos pestañas se reparten el ancho: en móvil el relleno fijo las sacaba
+       del contenedor. */
+    flex: 1 1 0;
+    padding-inline: var(--cc-space-4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cesar-rt__tab {
+    transition: none;
+  }
+}
