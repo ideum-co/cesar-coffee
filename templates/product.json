@@ -251,6 +251,8 @@
         "button_link": "",
         "heading_position": "side",
         "text_alignment": "left",
+        "source": "collection",
+        "intent": "complementary",
         "collection": "frontpage",
         "products_to_show": 6,
         "columns_desktop": 3,
