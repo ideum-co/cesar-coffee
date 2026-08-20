@@ -14,7 +14,12 @@
       "settings": {
         "show_collection_description": true,
         "show_collection_image": true,
-        "color_scheme": "scheme-1"
+        "color_scheme": "scheme-1",
+        "bg_color": "",
+        "heading_color": "#2D1206",
+        "text_color": "",
+        "heading_px": 0,
+        "text_px": 0
       }
     },
     "product-grid": {
@@ -34,7 +39,16 @@
         "filter_type": "horizontal",
         "enable_sorting": true,
         "padding_top": 24,
-        "padding_bottom": 24
+        "padding_bottom": 24,
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "link_color": "",
+        "link_hover_color": "",
+        "button_bg": "",
+        "button_text": "",
+        "heading_px": 0,
+        "text_px": 0
       }
     },
     "faq": {
