@@ -1,0 +1,96 @@
+/**
+ * Multicolumn: colores, tamaños y alineación por sección.
+ *
+ * Todas las reglas llevan valor de reserva y las de tamaño van tras un selector
+ * de atributo, así que una sección sin configurar se ve igual que antes.
+ */
+
+/* ---------- Titular de la sección ---------- */
+
+/* El contenedor es flex con space-between (deja sitio al enlace de móvil), así
+   que la alineación se decide con justify-content, no sólo con text-align. */
+.cesar-mc__title--left {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.cesar-mc__title--center {
+  justify-content: center;
+  text-align: center;
+}
+
+.cesar-mc__title--right {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.multicolumn.cesar-sec .title {
+  color: var(--cesar-sec-heading, inherit);
+}
+
+.multicolumn.cesar-sec[style*='--cesar-sec-heading-size'] .title {
+  font-size: var(--cesar-sec-heading-size);
+}
+
+/* ---------- Fondo de las cards ----------
+   Dawn lo pinta con .multicolumn:not(.background-none) .multicolumn-card y con
+   .multicolumn.background-primary .multicolumn-card, ambas de peso 0-3-0, y su
+   hoja carga después de esta. Hace falta una clase más para ganar.
+   Se usa la propiedad abreviada: la variante 'primary' añade un degradado
+   encima, y sobrescribir sólo background-color lo dejaría tapando el color. */
+.multicolumn.cesar-sec[style*='--cesar-card-bg'] .multicolumn-card {
+  background: var(--cesar-card-bg);
+}
+
+/* ---------- Textos de la card ---------- */
+
+.multicolumn.cesar-sec .multicolumn-card__info h3 {
+  color: var(--cesar-mc-card-title, var(--cesar-sec-heading, inherit));
+}
+
+.multicolumn.cesar-sec[style*='--cesar-mc-card-title-size'] .multicolumn-card__info h3 {
+  font-size: var(--cesar-mc-card-title-size);
+}
+
+.multicolumn.cesar-sec .multicolumn-card__info .rte {
+  color: var(--cesar-mc-card-text, var(--cesar-sec-text, inherit));
+}
+
+.multicolumn.cesar-sec[style*='--cesar-sec-text-size'] .multicolumn-card__info .rte {
+  font-size: var(--cesar-sec-text-size);
+}
+
+/* ---------- Enlaces de la card ---------- */
+
+.multicolumn.cesar-sec .multicolumn-card__info .link {
+  color: var(--cesar-sec-link, inherit);
+}
+
+.multicolumn.cesar-sec .multicolumn-card__info .link:hover {
+  color: var(--cesar-sec-link-hover, inherit);
+}
+
+/* ---------- Botón de la sección ---------- */
+
+.multicolumn.cesar-sec .button--primary {
+  background-color: var(--cesar-btn-bg, rgb(var(--color-button)));
+  color: var(--cesar-btn-text, rgb(var(--color-button-text)));
+  box-shadow: 0 0 0 var(--buttons-border-width)
+    var(--cesar-btn-bg, rgba(var(--color-button), var(--alpha-button-border)));
+}
+
+/* ---------- Alineación de las cards ----------
+   Dawn sólo trae izquierda y centro; la derecha se añade aquí. */
+
+.cesar-mc__item--right {
+  text-align: right;
+}
+
+.cesar-mc__item--right .multicolumn-card {
+  align-items: flex-end;
+}
+
+.cesar-mc__item--right .multicolumn-card__image-wrapper {
+  margin-left: auto;
+  margin-right: 0;
+}

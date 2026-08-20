@@ -23,7 +23,19 @@
   endif
 -%}
 
-<div class="multicolumn color-{{ section.settings.color_scheme }} gradient{% unless section.settings.background_style == 'none' and settings.text_boxes_border_thickness > 0 or settings.text_boxes_shadow_opacity > 0 %} background-{{ section.settings.background_style }}{% endunless %}{% if section.settings.title == blank %} no-heading{% endif %}">
+{{ 'cesar-multicolumn.css' | asset_url | stylesheet_tag }}
+
+{%- capture cesar_style -%}
+  {% render 'cesar-section-style', s: section.settings %}
+  {% if section.settings.card_title_px > 0 %}--cesar-mc-card-title-size: {{ section.settings.card_title_px }}px;{% endif %}
+  {% if section.settings.card_text_color != blank %}--cesar-mc-card-text: {{ section.settings.card_text_color }};{% endif %}
+  {% if section.settings.card_title_color != blank %}--cesar-mc-card-title: {{ section.settings.card_title_color }};{% endif %}
+{%- endcapture -%}
+
+<div
+  class="multicolumn cesar-sec color-{{ section.settings.color_scheme }} gradient{% unless section.settings.background_style == 'none' and settings.text_boxes_border_thickness > 0 or settings.text_boxes_shadow_opacity > 0 %} background-{{ section.settings.background_style }}{% endunless %}{% if section.settings.title == blank %} no-heading{% endif %}"
+  {% if cesar_style != blank %}style="{{ cesar_style | strip_newlines | strip }}"{% endif %}
+>
   <div
     class="page-width section-{{ section.id }}-padding isolate{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
     {% if settings.animations_reveal_on_scroll %}
@@ -31,7 +43,7 @@
     {% endif %}
   >
     {%- unless section.settings.title == blank -%}
-      <div class="title-wrapper-with-link title-wrapper--self-padded-mobile title-wrapper--no-top-margin multicolumn__title">
+      <div class="title-wrapper-with-link title-wrapper--self-padded-mobile title-wrapper--no-top-margin multicolumn__title cesar-mc__title--{{ section.settings.heading_alignment }}">
         <h2 class="title inline-richtext {{ section.settings.heading_size }}">
           {{ section.settings.title }}
         </h2>
@@ -68,7 +80,7 @@
 
           <li
             id="Slide-{{ section.id }}-{{ forloop.index }}"
-            class="multicolumn-list__item grid__item{% if section.settings.swipe_on_mobile %} slider__slide{% endif %}{% if section.settings.column_alignment == 'center' %} center{% endif %}{{ empty_column }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+            class="multicolumn-list__item grid__item{% if section.settings.swipe_on_mobile %} slider__slide{% endif %}{% if section.settings.column_alignment == 'center' %} center{% elsif section.settings.column_alignment == 'right' %} cesar-mc__item--right{% endif %}{{ empty_column }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
             {{ block.shopify_attributes }}
             {% if settings.animations_reveal_on_scroll %}
               data-cascade
@@ -192,7 +204,10 @@
   "class": "section",
   "tag": "section",
   "disabled_on": {
-    "groups": ["header", "footer"]
+    "groups": [
+      "header",
+      "footer"
+    ]
   },
   "settings": [
     {
@@ -232,7 +247,7 @@
     {
       "type": "header",
       "content": "t:sections.multicolumn.settings.header_image.content"
-    },    
+    },
     {
       "type": "select",
       "id": "image_width",
@@ -280,23 +295,23 @@
     {
       "type": "header",
       "content": "t:sections.multicolumn.settings.header_button.content"
-    },    
+    },
     {
       "type": "text",
       "id": "button_label",
       "default": "t:sections.multicolumn.settings.button_label.default",
-      "label": "t:sections.multicolumn.settings.button_label.label", 
+      "label": "t:sections.multicolumn.settings.button_label.label",
       "info": "t:sections.multicolumn.settings.button_label.info"
     },
     {
       "type": "url",
       "id": "button_link",
       "label": "t:sections.multicolumn.settings.button_link.label"
-    },    
+    },
     {
       "type": "header",
       "content": "t:sections.multicolumn.settings.header_layout.content"
-    },     
+    },
     {
       "type": "range",
       "id": "columns_desktop",
@@ -317,6 +332,10 @@
         {
           "value": "center",
           "label": "t:sections.multicolumn.settings.column_alignment.options__2.label"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
         }
       ],
       "default": "left",
@@ -343,7 +362,7 @@
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
-    },    
+    },
     {
       "type": "header",
       "content": "t:sections.multicolumn.settings.header_mobile.content"
@@ -393,6 +412,112 @@
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
       "default": 36
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Alineación del titular",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Colores y tamaños"
+    },
+    {
+      "type": "paragraph",
+      "content": "Todos opcionales. Vacíos o en 0, la sección usa su esquema de color y la escala tipográfica del tema. Al cambiarlos comprueba que el texto siga leyéndose sobre el fondo."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Fondo de la sección"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Titular de la sección"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Fondo de las cards"
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Título de la card"
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "Texto de la card"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Enlaces de la card"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_color",
+      "label": "Enlaces al pasar el ratón"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Fondo del botón"
+    },
+    {
+      "type": "color",
+      "id": "button_text",
+      "label": "Texto del botón"
+    },
+    {
+      "type": "range",
+      "id": "heading_px",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Tamaño del titular",
+      "default": 0,
+      "info": "0 = el del tema."
+    },
+    {
+      "type": "range",
+      "id": "card_title_px",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño del título de la card",
+      "default": 0,
+      "info": "0 = el del tema."
+    },
+    {
+      "type": "range",
+      "id": "text_px",
+      "min": 0,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño del texto de la card",
+      "default": 0,
+      "info": "0 = el del tema."
     }
   ],
   "blocks": [
