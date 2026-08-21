@@ -174,6 +174,37 @@
       assign language_selector = true
     endif
   -%}
+  {%- comment -%}
+    Desenfoque progresivo tras el menú. Cinco capas superpuestas, cada una con
+    el doble de desenfoque que la anterior y recortada por una máscara que llega
+    menos abajo: el resultado se acumula hacia arriba y la caída es no lineal,
+    que es lo que hace que no se vea un corte.
+
+    Sólo se pinta con el header transparente. Con fondo sólido no habría nada
+    que desenfocar detrás, y la banda acabaría emborronando el principio de la
+    página.
+  {%- endcomment -%}
+  {%- if header_transparent and section.settings.enable_blur and section.settings.blur_strength > 0 -%}
+    <div
+      class="cesar-header-blur"
+      aria-hidden="true"
+      style="
+        --cesar-blur: {{ section.settings.blur_strength }}px;
+        --cesar-blur-height: {{ section.settings.blur_height }}px;
+        {%- if section.settings.blur_tint != blank and section.settings.blur_tint_opacity > 0 -%}
+          --cesar-blur-tint-rgb: {{ section.settings.blur_tint.red }} {{ section.settings.blur_tint.green }} {{ section.settings.blur_tint.blue }};
+          --cesar-blur-tint-alpha: {{ section.settings.blur_tint_opacity | divided_by: 100.0 }};
+        {%- endif -%}
+      "
+    >
+      <div class="cesar-header-blur__layer is--1"></div>
+      <div class="cesar-header-blur__layer is--2"></div>
+      <div class="cesar-header-blur__layer is--3"></div>
+      <div class="cesar-header-blur__layer is--4"></div>
+      <div class="cesar-header-blur__layer is--5"></div>
+    </div>
+  {%- endif -%}
+
   <header class="header header--{{ section.settings.logo_position }} header--mobile-{{ section.settings.mobile_logo_position }} page-width{% if section.settings.menu_type_desktop == 'drawer' %} drawer-menu{% endif %}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if has_app_block %} header--has-app{% endif %}{% if social_links %} header--has-social{% endif %}{% if shop.customer_accounts_enabled %} header--has-account{% endif %}{% if country_selector or language_selector %} header--has-localizations{% endif %}">
     {%- liquid
       assign render_search_left = false
@@ -746,6 +777,59 @@
       "label": "Tamaño del texto",
       "default": 0,
       "info": "0 = el del tema."
+    },
+    {
+      "type": "header",
+      "content": "Desenfoque tras el menú"
+    },
+    {
+      "type": "paragraph",
+      "content": "Sólo se aplica donde el header es transparente, es decir sobre el hero de la portada. Al fijarse al hacer scroll el header recupera fondo y el desenfoque se retira."
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_blur",
+      "label": "Activar el desenfoque",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "blur_strength",
+      "min": 0,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Intensidad",
+      "default": 8,
+      "info": "Es el desenfoque del borde superior. Hacia abajo baja a la mitad en cada capa hasta desaparecer. En 0 no se pinta nada."
+    },
+    {
+      "type": "range",
+      "id": "blur_height",
+      "min": 60,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "label": "Alto de la banda",
+      "default": 160,
+      "info": "Cuánto baja el degradado. Cuanto más alto, más suave la transición."
+    },
+    {
+      "type": "color",
+      "id": "blur_tint",
+      "label": "Tinte",
+      "default": "#140803",
+      "info": "El desenfoque quita detalle pero no sube el contraste. Sobre fotos claras es este velo el que hace legible el menú."
+    },
+    {
+      "type": "range",
+      "id": "blur_tint_opacity",
+      "min": 0,
+      "max": 70,
+      "step": 5,
+      "unit": "%",
+      "label": "Intensidad del tinte",
+      "default": 20
     }
   ],
   "blocks": [

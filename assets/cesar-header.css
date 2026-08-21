@@ -47,3 +47,102 @@ body:has(.header-wrapper--transparent) main[data-template='index'] > .shopify-se
     transition: background-color var(--cc-duration, 220ms) var(--cc-ease, ease);
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Desenfoque progresivo tras el menú
+   --------------------------------------------------------------------------- */
+
+.cesar-header-blur {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--cesar-blur-height, 160px);
+  /* No intercepta nada: es decoración pura sobre el contenido. */
+  pointer-events: none;
+  /* contain e isolation acotan el efecto a esta caja. Sin ellos el
+     backdrop-filter de las capas puede arrastrar lo que hay fuera y provocar
+     repintados de toda la página al hacer scroll. */
+  isolation: isolate;
+  contain: paint;
+}
+
+.cesar-header-blur__layer {
+  position: absolute;
+  inset: 0;
+}
+
+/* Cada capa desenfoca el doble que la anterior y su máscara termina más arriba.
+   Como cada una toma como fondo lo que ya han desenfocado las de debajo, el
+   efecto se acumula hacia el borde superior y la caída es exponencial, no
+   lineal: por eso no se ve la costura donde acaba.
+
+   Las máscaras se declaran también con prefijo -webkit-: Safari sólo las
+   entiende así por debajo de la 15.4, y sin máscara la capa cubriría toda la
+   banda con un desenfoque plano. */
+.cesar-header-blur__layer.is--1 {
+  -webkit-backdrop-filter: blur(calc(var(--cesar-blur, 8px) / 16));
+  backdrop-filter: blur(calc(var(--cesar-blur, 8px) / 16));
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 87.5%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 87.5%, transparent 100%);
+}
+
+.cesar-header-blur__layer.is--2 {
+  -webkit-backdrop-filter: blur(calc(var(--cesar-blur, 8px) / 8));
+  backdrop-filter: blur(calc(var(--cesar-blur, 8px) / 8));
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 62.5%, transparent 87.5%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 62.5%, transparent 87.5%);
+}
+
+.cesar-header-blur__layer.is--3 {
+  -webkit-backdrop-filter: blur(calc(var(--cesar-blur, 8px) / 4));
+  backdrop-filter: blur(calc(var(--cesar-blur, 8px) / 4));
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 37.5%, transparent 62.5%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 37.5%, transparent 62.5%);
+}
+
+.cesar-header-blur__layer.is--4 {
+  -webkit-backdrop-filter: blur(calc(var(--cesar-blur, 8px) / 2));
+  backdrop-filter: blur(calc(var(--cesar-blur, 8px) / 2));
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 12.5%, transparent 37.5%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 12.5%, transparent 37.5%);
+}
+
+.cesar-header-blur__layer.is--5 {
+  -webkit-backdrop-filter: blur(var(--cesar-blur, 8px));
+  backdrop-filter: blur(var(--cesar-blur, 8px));
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 12.5%);
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 12.5%);
+}
+
+/* Tinte opcional. Va aparte de las capas a propósito: el desenfoque solo no
+   sube el contraste, únicamente quita detalle. Si el menú cae sobre una foto
+   clara, lo que hace legible el texto es este velo. Y funciona igual en los
+   navegadores sin backdrop-filter, donde las capas no pintan nada. */
+.cesar-header-blur::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* Los componentes del color llegan sueltos desde Liquid en vez de usar
+     sintaxis de color relativo: así no hace falta que el navegador entienda
+     rgb(from ...), que es reciente. */
+  background: linear-gradient(
+    to bottom,
+    rgb(var(--cesar-blur-tint-rgb, 0 0 0) / var(--cesar-blur-tint-alpha, 0)) 0%,
+    transparent 100%
+  );
+}
+
+/* Al hacerse sticky el header recupera fondo sólido, así que el desenfoque ya
+   no aporta nada y encima emborronaría el contenido que pasa por debajo. */
+.header-wrapper--transparent.shopify-section-header-sticky .cesar-header-blur,
+.header-wrapper--transparent.shopify-section-header-hidden .cesar-header-blur,
+.header-wrapper--search-open .cesar-header-blur {
+  display: none;
+}
+
+/* El contenido del header va por encima de la banda. */
+.header-wrapper--transparent .header {
+  position: relative;
+  z-index: 1;
+}

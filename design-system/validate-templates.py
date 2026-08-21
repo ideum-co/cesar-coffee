@@ -32,7 +32,14 @@ for f in files:
         for k,v in sec.get('settings',{}).items():
             if k not in sd: out.append(f"[{f.name}:{sid}] setting desconocido {k}")
             else: check(sd[k],k,v,f"[{f.name}:{sid}]",out)
+        acepta_app = '@app' in bd
         for bid,blk in sec.get('blocks',{}).items():
+            # Los bloques de app llegan como shopify://apps/... y sus ajustes los
+            # define la app, no el tema: aqui solo se comprueba que la seccion
+            # los admita declarando {"type": "@app"}.
+            if blk['type'].startswith('shopify://apps/'):
+                if not acepta_app: out.append(f"[{f.name}:{sid}] la seccion no admite bloques de app: {blk['type']}")
+                continue
             if blk['type'] not in bd: out.append(f"[{f.name}:{sid}] bloque desconocido {blk['type']}"); continue
             for k,v in blk.get('settings',{}).items():
                 if k not in bd[blk['type']]: out.append(f"[{f.name}:{sid}#{blk['type']}] setting desconocido {k} (validos: {sorted(bd[blk['type']])})")
