@@ -65,7 +65,7 @@
             "widget_style_card_selector": "dropdown",
             "subscription_policy_url": "shopify://policies/privacy-policy",
             "color_text_body": "#4e3625",
-            "dividers_color": "#8f8d8d",
+            "dividers_color": "#4E3625",
             "background_color": "#e1e1e4",
             "border_thickness": 0.5,
             "border_radius": 16,
