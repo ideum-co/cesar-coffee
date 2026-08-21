@@ -19,7 +19,14 @@
    imagen se queda con el espacio restante, así que todas las cards de una fila
    miden lo mismo aunque el título ocupe una o dos líneas. */
 
-.card-wrapper .card {
+/* Se usan las dos clases del contenedor a propósito. Dawn trae
+   .card:not(.ratio) { display:flex; flex-direction:column; height:100% }, y
+   :not(.ratio) cuenta como clase, así que esa regla pesa lo mismo (0-2-0) que
+   .card-wrapper .card. Al empatar decidía el orden de carga, y en la ficha de
+   producto component-card.css acaba después: la card se quedaba en height 100%
+   y perdía su alto fijo. Con las dos clases se gana por especificidad y da
+   igual en qué orden lleguen las hojas. */
+.card-wrapper.product-card-wrapper .card {
   display: flex;
   flex-direction: column;
   height: var(--cesar-card-height, 413px);
@@ -28,12 +35,12 @@
 /* El bloque de texto va arriba y ocupa sólo lo que necesita. Sin flex: 0 0 auto
    se repartía la altura con la imagen y acababa midiendo 257px para 92px de
    texto. */
-.card-wrapper .card > .card__content {
+.card-wrapper.product-card-wrapper .card > .card__content {
   order: -1;
   flex: 0 0 auto;
 }
 
-.card-wrapper .card__inner {
+.card-wrapper.product-card-wrapper .card__inner {
   position: relative;
   flex: 1 1 auto;
   /* sin esto el contenido impide que la celda flexible se encoja */
@@ -44,27 +51,27 @@
    badges (agotado / rebaja). Como .card__inner es flex en fila, ese contenedor
    se comía casi la mitad del ancho y dejaba la imagen pequeña y desplazada a la
    izquierda. Se saca del flujo: son etiquetas superpuestas, no una columna. */
-.card-wrapper .card__inner > .card__content {
+.card-wrapper.product-card-wrapper .card__inner > .card__content {
   position: absolute;
   inset: 0;
   pointer-events: none;
 }
 
-.card-wrapper .card__inner > .card__content > * {
+.card-wrapper.product-card-wrapper .card__inner > .card__content > * {
   pointer-events: auto;
 }
 
 /* Dawn reserva el alto de la imagen con un ::before y --ratio-percent. Con la
    altura ya fijada ese reservado sobra, y dejarlo empujaría la card más allá
    de los 413px. */
-.card-wrapper .card__inner.ratio::before {
+.card-wrapper.product-card-wrapper .card__inner.ratio::before {
   display: none;
 }
 
 /* .card__inner es flex. Sin flex-basis, el ancho de .card__media dependería de
    su contenido, y como la imagen va al 100% de ese ancho se retroalimentan a
    cero. Con flex: 1 el contenedor manda y la imagen ya tiene contra qué medir. */
-.card-wrapper .card__media {
+.card-wrapper.product-card-wrapper .card__media {
   position: relative;
   flex: 1 1 auto;
   min-width: 0;
@@ -82,7 +89,7 @@
    varios contenedores —que es lo que fallaba y dejaba la bolsa suelta y
    desbordando— se ancla al hueco de la imagen. Se posiciona respecto al área
    de contenido, dentro del padding, no respecto al borde. */
-.card-wrapper .card__media .media {
+.card-wrapper.product-card-wrapper .card__media .media {
   /* relative, no static: Dawn posiciona la <img> en absoluto, y sin contexto
      propio aquí se anclaba al contenedor saltándose su padding, con lo que la
      foto volvía a ocupar todo el ancho. */
@@ -93,7 +100,7 @@
   padding: 0;
 }
 
-.card-wrapper .card__media img {
+.card-wrapper.product-card-wrapper .card__media img {
   width: 100%;
   height: 100%;
   /* contain y no cover: la bolsa no se recorta */
@@ -101,8 +108,8 @@
 }
 
 /* Nada se sale de las esquinas redondeadas, ni la imagen ni los badges. */
-.card-wrapper .card,
-.card-wrapper .card__inner {
+.card-wrapper.product-card-wrapper .card,
+.card-wrapper.product-card-wrapper .card__inner {
   overflow: hidden;
 }
 
