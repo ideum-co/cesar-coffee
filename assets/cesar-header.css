@@ -67,7 +67,13 @@ body:has(.header-wrapper--transparent) main[data-template='index'] > .shopify-se
   contain: paint;
 }
 
-.cesar-header-blur__layer {
+/* Las capas van vacías a propósito: sólo existen para llevar un backdrop-filter.
+   Dawn oculta los elementos vacíos con `div:empty { display: none }`, que pesa
+   0-1-1 y ganaba a una sola clase, así que no se pintaba ninguna. Con las dos
+   clases del contenedor se recupera el display sin tocar la regla de Dawn, que
+   sigue siendo útil para el resto del tema. */
+.cesar-header-blur .cesar-header-blur__layer {
+  display: block;
   position: absolute;
   inset: 0;
 }
