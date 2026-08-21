@@ -10,10 +10,11 @@ class CesarCardPicker extends HTMLElement {
     this.submit = this.querySelector('[data-submit]');
     if (!this.form || !this.variantInput || !this.submit) return;
 
+    // El texto vive en un <span> porque el botón lleva además el spinner que
+    // ProductForm necesita.
+    this.submitLabel = this.submit.querySelector('span') || this.submit;
+
     this.addEventListener('change', this.onSizeChange);
-    // La card entera es un enlace al producto: dentro del panel, los clics no
-    // deben navegar, sólo operar el selector.
-    this.addEventListener('click', (event) => event.stopPropagation());
   }
 
   disconnectedCallback() {
@@ -30,8 +31,10 @@ class CesarCardPicker extends HTMLElement {
     this.variantInput.value = variantId;
     this.submit.disabled = false;
 
+    // textContent sobre el botón entero borraría el spinner que ProductForm
+    // busca luego, así que sólo se toca la etiqueta.
     const addLabel = this.submit.dataset.labelAdd;
-    if (addLabel) this.submit.textContent = addLabel;
+    if (addLabel) this.submitLabel.textContent = addLabel;
   };
 }
 

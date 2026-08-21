@@ -102,4 +102,9 @@ class CesarSliderDots extends HTMLElement {
   }
 }
 
-customElements.define('cesar-slider-dots', CesarSliderDots);
+// Con guarda, como el resto: si el script llegara dos veces —API de renderizado
+// de secciones, una app que lo inyecte— define() lanzaría y se llevaría por
+// delante lo que quedara del archivo.
+if (!customElements.get('cesar-slider-dots')) {
+  customElements.define('cesar-slider-dots', CesarSliderDots);
+}

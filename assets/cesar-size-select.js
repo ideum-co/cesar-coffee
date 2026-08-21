@@ -81,10 +81,10 @@ class CesarSizeSelect extends HTMLElement {
         ? `<img class="cesar-size__thumb" src="${extra.imagen}" alt="" loading="lazy" width="48" height="48">`
         : '<span class="cesar-size__thumb cesar-size__thumb--empty"></span>';
 
-      fila.innerHTML = `
-        ${miniatura}
-        <span class="cesar-size__option-label">${opcion.textContent.trim()}</span>
-        <span class="cesar-size__radio" aria-hidden="true"></span>`;
+      // El nombre de la variante se escribe con textContent y no interpolado en
+      // innerHTML: un título que contenga '<' rompería la fila.
+      fila.innerHTML = `${miniatura}<span class="cesar-size__option-label"></span><span class="cesar-size__radio" aria-hidden="true"></span>`;
+      fila.querySelector('.cesar-size__option-label').textContent = opcion.textContent.trim();
 
       fila.addEventListener('click', () => this.elegir(opcion.value));
       this.lista.append(fila);

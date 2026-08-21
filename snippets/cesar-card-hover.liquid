@@ -54,8 +54,17 @@
     }}
   {%- endif -%}
 
+  {%- comment -%}
+    product-form es quien envía por AJAX y abre el cajón del carrito. Sin él, el
+    formulario hacía POST a /cart/add y la página se recargaba entera en cada
+    añadido, perdiendo el sitio donde estaba el cliente.
+  {%- endcomment -%}
   <cesar-card-picker class="cesar-pcard__panel" data-url="{{ card_product.url }}">
-    {%- form 'product', card_product, id: form_id, class: 'cesar-pcard__form', novalidate: 'novalidate' -%}
+    <product-form data-section-id="{{ section_id }}">
+      <div class="product-form__error-message-wrapper cesar-pcard__error" role="alert" hidden>
+        <span class="product-form__error-message"></span>
+      </div>
+    {%- form 'product', card_product, id: form_id, class: 'cesar-pcard__form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
       <input
         type="hidden"
         name="id"
@@ -118,17 +127,26 @@
           disabled
         {% endif %}
       >
-        {%- liquid
-          if card_product.available == false
-            echo 'products.product.sold_out' | t
-          elsif has_sizes
-            # Copy de marca, no la cadena de Dawn ("Choose options")
-            echo 'Pick a size'
-          else
-            echo 'products.product.add_to_cart' | t
-          endif
-        -%}
+        {%- comment -%}
+          El <span> y el spinner no son decorativos: ProductForm hace
+          submitButton.querySelector('span') y querySelector('.loading__spinner')
+          sin comprobar que existan, y sin ellos lanza al primer clic.
+        {%- endcomment -%}
+        <span>
+          {%- liquid
+            if card_product.available == false
+              echo 'products.product.sold_out' | t
+            elsif has_sizes
+              # Copy de marca, no la cadena de Dawn ("Choose options")
+              echo 'Pick a size'
+            else
+              echo 'products.product.add_to_cart' | t
+            endif
+          -%}
+        </span>
+        {%- render 'loading-spinner' -%}
       </button>
     {%- endform -%}
+    </product-form>
   </cesar-card-picker>
 </div>

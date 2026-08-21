@@ -19,9 +19,9 @@
 {%- comment -%}
   Productos sugeridos con el titular en una columna y el carrusel en la otra.
 
-  Los productos salen de una colección que elige el comerciante, no de las
-  recomendaciones automáticas: esta sección es la selección editorial de la
-  ficha. Para las automáticas ya está "Productos relacionados".
+  Por defecto los elige Shopify a partir del producto que se está viendo. El
+  ajuste de origen permite fijar una colección concreta cuando se quiera una
+  selección editorial en vez de la automática.
 {%- endcomment -%}
 
 {%- liquid
@@ -63,7 +63,7 @@
   {%- if automatico -%}
     <product-recommendations
       class="cesar-sug__recommendations"
-      data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.products_to_show }}&intent={{ section.settings.intent }}"
+      data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.products_to_show }}&intent={{ section.settings.intent | default: 'related' }}"
       data-section-id="{{ section.id }}"
       data-product-id="{{ product.id }}"
     >

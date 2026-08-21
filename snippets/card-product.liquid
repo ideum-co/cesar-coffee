@@ -23,6 +23,12 @@
 {%- unless skip_styles -%}
   {{ 'cesar-product-card.css' | asset_url | stylesheet_tag }}
   <script src="{{ 'cesar-card-picker.js' | asset_url }}" defer="defer"></script>
+  {%- comment -%}
+    La capa de hover añade al carrito, así que necesita product-form aquí y no
+    sólo en las secciones que ya lo cargaban: en los carruseles de sugeridos y
+    de relacionados no llegaba, y allí el añadido recargaba la página.
+  {%- endcomment -%}
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
   {{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}
 
@@ -32,6 +38,15 @@
 {%- endunless -%}
 {%- if card_product and card_product != empty -%}
   {%- liquid
+    comment
+      La compra rápida de Dawn queda desactivada aquí: su función la cumple la
+      capa de hover, y hasta ahora se seguía pintando entera —con un modal y un
+      formulario por producto— sólo para ocultarla por CSS. Eso era DOM y JS
+      muertos en cada card, y repetía ids si el mismo producto salía en dos
+      carruseles de la misma página.
+    endcomment
+    assign quick_add = false
+
     assign ratio = 1
     if card_product.featured_media and media_aspect_ratio == 'portrait'
       assign ratio = 0.8
