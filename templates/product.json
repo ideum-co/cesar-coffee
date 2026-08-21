@@ -53,33 +53,6 @@
             "show_dynamic_checkout": false,
             "show_gift_card_recipient": false
           }
-        },
-        "faq_storage": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "How should I store this?",
-            "icon": "question_mark",
-            "content": "<p>Keep the bag sealed, out of the sun, at room temperature. Don't refrigerate.</p>",
-            "page": ""
-          }
-        },
-        "faq_freshness": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "How fresh is it when it arrives?",
-            "icon": "question_mark",
-            "content": "<p>Roasted to order in North Williamstown and dispatched within days of roasting — never off a shelf.</p>",
-            "page": ""
-          }
-        },
-        "faq_brew": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "What's the best way to brew this?",
-            "icon": "question_mark",
-            "content": "<p>Tasting notes and a suggested recipe are on the bag. Ask us if you want a starting point for your setup.</p>",
-            "page": ""
-          }
         }
       },
       "block_order": [
@@ -89,10 +62,7 @@
         "description",
         "variant_picker",
         "quantity_selector",
-        "buy_buttons",
-        "faq_storage",
-        "faq_freshness",
-        "faq_brew"
+        "buy_buttons"
       ],
       "settings": {
         "enable_sticky_info": true,
