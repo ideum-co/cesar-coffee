@@ -84,13 +84,16 @@
   min-width: 0;
 }
 
-/* ---------- Cards ---------- */
+/* ---------- Cards ----------
+   Esta sección está pensada sobre un fondo de color, así que la card lleva
+   fondo propio y no el del esquema: heredándolo se quedaba del mismo color que
+   la sección y desaparecía contra ella.
+   Abreviada y no background-color: .gradient escribe un background completo, y
+   su imagen de degradado taparía el color. */
 
-.cesar-sug[style*='--cesar-card-bg'] .card--card,
-.cesar-sug[style*='--cesar-card-bg'] .card--standard .card__inner {
-  /* Abreviada y no background-color: .gradient escribe un background completo,
-     y su imagen de degradado taparía el color elegido. */
-  background: var(--cesar-card-bg);
+.cesar-sug .card--card,
+.cesar-sug .card--standard .card__inner {
+  background: var(--cesar-card-bg, var(--cc-surface));
 }
 
 /* ---------- Flechas ---------- */
