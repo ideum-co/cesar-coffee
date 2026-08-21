@@ -165,8 +165,8 @@
 .product-form__input--dropdown .form__label {
   display: block;
   margin: 0 0 2px;
-  font-size: var(--cc-text-sm);
-  font-weight: 500;
+  font-size: var(--cc-text-xs);
+  font-weight: 400;
   /* Dawn pone la etiqueta en mayúsculas; el diseño la lleva en caja normal. */
   text-transform: none;
   letter-spacing: 0;
@@ -347,8 +347,8 @@ cesar-size-select .select {
   border: 0;
   background: transparent;
   font-family: inherit;
-  font-size: var(--cc-text-body-lg);
-  font-weight: 700;
+  font-size: var(--cc-text-body);
+  font-weight: 500;
   color: var(--cc-brown-900);
   cursor: pointer;
 }
