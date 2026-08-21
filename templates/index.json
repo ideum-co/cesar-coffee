@@ -85,7 +85,9 @@
         "button_link": "",
         "color_scheme": "scheme-1",
         "limit_width": true,
-        "max_width": 1200
+        "max_width": 1200,
+        "heading_color": "",
+        "heading_px": 0
       }
     },
     "more_than_a_bag": {
@@ -171,7 +173,8 @@
         "columns_mobile": "2",
         "swipe_on_mobile": true,
         "padding_top": 72,
-        "padding_bottom": 72
+        "padding_bottom": 72,
+        "card_bg": ""
       }
     },
     "flight_banner": {
@@ -413,6 +416,11 @@
         "button_link": "",
         "columns_desktop": 3,
         "columns_mobile": "1",
+        "source": "blog",
+        "blog": "",
+        "articles_to_show": 6,
+        "article_button_label": "Read the story",
+        "show_excerpt": false,
         "color_scheme": "scheme-3",
         "text_alignment": "left",
         "bg_color": "",
