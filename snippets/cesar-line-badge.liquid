@@ -73,22 +73,45 @@
     assign badge_label = line_field.value.name.value | default: badge_label
   endif
 
+  comment
+    Origen de la imagen. El campo del metaobjeto puede llegar como archivo
+    genérico —lo habitual con un SVG— o como imagen. Los SVG no pasan por
+    image_url, que sólo sirve para las imágenes que Shopify puede transformar,
+    así que en ese caso se usa la url tal cual.
+  endcomment
+  assign badge_src = ''
+  if badge_image.url != blank
+    assign badge_src = badge_image.url
+  elsif badge_image.image != blank
+    assign badge_src = badge_image.image | image_url: width: 160
+  elsif badge_image != blank
+    assign badge_src = badge_image | image_url: width: 160
+  endif
+
+  comment
+    Con imagen propia del metaobjeto se pinta aunque su handle no sea green,
+    silver ni gold. Atarlo a esos tres obligaba a nombrar las entradas de una
+    forma concreta, y basta con que la entrada traiga su badge: la imagen ya
+    identifica la línea.
+  endcomment
+  if badge_src != blank and badge_label == blank
+    assign badge_label = badge_src | split: '/' | last | split: '?' | first | remove: '.svg' | remove: '.png' | replace: 'badge-', '' | replace: '-', ' ' | capitalize
+  endif
+
   assign badge_size = size | default: 52
 -%}
 
-{%- if badge_asset != blank -%}
-  {%- if badge_image -%}
-    {%- assign badge_class = 'cc-line-badge ' | append: class -%}
-    {{
-      badge_image
-      | image_url: width: 160
-      | image_tag:
-        loading: 'lazy',
-        width: badge_size,
-        height: badge_size,
-        class: badge_class,
-        alt: badge_label
-    }}
+{%- if badge_src != blank or badge_asset != blank -%}
+  {%- if badge_src != blank -%}
+    <img
+      src="{{ badge_src }}"
+      alt="{{ badge_label | default: 'Coffee line' }}"
+      width="{{ badge_size }}"
+      height="{{ badge_size }}"
+      loading="lazy"
+      class="cc-line-badge {{ class }}"
+      style="width:{{ badge_size }}px;height:{{ badge_size }}px;"
+    >
   {%- else -%}
     <img
       src="{{ badge_asset | asset_url }}"
