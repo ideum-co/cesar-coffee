@@ -57,7 +57,7 @@
         "link_hover_color": "",
         "text_px": 0,
         "enable_blur": true,
-        "blur_strength": 20,
+        "blur_strength": 8,
         "blur_height": 160,
         "blur_tint": "#140803",
         "blur_tint_opacity": 20
