@@ -12,6 +12,10 @@
     "main": {
       "type": "main-product",
       "blocks": {
+        "judge_me_reviews_preview_badge_P4rCC7": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
         "origin": {
           "type": "text",
           "settings": {
@@ -54,35 +58,23 @@
             "show_gift_card_recipient": false
           }
         },
-        "faq_storage": {
-          "type": "collapsible_tab",
+        "subscriptions_app_block_gfYQbR": {
+          "type": "shopify://apps/subscriptions/blocks/app-block/a3bfe9ec-96f8-4508-a003-df608a36d2ad",
           "settings": {
-            "heading": "How should I store this?",
-            "icon": "question_mark",
-            "content": "<p>Keep the bag sealed, out of the sun, at room temperature. Don't refrigerate.</p>",
-            "page": ""
-          }
-        },
-        "faq_freshness": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "How fresh is it when it arrives?",
-            "icon": "question_mark",
-            "content": "<p>Roasted to order in North Williamstown and dispatched within days of roasting — never off a shelf.</p>",
-            "page": ""
-          }
-        },
-        "faq_brew": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "What's the best way to brew this?",
-            "icon": "question_mark",
-            "content": "<p>Tasting notes and a suggested recipe are on the bag. Ask us if you want a starting point for your setup.</p>",
-            "page": ""
+            "widget_style": "card",
+            "widget_style_card_selector": "radio_button",
+            "subscription_policy_url": "",
+            "color_text_body": "#6D7175",
+            "dividers_color": "#8F8D8D",
+            "background_color": "#FFFFFF",
+            "border_thickness": 1,
+            "border_radius": 0,
+            "product": "{{product}}"
           }
         }
       },
       "block_order": [
+        "judge_me_reviews_preview_badge_P4rCC7",
         "origin",
         "title",
         "rating",
@@ -90,9 +82,7 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
-        "faq_storage",
-        "faq_freshness",
-        "faq_brew"
+        "subscriptions_app_block_gfYQbR"
       ],
       "settings": {
         "enable_sticky_info": true,
@@ -370,34 +360,74 @@
         "color_scheme": ""
       }
     },
-    "roasted_to_order": {
-      "type": "rich-text",
+    "cesar_reviews_tabs_DUtbdX": {
+      "type": "cesar-reviews-tabs",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "judge_me_reviews_review_widget_Feh7Dm": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
-            "heading": "Roasted to order. Every time.",
-            "heading_size": "hxl"
+            "review_data": "no_reviews",
+            "max_width": 1200,
+            "show_shop_reviews": true,
+            "empty_state": "empty_widget"
           }
         },
-        "text": {
-          "type": "text",
+        "question_LwPdfe": {
+          "type": "question",
           "settings": {
-            "text": "<p>No inventory sitting on a shelf. Every bag is roasted after you order it, so what you get is always fresh.</p>"
+            "question": "How long does the coffee stay fresh?",
+            "answer": "<p>Best within four weeks of the roast date printed on the bag. After that it is still safe to drink, just less aromatic.</p>",
+            "author": "",
+            "verified": true,
+            "date": "",
+            "answered_by": "Cesar's Coffee Cup"
+          }
+        },
+        "question_q4WrX8": {
+          "type": "question",
+          "settings": {
+            "question": "How long does the coffee stay fresh?",
+            "answer": "<p>Best within four weeks of the roast date printed on the bag. After that it is still safe to drink, just less aromatic.</p>",
+            "author": "",
+            "verified": true,
+            "date": "",
+            "answered_by": "Cesar's Coffee Cup"
           }
         }
       },
       "block_order": [
-        "heading",
-        "text"
+        "judge_me_reviews_review_widget_Feh7Dm",
+        "question_LwPdfe",
+        "question_q4WrX8"
       ],
+      "name": "Cesar · Reseñas y Q&A",
       "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "scheme-1",
-        "full_width": true,
-        "padding_top": 72,
-        "padding_bottom": 40
+        "heading": "Roasted to order. Every time.",
+        "subheading": "<p>No inventory sitting on a shelf. Every bag is roasted after you order it, so what you get is always fresh.</p>",
+        "text_alignment": "center",
+        "reviews_label": "Reviews",
+        "reviews_title": "From Our Community",
+        "reviews_source": "judgeme",
+        "qa_label": "Q&A",
+        "qa_title": "Questions & Answers",
+        "verified_label": "Verified User",
+        "qa_button_label": "Ask a question",
+        "qa_button_link": "",
+        "limit_width": true,
+        "max_width": 1400,
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "tabs_bg": "",
+        "tab_active_bg": "",
+        "tab_active_text": "",
+        "tab_text": "",
+        "button_bg": "",
+        "button_text": "",
+        "heading_px": 0,
+        "subheading_px": 0,
+        "text_px": 0,
+        "color_scheme": ""
       }
     },
     "recommendations": {
@@ -430,7 +460,7 @@
     "cesar_suggested_A9fCn4",
     "tiers",
     "cesar_video_ttK3ca",
-    "roasted_to_order",
+    "cesar_reviews_tabs_DUtbdX",
     "recommendations"
   ]
 }
