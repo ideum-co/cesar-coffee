@@ -78,10 +78,11 @@
       </label>
 
       {%- comment -%}
-        Detalle de la suscripción. Sólo se muestra al elegirla: enseñarlo siempre
-        recarga el bloque de compra con información que aún no aplica.
+        El detalle está siempre visible, como en el diseño: las ventajas y la
+        frecuencia son justo lo que convence de elegir la suscripción, así que
+        esconderlas hasta después de elegirla las deja sin función.
       {%- endcomment -%}
-      <div class="cesar-purchase__detail" data-detail hidden>
+      <div class="cesar-purchase__detail" data-detail>
         {%- if block.settings.benefits != blank -%}
           <ul class="cesar-purchase__benefits" role="list">
             {%- assign benefits = block.settings.benefits | split: '|' -%}

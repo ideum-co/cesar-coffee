@@ -1,5 +1,10 @@
 /**
  * Compra única frente a suscripción en la ficha de producto.
+ *
+ * Cada opción es una tarjeta completa: al elegir la suscripción, la tarjeta
+ * entera pasa a verde. El estado se lee de :has(input:checked) y no de una
+ * clase, así que lo que se ve y lo que envía el formulario no pueden
+ * desincronizarse.
  */
 
 .cesar-purchase {
@@ -9,29 +14,54 @@
   margin-block: var(--cc-space-6);
 }
 
-.cesar-purchase__option-wrap {
+/* ---------- Tarjeta ---------- */
+
+.cesar-purchase__option-wrap,
+.cesar-purchase > .cesar-purchase__option {
   border-radius: var(--cc-radius-lg);
-  background-color: rgba(45, 18, 6, 0.06);
-  overflow: hidden;
+  background-color: var(--cesar-purchase-bg, rgba(45, 18, 6, 0.08));
+  transition:
+    background-color var(--cc-duration) var(--cc-ease),
+    color var(--cc-duration) var(--cc-ease);
+}
+
+.cesar-purchase__option-wrap {
+  padding-bottom: var(--cc-space-5, 20px);
+}
+
+/* Sólo la tarjeta de la suscripción lleva detalle debajo, así que la de compra
+   única no necesita ese relleno inferior. */
+.cesar-purchase > .cesar-purchase__option {
+  padding-bottom: 0;
 }
 
 .cesar-purchase__option {
   display: flex;
   align-items: center;
-  gap: var(--cc-space-3);
+  gap: var(--cc-space-4);
   /* mínimo táctil */
-  min-height: 56px;
+  min-height: 64px;
   padding: var(--cc-space-3) var(--cc-space-6);
   border-radius: var(--cc-radius-lg);
-  background-color: rgba(45, 18, 6, 0.06);
   cursor: pointer;
 }
 
+/* Dentro del envoltorio la fila no repite el fondo: lo pone la tarjeta. */
 .cesar-purchase__option-wrap .cesar-purchase__option {
   background-color: transparent;
 }
 
-/* El radio real se oculta pero conserva foco y teclado; el círculo de al lado
+/* ---------- Estado elegido ----------
+   El verde va sobre el envoltorio para que cubra también el detalle. */
+.cesar-purchase__option-wrap:has(input:checked),
+.cesar-purchase > .cesar-purchase__option:has(input:checked) {
+  --cesar-purchase-bg: var(--cc-green);
+
+  color: #fff;
+}
+
+/* ---------- Radio ----------
+   El input real se oculta pero conserva foco y teclado; el círculo de al lado
    es sólo su representación. */
 .cesar-purchase__option input {
   position: absolute;
@@ -45,16 +75,16 @@
   flex: none;
   display: grid;
   place-items: center;
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background-color: var(--cc-surface);
 }
 
 .cesar-purchase__dot::after {
   content: '';
-  width: 11px;
-  height: 11px;
+  width: 13px;
+  height: 13px;
   border-radius: 50%;
   background-color: transparent;
   transition: background-color var(--cc-duration) var(--cc-ease);
@@ -64,45 +94,51 @@
   background-color: var(--cc-brown-900);
 }
 
-/* El foco se dibuja sobre la fila, ya que el radio está oculto. */
-.cesar-purchase__option:has(input:focus-visible) {
-  outline: 2px solid var(--cc-brown-900);
-  outline-offset: 2px;
+/* El foco se dibuja sobre el círculo porque el input real es invisible: sin
+   esto, quien navega con teclado no sabría dónde está. */
+.cesar-purchase__option:has(input:focus-visible) .cesar-purchase__dot {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
 }
+
+/* ---------- Textos de la fila ---------- */
 
 .cesar-purchase__label {
   font-size: var(--cc-text-body-lg);
   font-weight: 700;
-  color: var(--cc-brown-900);
+  line-height: 1.2;
 }
 
 .cesar-purchase__badge {
-  padding: 4px 10px;
+  flex: none;
+  padding: 4px var(--cc-space-3);
   border-radius: var(--cc-radius-pill);
-  background-color: var(--cc-surface);
-  font-size: var(--cc-text-xs);
-  font-weight: 700;
+  /* Blanco fijo y no el color del texto: sobre el verde tiene que seguir
+     leyéndose en marrón, como en el diseño. */
+  background-color: #fff;
   color: var(--cc-brown-900);
+  font-size: var(--cc-text-sm);
+  font-weight: 700;
   white-space: nowrap;
 }
 
+/* Empuja el precio al extremo derecho sin necesidad de un contenedor extra. */
 .cesar-purchase__price {
-  /* empuja el precio al extremo derecho de la fila */
   margin-left: auto;
   font-size: var(--cc-text-body-lg);
   font-weight: 700;
   font-variant-numeric: tabular-nums;
-  color: var(--cc-brown-900);
+  white-space: nowrap;
 }
 
 /* ---------- Detalle de la suscripción ---------- */
 
 .cesar-purchase__detail {
-  padding: 0 var(--cc-space-6) var(--cc-space-5);
+  padding-inline: var(--cc-space-6);
 }
 
 .cesar-purchase__benefits {
-  margin: 0 0 var(--cc-space-4);
+  margin: 0 0 var(--cc-space-5, 20px);
   padding: 0;
   list-style: none;
   display: flex;
@@ -113,18 +149,17 @@
 .cesar-purchase__benefits li {
   display: flex;
   align-items: center;
-  gap: var(--cc-space-2);
-  font-size: var(--cc-text-sm);
-  color: var(--cc-text);
+  gap: var(--cc-space-3);
+  font-size: var(--cc-text-body);
+  line-height: 1.4;
 }
 
 .cesar-purchase__check {
+  flex: none;
   display: grid;
   place-items: center;
-  width: 16px;
-  height: 16px;
-  flex: none;
-  color: var(--cc-brown-700);
+  width: 18px;
+  height: 18px;
 }
 
 .cesar-purchase__check svg {
@@ -135,25 +170,50 @@
 .cesar-purchase__frequency-label {
   display: block;
   margin-bottom: var(--cc-space-2);
-  font-size: var(--cc-text-sm);
+  font-size: var(--cc-text-body);
   font-weight: 700;
-  color: var(--cc-brown-900);
 }
 
 .cesar-purchase__select {
   width: 100%;
-  min-height: 48px;
-  padding: var(--cc-space-2) var(--cc-space-4);
-  border: 1px solid rgba(45, 18, 6, 0.35);
-  border-radius: var(--cc-radius-sm);
-  background-color: var(--cc-surface);
-  color: var(--cc-brown-900);
+  min-height: 52px;
+  padding: 0 var(--cc-space-10, 40px) 0 var(--cc-space-4);
+  border: 1px solid currentColor;
+  border-radius: var(--cc-radius-md);
+  background-color: transparent;
+  color: inherit;
   font-family: inherit;
-  /* 16px evita el auto-zoom de iOS al enfocar */
   font-size: var(--cc-text-body);
+  /* El desplegable nativo pinta su propia flecha en cada sistema; se sustituye
+     por una igual en todos, dibujada como fondo. */
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position:
+    calc(100% - 22px) calc(50% + 2px),
+    calc(100% - 16px) calc(50% + 2px);
+  background-size:
+    6px 6px,
+    6px 6px;
+  background-repeat: no-repeat;
+}
+
+/* Las opciones del desplegable las pinta el sistema, no la página: sobre el
+   verde heredarían texto blanco sobre fondo blanco. */
+.cesar-purchase__select option {
+  color: var(--cc-brown-900);
+  background-color: var(--cc-surface);
 }
 
 .cesar-purchase__select:focus-visible {
-  outline: 2px solid var(--cc-brown-900);
+  outline: 2px solid currentColor;
   outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cesar-purchase__option-wrap,
+  .cesar-purchase > .cesar-purchase__option,
+  .cesar-purchase__dot::after {
+    transition: none;
+  }
 }

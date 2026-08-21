@@ -1,7 +1,11 @@
 /**
  * Compra única frente a suscripción en la ficha de producto.
- * Escribe el plan elegido en el campo que viaja con el formulario y muestra el
- * detalle de la suscripción sólo cuando está seleccionada.
+ * Escribe el plan elegido en el campo que viaja con el formulario y mantiene el
+ * precio de la suscripción al día con la frecuencia elegida.
+ *
+ * El color de la tarjeta elegida no lo pone este script: lo resuelve el CSS con
+ * :has(input:checked), de modo que lo que se ve y lo que envía el formulario
+ * salen del mismo sitio y no pueden discrepar.
  */
 class CesarPurchaseOptions extends HTMLElement {
   connectedCallback() {
@@ -44,7 +48,6 @@ class CesarPurchaseOptions extends HTMLElement {
     }
 
     this.hidden_input.value = plan;
-    if (this.detail) this.detail.hidden = !isSubscription;
   }
 }
 

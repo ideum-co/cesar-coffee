@@ -149,8 +149,22 @@
 
 /* ---------- Selector de talla ---------- */
 
-/* Ocupa su propia fila pero sólo el ancho de su contenido. */
+/* Cada selector de variante ocupa su propia fila.
+   El primero se ajusta a su contenido y los siguientes van a todo el ancho,
+   como en el diseño: la talla es corta y el tueste lleva nombres largos que
+   partirían en dos líneas dentro de una caja estrecha. */
 .product__info-container > .product-form__input--dropdown {
+  justify-self: stretch;
+  width: auto;
+  /* section-main-product.css limita .product-form__input a 44rem. Ese tope
+     dejaba el selector a media columna por mucho que se pidiera estirarlo. */
+  max-width: none;
+  /* Con el relleno propio y un ancho estirado, el modelo de caja tiene que
+     contar el relleno dentro o el selector se sale de su columna. */
+  box-sizing: border-box;
+}
+
+.product__info-container > .product-form__input--dropdown.cesar-variant--1 {
   justify-self: start;
 }
 

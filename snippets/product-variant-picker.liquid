@@ -67,7 +67,12 @@
           toda la lógica de variantes de Dawn sigue funcionando igual. Sin JS
           queda el desplegable nativo, que funciona.
         {%- endcomment -%}
-        <cesar-size-select class="product-form__input product-form__input--dropdown">
+        {%- comment -%}
+          El índice viaja en una clase para poder dar a cada selector un ancho
+          distinto desde el CSS. Se numera en vez de mirar el nombre de la
+          opción porque ese nombre lo escribe el comerciante y puede cambiar.
+        {%- endcomment -%}
+        <cesar-size-select class="product-form__input product-form__input--dropdown cesar-variant--{{ forloop.index }}">
           <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
             {{ option.name }}
           </label>
