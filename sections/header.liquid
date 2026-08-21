@@ -155,7 +155,7 @@
   {% if header_tag == 'sticky-header' %}
     data-sticky-type="{{ section.settings.sticky_header_type }}"
   {% endif %}
-  class="cesar-sec header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}{% if header_transparent %} header-wrapper--transparent{% endif %}"
+  class="cesar-sec header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}{% if header_transparent %} header-wrapper--transparent{% endif %}{% if section.settings.blur_scope == 'all' and section.settings.enable_blur and section.settings.blur_strength > 0 %} header-wrapper--blur-all{% endif %}"
   {% if cesar_style != blank %}style="{{ cesar_style | strip_newlines | strip }}"{% endif %}
 >
   {%- liquid
@@ -180,11 +180,19 @@
     menos abajo: el resultado se acumula hacia arriba y la caída es no lineal,
     que es lo que hace que no se vea un corte.
 
-    Sólo se pinta con el header transparente. Con fondo sólido no habría nada
-    que desenfocar detrás, y la banda acabaría emborronando el principio de la
-    página.
+    Con el alcance en la portada sólo se pinta donde el header es transparente.
+    Con el alcance en todo el sitio se pinta siempre, y el header renuncia a su
+    fondo sólido al fijarse: quien da legibilidad entonces es el velo.
   {%- endcomment -%}
-  {%- if header_transparent and section.settings.enable_blur and section.settings.blur_strength > 0 -%}
+  {%- liquid
+    assign pintar_blur = false
+    if section.settings.enable_blur and section.settings.blur_strength > 0
+      if section.settings.blur_scope == 'all' or header_transparent
+        assign pintar_blur = true
+      endif
+    endif
+  -%}
+  {%- if pintar_blur -%}
     <div
       class="cesar-header-blur"
       aria-hidden="true"
@@ -784,13 +792,30 @@
     },
     {
       "type": "paragraph",
-      "content": "Sólo se aplica donde el header es transparente, es decir sobre el hero de la portada. Al fijarse al hacer scroll el header recupera fondo y el desenfoque se retira."
+      "content": "El desenfoque necesita contenido detrás para notarse: se aprecia sobre el hero de la portada y, en las páginas internas, cuando el header queda fijado y el contenido pasa por debajo."
     },
     {
       "type": "checkbox",
       "id": "enable_blur",
       "label": "Activar el desenfoque",
       "default": true
+    },
+    {
+      "type": "select",
+      "id": "blur_scope",
+      "label": "Dónde se aplica",
+      "options": [
+        {
+          "value": "all",
+          "label": "Todo el sitio"
+        },
+        {
+          "value": "home",
+          "label": "Sólo la portada"
+        }
+      ],
+      "default": "all",
+      "info": "En todo el sitio, el header deja de tener fondo sólido y son el desenfoque y el velo los que separan el menú del contenido. Comprueba que el menú se lea sobre las páginas internas."
     },
     {
       "type": "range",

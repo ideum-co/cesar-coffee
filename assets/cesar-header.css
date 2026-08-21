@@ -28,9 +28,14 @@
 }
 
 /* Al hacer sticky el header ya no está sobre el hero, así que recupera fondo
-   para no quedar ilegible sobre el contenido que pasa por debajo. */
-.header-wrapper--transparent.shopify-section-header-sticky,
-.header-wrapper--transparent.shopify-section-header-hidden {
+   para no quedar ilegible sobre el contenido que pasa por debajo.
+
+   Las clases de sticky las pone el script sobre .section-header, que es el
+   contenedor de la sección, no sobre .header-wrapper. Escritas juntas en el
+   mismo selector exigían las dos clases en un solo elemento y no coincidían
+   nunca: van como descendencia. */
+.shopify-section-header-sticky .header-wrapper--transparent,
+.shopify-section-header-hidden .header-wrapper--transparent {
   background-color: rgb(var(--color-background));
 }
 
@@ -139,16 +144,43 @@ body:has(.header-wrapper--transparent) main[data-template='index'] > .shopify-se
   );
 }
 
-/* Al hacerse sticky el header recupera fondo sólido, así que el desenfoque ya
-   no aporta nada y encima emborronaría el contenido que pasa por debajo. */
-.header-wrapper--transparent.shopify-section-header-sticky .cesar-header-blur,
-.header-wrapper--transparent.shopify-section-header-hidden .cesar-header-blur,
+/* Con el desenfoque limitado a la portada, al fijarse el header recupera fondo
+   sólido: entonces la banda ya no aporta nada y encima emborronaría el
+   contenido que pasa por debajo, así que se retira. */
+.shopify-section-header-sticky .header-wrapper--transparent:not(.header-wrapper--blur-all) .cesar-header-blur,
+.shopify-section-header-hidden .header-wrapper--transparent:not(.header-wrapper--blur-all) .cesar-header-blur {
+  display: none;
+}
+
+/* Con la búsqueda abierta el header recupera fondo en cualquier caso, porque la
+   fila de resultados necesita un fondo opaco detrás. */
 .header-wrapper--search-open .cesar-header-blur {
   display: none;
 }
 
+/* ---- Alcance en todo el sitio ----
+   El header renuncia a su fondo sólido, también al fijarse: lo que separa el
+   menú del contenido pasa a ser el desenfoque más el velo. Sin esto la banda
+   quedaría detrás de un fondo opaco y no se vería nada.
+   Se declara sobre .gradient y sobre .header además del envoltorio porque Dawn
+   pinta el fondo en los tres sitios, y 'background' es una propiedad abreviada
+   que ganaría a un background-color posterior. */
+.header-wrapper--blur-all:not(.header-wrapper--search-open),
+.header-wrapper--blur-all:not(.header-wrapper--search-open).gradient,
+.header-wrapper--blur-all:not(.header-wrapper--search-open) .header {
+  background: transparent;
+}
+
 /* El contenido del header va por encima de la banda. */
-.header-wrapper--transparent .header {
+.header-wrapper--transparent .header,
+.header-wrapper--blur-all .header {
   position: relative;
   z-index: 1;
+}
+
+/* Fijado en páginas internas el header sale del flujo por encima del contenido;
+   sin contexto de apilamiento propio, secciones posteriores podían pintarse por
+   delante del menú. */
+.shopify-section-header-sticky:has(.header-wrapper--blur-all) {
+  z-index: 4;
 }
