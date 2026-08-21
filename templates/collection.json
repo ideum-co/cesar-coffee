@@ -16,7 +16,7 @@
         "show_collection_image": true,
         "color_scheme": "scheme-1",
         "bg_color": "",
-        "heading_color": "#2D1206",
+        "heading_color": "#2d1206",
         "text_color": "",
         "heading_px": 0,
         "text_px": 0
@@ -48,7 +48,8 @@
         "button_bg": "",
         "button_text": "",
         "heading_px": 0,
-        "text_px": 0
+        "text_px": 0,
+        "card_bg": "#FFFFFF"
       }
     },
     "faq": {
