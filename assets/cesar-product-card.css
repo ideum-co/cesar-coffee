@@ -113,6 +113,21 @@
   overflow: hidden;
 }
 
+/* ---------- Borde de la card ----------
+   Dawn ya pinta uno en .card--card y en .card--standard .card__inner, con el
+   grosor y la opacidad de los ajustes del tema. Aquí se fija el del diseño.
+   Va con las dos clases del contenedor por lo mismo que el resto del bloque:
+   la regla de Dawn pesa 0-2-0 y su hoja puede cargarse después. */
+.card-wrapper.product-card-wrapper .card--card,
+.card-wrapper.product-card-wrapper .card--standard .card__inner {
+  /* Dawn dibuja la sombra en un ::after que se desplaza según --border-width.
+     Si no coincide con el borde real, la sombra queda descuadrada respecto al
+     contorno, así que se ajusta la variable al mismo grosor. */
+  --border-width: var(--cesar-card-border-width, 1px);
+
+  border: var(--cesar-card-border-width, 1px) solid var(--cesar-card-border-color, #cac4d0);
+}
+
 /* ---------- Badge de línea ---------- */
 
 .card__inner {
