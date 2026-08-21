@@ -363,6 +363,15 @@
     "cesar_reviews_tabs_DUtbdX": {
       "type": "cesar-reviews-tabs",
       "blocks": {
+        "judge_me_reviews_review_widget_Feh7Dm": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "no_reviews",
+            "max_width": 1200,
+            "show_shop_reviews": true,
+            "empty_state": "empty_widget"
+          }
+        },
         "question_LwPdfe": {
           "type": "question",
           "settings": {
@@ -387,6 +396,7 @@
         }
       },
       "block_order": [
+        "judge_me_reviews_review_widget_Feh7Dm",
         "question_LwPdfe",
         "question_q4WrX8"
       ],
