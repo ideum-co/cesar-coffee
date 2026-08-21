@@ -370,6 +370,66 @@
         "padding_bottom": 40
       }
     },
+    "cesar_reviews_tabs_DUtbdX": {
+      "type": "cesar-reviews-tabs",
+      "blocks": {
+        "question_LwPdfe": {
+          "type": "question",
+          "settings": {
+            "question": "How long does the coffee stay fresh?",
+            "answer": "<p>Best within four weeks of the roast date printed on the bag. After that it is still safe to drink, just less aromatic.</p>",
+            "author": "",
+            "verified": true,
+            "date": "",
+            "answered_by": "Cesar's Coffee Cup"
+          }
+        },
+        "question_q4WrX8": {
+          "type": "question",
+          "settings": {
+            "question": "How long does the coffee stay fresh?",
+            "answer": "<p>Best within four weeks of the roast date printed on the bag. After that it is still safe to drink, just less aromatic.</p>",
+            "author": "",
+            "verified": true,
+            "date": "",
+            "answered_by": "Cesar's Coffee Cup"
+          }
+        }
+      },
+      "block_order": [
+        "question_LwPdfe",
+        "question_q4WrX8"
+      ],
+      "name": "Cesar · Reseñas y Q&A",
+      "settings": {
+        "heading": "Roasted to order. Every time.",
+        "subheading": "<p>No inventory sitting on a shelf. Every bag is roasted after you order it, so what you get is always fresh.</p>",
+        "text_alignment": "center",
+        "reviews_label": "Reviews",
+        "reviews_title": "From Our Community",
+        "reviews_source": "judgeme",
+        "qa_label": "Q&A",
+        "qa_title": "Questions & Answers",
+        "verified_label": "Verified User",
+        "qa_button_label": "Ask a question",
+        "qa_button_link": "",
+        "limit_width": true,
+        "max_width": 1400,
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "tabs_bg": "",
+        "tab_active_bg": "",
+        "tab_active_text": "",
+        "tab_text": "",
+        "button_bg": "",
+        "button_text": "",
+        "heading_px": 0,
+        "subheading_px": 0,
+        "text_px": 0,
+        "color_scheme": ""
+      }
+    },
     "recommendations": {
       "type": "related-products",
       "settings": {
@@ -401,6 +461,7 @@
     "tiers",
     "cesar_video_ttK3ca",
     "roasted_to_order",
+    "cesar_reviews_tabs_DUtbdX",
     "recommendations"
   ]
 }
