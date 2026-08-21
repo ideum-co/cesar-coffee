@@ -340,36 +340,6 @@
         "color_scheme": ""
       }
     },
-    "roasted_to_order": {
-      "type": "rich-text",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Roasted to order. Every time.",
-            "heading_size": "hxl"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>No inventory sitting on a shelf. Every bag is roasted after you order it, so what you get is always fresh.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text"
-      ],
-      "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "scheme-1",
-        "full_width": true,
-        "padding_top": 72,
-        "padding_bottom": 40
-      }
-    },
     "cesar_reviews_tabs_DUtbdX": {
       "type": "cesar-reviews-tabs",
       "blocks": {
@@ -460,7 +430,6 @@
     "cesar_suggested_A9fCn4",
     "tiers",
     "cesar_video_ttK3ca",
-    "roasted_to_order",
     "cesar_reviews_tabs_DUtbdX",
     "recommendations"
   ]
