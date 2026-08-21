@@ -51,7 +51,16 @@
         "enable_language_selector": false,
         "margin_bottom": 0,
         "padding_top": 12,
-        "padding_bottom": 12
+        "padding_bottom": 12,
+        "bg_color": "",
+        "link_color": "",
+        "link_hover_color": "",
+        "text_px": 0,
+        "enable_blur": true,
+        "blur_strength": 20,
+        "blur_height": 160,
+        "blur_tint": "#140803",
+        "blur_tint_opacity": 20
       }
     }
   },
