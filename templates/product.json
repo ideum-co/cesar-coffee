@@ -65,16 +65,12 @@
             "widget_style_card_selector": "dropdown",
             "subscription_policy_url": "shopify://policies/privacy-policy",
             "color_text_body": "#4e3625",
-            "dividers_color": "#4E3625",
+            "dividers_color": "#4e3625",
             "background_color": "#e1e1e4",
             "border_thickness": 0.5,
             "border_radius": 16,
             "product": "{{product}}"
           }
-        },
-        "judge_me_reviews_preview_badge_gFPFyL": {
-          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {}
         }
       },
       "block_order": [
@@ -86,8 +82,7 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
-        "subscriptions_app_block_gfYQbR",
-        "judge_me_reviews_preview_badge_gFPFyL"
+        "subscriptions_app_block_gfYQbR"
       ],
       "settings": {
         "enable_sticky_info": true,
@@ -437,6 +432,7 @@
     },
     "recommendations": {
       "type": "related-products",
+      "disabled": true,
       "settings": {
         "heading": "You may also like",
         "heading_size": "h1",
