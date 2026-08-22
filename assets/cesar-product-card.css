@@ -278,7 +278,19 @@
 
 /* ---------- Botón ---------- */
 
+/* product-form es un elemento propio de Dawn y sin display declarado es inline.
+   El botón pide width: 100%, y contra una caja inline ese 100% no corresponde
+   al ancho de la card: se salía por la derecha. Apareció al envolver el
+   formulario en product-form para que el añadido fuera por AJAX. */
+.cesar-pcard__panel product-form,
+.cesar-pcard__panel .product-form {
+  display: block;
+}
+
 .cesar-pcard__submit {
+  /* Con relleno propio y ancho al 100%, el relleno tiene que contar dentro o
+     el botón vuelve a desbordar. */
+  box-sizing: border-box;
   width: 100%;
   min-height: 44px;
   padding: var(--cc-space-3) var(--cc-space-4);
@@ -312,6 +324,45 @@
 .cesar-pcard__submit:focus-visible {
   outline: 2px solid var(--cc-brown-900);
   outline-offset: 2px;
+}
+
+/* ---------- Pantallas estrechas ----------
+   La card mide bastante menos, así que las píldoras y el botón ocupaban una
+   parte desproporcionada de la foto. Se recorta el texto y el relleno, no el
+   alto: los 44px son el mínimo táctil y en móvil es justo donde más importan.
+
+   Va por ancho y no por (hover: none) para que también aplique al probar en un
+   navegador de escritorio estrechado, que sigue declarando que tiene ratón. */
+@media screen and (max-width: 749px) {
+  .cesar-pcard__panel {
+    padding: var(--cc-space-2);
+  }
+
+  .cesar-pcard__sizes {
+    gap: var(--cc-space-1);
+    margin-bottom: var(--cc-space-2);
+  }
+
+  .cesar-pcard__size {
+    gap: var(--cc-space-2);
+    padding-inline: var(--cc-space-3);
+    font-size: var(--cc-text-sm);
+  }
+
+  .cesar-pcard__size-dot {
+    width: 18px;
+    height: 18px;
+  }
+
+  .cesar-pcard__size-dot::after {
+    width: 8px;
+    height: 8px;
+  }
+
+  .cesar-pcard__submit {
+    padding-block: var(--cc-space-2);
+    font-size: var(--cc-text-sm);
+  }
 }
 
 /* En pantallas táctiles no hay hover: la capa se muestra siempre, porque si no
