@@ -101,7 +101,8 @@
       ".shopify_subscriptions_app_policy {font-family: helvetica; font-size: 12px;}",
       ".jdgm-prev-badge__text {font-size: 12px;}",
       ".plan_card {border: none !important;}",
-      ".group_dropdown {height: 35px;}"
+      ".group_dropdown {height: 35px;}",
+      "h1.header__heading {z-index: 9;}"
     ]
   }
 }
