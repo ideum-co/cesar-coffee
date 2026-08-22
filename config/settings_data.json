@@ -95,5 +95,10 @@
         }
       }
     }
+  },
+  "platform_customizations": {
+    "custom_css": [
+      ".shopify_subscriptions_app_policy {font-family: helvetica; font-size: 12px;}"
+    ]
   }
 }
