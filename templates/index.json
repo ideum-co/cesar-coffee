@@ -36,7 +36,7 @@
             "button_label": "See Our Farms",
             "button_link": "",
             "bg_color": "#3e5f49",
-            "text_color": "",
+            "text_color": "#FFFFFF",
             "button_bg": "#5c8a6e",
             "button_text": "#ffffff"
           }
@@ -174,7 +174,7 @@
         "swipe_on_mobile": true,
         "padding_top": 72,
         "padding_bottom": 72,
-        "card_bg": "#FFFFFF"
+        "card_bg": "#ffffff"
       }
     },
     "flight_banner": {

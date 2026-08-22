@@ -281,8 +281,8 @@
             "button_link": "",
             "bg_color": "",
             "text_color": "",
-            "button_bg": "",
-            "button_text": ""
+            "button_bg": "#5C8A6E",
+            "button_text": "#FFFFFF"
           }
         },
         "gold": {
@@ -297,8 +297,8 @@
             "button_link": "",
             "bg_color": "",
             "text_color": "#ffffff",
-            "button_bg": "",
-            "button_text": ""
+            "button_bg": "#5C8A6E",
+            "button_text": "#FFFFFF"
           }
         },
         "silver": {
@@ -313,8 +313,8 @@
             "button_link": "",
             "bg_color": "",
             "text_color": "",
-            "button_bg": "",
-            "button_text": ""
+            "button_bg": "#5C8A6E",
+            "button_text": "#FFFFFF"
           }
         }
       },
