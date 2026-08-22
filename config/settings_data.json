@@ -99,7 +99,9 @@
   "platform_customizations": {
     "custom_css": [
       ".shopify_subscriptions_app_policy {font-family: helvetica; font-size: 12px;}",
-      ".jdgm-prev-badge__text {font-size: 12px;}"
+      ".jdgm-prev-badge__text {font-size: 12px;}",
+      ".plan_card {border: none !important;}",
+      ".group_dropdown {height: 35px;}"
     ]
   }
 }
