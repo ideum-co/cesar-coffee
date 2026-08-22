@@ -54,6 +54,12 @@
 .cesar-slider.slider--desktop .grid__item {
   width: calc((100% - var(--cc-gutter) * (var(--cc-cards-shown, 3) - 1)) / var(--cc-cards-shown, 3));
   max-width: none;
+  /* Dawn da flex: 1 0 auto, y ese crecimiento reparte el espacio sobrante
+     entre los slides que haya. Con menos productos que columnas, las cards se
+     estiraban y la foto y las proporciones se deformaban. Sin crecimiento
+     conservan su ancho y el hueco se queda a la derecha, que es lo que se
+     espera de un carrusel a medio llenar. */
+  flex-grow: 0;
 }
 
 .cesar-slider.slider--desktop .slider__slide:first-child {
