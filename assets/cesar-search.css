@@ -26,6 +26,11 @@
 .search-modal__content {
   /* A sangre y pegada al header, no como diálogo flotante. */
   position: static;
+  /* El formulario ocupa todo el ancho disponible y el cierre se queda al final,
+     sin robarle sitio al campo. */
+  display: flex;
+  align-items: center;
+  gap: var(--cc-space-4);
   width: 100%;
   max-width: none;
   height: auto;
@@ -48,6 +53,10 @@
   top: 100%;
   z-index: 4;
   height: auto;
+  /* base.css le da min-height: calc(100% + ...), y ese 100% se mide contra el
+     header. La caja quedaba tan alta como el propio header y dejaba una franja
+     vacía bajo la fila, con la página asomando por debajo. */
+  min-height: 0;
   background: transparent;
 }
 
@@ -76,6 +85,8 @@
 /* ---------- Campo ---------- */
 
 .search-modal__form {
+  flex: 1 1 auto;
+  min-width: 0;
   width: 100%;
 }
 
@@ -150,7 +161,12 @@
 
 /* ---------- Botón Search ---------- */
 
-.search-modal__content .search__button {
+/* El segundo selector repite el :not() de Dawn a propósito. component-search.css
+   trae .search__button:not(:focus-visible):not(.focused) { background-color:
+   inherit }, que pesa 0-3-0 y ganaba: el botón salía con el texto blanco y sin
+   fondo. Y esa hoja se carga en diferido, así que siempre llega la última. */
+.search-modal__content .search__button,
+.search-modal__content .search__button:not(:focus-visible):not(.focused) {
   flex: 0 0 auto;
   position: relative;
   display: inline-flex;
@@ -203,10 +219,35 @@
   color: var(--cc-brown-500);
 }
 
-/* Dawn coloca el botón de cerrar dentro del diálogo; aquí la fila se cierra
-   con el mismo icono del header, así que sobra. */
-.search-modal__close-button {
+/* ---------- Cierre ----------
+   Había dos: el icono del header, que Dawn cambia por una X al abrir, y el
+   botón de la fila. Dos cierres a dos dedos uno del otro, y el del header
+   quedaba flotando entre la lupa y la cuenta. Se conserva el de la fila, que
+   se lee como parte del buscador, y el header mantiene su lupa.
+
+   El selector repite details[open] porque el de Dawn pesa 0-2-1 y una regla
+   con dos clases no le ganaba. */
+.header__search details[open] .header__icon-close {
   display: none;
+}
+
+.search-modal__content .search-modal__close-button {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--cc-brown-900);
+  cursor: pointer;
+}
+
+.search-modal__content .search-modal__close-button:focus-visible {
+  outline: 2px solid var(--cc-brown-900);
+  outline-offset: 2px;
 }
 
 /* ---------- Resultados predictivos ---------- */
