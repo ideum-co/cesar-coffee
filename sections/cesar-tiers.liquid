@@ -42,6 +42,7 @@
         {%- capture tier_style -%}
           {% if block.settings.bg_color != blank %}--cesar-tier-bg: {{ block.settings.bg_color }};{% endif %}
           {% if block.settings.text_color != blank %}--cesar-tier-text: {{ block.settings.text_color }};{% endif %}
+          {% if block.settings.title_color != blank %}--cesar-tier-title: {{ block.settings.title_color }};{% endif %}
           {% if block.settings.button_bg != blank %}--cesar-tier-btn-bg: {{ block.settings.button_bg }};{% endif %}
           {% if block.settings.button_text != blank %}--cesar-tier-btn-text: {{ block.settings.button_text }};{% endif %}
         {%- endcapture -%}
@@ -236,8 +237,14 @@
         },
         {
           "type": "color",
+          "id": "title_color",
+          "label": "Título",
+          "info": "Vacío, el título sigue al color de texto de la card."
+        },
+        {
+          "type": "color",
           "id": "text_color",
-          "label": "Texto"
+          "label": "Texto de la descripción"
         },
         {
           "type": "color",

@@ -50,6 +50,11 @@
 }
 
 .cesar-tier__title {
+  /* base.css da color a todos los h1-h5, así que el título rompía la herencia
+     y el color de texto de la card no le llegaba: quedaba con el del esquema
+     mientras la descripción sí cambiaba. Con inherit vuelve a seguir a la
+     card, y --cesar-tier-title permite además darle uno propio. */
+  color: var(--cesar-tier-title, inherit);
   margin: 0 0 var(--cc-space-2);
   font-family: var(--cc-font-sans, var(--cc-fallback-sans));
   font-size: var(--cc-text-h3);
