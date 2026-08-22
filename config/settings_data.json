@@ -102,7 +102,7 @@
       ".jdgm-prev-badge__text {font-size: 12px;}",
       ".plan_card {border: none !important;}",
       ".group_dropdown {height: 35px;}",
-      "h1.header__heading {z-index: 1;}"
+      "h1.header__heading {z-index: 9;}"
     ]
   }
 }
