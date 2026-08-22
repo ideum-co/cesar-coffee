@@ -17,16 +17,48 @@
    orden a cualquier regla nuestra del head. Las secciones propias no ponen
    grid--N-col-desktop, de modo que no llega a aplicarse y manda el reparto
    exacto de aquí. --cc-cards lo escribe la sección con su ajuste. */
-@media screen and (min-width: 990px) {
-  .cesar-slider.slider--desktop .grid__item {
-    width: calc((100% - var(--cc-gutter) * (var(--cc-cards, 3) - 1)) / var(--cc-cards, 3));
-    max-width: none;
-  }
+/* El reparto se aplica en todos los anchos, no sólo en escritorio. Antes la
+   regla vivía dentro de un min-width: 990px, así que por debajo mandaba la
+   clase grid--N-col-tablet-down de Dawn y se pasaba de tres o cuatro cards a
+   una de golpe. Ahora el número baja de tramo en tramo.
 
-  .cesar-slider.slider--desktop .slider__slide:first-child {
-    margin-left: 0;
-    scroll-margin-left: 0;
+   El tope por tramo nunca sube por encima de lo que pida la sección: min() se
+   queda con el menor de los dos, de modo que un carrusel configurado a 2 no se
+   convierte en 4 en pantalla ancha. */
+/* El número de cards visibles se resuelve aquí, en el contenedor, y una sola
+   vez por tramo. La regla del slide lo usa ya calculado: si el min() viviera
+   en esa regla aparecería dos veces —en la resta y en la división— y son dos
+   evaluaciones independientes que pueden no coincidir. */
+.cesar-slider.slider--desktop {
+  --cc-cards-shown: min(var(--cc-cards, 3), 4);
+}
+
+@media screen and (max-width: 1199px) {
+  .cesar-slider.slider--desktop {
+    --cc-cards-shown: min(var(--cc-cards, 3), 3);
   }
+}
+
+@media screen and (max-width: 989px) {
+  .cesar-slider.slider--desktop {
+    --cc-cards-shown: min(var(--cc-cards, 3), 2);
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .cesar-slider.slider--desktop {
+    --cc-cards-shown: 1;
+  }
+}
+
+.cesar-slider.slider--desktop .grid__item {
+  width: calc((100% - var(--cc-gutter) * (var(--cc-cards-shown, 3) - 1)) / var(--cc-cards-shown, 3));
+  max-width: none;
+}
+
+.cesar-slider.slider--desktop .slider__slide:first-child {
+  margin-left: 0;
+  scroll-margin-left: 0;
 }
 
 /* ---------- Flechas flotantes sobre las cards ----------
