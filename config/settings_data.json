@@ -17,24 +17,24 @@
         "disabled": false,
         "settings": {}
       },
-      "1768834845299682660": {
-        "type": "shopify://apps/subscriptions/blocks/app-embed-block/a3bfe9ec-96f8-4508-a003-df608a36d2ad",
-        "disabled": false,
-        "settings": {
-          "color_text_title": "#6D7175",
-          "color_text_body": "#6D7175",
-          "dividers_color": "#8F8D8D",
-          "bacgkround_color": "#FFFFFF",
-          "border_thickness": 1,
-          "border_radius": 0,
-          "subscription_policy_url": ""
-        }
-      },
       "13047258039897440615": {
         "type": "shopify://apps/judge-me-reviews/blocks/cart_drawer_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
         "disabled": false,
         "settings": {
           "widget_type": "review-widget"
+        }
+      },
+      "1768834845299682660": {
+        "type": "shopify://apps/subscriptions/blocks/app-embed-block/a3bfe9ec-96f8-4508-a003-df608a36d2ad",
+        "disabled": true,
+        "settings": {
+          "color_text_title": "#6d7175",
+          "color_text_body": "#6d7175",
+          "dividers_color": "#8f8d8d",
+          "bacgkround_color": "#ffffff",
+          "border_thickness": 1,
+          "border_radius": 0,
+          "subscription_policy_url": ""
         }
       }
     },
@@ -43,7 +43,7 @@
         "settings": {
           "background": "#ebebed",
           "background_gradient": "",
-          "text": "#4E3625",
+          "text": "#4e3625",
           "button": "#5c8a6e",
           "button_label": "#ffffff",
           "secondary_button_label": "#2d1206",
@@ -95,5 +95,13 @@
         }
       }
     }
+  },
+  "platform_customizations": {
+    "custom_css": [
+      ".shopify_subscriptions_app_policy {font-family: helvetica; font-size: 12px;}",
+      ".jdgm-prev-badge__text {font-size: 12px;}",
+      ".plan_card {border: none !important;}",
+      ".group_dropdown {height: 35px;}"
+    ]
   }
 }
