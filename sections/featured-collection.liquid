@@ -119,7 +119,19 @@
       <ul
         id="Slider-{{ section.id }}"
         data-id="{{ section.id }}"
-        class="grid product-grid contains-card contains-card--product{% if settings.card_style == 'standard' %} contains-card--standard{% endif %} grid--{{ section.settings.columns_desktop }}-col-desktop{% if section.settings.collection == blank %} grid--2-col-tablet-down{% else %} grid--{{ section.settings.columns_mobile }}-col-tablet-down{% endif %}{% if show_mobile_slider or show_desktop_slider %} slider{% if show_desktop_slider %} slider--desktop{% endif %}{% if show_mobile_slider %} slider--tablet grid--peek{% endif %}{% endif %}"
+        {%- comment -%}
+          Con carrusel en escritorio, el ancho de las cards lo lleva
+          cesar-slider-dots.css a partir de --cc-cards, que baja por tramos
+          (4 → 3 → 2 → 1) en vez de saltar de golpe a una columna.
+
+          En ese caso no se emite grid--N-col-desktop a propósito: esa clase
+          activa el cálculo de ancho de Dawn, que vive en component-slider.css
+          y se carga en el cuerpo, así que ganaba por orden. Sin la clase, no
+          llega a aplicarse. Fuera del carrusel sí se emite, porque ahí es la
+          que reparte las columnas de la rejilla.
+        {%- endcomment -%}
+        class="grid product-grid contains-card contains-card--product{% if settings.card_style == 'standard' %} contains-card--standard{% endif %}{% unless show_desktop_slider %} grid--{{ section.settings.columns_desktop }}-col-desktop{% endunless %}{% if section.settings.collection == blank %} grid--2-col-tablet-down{% else %} grid--{{ section.settings.columns_mobile }}-col-tablet-down{% endif %}{% if show_mobile_slider or show_desktop_slider %} slider{% if show_desktop_slider %} cesar-slider slider--desktop{% endif %}{% if show_mobile_slider %} slider--tablet grid--peek{% endif %}{% endif %}"
+        {% if show_desktop_slider %}style="--cc-cards: {{ section.settings.columns_desktop }};"{% endif %}
         role="list"
         aria-label="{{ 'general.slider.name' | t }}"
       >
