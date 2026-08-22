@@ -150,22 +150,33 @@
 /* ---------- Selector de talla ---------- */
 
 /* Cada selector de variante ocupa su propia fila.
+
+   El hijo directo del contenedor no es cada selector sino <variant-selects>,
+   que los envuelve a todos. Y como es un elemento propio sin display, se
+   comporta como inline: los desplegables se colocaban uno al lado del otro en
+   la misma línea. Se convierte en columna y desde ahí se dimensiona cada uno.
+
    El primero se ajusta a su contenido y los siguientes van a todo el ancho,
    como en el diseño: la talla es corta y el tueste lleva nombres largos que
    partirían en dos líneas dentro de una caja estrecha. */
-.product__info-container > .product-form__input--dropdown {
-  justify-self: stretch;
-  width: auto;
+.product__info-container > variant-selects {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--cc-space-3);
+}
+
+.product__info-container > variant-selects > .product-form__input--dropdown {
   /* section-main-product.css limita .product-form__input a 44rem. Ese tope
-     dejaba el selector a media columna por mucho que se pidiera estirarlo. */
+     dejaba el selector a media fila por mucho que se pidiera estirarlo. */
   max-width: none;
   /* Con el relleno propio y un ancho estirado, el modelo de caja tiene que
-     contar el relleno dentro o el selector se sale de su columna. */
+     contar el relleno dentro o el selector se sale de su fila. */
   box-sizing: border-box;
 }
 
-.product__info-container > .product-form__input--dropdown.cesar-variant--1 {
-  justify-self: start;
+.product__info-container > variant-selects > .product-form__input--dropdown:not(.cesar-variant--1) {
+  align-self: stretch;
 }
 
 .product-form__input--dropdown {
