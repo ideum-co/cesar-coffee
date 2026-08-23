@@ -212,7 +212,33 @@
 
               <span class="caption-large light">{{ block.settings.description | escape }}</span>
 
-              {%- if show_rating and card_product.metafields.reviews.rating.value != blank -%}
+              {%- comment -%}
+                Estrellas de Judge.me. El metafield judgeme.badge trae el HTML
+                ya montado, así que se pinta con la página y no da el salto que
+                deja el widget al montarse por JS. Si aún no está sincronizado,
+                el contenedor vacío es el que la app rellena: lleva data-id y
+                data-template, que es lo que su script busca.
+
+                Sustituye a las estrellas nativas de Dawn, que leen el metafield
+                reviews.rating. Mantener las dos pintaría dos filas de estrellas
+                en cuanto Judge.me sincronizara.
+              {%- endcomment -%}
+              {%- if show_rating -%}
+                <div
+                  class="jdgm-widget jdgm-preview-badge cesar-card__rating"
+                  data-id="{{ card_product.id }}"
+                  data-template="index"
+                >
+                  {{- card_product.metafields.judgeme.badge -}}
+                </div>
+              {%- endif -%}
+
+              {%- comment -%}
+                Estrellas nativas de Dawn, sólo mientras Judge.me no haya
+                sincronizado su badge para este producto. En cuanto lo haga,
+                manda el suyo y estas se retiran para no pintar dos filas.
+              {%- endcomment -%}
+              {%- if show_rating and card_product.metafields.judgeme.badge == blank and card_product.metafields.reviews.rating.value != blank -%}
                 {% liquid
                   assign rating_decimal = 0
                   assign decimal = card_product.metafields.reviews.rating.value.rating | modulo: 1

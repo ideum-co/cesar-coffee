@@ -433,7 +433,9 @@ button.shopify-payment-button__button--unbranded {
 
 .card__heading {
   font-family: var(--cc-font-sans, var(--cc-fallback-sans));
-  font-size: var(--cc-text-body);
+  /* Dos puntos por debajo del cuerpo: en la card el nombre convive con las
+     notas de cata y las estrellas, y a 16px se comía ese bloque. */
+  font-size: var(--cc-text-sm);
   font-weight: 700;
   line-height: 1.25;
   letter-spacing: -0.01em;
@@ -447,18 +449,33 @@ button.shopify-payment-button__button--unbranded {
 
 /* Notas de cata bajo el título de la card */
 .cesar-card__notes {
-  margin: var(--cc-space-1) 0 var(--cc-space-2);
-  font-size: var(--cc-text-sm);
-  line-height: 1.4;
-  color: var(--cc-text-muted);
-}
-
-/* Notas de cata bajo el título */
-.cesar-card__notes {
   margin: var(--cc-space-1) 0 0;
   font-size: var(--cc-text-xs);
   line-height: 1.4;
   color: var(--cc-text-muted);
+}
+
+/* Estrellas de Judge.me en la card. La app trae su propio CSS desde su
+   incrustación, así que aquí sólo se coloca el bloque y se ajusta la escala:
+   por defecto llega con el tamaño de la ficha, que en la card es excesivo. */
+.cesar-card__rating {
+  margin: var(--cc-space-2) 0 0;
+  line-height: 1;
+}
+
+.cesar-card__rating .jdgm-star {
+  font-size: var(--cc-text-sm);
+}
+
+.cesar-card__rating .jdgm-prev-badge__text {
+  font-size: var(--cc-text-xs);
+  color: var(--cc-text-muted);
+}
+
+/* Sin reseñas, Judge.me deja el bloque vacío: sin esto quedaría un hueco
+   suelto entre las notas de cata y el precio. */
+.cesar-card__rating:empty {
+  display: none;
 }
 
 /* ---------- Badges de línea ---------- */
