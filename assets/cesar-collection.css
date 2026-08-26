@@ -112,20 +112,81 @@
   background-color: transparent;
 }
 
-.facets__display .facets__item,
-.facets__display .facets__label {
+.facets__display .facets__item {
   color: var(--cc-brown-900);
-  font-size: var(--cc-text-body);
 }
 
-/* El recuento pesa menos que la opción: es un dato de apoyo. */
+/* La fila es flex para poder mandar el recuento al extremo derecho.
+   El relleno y el radio van aquí y no en :hover: aplicados sólo al pasar el
+   ratón, la fila crecía bajo el cursor y las de abajo se desplazaban. */
+.facets__display .facets__label {
+  display: flex;
+  align-items: center;
+  gap: var(--cc-space-3);
+  padding: 8px;
+  border-radius: 4px;
+  color: var(--cc-brown-900);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.facets__display .facets__label:hover,
+.facets__display .facets__label.active,
+.facets__display .facets__label:has(:focus-visible) {
+  background-color: #e8e3e4;
+  color: #4e3625;
+}
+
+/* El recuento se va al final de la fila. */
 .facets__display .facets__label .facet-checkbox__text-label + span,
 .facets__display .facets__label span:last-child {
-  color: var(--cc-text-muted);
+  margin-left: auto;
+  color: #4e3625;
+  font-weight: 500;
+  text-decoration: none;
 }
 
-.facets__display .facets__label:hover {
-  background-color: var(--cc-cream-tint);
+/* ---------- Casilla ----------
+   Dawn esconde el input detrás de un SVG y le da fondo con
+   rgb(var(--color-background)); donde no resuelve, la casilla salía como un
+   cuadro negro. Aquí se dibuja entera: sin apariencia nativa, con borde de
+   marca y la marca de verificación como fondo al marcarla. */
+.facets__display .facets__label input[type='checkbox'] {
+  appearance: none;
+  -webkit-appearance: none;
+  position: static;
+  z-index: auto;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  opacity: 1;
+  border: 1.5px solid var(--cc-brown-500);
+  border-radius: 3px;
+  background-color: var(--cc-surface);
+  cursor: pointer;
+  transition: background-color var(--cc-duration) var(--cc-ease);
+}
+
+.facets__display .facets__label input[type='checkbox']:checked {
+  border-color: var(--cc-brown-900);
+  background-color: var(--cc-brown-900);
+  /* La marca va como imagen de fondo: un ::before no es posible en un input. */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-6' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 14px;
+}
+
+.facets__display .facets__label input[type='checkbox']:focus-visible {
+  outline: 2px solid var(--cc-brown-900);
+  outline-offset: 2px;
+}
+
+/* Dawn dibuja su propia marca en un SVG junto al input; con la casilla ya
+   dibujada, ese icono sobraría y se solaparía. */
+.facets__display .facets__label > svg {
+  display: none;
 }
 
 /* ---------- Grid ----------
