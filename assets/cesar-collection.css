@@ -27,7 +27,7 @@
 
 /* Medidas tomadas de la referencia: alto 42px, padding 10/21, radio completo,
    texto de 16px. Se sube a 44px por el mínimo táctil. */
-.facets-pill .facets__summary,
+.facets .facets__summary,
 .facet-filters__sort {
   border-radius: var(--cc-radius-pill);
   background-color: var(--cc-cream);
@@ -39,8 +39,8 @@
   color: var(--cc-brown-900);
 }
 
-.facets-pill .facets__disclosure[open] .facets__summary,
-.facets-pill .facets__summary:hover,
+.facets .facets__disclosure[open] .facets__summary,
+.facets .facets__summary:hover,
 .facet-filters__sort:hover {
   background-color: var(--cc-cream-tint);
 }
@@ -144,6 +144,54 @@
   color: #4e3625;
   font-weight: 500;
   text-decoration: none;
+}
+
+/* ---------- Filtro de precio ----------
+   Los campos son .field__input, que Dawn pinta con
+   rgb(var(--color-background)); igual que el panel, donde esa variable no
+   resuelve quedaban en negro con el texto encima sin contraste. */
+.facets__display .facets__price .field__input {
+  background-color: var(--cc-surface);
+  border: 1px solid var(--cc-border);
+  border-radius: var(--cc-radius-sm);
+  box-shadow: none;
+  color: var(--cc-brown-900);
+  font-family: var(--cc-font-sans, var(--cc-fallback-sans));
+  /* 16px: por debajo, iOS hace zoom al enfocar el campo */
+  font-size: var(--cc-text-body);
+  min-height: 44px;
+  padding-inline: var(--cc-space-3);
+}
+
+.facets__display .facets__price .field__input::placeholder {
+  color: var(--cc-text-muted);
+  opacity: 1;
+}
+
+.facets__display .facets__price .field__input:focus-visible {
+  outline: 2px solid var(--cc-brown-900);
+  outline-offset: 2px;
+}
+
+/* Dawn dibuja el borde del campo con un ::after; con borde propio, sobra. */
+.facets__display .facets__price .field::after,
+.facets__display .facets__price .field::before {
+  display: none;
+}
+
+.facets__display .facets__price .field-currency {
+  color: var(--cc-brown-900);
+  font-weight: 600;
+}
+
+/* La etiqueta flotante de Dawn se solapa con el placeholder. */
+.facets__display .facets__price .field__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
 /* ---------- Casilla ----------
