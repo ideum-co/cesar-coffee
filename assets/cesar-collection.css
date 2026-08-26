@@ -40,8 +40,9 @@
 }
 
 .facets-pill .facets__disclosure[open] .facets__summary,
-.facets-pill .facets__summary:hover {
-  background-color: #f3ecd8;
+.facets-pill .facets__summary:hover,
+.facet-filters__sort:hover {
+  background-color: var(--cc-cream-tint);
 }
 
 .facets__summary:focus-visible,
@@ -71,10 +72,60 @@
   text-decoration: none;
 }
 
-.facets__display,
-.facets__display-vertical {
+/* ---------- Panel del filtro ----------
+   Dawn lo pinta con rgb(var(--color-background)) y rgb(var(--color-foreground)).
+   Donde se despliega el panel esas variables no resuelven, así que el fondo
+   caía a negro y el texto quedaba ilegible sobre él. Aquí lleva colores
+   propios y no depende del esquema.
+
+   El lenguaje es el de los selectores de variante: mismo fondo, mismo radio,
+   misma tipografía y texto de marca. */
+/* Con la clase del desplegable delante: la regla de Dawn pesa lo mismo con
+   una sola clase y component-facets.css se carga después, así que ganaba por
+   orden y el panel se quedaba con su fondo de esquema. */
+.facets__disclosure .facets__display,
+.facets__disclosure-vertical .facets__display-vertical {
   border-radius: var(--cc-radius-md);
   border: 1px solid var(--cc-border);
+  background-color: var(--cc-field);
+  color: var(--cc-brown-900);
+  font-family: var(--cc-font-sans, var(--cc-fallback-sans));
+  overflow: hidden;
+}
+
+/* La cabecera va pegada arriba al desplazar, así que necesita fondo propio: si
+   fuera transparente, las opciones pasarían por detrás del contador. */
+.facets__display .facets__header,
+.facets__display-vertical .facets__header {
+  background-color: var(--cc-field);
+  color: var(--cc-brown-900);
+  border-bottom: 1px solid var(--cc-border);
+  font-size: var(--cc-text-sm);
+  font-weight: 500;
+}
+
+.facets__display .facets__reset {
+  color: var(--cc-terracotta-text);
+}
+
+.facets__list {
+  background-color: transparent;
+}
+
+.facets__display .facets__item,
+.facets__display .facets__label {
+  color: var(--cc-brown-900);
+  font-size: var(--cc-text-body);
+}
+
+/* El recuento pesa menos que la opción: es un dato de apoyo. */
+.facets__display .facets__label .facet-checkbox__text-label + span,
+.facets__display .facets__label span:last-child {
+  color: var(--cc-text-muted);
+}
+
+.facets__display .facets__label:hover {
+  background-color: var(--cc-cream-tint);
 }
 
 /* ---------- Grid ----------

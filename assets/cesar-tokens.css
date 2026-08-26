@@ -17,6 +17,10 @@
   --cc-silver: #5f6a67;
   --cc-yellow: #fdf5a6;
   --cc-cream: #fbf8ec;
+  --cc-cream-tint: #f8f7ee; /* estado activo de los filtros */
+  /* El mismo gris cálido de los selectores de variante, pero opaco: en un
+     desplegable flotante el rgba dejaría pasar el contenido de debajo. */
+  --cc-field: #f2f1f0;
   --cc-bg: #ebebed;
   --cc-surface: #ffffff;
 
