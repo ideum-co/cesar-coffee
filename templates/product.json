@@ -19,7 +19,7 @@
         "origin": {
           "type": "text",
           "settings": {
-            "text": "Hero varietal · Cauca, Colombia",
+            "text": "{{ product.metafields.custom.state_country.value }}",
             "text_style": "uppercase"
           }
         },
