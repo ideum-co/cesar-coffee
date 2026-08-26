@@ -177,7 +177,7 @@
           "settings": {
             "image": "shopify://shop_images/icon-coffee-beans-1.svg",
             "title": "Tasting Notes",
-            "text": "<p>Taste them side by side to feel what each method does.</p>",
+            "text": "{{ product.metafields.custom.coffee_notes | metafield_tag }}",
             "link_label": "",
             "link": ""
           }
@@ -280,9 +280,10 @@
             "button_label": "See Our Farms",
             "button_link": "",
             "bg_color": "",
+            "title_color": "",
             "text_color": "",
-            "button_bg": "#5C8A6E",
-            "button_text": "#FFFFFF"
+            "button_bg": "#5c8a6e",
+            "button_text": "#ffffff"
           }
         },
         "gold": {
@@ -296,9 +297,10 @@
             "button_label": "See Our Farms",
             "button_link": "",
             "bg_color": "",
+            "title_color": "",
             "text_color": "#ffffff",
-            "button_bg": "#5C8A6E",
-            "button_text": "#FFFFFF"
+            "button_bg": "#5c8a6e",
+            "button_text": "#ffffff"
           }
         },
         "silver": {
@@ -312,9 +314,10 @@
             "button_label": "See Our Farms",
             "button_link": "",
             "bg_color": "",
+            "title_color": "",
             "text_color": "",
-            "button_bg": "#5C8A6E",
-            "button_text": "#FFFFFF"
+            "button_bg": "#5c8a6e",
+            "button_text": "#ffffff"
           }
         }
       },
