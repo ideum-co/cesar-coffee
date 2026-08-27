@@ -257,3 +257,109 @@
   column-gap: var(--cc-gutter);
   row-gap: var(--cc-gutter);
 }
+
+/* ---------------------------------------------------------------------------
+   Cajón de filtros en móvil
+   Mismo caso que el panel de escritorio: Dawn lo pinta con
+   rgb(var(--color-background)) y rgb(var(--color-foreground)), y donde esas
+   variables no resuelven el cajón entero salía negro con el texto encima sin
+   contraste. Aquí lleva colores propios.
+
+   Los selectores repiten la clase del formulario porque los de Dawn pesan lo
+   mismo con una sola y component-facets.css se carga después, así que ganaba
+   por orden.
+   --------------------------------------------------------------------------- */
+
+.mobile-facets .mobile-facets__inner {
+  background-color: var(--cc-bg);
+  color: var(--cc-brown-900);
+  font-family: var(--cc-font-sans, var(--cc-fallback-sans));
+}
+
+.mobile-facets .mobile-facets__header,
+.mobile-facets .mobile-facets__footer {
+  background-color: var(--cc-bg);
+  color: var(--cc-brown-900);
+  border-color: var(--cc-border);
+}
+
+.mobile-facets .mobile-facets__heading {
+  color: var(--cc-brown-900);
+  font-weight: 700;
+}
+
+.mobile-facets .mobile-facets__count {
+  color: var(--cc-text-muted);
+}
+
+/* Cada fila del listado: nombre del filtro y flecha. */
+.mobile-facets .mobile-facets__summary,
+.mobile-facets .mobile-facets__item,
+.mobile-facets .mobile-facets__label,
+.mobile-facets .mobile-facets__submenu {
+  background-color: transparent;
+  color: var(--cc-brown-900);
+}
+
+.mobile-facets .mobile-facets__submenu {
+  background-color: var(--cc-bg);
+}
+
+.mobile-facets .mobile-facets__label:hover {
+  background-color: #e8e3e4;
+}
+
+/* La casilla del cajón lleva el mismo tratamiento que la de escritorio: Dawn
+   la esconde tras un SVG con fondo de esquema, que es lo que salía en negro. */
+.mobile-facets .mobile-facets__label > svg {
+  display: none;
+}
+
+.mobile-facets .mobile-facets__label input[type='checkbox'] {
+  appearance: none;
+  -webkit-appearance: none;
+  position: static;
+  z-index: auto;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin: 0 12px 0 0;
+  opacity: 1;
+  border: 1.5px solid var(--cc-brown-500);
+  border-radius: 3px;
+  background-color: var(--cc-surface);
+}
+
+.mobile-facets .mobile-facets__label input[type='checkbox']:checked {
+  border-color: var(--cc-brown-900);
+  background-color: var(--cc-brown-900);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-6' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 14px;
+}
+
+/* Campos del filtro de precio dentro del cajón. */
+.mobile-facets .mobile-facets__price .field__input,
+.mobile-facets .facets__price .field__input {
+  background-color: var(--cc-surface);
+  border: 1px solid var(--cc-border);
+  border-radius: var(--cc-radius-sm);
+  box-shadow: none;
+  color: var(--cc-brown-900);
+  /* 16px: por debajo, iOS hace zoom al enfocar */
+  font-size: var(--cc-text-body);
+  min-height: 44px;
+}
+
+/* El botón que abre el cajón, con la misma píldora que los de escritorio. */
+.mobile-facets__open {
+  border-radius: var(--cc-radius-md);
+  background-color: var(--cc-cream);
+  color: var(--cc-brown-900);
+  min-height: 44px;
+}
+
+.mobile-facets__open:hover {
+  background-color: var(--cc-cream-tint);
+}
