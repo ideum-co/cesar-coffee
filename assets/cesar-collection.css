@@ -27,16 +27,28 @@
 
 /* Medidas tomadas de la referencia: alto 42px, padding 10/21, radio completo,
    texto de 16px. Se sube a 44px por el mínimo táctil. */
+/* La separación entre filtros la lleva el gap del contenedor. Dawn la resolvía
+   con un margen a la derecha de cada desplegable, que dejaba el último con
+   hueco sobrante y no se ajustaba al saltar de línea. */
+.facets .facets__wrapper {
+  gap: 6px;
+}
+
+.facets .facets__disclosure {
+  margin-right: 0;
+}
+
 .facets .facets__summary,
 .facet-filters__sort {
-  border-radius: var(--cc-radius-pill);
+  border-radius: var(--cc-radius-md);
   background-color: var(--cc-cream);
   border: 1px solid transparent;
   min-height: 44px;
-  padding-inline: var(--cc-space-6);
+  padding-inline: var(--cc-space-4);
   font-size: var(--cc-text-body);
   font-weight: 500;
   color: var(--cc-brown-900);
+  align-content: center;
 }
 
 .facets .facets__disclosure[open] .facets__summary,
