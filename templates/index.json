@@ -16,9 +16,9 @@
         "subheading": "Colombian coffee, sourced direct from origin and roasted to order in Melbourne.",
         "image": "shopify://shop_images/hero.webp",
         "button_label": "Shop The Range",
-        "button_link": "",
+        "button_link": "shopify://collections/all",
         "button_label_2": "Our Story",
-        "button_link_2": "",
+        "button_link_2": "shopify://pages/about-us",
         "color_scheme": "scheme-1"
       }
     },
@@ -34,7 +34,7 @@
             "title": "Green Line",
             "text": "Everyday espresso, always on. The dependable base of the range.",
             "button_label": "See Our Farms",
-            "button_link": "",
+            "button_link": "shopify://pages/about-us",
             "bg_color": "#3e5f49",
             "text_color": "#FFFFFF",
             "button_bg": "#5c8a6e",
@@ -50,7 +50,7 @@
             "title": "Gold Line",
             "text": "Rare allocation lots, the microlots that carry the story.",
             "button_label": "See Our Farms",
-            "button_link": "",
+            "button_link": "shopify://pages/about-us",
             "bg_color": "#c4972e",
             "text_color": "#ffffff",
             "button_bg": "#5c8a6e",
@@ -66,7 +66,7 @@
             "title": "Silver Line",
             "text": "Seasonal specialty from named producers, roasted for filter.",
             "button_label": "See Our Farms",
-            "button_link": "",
+            "button_link": "shopify://pages/about-us",
             "bg_color": "#5f6a67",
             "text_color": "",
             "button_bg": "#5c8a6e",
@@ -82,7 +82,7 @@
       "settings": {
         "heading": "Three tiers, one clear range",
         "button_label": "Shop All",
-        "button_link": "",
+        "button_link": "shopify://collections/all",
         "color_scheme": "scheme-1",
         "limit_width": true,
         "max_width": 1200,
@@ -113,7 +113,7 @@
           "type": "button",
           "settings": {
             "button_label": "Meet Cesar",
-            "button_link": "",
+            "button_link": "shopify://pages/about-us",
             "button_style_secondary": false,
             "button_bg": "#ffffff",
             "button_text": "#2d1206"
@@ -185,7 +185,7 @@
         "heading": "The Bourbon Rosado Flight",
         "text": "Taste what process alone can do to a single lot — Bourbon Rosado finished four ways: washed, natural, honey and anaerobic. Four 100g bags, one story.",
         "button_label": "Shop The Flight",
-        "link": "",
+        "link": "/search?q=Bourbon+Rosado&type=product",
         "color_scheme": "scheme-1",
         "text_alignment": "left",
         "bg_color": "",
@@ -205,7 +205,7 @@
             "title": "Directly from origin",
             "text": "Real relationships with the growers behind every lot.",
             "link_label": "See Our Farms",
-            "link": ""
+            "link": "shopify://pages/about-us"
           }
         },
         "card_2": {
@@ -215,7 +215,7 @@
             "title": "Roasted to order in Melbourne",
             "text": "Roasted fresh at our North Williamstown facility and dispatched within days.",
             "link_label": "How We Roast",
-            "link": ""
+            "link": "shopify://pages/co-roasting"
           }
         }
       },
@@ -261,7 +261,7 @@
           "type": "buttons",
           "settings": {
             "button_label_1": "Start Your Subscription",
-            "button_link_1": "",
+            "button_link_1": "shopify://collections/all",
             "button_bg_1": "#2d1206",
             "button_text_1": "#ffffff",
             "button_label_2": "",
@@ -294,42 +294,42 @@
           "type": "link",
           "settings": {
             "label": "Green",
-            "link": ""
+            "link": "shopify://collections/all"
           }
         },
         "silver": {
           "type": "link",
           "settings": {
             "label": "Silver",
-            "link": ""
+            "link": "shopify://collections/all"
           }
         },
         "gold": {
           "type": "link",
           "settings": {
             "label": "Gold",
-            "link": ""
+            "link": "shopify://collections/all"
           }
         },
         "flight": {
           "type": "link",
           "settings": {
             "label": "The Flight",
-            "link": ""
+            "link": "/search?q=Bourbon+Rosado&type=product"
           }
         },
         "subs": {
           "type": "link",
           "settings": {
             "label": "Subscriptions",
-            "link": ""
+            "link": "shopify://collections/all"
           }
         },
         "wholesale": {
           "type": "link",
           "settings": {
             "label": "Wholesale",
-            "link": ""
+            "link": "shopify://pages/wholesale"
           }
         }
       },
@@ -361,8 +361,8 @@
           "settings": {
             "title": "wholesale",
             "text": "",
-            "link_label": "See Our Farms",
-            "link": ""
+            "link_label": "Partner With Us",
+            "link": "shopify://pages/wholesale"
           }
         },
         "card_2": {
@@ -370,8 +370,8 @@
           "settings": {
             "title": "white label",
             "text": "",
-            "link_label": "How We Roast",
-            "link": ""
+            "link_label": "Talk Private Label",
+            "link": "shopify://pages/wholesale"
           }
         },
         "card_3": {
@@ -380,25 +380,25 @@
             "title": "co-roasting",
             "text": "",
             "link_label": "How We Roast",
-            "link": ""
+            "link": "shopify://pages/co-roasting"
           }
         },
         "card_z9btN7": {
           "type": "card",
           "settings": {
-            "title": "co-roasting",
+            "title": "roaster hire",
             "text": "",
-            "link_label": "How We Roast",
-            "link": ""
+            "link_label": "See Pricing",
+            "link": "shopify://pages/co-roasting"
           }
         },
         "card_VLcEYV": {
           "type": "card",
           "settings": {
-            "title": "co-roasting",
+            "title": "private label",
             "text": "",
-            "link_label": "How We Roast",
-            "link": ""
+            "link_label": "Talk To Us",
+            "link": "shopify://pages/wholesale"
           }
         }
       },
@@ -413,7 +413,7 @@
         "heading": "Retail proof. Trade ready.",
         "text": "Wholesale roast-to-order, white-label roasting, co-roasting and roaster hire — for cafés, venues and roasters who want what's in the bag.",
         "button_label": "Talk To Us About Trade",
-        "button_link": "",
+        "button_link": "shopify://pages/contact",
         "columns_desktop": 3,
         "columns_mobile": "1",
         "source": "blog",
