@@ -22,32 +22,6 @@
         "color_scheme": "scheme-1"
       }
     },
-    "farm_video": {
-      "type": "cesar-video",
-      "settings": {
-        "video": "gid://shopify/Video/42502945997013",
-        "video_url": "",
-        "cover_image": "",
-        "description": "Aerial view of a coffee farm in Colombia",
-        "enable_video_looping": true,
-        "ratio": "wide",
-        "play_label": "Watch",
-        "play_bg": "",
-        "play_text": "",
-        "play_px": 0,
-        "heading": "From the farm to your cup",
-        "text": "<p>A look at where it starts — our partner farms in Colombia, before the beans ever reach Melbourne.</p>",
-        "text_alignment": "left",
-        "limit_width": false,
-        "max_width": 1400,
-        "bg_color": "",
-        "heading_color": "",
-        "text_color": "",
-        "heading_px": 0,
-        "text_px": 0,
-        "color_scheme": "scheme-1"
-      }
-    },
     "tiers": {
       "type": "cesar-tiers",
       "blocks": {
@@ -62,7 +36,8 @@
             "button_label": "See Our Farms",
             "button_link": "shopify://pages/about-us",
             "bg_color": "#3e5f49",
-            "text_color": "#FFFFFF",
+            "title_color": "",
+            "text_color": "#ffffff",
             "button_bg": "#5c8a6e",
             "button_text": "#ffffff"
           }
@@ -78,6 +53,7 @@
             "button_label": "See Our Farms",
             "button_link": "shopify://pages/about-us",
             "bg_color": "#c4972e",
+            "title_color": "",
             "text_color": "#ffffff",
             "button_bg": "#5c8a6e",
             "button_text": ""
@@ -94,6 +70,7 @@
             "button_label": "See Our Farms",
             "button_link": "shopify://pages/about-us",
             "bg_color": "#5f6a67",
+            "title_color": "",
             "text_color": "",
             "button_bg": "#5c8a6e",
             "button_text": "#ffffff"
@@ -455,11 +432,35 @@
         "button_bg": "",
         "button_text": ""
       }
+    },
+    "cesar_video_dYCDmU": {
+      "type": "cesar-video",
+      "name": "Cesar · Vídeo",
+      "settings": {
+        "video": "shopify://files/videos/15678786-hd_1280_720_24fps.mp4",
+        "description": "",
+        "enable_video_looping": false,
+        "ratio": "video",
+        "play_label": "Play",
+        "play_bg": "",
+        "play_text": "",
+        "play_px": 0,
+        "heading": "",
+        "text": "",
+        "text_alignment": "left",
+        "limit_width": false,
+        "max_width": 1400,
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "heading_px": 0,
+        "text_px": 0,
+        "color_scheme": ""
+      }
     }
   },
   "order": [
     "hero",
-    "farm_video",
     "tiers",
     "more_than_a_bag",
     "the_range",
@@ -467,6 +468,7 @@
     "origin_and_roast",
     "cesar_feature_banner_GHpwfc",
     "explore",
-    "trade"
+    "trade",
+    "cesar_video_dYCDmU"
   ]
 }
