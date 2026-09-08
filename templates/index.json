@@ -22,6 +22,32 @@
         "color_scheme": "scheme-1"
       }
     },
+    "cesar_video_dYCDmU": {
+      "type": "cesar-video",
+      "name": "Cesar · Vídeo",
+      "settings": {
+        "video": "shopify://files/videos/15678786-hd_1280_720_24fps.mp4",
+        "video_url": "",
+        "description": "",
+        "enable_video_looping": false,
+        "ratio": "video",
+        "play_label": "Play",
+        "play_bg": "",
+        "play_text": "",
+        "play_px": 0,
+        "heading": "",
+        "text": "",
+        "text_alignment": "left",
+        "limit_width": false,
+        "max_width": 1400,
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "heading_px": 0,
+        "text_px": 0,
+        "color_scheme": ""
+      }
+    },
     "tiers": {
       "type": "cesar-tiers",
       "blocks": {
@@ -432,35 +458,11 @@
         "button_bg": "",
         "button_text": ""
       }
-    },
-    "cesar_video_dYCDmU": {
-      "type": "cesar-video",
-      "name": "Cesar · Vídeo",
-      "settings": {
-        "video": "shopify://files/videos/15678786-hd_1280_720_24fps.mp4",
-        "description": "",
-        "enable_video_looping": false,
-        "ratio": "video",
-        "play_label": "Play",
-        "play_bg": "",
-        "play_text": "",
-        "play_px": 0,
-        "heading": "",
-        "text": "",
-        "text_alignment": "left",
-        "limit_width": false,
-        "max_width": 1400,
-        "bg_color": "",
-        "heading_color": "",
-        "text_color": "",
-        "heading_px": 0,
-        "text_px": 0,
-        "color_scheme": ""
-      }
     }
   },
   "order": [
     "hero",
+    "cesar_video_dYCDmU",
     "tiers",
     "more_than_a_bag",
     "the_range",
@@ -468,7 +470,6 @@
     "origin_and_roast",
     "cesar_feature_banner_GHpwfc",
     "explore",
-    "trade",
-    "cesar_video_dYCDmU"
+    "trade"
   ]
 }
