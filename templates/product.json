@@ -341,6 +341,7 @@
       "type": "cesar-video",
       "name": "Cesar · Vídeo",
       "settings": {
+        "video": "shopify://files/videos/15678786-hd_1280_720_24fps.mp4",
         "video_url": "",
         "cover_image": "shopify://shop_images/banner-3.webp",
         "description": "",
