@@ -77,10 +77,18 @@
   align-content: center;
 }
 
+/* El estado se comunica con el fondo, no con un subrayado: dentro de una
+   píldora el subrayado se lee como enlace y compite con el propio relleno. */
+.facets .facets__summary:hover .facets__summary-label,
+.facets .facets__disclosure[open] .facets__summary-label,
+.mobile-facets__open:hover .mobile-facets__open-label {
+  text-decoration: none;
+}
+
 .facets .facets__disclosure[open] .facets__summary,
 .facets .facets__summary:hover,
 .facet-filters__sort:hover {
-  background-color: var(--cc-cream-tint);
+  background-color: var(--cc-cream-active);
 }
 
 .facets__summary:focus-visible,
@@ -168,10 +176,21 @@
   font-weight: 600;
 }
 
+/* Dawn subraya la opción al pasar el ratón y al enfocar el input. Aquí el
+   estado ya se ve con el fondo, así que el subrayado sobra. */
+.facets__display .facets__label:hover .facet-checkbox__text-label,
+.facets__display .facets__label input:focus ~ .facet-checkbox__text-label,
 .facets__display .facets__label:hover,
-.facets__display .facets__label.active,
+.facets__display .facets__label:focus-within {
+  text-decoration: none;
+}
+
+/* Marcada cuenta también como estado: sin esto, al cerrar y reabrir el panel
+   no había forma de ver de un vistazo qué filtros estaban puestos. */
+.facets__display .facets__label:hover,
+.facets__display .facets__label:has(:checked),
 .facets__display .facets__label:has(:focus-visible) {
-  background-color: #e8e3e4;
+  background-color: var(--cc-cream-active);
   color: #4e3625;
 }
 
@@ -331,8 +350,14 @@
   background-color: var(--cc-bg);
 }
 
-.mobile-facets .mobile-facets__label:hover {
-  background-color: #e8e3e4;
+.mobile-facets .mobile-facets__label:hover,
+.mobile-facets .mobile-facets__label:has(:checked) {
+  background-color: var(--cc-cream-active);
+}
+
+.mobile-facets .mobile-facets__label:hover,
+.mobile-facets .mobile-facets__label:focus-within {
+  text-decoration: none;
 }
 
 /* La casilla del cajón lleva el mismo tratamiento que la de escritorio: Dawn
