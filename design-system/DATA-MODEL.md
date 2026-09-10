@@ -149,6 +149,17 @@ Crear en **Configuración → Metafields y metaobjetos → Productos**.
 
 En todos: **marcar "Storefront access"**.
 
+> **El espacio de nombres hay que escribirlo a mano.** Al crear una definición,
+> Shopify propone `custom` y convierte el nombre en la clave: escribir
+> `cesar.origins` en *Name* deja el metafield guardado como
+> `custom.cesar_origins`, y la ruta de la tabla no existe. Hay que desplegar el
+> campo de espacio de nombres y clave y poner `cesar` y `origins` por separado.
+>
+> El tema lee las dos rutas, así que un alta con el espacio de nombres por
+> defecto funciona igual. Se acepta por comodidad, no porque dé lo mismo: con
+> `custom` conviven los campos de todas las apps y es más fácil chocar de
+> nombre.
+
 ---
 
 ## 4. Cómo se convierten en filtros

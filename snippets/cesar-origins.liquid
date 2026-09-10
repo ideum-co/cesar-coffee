@@ -27,7 +27,17 @@
 {% endcomment %}
 
 {%- liquid
+  comment
+    Se busca en los dos sitios donde puede estar. Al crear una definición,
+    Shopify propone el espacio de nombres `custom` y convierte el nombre en la
+    clave, así que `cesar.origins` acaba guardado como `custom.cesar_origins`
+    salvo que se edite a mano el espacio de nombres. Aceptar las dos rutas
+    evita que el bloque dependa de ese detalle del alta.
+  endcomment
   assign campo = product.metafields.cesar.origins
+  if campo == blank
+    assign campo = product.metafields.custom.cesar_origins
+  endif
   assign lista = null
   assign unico = null
   assign nombres_sueltos = ''

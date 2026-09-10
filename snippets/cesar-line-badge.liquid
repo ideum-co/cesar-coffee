@@ -25,7 +25,16 @@
 {% endcomment %}
 
 {%- liquid
+  comment
+    Los dos sitios donde puede estar: al crear la definición, Shopify propone
+    el espacio de nombres `custom` y convierte el nombre en la clave, de modo
+    que `cesar.line` acaba guardado como `custom.cesar_line` salvo que se edite
+    a mano. Aceptar ambas evita depender de ese detalle del alta.
+  endcomment
   assign line_field = product.metafields.cesar.line
+  if line_field == blank
+    assign line_field = product.metafields.custom.cesar_line
+  endif
   assign line = ''
   assign badge_image = null
 

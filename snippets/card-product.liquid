@@ -187,7 +187,13 @@
                 design-system/DATA-MODEL.md). Si no hay, no se pinta nada.
               {%- endcomment -%}
               {%- liquid
+                comment
+                  Los dos sitios donde puede estar; ver cesar-origins.liquid.
+                endcomment
                 assign notes_field = card_product.metafields.cesar.tasting_notes
+                if notes_field == blank
+                  assign notes_field = card_product.metafields.custom.cesar_tasting_notes
+                endif
                 assign notes = ''
                 if notes_field.type == 'list.metaobject_reference'
                   assign note_names = ''
