@@ -1,4 +1,9 @@
 {{ 'section-contact-form.css' | asset_url | stylesheet_tag }}
+{{ 'cesar-contact.css' | asset_url | stylesheet_tag }}
+
+{%- if section.settings.enquiry_enabled -%}
+  <script src="{{ 'cesar-contact-form.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -14,124 +19,217 @@
   }
 {%- endstyle -%}
 
-<div class="color-{{ section.settings.color_scheme }} gradient">
-  <div class="contact page-width page-width--narrow section-{{ section.id }}-padding">
-    {%- if section.settings.heading != blank -%}
-      <h2 class="title title-wrapper--no-top-margin inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-        {{ section.settings.heading }}
-      </h2>
-    {%- else -%}
-      <h2 class="visually-hidden">{{ 'templates.contact.form.title' | t }}</h2>
-    {%- endif -%}
-    {%- liquid
-      assign contact_form_class = 'isolate'
-      if settings.animations_reveal_on_scroll
-        assign contact_form_class = 'isolate scroll-trigger animate--slide-in'
-      endif
-    -%}
-    {%- form 'contact', id: 'ContactForm', class: contact_form_class -%}
-      {%- if form.posted_successfully? -%}
-        <h2 class="form-status form-status-list form__message" tabindex="-1" autofocus>
-          {{- 'icon-success.svg' | inline_asset_content -}}
-          {{ 'templates.contact.form.post_success' | t }}
+{%- capture cesar_style -%}
+  {% render 'cesar-section-style', s: section.settings %}
+  {% if section.settings.limit_width %}--cesar-contact-max: {{ section.settings.max_width }}px;{% endif %}
+  {% if section.settings.field_bg != blank %}--cesar-contact-field-bg: {{ section.settings.field_bg }};{% endif %}
+  {% if section.settings.field_border != blank %}--cesar-contact-field-border: {{ section.settings.field_border }};{% endif %}
+{%- endcapture -%}
+
+{%- liquid
+  comment
+    Las opciones del desplegable se escriben una por línea en el
+    personalizador. newline_to_br y split es la vía fiable para partirlas:
+    Liquid no puede dividir por un salto de línea escrito como '\n'.
+  endcomment
+  assign enquiry_options = section.settings.enquiry_options | strip | newline_to_br | split: '<br />'
+  assign enquiry_name = section.settings.enquiry_label | default: 'Enquiry type'
+-%}
+
+<div
+  class="cesar-contact cesar-sec color-{{ section.settings.color_scheme }} gradient"
+  {% if cesar_style != blank %}style="{{ cesar_style | strip_newlines | strip }}"{% endif %}
+>
+  <div class="contact page-width section-{{ section.id }}-padding">
+    <div class="cesar-contact__container{% if section.settings.limit_width %} cesar-contact__container--limited{% endif %}">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="title title-wrapper--no-top-margin inline-richtext {{ section.settings.heading_size }} cesar-contact__heading{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+          {{ section.settings.heading }}
         </h2>
-      {%- elsif form.errors -%}
-        <div class="form__message">
-          <h2 class="form-status caption-large text-body" role="alert" tabindex="-1" autofocus>
-            {{- 'icon-error.svg' | inline_asset_content -}}
-            {{ 'templates.contact.form.error_heading' | t }}
-          </h2>
-        </div>
-        <ul class="form-status-list caption-large" role="list">
-          <li>
-            <a href="#ContactForm-email" class="link">
-              {{ form.errors.translated_fields.email | capitalize }}
-              {{ form.errors.messages.email }}
-            </a>
-          </li>
-        </ul>
+      {%- else -%}
+        <h2 class="visually-hidden">{{ 'templates.contact.form.title' | t }}</h2>
       {%- endif -%}
-      <div class="contact__fields">
-        <div class="field">
-          <input
-            class="field__input"
-            autocomplete="name"
-            type="text"
-            id="ContactForm-name"
-            name="contact[{{ 'templates.contact.form.name' | t }}]"
-            value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
-            placeholder="{{ 'templates.contact.form.name' | t }}"
-          >
-          <label class="field__label" for="ContactForm-name">{{ 'templates.contact.form.name' | t }}</label>
-        </div>
-        <div class="field field--with-error">
-          <input
-            autocomplete="email"
-            type="email"
-            id="ContactForm-email"
-            class="field__input"
-            name="contact[email]"
-            spellcheck="false"
-            autocapitalize="off"
-            value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
-            aria-required="true"
-            {% if form.errors contains 'email' %}
-              aria-invalid="true"
-              aria-describedby="ContactForm-email-error"
-            {% endif %}
-            placeholder="{{ 'templates.contact.form.email' | t }}"
-          >
-          <label class="field__label" for="ContactForm-email">
-            {{- 'templates.contact.form.email' | t }}
-            <span aria-hidden="true">*</span></label
-          >
-          {%- if form.errors contains 'email' -%}
-            <small class="contact__field-error" id="ContactForm-email-error">
-              <span class="visually-hidden">{{ 'accessibility.error' | t }}</span>
-              <span class="form__message">
-                <span class="svg-wrapper">
+
+      {%- if section.settings.text != blank -%}
+        <div class="cesar-contact__text rte">{{ section.settings.text }}</div>
+      {%- endif -%}
+
+      {%- comment -%}
+        El formulario y los datos de contacto van uno al lado del otro cuando
+        hay sitio. En el orden del documento el formulario va primero: es a lo
+        que se viene, y así es lo primero que se encuentra con el teclado.
+      {%- endcomment -%}
+      <div class="cesar-contact__grid{% if section.blocks.size == 0 %} cesar-contact__grid--solo{% endif %}">
+        <div class="cesar-contact__form">
+          {%- liquid
+            assign contact_form_class = 'isolate'
+            if settings.animations_reveal_on_scroll
+              assign contact_form_class = 'isolate scroll-trigger animate--slide-in'
+            endif
+          -%}
+          {%- form 'contact', id: 'ContactForm', class: contact_form_class -%}
+            {%- if form.posted_successfully? -%}
+              <h2 class="form-status form-status-list form__message" tabindex="-1" autofocus>
+                {{- 'icon-success.svg' | inline_asset_content -}}
+                {{ 'templates.contact.form.post_success' | t }}
+              </h2>
+            {%- elsif form.errors -%}
+              <div class="form__message">
+                <h2 class="form-status caption-large text-body" role="alert" tabindex="-1" autofocus>
                   {{- 'icon-error.svg' | inline_asset_content -}}
-                </span>
-                {{- form.errors.translated_fields.email | capitalize }}
-                {{ form.errors.messages.email -}}
-              </span>
-            </small>
-          {%- endif -%}
+                  {{ 'templates.contact.form.error_heading' | t }}
+                </h2>
+              </div>
+              <ul class="form-status-list caption-large" role="list">
+                <li>
+                  <a href="#ContactForm-email" class="link">
+                    {{ form.errors.translated_fields.email | capitalize }}
+                    {{ form.errors.messages.email }}
+                  </a>
+                </li>
+              </ul>
+            {%- endif -%}
+
+            <div class="contact__fields">
+              <div class="field">
+                <input
+                  class="field__input"
+                  autocomplete="name"
+                  type="text"
+                  id="ContactForm-name"
+                  name="contact[{{ 'templates.contact.form.name' | t }}]"
+                  value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+                  placeholder="{{ 'templates.contact.form.name' | t }}"
+                >
+                <label class="field__label" for="ContactForm-name">{{ 'templates.contact.form.name' | t }}</label>
+              </div>
+              <div class="field field--with-error">
+                <input
+                  autocomplete="email"
+                  type="email"
+                  id="ContactForm-email"
+                  class="field__input"
+                  name="contact[email]"
+                  spellcheck="false"
+                  autocapitalize="off"
+                  value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                  aria-required="true"
+                  {% if form.errors contains 'email' %}
+                    aria-invalid="true"
+                    aria-describedby="ContactForm-email-error"
+                  {% endif %}
+                  placeholder="{{ 'templates.contact.form.email' | t }}"
+                >
+                <label class="field__label" for="ContactForm-email">
+                  {{- 'templates.contact.form.email' | t }}
+                  <span aria-hidden="true">*</span></label
+                >
+                {%- if form.errors contains 'email' -%}
+                  <small class="contact__field-error" id="ContactForm-email-error">
+                    <span class="visually-hidden">{{ 'accessibility.error' | t }}</span>
+                    <span class="form__message">
+                      <span class="svg-wrapper">
+                        {{- 'icon-error.svg' | inline_asset_content -}}
+                      </span>
+                      {{- form.errors.translated_fields.email | capitalize }}
+                      {{ form.errors.messages.email -}}
+                    </span>
+                  </small>
+                {%- endif -%}
+              </div>
+            </div>
+
+            <div class="field">
+              <input
+                type="tel"
+                id="ContactForm-phone"
+                class="field__input"
+                autocomplete="tel"
+                name="contact[{{ 'templates.contact.form.phone' | t }}]"
+                pattern="[0-9\-]*"
+                value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+                placeholder="{{ 'templates.contact.form.phone' | t }}"
+              >
+              <label class="field__label" for="ContactForm-phone">{{ 'templates.contact.form.phone' | t }}</label>
+            </div>
+
+            {%- if section.settings.enquiry_enabled and enquiry_options.size > 0 -%}
+              {%- comment -%}
+                El desplegable lleva rótulo propio y no etiqueta flotante: un
+                select siempre muestra un valor, así que la etiqueta nunca
+                estaría "dentro" del campo y quedaría montada sobre el texto.
+              {%- endcomment -%}
+              <div class="cesar-contact__enquiry">
+                <label class="cesar-contact__label" for="ContactForm-enquiry">
+                  {{- section.settings.enquiry_label -}}
+                </label>
+                <div class="select">
+                  <select
+                    id="ContactForm-enquiry"
+                    class="select__select"
+                    name="contact[{{ enquiry_name | escape }}]"
+                    data-cesar-enquiry
+                  >
+                    {%- for option in enquiry_options -%}
+                      {%- assign option_text = option | strip_html | strip -%}
+                      {%- if option_text != blank -%}
+                        <option value="{{ option_text | escape }}">{{ option_text }}</option>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </select>
+                  <span class="svg-wrapper">
+                    {{- 'icon-caret.svg' | inline_asset_content -}}
+                  </span>
+                </div>
+              </div>
+            {%- endif -%}
+
+            <div class="field">
+              <textarea
+                rows="10"
+                id="ContactForm-body"
+                class="text-area field__input"
+                name="contact[{{ 'templates.contact.form.comment' | t }}]"
+                placeholder="{{ 'templates.contact.form.comment' | t }}"
+              >
+                {{- form.body -}}
+              </textarea>
+              <label class="form__label field__label" for="ContactForm-body">
+                {{- 'templates.contact.form.comment' | t -}}
+              </label>
+            </div>
+
+            <div class="contact__button">
+              <button type="submit" class="button cesar-contact__submit">
+                {{ 'templates.contact.form.send' | t }}
+              </button>
+            </div>
+          {%- endform -%}
         </div>
+
+        {%- if section.blocks.size > 0 -%}
+          <aside class="cesar-contact__aside">
+            {%- for block in section.blocks -%}
+              <div class="cesar-contact__detail" {{ block.shopify_attributes }}>
+                {%- if block.settings.title != blank -%}
+                  <h3 class="cesar-contact__detail-title">{{ block.settings.title }}</h3>
+                {%- endif -%}
+
+                {%- if block.settings.text != blank -%}
+                  <div class="cesar-contact__detail-text rte">{{ block.settings.text }}</div>
+                {%- endif -%}
+
+                {%- if block.settings.link_label != blank -%}
+                  <a href="{{ block.settings.link | default: '#' }}" class="cesar-contact__detail-link">
+                    {{ block.settings.link_label }}
+                  </a>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </aside>
+        {%- endif -%}
       </div>
-      <div class="field">
-        <input
-          type="tel"
-          id="ContactForm-phone"
-          class="field__input"
-          autocomplete="tel"
-          name="contact[{{ 'templates.contact.form.phone' | t }}]"
-          pattern="[0-9\-]*"
-          value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
-          placeholder="{{ 'templates.contact.form.phone' | t }}"
-        >
-        <label class="field__label" for="ContactForm-phone">{{ 'templates.contact.form.phone' | t }}</label>
-      </div>
-      <div class="field">
-        <textarea
-          rows="10"
-          id="ContactForm-body"
-          class="text-area field__input"
-          name="contact[{{ 'templates.contact.form.comment' | t }}]"
-          placeholder="{{ 'templates.contact.form.comment' | t }}"
-        >
-          {{- form.body -}}
-        </textarea>
-        <label class="form__label field__label" for="ContactForm-body">
-          {{- 'templates.contact.form.comment' | t -}}
-        </label>
-      </div>
-      <div class="contact__button">
-        <button type="submit" class="button">
-          {{ 'templates.contact.form.send' | t }}
-        </button>
-      </div>
-    {%- endform -%}
+    </div>
   </div>
 </div>
 
@@ -154,29 +252,94 @@
       "type": "select",
       "id": "heading_size",
       "options": [
-        {
-          "value": "h2",
-          "label": "t:sections.all.heading_size.options__1.label"
-        },
-        {
-          "value": "h1",
-          "label": "t:sections.all.heading_size.options__2.label"
-        },
-        {
-          "value": "h0",
-          "label": "t:sections.all.heading_size.options__3.label"
-        },
-        {
-          "value": "hxl",
-          "label": "t:sections.all.heading_size.options__4.label"
-        },
-        {
-          "value": "hxxl",
-          "label": "t:sections.all.heading_size.options__5.label"
-        }
+        { "value": "h2", "label": "t:sections.all.heading_size.options__1.label" },
+        { "value": "h1", "label": "t:sections.all.heading_size.options__2.label" },
+        { "value": "h0", "label": "t:sections.all.heading_size.options__3.label" },
+        { "value": "hxl", "label": "t:sections.all.heading_size.options__4.label" },
+        { "value": "hxxl", "label": "t:sections.all.heading_size.options__5.label" }
       ],
       "default": "h1",
       "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto de entrada"
+    },
+    {
+      "type": "header",
+      "content": "Tipo de consulta"
+    },
+    {
+      "type": "paragraph",
+      "content": "Añade un desplegable al formulario. Lo que elija la persona llega en el correo como un campo más. Los enlaces de otras páginas pueden dejarlo preseleccionado: /pages/contact?enquiry=Wholesale"
+    },
+    {
+      "type": "checkbox",
+      "id": "enquiry_enabled",
+      "label": "Mostrar el desplegable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "enquiry_label",
+      "label": "Rótulo",
+      "default": "Enquiry type"
+    },
+    {
+      "type": "textarea",
+      "id": "enquiry_options",
+      "label": "Opciones",
+      "info": "Una por línea.",
+      "default": "General enquiry\nWholesale\nCo-roasting\nOrders and shipping"
+    },
+    {
+      "type": "header",
+      "content": "Ancho"
+    },
+    {
+      "type": "checkbox",
+      "id": "limit_width",
+      "label": "Limitar el ancho del contenido",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 700,
+      "max": 1600,
+      "step": 20,
+      "unit": "px",
+      "label": "Ancho máximo",
+      "default": 1200
+    },
+    {
+      "type": "header",
+      "content": "Colores y tamaños"
+    },
+    {
+      "type": "paragraph",
+      "content": "Todos opcionales. Vacíos o en 0, la sección usa su esquema de color y la escala tipográfica del tema."
+    },
+    { "type": "color", "id": "bg_color", "label": "Fondo de la sección" },
+    { "type": "color", "id": "heading_color", "label": "Titular" },
+    { "type": "color", "id": "text_color", "label": "Texto" },
+    { "type": "color", "id": "field_bg", "label": "Fondo de los campos" },
+    { "type": "color", "id": "field_border", "label": "Borde de los campos" },
+    { "type": "color", "id": "card_bg", "label": "Fondo de los datos de contacto" },
+    { "type": "color", "id": "link_color", "label": "Enlaces" },
+    { "type": "color", "id": "button_bg", "label": "Fondo del botón" },
+    { "type": "color", "id": "button_text", "label": "Texto del botón" },
+    {
+      "type": "range",
+      "id": "text_px",
+      "min": 0,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño del texto",
+      "default": 0,
+      "info": "0 = el del tema."
     },
     {
       "type": "color_scheme",
@@ -207,6 +370,23 @@
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
       "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "detail",
+      "name": "Dato de contacto",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Título", "default": "Visit us" },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Texto",
+          "default": "<p>North Williamstown, Melbourne</p>"
+        },
+        { "type": "text", "id": "link_label", "label": "Enlace" },
+        { "type": "url", "id": "link", "label": "Destino del enlace" }
+      ]
     }
   ],
   "presets": [

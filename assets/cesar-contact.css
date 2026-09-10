@@ -1,0 +1,183 @@
+/**
+ * Página de contacto: formulario y datos, uno al lado del otro.
+ *
+ * Las reglas de los campos son más específicas que las de base.css a propósito
+ * (`.cesar-contact .field__input` frente a `.field__input`): así ganan por
+ * especificidad y no por orden de carga, que es lo que se rompe en cuanto
+ * Shopify cambia dónde inserta cada hoja.
+ */
+
+.cesar-contact__container--limited {
+  max-width: var(--cesar-contact-max, none);
+  margin-inline: auto;
+}
+
+.cesar-contact__heading {
+  color: var(--cesar-sec-heading, inherit);
+}
+
+.cesar-contact__text {
+  margin-top: calc(var(--cc-space-4) * -1);
+  margin-bottom: var(--cc-space-8);
+  font-size: var(--cesar-sec-text-size, var(--cc-text-body-lg));
+  line-height: 1.55;
+  color: var(--cesar-sec-text, var(--cc-text));
+}
+
+/* ---------- Reparto ---------- */
+
+.cesar-contact__grid {
+  display: grid;
+  gap: var(--cc-space-12);
+}
+
+/* Dos columnas sólo cuando hay sitio de verdad. Por debajo, el formulario y los
+   datos van uno tras otro: partir un formulario en dos columnas estrechas
+   obliga a ir en zigzag entre campos. */
+@media screen and (min-width: 990px) {
+  .cesar-contact__grid {
+    grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr);
+    gap: var(--cc-space-16);
+    align-items: start;
+  }
+
+  .cesar-contact__grid--solo {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---------- Campos ---------- */
+
+.cesar-contact .field__input,
+.cesar-contact .select__select {
+  background-color: var(--cesar-contact-field-bg, var(--cc-field));
+  color: var(--cc-brown-900);
+  /* 16px: por debajo, iOS hace zoom al enfocar el campo */
+  font-size: var(--cc-text-body);
+}
+
+.cesar-contact .select__select {
+  /* En base.css el select se queda en 12px y a un 75% de opacidad, que junto
+     al fondo claro no llega al contraste mínimo. */
+  color: var(--cc-brown-900);
+  padding-inline: var(--cc-space-4);
+}
+
+.cesar-contact .field__label,
+.cesar-contact .form__label {
+  color: var(--cc-brown-500);
+}
+
+/* El borde lo dibuja Dawn en un pseudoelemento, no en el campo. */
+.cesar-contact .field:after,
+.cesar-contact .select:after {
+  box-shadow: 0 0 0 1px var(--cesar-contact-field-border, var(--cc-border));
+}
+
+/* El estado de hover se redefine con más peso que la regla propia de Dawn
+   (`.field:hover.field:after`), que si no empataría y ganaría por orden. */
+.cesar-contact .field:hover.field:after,
+.cesar-contact .select:hover.select:after {
+  box-shadow: 0 0 0 1px var(--cc-brown-500);
+}
+
+.cesar-contact .field__input:focus-visible,
+.cesar-contact .select__select:focus-visible {
+  box-shadow: 0 0 0 2px var(--cc-brown-900);
+}
+
+/* ---------- Tipo de consulta ---------- */
+
+.cesar-contact__enquiry {
+  margin-bottom: var(--cc-space-6);
+}
+
+.cesar-contact__label {
+  display: block;
+  margin-bottom: var(--cc-space-1);
+  font-size: var(--cc-text-sm);
+  font-weight: 600;
+  color: var(--cesar-sec-text, var(--cc-brown-900));
+}
+
+.cesar-contact__enquiry .select {
+  width: 100%;
+}
+
+/* ---------- Botón ---------- */
+
+.cesar-contact .contact__button {
+  margin-top: var(--cc-space-8);
+}
+
+.cesar-contact__submit {
+  /* El tema quita el ancho mínimo de Dawn a propósito, para que los botones
+     cortos no se deformen. Aquí se devuelve sólo a este: "Send" mide cuatro
+     letras, y el botón que cierra un formulario largo no puede ser lo más
+     pequeño de la página. */
+  min-width: 160px;
+  /* mínimo táctil */
+  min-height: 48px;
+  background-color: var(--cesar-btn-bg, var(--cc-brown-900));
+  color: var(--cesar-btn-text, #fff);
+}
+
+/* ---------- Datos de contacto ---------- */
+
+.cesar-contact__aside {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cc-space-8);
+  box-sizing: border-box;
+  padding: var(--cc-space-8);
+  border-radius: var(--cc-radius-md);
+  background-color: var(--cesar-card-bg, var(--cc-cream));
+}
+
+.cesar-contact__detail-title {
+  margin: 0 0 var(--cc-space-2);
+  font-size: var(--cc-text-body-lg);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--cesar-sec-heading, var(--cc-brown-900));
+}
+
+.cesar-contact__detail-text {
+  font-size: var(--cesar-sec-text-size, var(--cc-text-body));
+  line-height: 1.55;
+  color: var(--cesar-sec-text, var(--cc-text));
+}
+
+.cesar-contact__detail-text > :first-child {
+  margin-top: 0;
+}
+
+.cesar-contact__detail-text > :last-child {
+  margin-bottom: 0;
+}
+
+.cesar-contact__detail-link {
+  display: inline-block;
+  margin-top: var(--cc-space-2);
+  color: var(--cesar-sec-link, var(--cc-terracotta-text));
+  font-weight: 600;
+  text-underline-offset: 3px;
+}
+
+.cesar-contact__detail-link:hover {
+  color: var(--cesar-sec-link-hover, var(--cc-brown-900));
+}
+
+@media screen and (max-width: 749px) {
+  .cesar-contact__grid {
+    gap: var(--cc-space-8);
+  }
+
+  .cesar-contact__aside {
+    padding: var(--cc-space-6);
+  }
+
+  .cesar-contact__submit {
+    width: 100%;
+  }
+}
