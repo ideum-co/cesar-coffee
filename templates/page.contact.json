@@ -16,16 +16,6 @@
         "padding_bottom": 36
       }
     },
-    "form": {
-      "type": "contact-form",
-      "settings": {
-        "heading": "",
-        "heading_size": "h1",
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
     "rich_text_fELRb9": {
       "type": "rich-text",
       "blocks": {
@@ -67,6 +57,16 @@
         "full_width": true,
         "padding_top": 40,
         "padding_bottom": 52
+      }
+    },
+    "form": {
+      "type": "contact-form",
+      "settings": {
+        "heading": "",
+        "heading_size": "h1",
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     },
     "cesar_tiers_fMYTqM": {
@@ -249,8 +249,8 @@
   },
   "order": [
     "main",
-    "form",
     "rich_text_fELRb9",
+    "form",
     "cesar_tiers_fMYTqM",
     "cesar_collection_row_Ynq93D",
     "cesar_product_faq_Bdk37T"
