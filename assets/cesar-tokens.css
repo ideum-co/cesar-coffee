@@ -479,8 +479,33 @@ button.shopify-payment-button__button--unbranded {
 
 /* Sin reseñas, Judge.me deja el bloque vacío: sin esto quedaría un hueco
    suelto entre las notas de cata y el precio. */
-.cesar-card__rating:empty {
+/* Vacío no se oculta: si lo hiciera, el hueco de la fila desaparecería y las
+   cards de una misma fila dejarían de alinearse entre sí. Lo que se ve
+   entonces son las estrellas de reserva de abajo. */
+
+/* Reserva: cinco estrellas huecas y "No reviews". Se retiran en cuanto Judge.me
+   pinta algo dentro del bloque de arriba, que es su hermano inmediato. */
+.cesar-card__rating:not(:empty) + .cesar-card__stars {
   display: none;
+}
+
+.cesar-card__stars {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin: var(--cc-space-2) 0 0;
+  color: var(--cc-text-muted);
+}
+
+.cesar-card__star {
+  width: 14px;
+  height: 14px;
+  flex: none;
+}
+
+.cesar-card__stars-text {
+  margin-left: var(--cc-space-2);
+  font-size: var(--cc-text-xs);
 }
 
 /* ---------- Badges de línea ---------- */
@@ -489,16 +514,28 @@ button.shopify-payment-button__button--unbranded {
   position: absolute;
   top: var(--cc-space-3);
   right: var(--cc-space-3);
-  width: 52px;
-  height: 52px;
+  width: var(--cesar-badge-size, 52px);
+  height: var(--cesar-badge-size, 52px);
   z-index: 2;
   pointer-events: none;
 }
 
+/* El badge está fuera del flujo, así que no empuja nada: un nombre largo le
+   pasaba por debajo y quedaba tapado. El bloque de texto reserva su ancho más
+   el aire de los dos lados. Va como variable para que el hueco y el badge no
+   puedan descuadrarse al cambiar de tamaño. */
+.card-wrapper .card > .card__content {
+  /* border-box es imprescindible: en content-box el relleno se suma al ancho
+     en vez de meter el texto hacia dentro, y el bloque se salía de la card
+     llevándose el título por debajo del badge. */
+  box-sizing: border-box;
+  padding-right: calc(var(--cesar-badge-size, 52px) + var(--cc-space-3) * 2);
+}
+
 @media screen and (max-width: 749px) {
-  .cc-line-badge {
-    width: 40px;
-    height: 40px;
+  .cc-line-badge,
+  .card-wrapper .card > .card__content {
+    --cesar-badge-size: 40px;
   }
 }
 
