@@ -26,9 +26,9 @@
         "button_link_2": "shopify://pages/about-us",
         "color_scheme": "scheme-1",
         "text_alignment": "left",
-        "heading_color": "#FDF5A6",
+        "heading_color": "#fdf5a6",
         "heading_px": 0,
-        "subheading_color": "#FDF5A6",
+        "subheading_color": "#fdf5a6",
         "subheading_px": 0
       }
     },
@@ -166,7 +166,7 @@
         "button"
       ],
       "settings": {
-        "image": "shopify://shop_images/more-coffee.webp",
+        "image": "shopify://shop_images/banner-body-2.webp",
         "height": "large",
         "desktop_image_width": "medium",
         "layout": "image_first",
@@ -220,7 +220,7 @@
     "flight_banner": {
       "type": "cesar-banner",
       "settings": {
-        "image": "shopify://shop_images/banner-3.webp",
+        "image": "shopify://shop_images/bannere-body.webp",
         "ratio": "wide",
         "heading": "The Bourbon Rosado Flight",
         "text": "Taste what process alone can do to a single lot — Bourbon Rosado finished four ways: washed, natural, honey and anaerobic. Four 100g bags, one story.",
@@ -241,7 +241,7 @@
         "card_1": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/pexels-photo-36509752.jpg",
+            "image": "shopify://shop_images/banner-body-3.jpg",
             "title": "Directly from origin",
             "text": "Real relationships with the growers behind every lot.",
             "link_label": "See Our Farms",
@@ -251,7 +251,7 @@
         "card_2": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/poster-2.webp",
+            "image": "shopify://shop_images/banner-body-1.jpg",
             "title": "Roasted to order in Melbourne",
             "text": "Roasted fresh at our North Williamstown facility and dispatched within days.",
             "link_label": "How We Roast",
