@@ -102,11 +102,13 @@
 }
 
 .cesar-hero__heading {
-  color: var(--cc-terracotta);
+  color: var(--cesar-hero-heading, var(--cc-terracotta));
 }
 
+/* La reserva se repite en la variante clara: si aquí se dejara sólo el blanco,
+   el ajuste de color no tendría efecto sobre un hero con texto claro. */
 .cesar-hero--text-light .cesar-hero__heading {
-  color: #fff;
+  color: var(--cesar-hero-heading, #fff);
 }
 
 .cesar-hero__subheading {
@@ -118,11 +120,11 @@
   letter-spacing: 0.03em;
   text-transform: uppercase;
   /* variante accesible: el terracota de display no llega a 4.5:1 en texto pequeño */
-  color: var(--cc-terracotta-text);
+  color: var(--cesar-hero-sub, var(--cc-terracotta-text));
 }
 
 .cesar-hero--text-light .cesar-hero__subheading {
-  color: rgba(255, 255, 255, 0.92);
+  color: var(--cesar-hero-sub, rgba(255, 255, 255, 0.92));
 }
 
 .cesar-hero__actions {
@@ -285,4 +287,59 @@ cesar-hero-video[paused] .cesar-hero__toggle-icon {
   border-bottom: 8px solid transparent;
   /* El triángulo pesa a la izquierda; se recoloca para que se vea centrado. */
   margin-left: 4px;
+}
+
+/* ---------------------------------------------------------------------------
+   Tamaño y alineación del texto
+   Los tamaños van tras un selector de atributo: sin ajuste guardado la variable
+   no existe, la regla ni siquiera aplica y manda la escala del tema.
+   --------------------------------------------------------------------------- */
+
+.cesar-hero[style*='--cesar-hero-heading-size'] .cesar-hero__heading {
+  font-size: var(--cesar-hero-heading-size);
+}
+
+.cesar-hero[style*='--cesar-hero-sub-size'] .cesar-hero__subheading {
+  font-size: var(--cesar-hero-sub-size);
+}
+
+/* ---- Alineación ----
+   Izquierda es lo que la sección ya hacía, así que no necesita reglas: se deja
+   declarada por claridad, pero sin nada que revertir. */
+
+.cesar-hero--align-left .cesar-hero__content {
+  text-align: left;
+}
+
+/* El bloque de contenido lleva medida máxima y el titular una medida en ch.
+   Centrar sólo el texto los dejaría pegados a la izquierda dentro de una caja
+   estrecha, así que hay que recolocar también las cajas. */
+.cesar-hero--align-center .cesar-hero__content {
+  text-align: center;
+  margin-inline: auto;
+}
+
+.cesar-hero--align-center .cesar-hero__heading,
+.cesar-hero--align-center .cesar-hero__subheading {
+  margin-inline: auto;
+}
+
+.cesar-hero--align-center .cesar-hero__actions {
+  justify-content: center;
+}
+
+.cesar-hero--align-right .cesar-hero__content {
+  text-align: right;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.cesar-hero--align-right .cesar-hero__heading,
+.cesar-hero--align-right .cesar-hero__subheading {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.cesar-hero--align-right .cesar-hero__actions {
+  justify-content: flex-end;
 }

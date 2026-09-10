@@ -22,7 +22,22 @@
   <script src="{{ 'cesar-hero-video.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 
-<div class="cesar-hero cesar-hero--text-{{ section.settings.text_color }} color-{{ section.settings.color_scheme }}">
+{%- comment -%}
+  Color, tamaño y alineación del texto. Cada variable se escribe sólo si el
+  ajuste tiene valor, y las reglas de cesar-hero.css llevan como reserva lo que
+  la sección ya usaba: sin tocar nada, el hero se ve exactamente igual.
+{%- endcomment -%}
+{%- capture hero_style -%}
+  {% if section.settings.heading_color != blank %}--cesar-hero-heading: {{ section.settings.heading_color }};{% endif %}
+  {% if section.settings.subheading_color != blank %}--cesar-hero-sub: {{ section.settings.subheading_color }};{% endif %}
+  {% if section.settings.heading_px > 0 %}--cesar-hero-heading-size: {{ section.settings.heading_px }}px;{% endif %}
+  {% if section.settings.subheading_px > 0 %}--cesar-hero-sub-size: {{ section.settings.subheading_px }}px;{% endif %}
+{%- endcapture -%}
+
+<div
+  class="cesar-hero cesar-hero--text-{{ section.settings.text_color }} cesar-hero--align-{{ section.settings.text_alignment }} color-{{ section.settings.color_scheme }}"
+  {% if hero_style != blank %}style="{{ hero_style | strip_newlines | strip }}"{% endif %}
+>
   {%- if section.settings.image != blank or hero_fondo != 'imagen' -%}
     <cesar-hero-video class="cesar-hero__media" data-fondo="{{ hero_fondo }}">
       {%- if section.settings.image != blank -%}
@@ -265,6 +280,67 @@
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Texto: color, tamaño y alineación"
+    },
+    {
+      "type": "paragraph",
+      "content": "Todos opcionales. Vacíos o en 0, el hero conserva el aspecto actual: el titular y el subtítulo siguen tomando su color del selector de arriba y su tamaño de la escala del tema."
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Alineación",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Color del titular",
+      "info": "Vacío, usa el del selector de color de texto."
+    },
+    {
+      "type": "range",
+      "id": "heading_px",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Tamaño del titular",
+      "default": 0,
+      "info": "0 = el del tema, que ya se adapta al ancho de la pantalla. Con un valor fijo deja de hacerlo: compruébalo en móvil."
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Color del subtítulo"
+    },
+    {
+      "type": "range",
+      "id": "subheading_px",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño del subtítulo",
+      "default": 0,
+      "info": "0 = el del tema."
     }
   ],
   "presets": [
