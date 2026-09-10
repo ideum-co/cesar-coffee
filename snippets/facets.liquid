@@ -46,6 +46,16 @@
         {%- endif -%}
 
         {% if enable_filtering %}
+          {%- comment -%}
+            Con muchos filtros la fila saltaba a una segunda línea y empujaba
+            la rejilla hacia abajo. En horizontal pasa a ser un carril que se
+            desplaza: cesar-filter-rail muestra u oculta cada flecha según
+            quede contenido hacia ese lado.
+          {%- endcomment -%}
+          {%- if filter_type == 'horizontal' -%}
+            <script src="{{ 'cesar-filter-rail.js' | asset_url }}" defer="defer"></script>
+            <cesar-filter-rail class="cesar-rail">
+          {%- endif -%}
           {% comment %} Heading is the first tabbable element on filter type horizontal {% endcomment %}
           <div
             id="FacetsWrapperDesktop"
@@ -351,6 +361,27 @@
               {% endcase %}
             {%- endfor -%}
           </div>
+          {%- if filter_type == 'horizontal' -%}
+              <button
+                type="button"
+                class="cesar-rail__arrow cesar-rail__arrow--prev"
+                data-rail-prev
+                aria-label="{{ 'general.slider.previous_slide' | t }}"
+                hidden
+              >
+                <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+              </button>
+              <button
+                type="button"
+                class="cesar-rail__arrow cesar-rail__arrow--next"
+                data-rail-next
+                aria-label="{{ 'general.slider.next_slide' | t }}"
+                hidden
+              >
+                <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+              </button>
+            </cesar-filter-rail>
+          {%- endif -%}
           {% comment %} Pills after filtes on filter type horizontal {% endcomment %}
           {%- if filter_type == 'horizontal' -%}
             <div class="active-facets active-facets-desktop">

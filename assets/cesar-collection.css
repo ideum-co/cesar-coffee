@@ -27,11 +27,101 @@
 
 /* Medidas tomadas de la referencia: alto 42px, padding 10/21, radio completo,
    texto de 16px. Se sube a 44px por el mínimo táctil. */
+/* ---------- Carril de filtros ----------
+   Una sola línea que se desplaza en vez de partirse en dos. El contenedor
+   exterior es el que posiciona las flechas; el interior es el que desplaza. */
+
+.cesar-rail {
+  position: relative;
+  display: block;
+}
+
 /* La separación entre filtros la lleva el gap del contenedor. Dawn la resolvía
    con un margen a la derecha de cada desplegable, que dejaba el último con
-   hueco sobrante y no se ajustaba al saltar de línea. */
+   hueco sobrante. */
 .facets .facets__wrapper {
   gap: 6px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  /* El panel de cada filtro cuelga hacia abajo, y un overflow-x recortaría
+     también en vertical. clip en un solo eje deja el otro libre. */
+  overflow-y: visible;
+  overflow-x: clip;
+  scrollbar-width: none;
+  /* Sitio para la flecha, sólo cuando hay algo que desplazar. */
+  padding-right: 0;
+}
+
+/* clip no permite desplazar por script ni con gesto. Se usa auto en cuanto hay
+   desbordamiento, que es cuando el desplazamiento tiene sentido. */
+.cesar-rail[data-overflow] .facets__wrapper {
+  overflow-x: auto;
+  padding-right: 52px;
+}
+
+.facets .facets__wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+/* Las píldoras no se encogen: prefieren salirse del carril antes que
+   comprimir el nombre del filtro hasta partirlo. */
+.facets .facets__wrapper > * {
+  flex: none;
+}
+
+.cesar-rail__arrow {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  /* mínimo táctil */
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--cc-radius-pill);
+  background-color: var(--cc-cream);
+  color: var(--cc-brown-900);
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(45, 18, 6, 0.16);
+  transition: background-color var(--cc-duration) var(--cc-ease);
+}
+
+.cesar-rail__arrow[hidden] {
+  display: none;
+}
+
+.cesar-rail__arrow:hover {
+  background-color: var(--cc-cream-active);
+}
+
+.cesar-rail__arrow:focus-visible {
+  outline: 2px solid var(--cc-brown-900);
+  outline-offset: 2px;
+}
+
+.cesar-rail__arrow--prev {
+  left: 0;
+}
+
+.cesar-rail__arrow--next {
+  right: 0;
+}
+
+/* El icono es el mismo caret que abre los filtros, girado a cada lado. */
+.cesar-rail__arrow .svg-wrapper {
+  width: 12px;
+  height: 12px;
+}
+
+.cesar-rail__arrow--prev .svg-wrapper {
+  rotate: 90deg;
+}
+
+.cesar-rail__arrow--next .svg-wrapper {
+  rotate: -90deg;
 }
 
 .facets .facets__disclosure {
