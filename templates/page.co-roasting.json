@@ -37,6 +37,7 @@
         "b-1": {
           "type": "column",
           "settings": {
+            "image": "shopify://shop_images/machine-acess.webp",
             "show_origins": false,
             "title": "Machine access",
             "text": "<p>Professional Loring roasters, ready to run.</p>",
