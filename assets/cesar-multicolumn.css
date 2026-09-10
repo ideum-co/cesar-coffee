@@ -121,15 +121,15 @@
 
 /* ---------------------------------------------------------------------------
    Mapas de origen
-   Un producto puede venir de varios países, así que se listan en fila y se
-   parten a la siguiente si no caben.
+   Un producto puede venir de varios países. Van en una sola fila y solapados,
+   como una pila de fichas: comunica que son del mismo café mejor que una
+   retícula de columnas separadas.
    --------------------------------------------------------------------------- */
 
 .cesar-origins {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start;
-  gap: var(--cc-space-6);
+  align-items: center;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -137,12 +137,13 @@
 
 .cesar-origins__item {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: var(--cc-space-2);
-  /* El nombre no estira la columna más allá del mapa salvo que lo necesite. */
-  max-width: 12ch;
-  text-align: center;
+}
+
+/* Cada mapa monta un poco sobre el anterior. El primero no se desplaza, o el
+   bloque entero quedaría descolgado a la izquierda. */
+.cesar-origins__item + .cesar-origins__item {
+  margin-left: -10px;
 }
 
 .cesar-origins__map {
@@ -152,6 +153,8 @@
   object-fit: contain;
 }
 
+/* El nombre sólo aparece cuando no hay mapa que enseñar. Con mapa viaja en su
+   alt, así que no se pierde para quien no ve la imagen. */
 .cesar-origins__name {
   font-size: var(--cc-text-sm);
   font-weight: 600;
@@ -159,14 +162,14 @@
   color: var(--cesar-mc-card-text, var(--cesar-sec-text, inherit));
 }
 
-/* Sin mapas la lista es sólo texto: en fila y separada por comas visuales, que
-   ocupa menos que una columna por país. */
+/* Sin ningún mapa la lista es sólo texto: separada por puntos, que ocupa menos
+   que una columna por país. */
 .cesar-origins--sin-mapa {
   gap: var(--cc-space-2);
 }
 
-.cesar-origins--sin-mapa .cesar-origins__item {
-  max-width: none;
+.cesar-origins--sin-mapa .cesar-origins__item + .cesar-origins__item {
+  margin-left: 0;
 }
 
 .cesar-origins--sin-mapa .cesar-origins__item:not(:last-child)::after {

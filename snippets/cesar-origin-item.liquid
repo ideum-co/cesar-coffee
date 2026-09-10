@@ -15,23 +15,40 @@
 {%- liquid
   assign nombre = origen.name.value | default: origen.system.handle
   assign mapa = origen.map.value
+
+  comment
+    El origen del archivo se resuelve por tipo. Un SVG llega como archivo
+    genérico y tiene url propia; una imagen rasterizada llega como media_image
+    y hay que pedirle la suya. Es la misma cadena que usa el badge de línea,
+    que ya se ve bien en la tienda.
+  endcomment
+  assign mapa_src = ''
+  if mapa.url != blank
+    assign mapa_src = mapa.url
+  elsif mapa.image != blank
+    assign mapa_src = mapa.image | image_url: width: 300
+  elsif mapa != blank
+    assign mapa_src = mapa | image_url: width: 300
+  endif
 -%}
 
 <li class="cesar-origins__item">
-  {%- if mapa != blank -%}
+  {%- if mapa_src != blank -%}
     {%- comment -%}
-      Los mapas son SVG, y los SVG llegan como archivo genérico: no pasan por
-      image_url, que sólo transforma imágenes rasterizadas. Se usa la url tal
-      cual. El mapa es decorativo porque el nombre va justo al lado.
+      El nombre va en el alt y no fuera: en la ficha los mapas se muestran sin
+      rótulo, así que si el alt quedara vacío el país sería una información
+      sólo disponible para quien ve la imagen.
     {%- endcomment -%}
     <img
       class="cesar-origins__map"
-      src="{{ mapa.url }}"
-      alt=""
+      src="{{ mapa_src }}"
+      alt="{{ nombre }}"
       loading="lazy"
       width="{{ lado }}"
       height="{{ lado }}"
     >
+  {%- else -%}
+    {%- comment -%} Sin mapa queda el nombre, que es mejor que un hueco. {%- endcomment -%}
+    <span class="cesar-origins__name">{{ nombre }}</span>
   {%- endif -%}
-  <span class="cesar-origins__name">{{ nombre }}</span>
 </li>
