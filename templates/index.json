@@ -15,6 +15,11 @@
         "heading": "Strong roots. Direct from origin.",
         "subheading": "Colombian coffee, sourced direct from origin and roasted to order in Melbourne.",
         "image": "shopify://shop_images/hero.webp",
+        "video": "shopify://files/videos/15678786-hd_1280_720_24fps.mp4",
+        "video_url": "",
+        "video_description": "",
+        "overlay_opacity": 100,
+        "text_color": "brand",
         "button_label": "Shop The Range",
         "button_link": "shopify://collections/all",
         "button_label_2": "Our Story",
@@ -24,6 +29,7 @@
     },
     "cesar_video_dYCDmU": {
       "type": "cesar-video",
+      "disabled": true,
       "name": "Cesar · Vídeo",
       "settings": {
         "video": "shopify://files/videos/15678786-hd_1280_720_24fps.mp4",
