@@ -14,113 +14,165 @@
       "settings": {
         "heading": "Co-roasting",
         "subheading": "Access professional Loring S7 Nighthawk and S15 Falcon roasters with expert guidance from our team. No experience needed — we guide you through every step.",
+        "image": "shopify://shop_images/banner-co-roasting.webp",
+        "video_url": "",
+        "video_description": "",
+        "overlay_opacity": 45,
+        "text_color": "brand",
         "button_label": "Book a session",
         "button_link": "/pages/contact",
         "button_label_2": "Ask a question",
         "button_link_2": "/pages/contact",
-        "overlay_opacity": 45,
+        "color_scheme": "scheme-1",
         "text_alignment": "left",
-        "color_scheme": "scheme-1"
+        "heading_color": "#5C8A6E",
+        "heading_px": 0,
+        "subheading_color": "#5C8A6E",
+        "subheading_px": 0
       }
     },
     "benefits": {
       "type": "multicolumn",
-      "settings": {
-        "title": "What You Get",
-        "heading_size": "h2",
-        "heading_alignment": "left",
-        "columns_desktop": 4,
-        "columns_mobile": "1",
-        "column_alignment": "left",
-        "background_style": "none",
-        "swipe_on_mobile": false,
-        "image_width": "third",
-        "image_ratio": "circle",
-        "color_scheme": "scheme-1"
-      },
       "blocks": {
         "b-1": {
           "type": "column",
           "settings": {
+            "image": "shopify://shop_images/machine-acess.webp",
+            "show_origins": false,
             "title": "Machine access",
-            "text": "<p>Professional Loring roasters, ready to run.</p>"
+            "text": "<p>Professional Loring roasters, ready to run.</p>",
+            "link_label": "",
+            "link": ""
           }
         },
         "b-2": {
           "type": "column",
           "settings": {
+            "show_origins": false,
             "title": "Expert guidance",
-            "text": "<p>Our team stays with you throughout the session.</p>"
+            "text": "<p>Our team stays with you throughout the session.</p>",
+            "link_label": "",
+            "link": ""
           }
         },
         "b-3": {
           "type": "column",
           "settings": {
+            "show_origins": false,
             "title": "Roast development",
-            "text": "<p>Profile refinement support, batch after batch.</p>"
+            "text": "<p>Profile refinement support, batch after batch.</p>",
+            "link_label": "",
+            "link": ""
           }
         },
         "b-4": {
           "type": "column",
           "settings": {
+            "show_origins": false,
             "title": "Skill building",
-            "text": "<p>Grow your own roasting capability as you go.</p>"
+            "text": "<p>Grow your own roasting capability as you go.</p>",
+            "link_label": "",
+            "link": ""
           }
         }
       },
-      "block_order": ["b-1", "b-2", "b-3", "b-4"]
+      "block_order": [
+        "b-1",
+        "b-2",
+        "b-3",
+        "b-4"
+      ],
+      "settings": {
+        "title": "What You Get",
+        "heading_size": "h2",
+        "image_width": "third",
+        "image_ratio": "circle",
+        "button_label": "Button label",
+        "button_link": "",
+        "columns_desktop": 4,
+        "column_alignment": "left",
+        "background_style": "none",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "heading_alignment": "left",
+        "bg_color": "",
+        "heading_color": "",
+        "card_bg": "",
+        "card_title_color": "",
+        "card_text_color": "",
+        "link_color": "",
+        "link_hover_color": "",
+        "button_bg": "",
+        "button_text": "",
+        "heading_px": 0,
+        "card_title_px": 0,
+        "text_px": 0,
+        "custom_radius": false,
+        "card_radius": 0,
+        "icon_px": 0
+      }
     },
     "equipment": {
       "type": "cesar-collection-row",
-      "settings": {
-        "heading": "Equipment",
-        "text": "<p>Both feature digital profiling and automated controls.</p>",
-        "source": "blocks",
-        "columns_desktop": 2,
-        "columns_mobile": "1",
-        "text_alignment": "left",
-        "color_scheme": "scheme-1"
-      },
       "blocks": {
         "m-1": {
           "type": "card",
           "settings": {
             "title": "Loring S7 Nighthawk",
-            "text": "1.4–7kg batches, ideal for smaller runs and profile development."
+            "text": "1.4–7kg batches, ideal for smaller runs and profile development.",
+            "link_label": "See Our Farms",
+            "link": ""
           }
         },
         "m-2": {
           "type": "card",
           "settings": {
             "title": "Loring S15 Falcon",
-            "text": "3–15kg batches, ideal for production runs and wholesale volumes."
+            "text": "3–15kg batches, ideal for production runs and wholesale volumes.",
+            "link_label": "See Our Farms",
+            "link": ""
           }
         }
       },
-      "block_order": ["m-1", "m-2"]
+      "block_order": [
+        "m-1",
+        "m-2"
+      ],
+      "settings": {
+        "heading": "Equipment",
+        "text": "<p>Both feature digital profiling and automated controls.</p>",
+        "button_label": "Talk To Us About Trade",
+        "button_link": "",
+        "columns_desktop": 2,
+        "columns_mobile": "1",
+        "source": "blocks",
+        "blog": "",
+        "articles_to_show": 6,
+        "article_button_label": "Read the story",
+        "show_excerpt": false,
+        "color_scheme": "scheme-1",
+        "text_alignment": "left",
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "button_bg": "",
+        "button_text": ""
+      }
     },
     "pricing": {
       "type": "cesar-pricing-table",
-      "settings": {
-        "heading": "Pricing",
-        "col_1_label": "Package",
-        "col_2_label": "Session length",
-        "col_3_label": "Price per kg",
-        "note": "<p>Pricing varies by bean selection and volume.</p>",
-        "included_heading": "Included",
-        "included_text": "<p>Access to roasters, destoner, espresso machine (San Remo D8 Pro) for cupping, on-site packing, private label support and green bean sourcing.</p>",
-        "text_alignment": "left",
-        "limit_width": true,
-        "max_width": 1100,
-        "color_scheme": "scheme-1"
-      },
       "blocks": {
         "p-1": {
           "type": "row",
           "settings": {
             "package": "Starter",
             "length": "1 hour",
-            "price": "$26.00/kg"
+            "price": "$26.00/kg",
+            "badge": "",
+            "highlight": false
           }
         },
         "p-2": {
@@ -128,7 +180,9 @@
           "settings": {
             "package": "Basic",
             "length": "2 hours",
-            "price": "$24.90/kg"
+            "price": "$24.90/kg",
+            "badge": "",
+            "highlight": false
           }
         },
         "p-3": {
@@ -136,7 +190,9 @@
           "settings": {
             "package": "Standard",
             "length": "3 hours",
-            "price": "$24.13/kg"
+            "price": "$24.13/kg",
+            "badge": "",
+            "highlight": false
           }
         },
         "p-4": {
@@ -144,150 +200,274 @@
           "settings": {
             "package": "Premium",
             "length": "4 hours",
-            "price": "$23.13/kg"
+            "price": "$23.13/kg",
+            "badge": "",
+            "highlight": false
           }
         }
       },
-      "block_order": ["p-1", "p-2", "p-3", "p-4"]
+      "block_order": [
+        "p-1",
+        "p-2",
+        "p-3",
+        "p-4"
+      ],
+      "settings": {
+        "heading": "Pricing",
+        "text": "",
+        "text_alignment": "left",
+        "col_1_label": "Package",
+        "col_2_label": "Session length",
+        "col_3_label": "Price per kg",
+        "note": "<p>Pricing varies by bean selection and volume.</p>",
+        "included_heading": "Included",
+        "included_text": "<p>Access to roasters, destoner, espresso machine (San Remo D8 Pro) for cupping, on-site packing, private label support and green bean sourcing.</p>",
+        "button_label": "",
+        "button_link": "",
+        "limit_width": true,
+        "max_width": 1100,
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "head_bg": "",
+        "head_text": "",
+        "rule_color": "",
+        "highlight_bg": "",
+        "button_bg": "",
+        "button_text": "",
+        "heading_px": 0,
+        "text_px": 0,
+        "price_px": 0,
+        "color_scheme": "scheme-1"
+      }
     },
     "audience": {
       "type": "multicolumn",
-      "settings": {
-        "title": "Who It's For",
-        "heading_size": "h2",
-        "heading_alignment": "left",
-        "columns_desktop": 3,
-        "columns_mobile": "1",
-        "column_alignment": "left",
-        "background_style": "primary",
-        "swipe_on_mobile": false,
-        "image_width": "third",
-        "image_ratio": "circle",
-        "color_scheme": "scheme-1"
-      },
       "blocks": {
         "a-1": {
           "type": "column",
           "settings": {
+            "show_origins": false,
             "title": "Aspiring roasters",
-            "text": "<p>Learn on production equipment, with someone beside you.</p>"
+            "text": "<p>Learn on production equipment, with someone beside you.</p>",
+            "link_label": "",
+            "link": ""
           }
         },
         "a-2": {
           "type": "column",
           "settings": {
+            "show_origins": false,
             "title": "Cafe owners",
-            "text": "<p>Roast your own house blend without buying a roastery.</p>"
+            "text": "<p>Roast your own house blend without buying a roastery.</p>",
+            "link_label": "",
+            "link": ""
           }
         },
         "a-3": {
           "type": "column",
           "settings": {
+            "show_origins": false,
             "title": "Scale-up brands",
-            "text": "<p>Move to production volumes with packing and sourcing handled.</p>"
+            "text": "<p>Move to production volumes with packing and sourcing handled.</p>",
+            "link_label": "",
+            "link": ""
           }
         }
       },
-      "block_order": ["a-1", "a-2", "a-3"]
+      "block_order": [
+        "a-1",
+        "a-2",
+        "a-3"
+      ],
+      "settings": {
+        "title": "Who It's For",
+        "heading_size": "h2",
+        "image_width": "third",
+        "image_ratio": "circle",
+        "button_label": "Button label",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "heading_alignment": "left",
+        "bg_color": "",
+        "heading_color": "",
+        "card_bg": "",
+        "card_title_color": "",
+        "card_text_color": "",
+        "link_color": "",
+        "link_hover_color": "",
+        "button_bg": "",
+        "button_text": "",
+        "heading_px": 0,
+        "card_title_px": 0,
+        "text_px": 0,
+        "custom_radius": false,
+        "card_radius": 0,
+        "icon_px": 0
+      }
     },
     "process": {
       "type": "cesar-steps",
-      "settings": {
-        "caption": "",
-        "heading": "How It Works",
-        "layout": "row",
-        "text_alignment": "left",
-        "button_label": "Book a session",
-        "button_link": "/pages/contact",
-        "limit_width": true,
-        "max_width": 1400,
-        "color_scheme": "scheme-1"
-      },
       "blocks": {
         "s-1": {
           "type": "step",
           "settings": {
             "title": "Introduction & safety briefing",
-            "text": "<p>We walk you through the roastery and how the session runs.</p>"
+            "text": "<p>We walk you through the roastery and how the session runs.</p>",
+            "link_label": "",
+            "link": ""
           }
         },
         "s-2": {
           "type": "step",
           "settings": {
             "title": "Profile development",
-            "text": "<p>We shape the curve with you until the coffee tastes the way you want it.</p>"
+            "text": "<p>We shape the curve with you until the coffee tastes the way you want it.</p>",
+            "link_label": "",
+            "link": ""
           }
         },
         "s-3": {
           "type": "step",
           "settings": {
             "title": "Roasting session",
-            "text": "<p>You roast, with our team beside you for the whole session.</p>"
+            "text": "<p>You roast, with our team beside you for the whole session.</p>",
+            "link_label": "",
+            "link": ""
           }
         },
         "s-4": {
           "type": "step",
           "settings": {
             "title": "Packing",
-            "text": "<p>On-site packing, with private label support if you need it.</p>"
+            "text": "<p>On-site packing, with private label support if you need it.</p>",
+            "link_label": "",
+            "link": ""
           }
         }
       },
-      "block_order": ["s-1", "s-2", "s-3", "s-4"]
+      "block_order": [
+        "s-1",
+        "s-2",
+        "s-3",
+        "s-4"
+      ],
+      "settings": {
+        "caption": "",
+        "heading": "How It Works",
+        "text": "",
+        "layout": "row",
+        "text_alignment": "left",
+        "button_label": "Book a session",
+        "button_link": "/pages/contact",
+        "limit_width": true,
+        "max_width": 1400,
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "number_color": "",
+        "rule_color": "",
+        "link_color": "",
+        "button_bg": "",
+        "button_text": "",
+        "heading_px": 0,
+        "number_px": 0,
+        "step_title_px": 0,
+        "text_px": 0,
+        "color_scheme": "scheme-1"
+      }
     },
     "faq": {
       "type": "cesar-product-faq",
-      "settings": {
-        "heading": "FAQs",
-        "one_at_a_time": true,
-        "limit_width": true,
-        "max_width": 1000,
-        "color_scheme": "scheme-1"
-      },
       "blocks": {
         "q-1": {
           "type": "question",
           "settings": {
             "question": "Do I need to bring my own green beans?",
-            "answer": "<p>No — we can source them for you, or you're welcome to bring your own.</p>"
+            "answer": "<p>No — we can source them for you, or you're welcome to bring your own.</p>",
+            "open_by_default": false
           }
         },
         "q-2": {
           "type": "question",
           "settings": {
             "question": "Will someone from the team be with me the whole time?",
-            "answer": "<p>Yes, our team stays with you throughout the session.</p>"
+            "answer": "<p>Yes, our team stays with you throughout the session.</p>",
+            "open_by_default": false
           }
         },
         "q-3": {
           "type": "question",
           "settings": {
             "question": "I've never roasted before — is that OK?",
-            "answer": "<p>Yes, no experience is needed.</p>"
+            "answer": "<p>Yes, no experience is needed.</p>",
+            "open_by_default": false
           }
         },
         "q-4": {
           "type": "question",
           "settings": {
             "question": "What's the cancellation policy?",
-            "answer": "<p>Free rescheduling up to 48 hours before your session. Sessions cancelled within 48 hours are forfeited.</p>"
+            "answer": "<p>Free rescheduling up to 48 hours before your session. Sessions cancelled within 48 hours are forfeited.</p>",
+            "open_by_default": false
           }
         }
       },
-      "block_order": ["q-1", "q-2", "q-3", "q-4"]
+      "block_order": [
+        "q-1",
+        "q-2",
+        "q-3",
+        "q-4"
+      ],
+      "settings": {
+        "heading": "FAQs",
+        "text": "",
+        "one_at_a_time": true,
+        "limit_width": true,
+        "max_width": 1000,
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "divider_color": "",
+        "heading_px": 0,
+        "question_px": 0,
+        "text_px": 0,
+        "color_scheme": "scheme-1"
+      }
     },
     "cta": {
       "type": "cesar-banner",
       "settings": {
+        "ratio": "wide",
         "heading": "Book a session or ask a question",
         "text": "<p>Tell us what you want to roast and we'll find you a slot.</p>",
         "button_label": "Get in touch",
         "link": "/pages/contact",
+        "color_scheme": "scheme-3",
         "text_alignment": "center",
-        "ratio": "wide",
-        "color_scheme": "scheme-3"
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "button_bg": "",
+        "button_text": ""
       }
     }
   },
-  "order": ["hero", "benefits", "equipment", "pricing", "audience", "process", "faq", "cta"]
+  "order": [
+    "hero",
+    "benefits",
+    "equipment",
+    "pricing",
+    "audience",
+    "process",
+    "faq",
+    "cta"
+  ]
 }
