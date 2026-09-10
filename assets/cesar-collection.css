@@ -63,6 +63,51 @@
   display: none;
 }
 
+/* ---------- Desvanecido del borde ----------
+   El corte en seco no dice si queda algo más allá. Con una máscara el final
+   del carril se difumina, y se hace sólo del lado que tiene contenido: los dos
+   anchos valen 0 cuando no hay nada que desplazar, y entonces la máscara es
+   opaca de lado a lado y no se nota.
+
+   Se usa máscara y no un degradado de color encima porque este bloque puede ir
+   sobre el fondo que elija la sección: un velo con color fijo sólo funcionaría
+   sobre uno concreto.
+
+   Los estados salen de las propias flechas con :has(), así que no hace falta
+   que el script publique nada más: lo que se ve y lo que se puede pulsar salen
+   de la misma condición. */
+.facets .facets__wrapper {
+  --cesar-fade-izq: 0px;
+  --cesar-fade-der: 0px;
+}
+
+/* Con un panel abierto no se enmascara. La máscara recorta contra la caja del
+   elemento, y el desplegable cuelga por debajo: se lo habría comido entero. */
+.cesar-rail:not(:has(details[open])) .facets__wrapper {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 var(--cesar-fade-izq),
+    #000 calc(100% - var(--cesar-fade-der)),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 var(--cesar-fade-izq),
+    #000 calc(100% - var(--cesar-fade-der)),
+    transparent 100%
+  );
+}
+
+.cesar-rail:has([data-rail-prev]:not([hidden])) .facets__wrapper {
+  --cesar-fade-izq: 48px;
+}
+
+.cesar-rail:has([data-rail-next]:not([hidden])) .facets__wrapper {
+  --cesar-fade-der: 64px;
+}
+
 /* Las píldoras no se encogen: prefieren salirse del carril antes que
    comprimir el nombre del filtro hasta partirlo. */
 .facets .facets__wrapper > * {
