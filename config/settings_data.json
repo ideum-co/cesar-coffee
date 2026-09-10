@@ -104,7 +104,8 @@
       ".group_dropdown {height: 35px;}",
       "h1.header__heading {z-index: 9;}",
       ".page-width .rte,.rte p {margin: 0 auto;}",
-      "h1.main-page-title{text-align: center}"
+      "h1.main-page-title {text-align: center;}",
+      ".contact.page-width {max-width: 800px; margin: 0 auto;}"
     ]
   }
 }
