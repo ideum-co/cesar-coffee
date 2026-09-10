@@ -211,7 +211,18 @@
 
                             {%- capture text_value -%}
                               <span class="facet-checkbox__text" aria-hidden="true">
-                                <span class="facet-checkbox__text-label">{{- value.label | escape }}</span> ({{- value.count -}})
+                                <span class="facet-checkbox__text-label">{{- value.label | escape }}</span>
+                                {%- comment -%}
+                                  El recuento va en su propio elemento para
+                                  poder pintarlo como distintivo al final de la
+                                  fila. Antes era texto suelto entre paréntesis
+                                  dentro del mismo span, sin nada a lo que
+                                  agarrarse desde el CSS. Los paréntesis salen:
+                                  la forma del distintivo ya lo separa del
+                                  nombre, y la versión para lectores de pantalla
+                                  sigue diciendo "N productos".
+                                {%- endcomment -%}
+                                <span class="cesar-facet__count">{{- value.count -}}</span>
                               </span>
                               <span class="visually-hidden">
                                 {{- value.label | escape }} (
@@ -580,7 +591,18 @@
 
                               {%- capture text_value -%}
                                 <span class="facet-checkbox__text" aria-hidden="true">
-                                  <span class="facet-checkbox__text-label">{{- value.label | escape }}</span> ({{- value.count -}})
+                                  <span class="facet-checkbox__text-label">{{- value.label | escape }}</span>
+                                {%- comment -%}
+                                  El recuento va en su propio elemento para
+                                  poder pintarlo como distintivo al final de la
+                                  fila. Antes era texto suelto entre paréntesis
+                                  dentro del mismo span, sin nada a lo que
+                                  agarrarse desde el CSS. Los paréntesis salen:
+                                  la forma del distintivo ya lo separa del
+                                  nombre, y la versión para lectores de pantalla
+                                  sigue diciendo "N productos".
+                                {%- endcomment -%}
+                                <span class="cesar-facet__count">{{- value.count -}}</span>
                                 </span>
                                 <span class="visually-hidden">
                                   {{- value.label | escape }} (

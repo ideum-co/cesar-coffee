@@ -131,12 +131,16 @@
    orden y el panel se quedaba con su fondo de esquema. */
 .facets__disclosure .facets__display,
 .facets__disclosure-vertical .facets__display-vertical {
-  border-radius: var(--cc-radius-md);
+  border-radius: var(--cc-radius-lg);
   border: 1px solid var(--cc-border);
   background-color: var(--cc-field);
   color: var(--cc-brown-900);
   font-family: var(--cc-font-sans, var(--cc-fallback-sans));
   overflow: hidden;
+  /* Sombra baja y difusa: el panel flota sobre las cards, y un borde solo no
+     bastaba para despegarlo del fondo. */
+  box-shadow: 0 12px 32px rgba(45, 18, 6, 0.1);
+  padding-bottom: var(--cc-space-2);
 }
 
 /* La cabecera va pegada arriba al desplazar, así que necesita fondo propio: si
@@ -146,16 +150,28 @@
   background-color: var(--cc-field);
   color: var(--cc-brown-900);
   border-bottom: 1px solid var(--cc-border);
-  font-size: var(--cc-text-sm);
-  font-weight: 500;
+  padding: var(--cc-space-4);
+  font-size: var(--cc-text-body);
+  font-weight: 700;
 }
 
+/* El Reset se distingue por color, no por subrayado: en una cabecera con una
+   sola acción, el subrayado permanente sólo añade ruido. Al pasar el ratón sí
+   aparece, que es donde comunica algo. */
 .facets__display .facets__reset {
   color: var(--cc-terracotta-text);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.facets__display .facets__reset:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .facets__list {
   background-color: transparent;
+  padding: var(--cc-space-2) var(--cc-space-2) 0;
 }
 
 .facets__display .facets__item {
@@ -169,11 +185,26 @@
   display: flex;
   align-items: center;
   gap: var(--cc-space-3);
-  padding: 8px;
-  border-radius: 4px;
+  padding: var(--cc-space-2) var(--cc-space-3);
+  border-radius: var(--cc-radius-sm);
   color: var(--cc-brown-900);
-  font-size: 12px;
+  font-size: var(--cc-text-body);
   font-weight: 600;
+  line-height: 1.3;
+}
+
+/* El texto de la opción es el que se estira: así el recuento queda pegado al
+   borde derecho por mucho que varíe la longitud del nombre. */
+.facets__display .facet-checkbox__text {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  gap: var(--cc-space-3);
+  min-width: 0;
+}
+
+.facets__display .facet-checkbox__text-label {
+  min-width: 0;
 }
 
 /* Dawn subraya la opción al pasar el ratón y al enfocar el input. Aquí el
@@ -194,61 +225,33 @@
   color: #4e3625;
 }
 
-/* El recuento se va al final de la fila. */
-.facets__display .facets__label .facet-checkbox__text-label + span,
-.facets__display .facets__label span:last-child {
+/* ---------- Recuento ----------
+   Disco al final de la fila en vez de un número entre paréntesis pegado al
+   nombre: separa el dato de la etiqueta y da un punto de anclaje visual a la
+   derecha, que es lo que ordena la lista cuando los nombres son de largos muy
+   distintos. */
+.facets__display .cesar-facet__count {
+  flex: none;
   margin-left: auto;
-  color: #4e3625;
-  font-weight: 500;
-  text-decoration: none;
+  display: grid;
+  place-items: center;
+  min-width: 28px;
+  height: 28px;
+  padding-inline: 6px;
+  border-radius: var(--cc-radius-pill);
+  background-color: var(--cc-brown-900);
+  color: #fff;
+  font-size: var(--cc-text-xs);
+  font-weight: 700;
+  /* Cifras de ancho fijo: sin esto los discos de una misma lista bailan de
+     ancho entre un 1 y un 8. */
+  font-variant-numeric: tabular-nums;
 }
 
-/* ---------- Filtro de precio ----------
-   Los campos son .field__input, que Dawn pinta con
-   rgb(var(--color-background)); igual que el panel, donde esa variable no
-   resuelve quedaban en negro con el texto encima sin contraste. */
-.facets__display .facets__price .field__input {
-  background-color: var(--cc-surface);
-  border: 1px solid var(--cc-border);
-  border-radius: var(--cc-radius-sm);
-  box-shadow: none;
-  color: var(--cc-brown-900);
-  font-family: var(--cc-font-sans, var(--cc-fallback-sans));
-  /* 16px: por debajo, iOS hace zoom al enfocar el campo */
-  font-size: var(--cc-text-body);
-  min-height: 44px;
-  padding-inline: var(--cc-space-3);
-}
-
-.facets__display .facets__price .field__input::placeholder {
+/* Sin resultados el disco pierde peso: la opción sigue ahí pero no invita. */
+.facets__display .facets__label.disabled .cesar-facet__count {
+  background-color: var(--cc-border);
   color: var(--cc-text-muted);
-  opacity: 1;
-}
-
-.facets__display .facets__price .field__input:focus-visible {
-  outline: 2px solid var(--cc-brown-900);
-  outline-offset: 2px;
-}
-
-/* Dawn dibuja el borde del campo con un ::after; con borde propio, sobra. */
-.facets__display .facets__price .field::after,
-.facets__display .facets__price .field::before {
-  display: none;
-}
-
-.facets__display .facets__price .field-currency {
-  color: var(--cc-brown-900);
-  font-weight: 600;
-}
-
-/* La etiqueta flotante de Dawn se solapa con el placeholder. */
-.facets__display .facets__price .field__label {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
 }
 
 /* ---------- Casilla ----------
@@ -256,7 +259,7 @@
    rgb(var(--color-background)); donde no resuelve, la casilla salía como un
    cuadro negro. Aquí se dibuja entera: sin apariencia nativa, con borde de
    marca y la marca de verificación como fondo al marcarla. */
-.facets__display .facets__label input[type='checkbox'] {
+.facets__display .facets__label input[type='checkbox']:not(.swatch-input__input) {
   appearance: none;
   -webkit-appearance: none;
   position: static;
@@ -273,7 +276,7 @@
   transition: background-color var(--cc-duration) var(--cc-ease);
 }
 
-.facets__display .facets__label input[type='checkbox']:checked {
+.facets__display .facets__label input[type='checkbox']:not(.swatch-input__input):checked {
   border-color: var(--cc-brown-900);
   background-color: var(--cc-brown-900);
   /* La marca va como imagen de fondo: un ::before no es posible en un input. */
@@ -283,7 +286,7 @@
   background-size: 14px;
 }
 
-.facets__display .facets__label input[type='checkbox']:focus-visible {
+.facets__display .facets__label input[type='checkbox']:not(.swatch-input__input):focus-visible {
   outline: 2px solid var(--cc-brown-900);
   outline-offset: 2px;
 }
@@ -413,4 +416,61 @@
 
 .mobile-facets__open:hover {
   background-color: var(--cc-cream-tint);
+}
+
+/* ---------------------------------------------------------------------------
+   Filtro por línea: el disco de color
+   Es la identidad de cada línea, así que manda sobre el texto. Se le da tamaño
+   propio y un aro interior tenue: sin él, el dorado y los tonos claros se
+   fundían con el crema del panel y el disco desaparecía contra el fondo.
+   --------------------------------------------------------------------------- */
+
+.facets__display .swatch-input-wrapper {
+  flex: none;
+  display: flex;
+  align-items: center;
+}
+
+.facets__display .swatch-input__label {
+  margin: 0;
+}
+
+/* La casilla desaparece de la vista, no del DOM: en este filtro el disco ya
+   dice cuál es la opción y si está elegida, así que una casilla al lado sumaba
+   un cuarto elemento a la fila sin aportar nada. El input sigue siendo el
+   control que recibe foco y teclado; el disco es su representación.
+   Se oculta con tamaño y opacidad en vez de display:none, que lo sacaría del
+   orden de tabulación y del árbol de accesibilidad. */
+/* Tres clases porque component-facets.css trae
+   .facets-layout-list--text input[type='checkbox'] con opacity: 1 y medidas
+   propias, que pesa 0-2-1 y ganaba a dos clases. Sin esto el input reaparecía
+   asomando por la izquierda de la fila. */
+.facets__display .facets__label .swatch-input__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  /* Los clics los recoge el <label for>, que envuelve el disco. */
+  pointer-events: none;
+}
+
+.facets__display .swatch {
+  --swatch--size: 28px;
+
+  box-shadow: inset 0 0 0 1px rgba(45, 18, 6, 0.2);
+}
+
+/* El foco se dibuja sobre el disco, que es lo que se ve. */
+.facets__display .facets__label:has(.swatch-input__input:focus-visible) .swatch {
+  box-shadow:
+    inset 0 0 0 1px rgba(45, 18, 6, 0.2),
+    0 0 0 3px var(--cc-brown-900);
+}
+
+/* Elegida, el disco gana un aro exterior en vez de crecer: cambiar de tamaño
+   movería la fila entera y las de al lado. */
+.facets__display .facets__label:has(:checked) .swatch {
+  box-shadow:
+    inset 0 0 0 1px rgba(45, 18, 6, 0.2),
+    0 0 0 2px var(--cc-brown-900);
 }
