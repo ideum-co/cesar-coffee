@@ -237,3 +237,121 @@
     transition: none;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Formulario de preguntas
+   --------------------------------------------------------------------------- */
+
+.cesar-rt__dialog {
+  width: min(480px, calc(100vw - 2 * var(--cc-gutter)));
+  padding: var(--cc-space-8);
+  border: 0;
+  border-radius: var(--cc-radius-lg);
+  background-color: var(--cc-surface);
+  color: var(--cc-brown-900);
+  font-family: var(--cc-font-sans, var(--cc-fallback-sans));
+}
+
+/* El velo lo pinta el propio diálogo; sin esto queda el gris del navegador. */
+.cesar-rt__dialog::backdrop {
+  background-color: rgba(20, 8, 3, 0.55);
+}
+
+.cesar-rt__dialog-close-form {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cesar-rt__dialog-close {
+  /* mínimo táctil */
+  width: 44px;
+  height: 44px;
+  margin: calc(var(--cc-space-4) * -1) calc(var(--cc-space-4) * -1) 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--cc-radius-pill);
+  background: none;
+  color: var(--cc-brown-900);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.cesar-rt__dialog-close:hover {
+  background-color: var(--cc-cream-active);
+}
+
+.cesar-rt__dialog-title {
+  margin: 0 0 var(--cc-space-6);
+  font-size: var(--cc-text-h3);
+  font-weight: 700;
+}
+
+.cesar-rt__form-label {
+  display: block;
+  margin-bottom: var(--cc-space-1);
+  font-size: var(--cc-text-sm);
+  font-weight: 600;
+}
+
+.cesar-rt__form-input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 48px;
+  margin-bottom: var(--cc-space-4);
+  padding: var(--cc-space-3);
+  border: 1px solid var(--cc-border);
+  border-radius: var(--cc-radius-sm);
+  background-color: var(--cc-surface);
+  color: var(--cc-brown-900);
+  font-family: inherit;
+  /* 16px: por debajo, iOS hace zoom al enfocar el campo */
+  font-size: var(--cc-text-body);
+}
+
+.cesar-rt__form-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.cesar-rt__form-input:focus-visible {
+  outline: 2px solid var(--cc-brown-900);
+  outline-offset: 2px;
+}
+
+.cesar-rt__form-submit {
+  width: 100%;
+  min-height: 48px;
+  border: 0;
+  border-radius: var(--cc-cta-radius);
+  background-color: var(--cc-brown-900);
+  color: #fff;
+  font-family: inherit;
+  font-size: var(--cc-cta-font-size);
+  font-weight: var(--cc-cta-weight);
+  cursor: pointer;
+}
+
+.cesar-rt__form-submit:hover {
+  background-color: var(--cc-brown-700);
+}
+
+.cesar-rt__form-ok,
+.cesar-rt__form-error {
+  margin: 0 0 var(--cc-space-4);
+  padding: var(--cc-space-3);
+  border-radius: var(--cc-radius-sm);
+  font-size: var(--cc-text-sm);
+}
+
+.cesar-rt__form-ok {
+  background-color: var(--cc-cream);
+  color: var(--cc-brown-900);
+}
+
+/* El error no se comunica sólo con color: quien no distinga rojo de crema
+   necesita que el texto diga qué ha pasado, y eso lo pone Shopify. */
+.cesar-rt__form-error {
+  background-color: #fdecea;
+  color: #8a2b1f;
+}
