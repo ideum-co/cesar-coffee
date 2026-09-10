@@ -104,6 +104,27 @@ Alimenta "See Our Farms" y el bloque de origen.
 
 ---
 
+### `origin_country`
+
+País de origen del café. Existe para poder colgarle un **mapa**: el texto de
+ubicación que alimenta el filtro *State, Country* de las colecciones vive en su
+propio campo y no se toca, porque los filtros de Shopify necesitan que ese valor
+siga siendo el que ya está indexado.
+
+Un producto puede venir de varios países, de ahí que el metafield sea una lista.
+
+| Campo | Tipo | Obligatorio | Notas |
+|---|---|---|---|
+| `name` | Single line text | Sí | `Colombia`. Es lo que se ve bajo el mapa. |
+| `map` | File | Sí | El SVG del contorno del país. Trazo, sin relleno: hereda el color del texto de la sección. |
+| `code` | Single line text | No | `CO`. Útil si más adelante hay que cruzar con otra fuente. |
+
+En **Display name** conviene poner `name`, no el color ni el código: es lo que
+se ve en el selector al asignarlo a un producto. Con las entradas de
+`coffee_line` pasó lo contrario y sus handles quedaron como códigos hexadecimales.
+
+---
+
 ## 3. Metafields de producto
 
 Crear en **Configuración → Metafields y metaobjetos → Productos**.
@@ -115,6 +136,7 @@ Crear en **Configuración → Metafields y metaobjetos → Productos**.
 | `cesar.tasting_notes` | **List of** metaobject references → `tasting_note` | Opcional | Línea bajo el título de la card |
 | `cesar.farm` | Metaobject reference → `farm` | No | Bloque "See Our Farms" |
 | `cesar.origin` | Single line text | No | `Cauca, Colombia` |
+| `cesar.origins` | **List of** metaobject references → `origin_country` | No | Mapas de origen en la ficha |
 | `cesar.varietal` | Single line text | No | `Bourbon Rosado` |
 | `cesar.altitude` | Single line text | No | `1.750–1.900 msnm` |
 | `cesar.roast_profile` | Single line text | Sí | `Espresso` / `Filter` |

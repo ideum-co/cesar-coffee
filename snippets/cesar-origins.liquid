@@ -1,0 +1,78 @@
+{% comment %}
+  Mapas de origen de un producto.
+
+  Lee `product.metafields.cesar.origins`, que admite tres formas, en este orden
+  de preferencia:
+
+    1. Lista de referencias al metaobjeto `origin_country` (lo recomendado, ver
+       design-system/DATA-MODEL.md). Cada entrada trae su nombre y su mapa.
+    2. Una sola referencia al mismo metaobjeto.
+    3. Texto plano, separado por comas. Sin mapa, sólo el nombre.
+
+  El texto de los filtros de colección vive en otro metafield y no se toca:
+  este bloque sólo añade la parte visual. Un producto puede tener varios
+  orígenes, así que se listan todos.
+
+  Si el producto no tiene orígenes no se renderiza nada, y quien invoca decide
+  qué poner en su lugar.
+
+  Uso:
+    {% render 'cesar-origins', product: product %}
+    {% render 'cesar-origins', product: product, size: 96 %}
+
+  Acepta:
+    product {Object} - el producto
+    size    {Number} - lado del mapa en px (por defecto 72)
+    class   {String} - clases extra para el contenedor
+{% endcomment %}
+
+{%- liquid
+  assign campo = product.metafields.cesar.origins
+  assign origenes = null
+  assign nombres_sueltos = ''
+
+  if campo.type == 'list.metaobject_reference'
+    assign origenes = campo.value
+  elsif campo.type == 'metaobject_reference'
+    assign origenes = campo.value
+  elsif campo != blank
+    comment
+      Texto plano como último recurso: sirve para tener el dato cargado antes
+      de crear los metaobjetos, aunque sin mapa que mostrar.
+    endcomment
+    assign texto = campo.value | default: campo
+    assign nombres_sueltos = texto | split: ','
+  endif
+
+  assign lado = size | default: 72
+-%}
+
+{%- if origenes != blank -%}
+  <ul class="cesar-origins {{ class }}" role="list" style="--cesar-origin-size: {{ lado }}px;">
+    {%- for origen in origenes -%}
+      {%- liquid
+        assign nombre = origen.name.value | default: origen.system.handle
+        assign mapa = origen.map.value
+      -%}
+      <li class="cesar-origins__item">
+        {%- if mapa != blank -%}
+          {%- comment -%}
+            Los mapas son SVG, y los SVG llegan como archivo genérico: no pasan
+            por image_url, que sólo transforma imágenes rasterizadas. Se usa la
+            url tal cual. El mapa es decorativo porque el nombre va al lado.
+          {%- endcomment -%}
+          <img class="cesar-origins__map" src="{{ mapa.url }}" alt="" loading="lazy" width="{{ lado }}" height="{{ lado }}">
+        {%- endif -%}
+        <span class="cesar-origins__name">{{ nombre }}</span>
+      </li>
+    {%- endfor -%}
+  </ul>
+{%- elsif nombres_sueltos.size > 0 -%}
+  <ul class="cesar-origins cesar-origins--sin-mapa {{ class }}" role="list">
+    {%- for nombre in nombres_sueltos -%}
+      <li class="cesar-origins__item">
+        <span class="cesar-origins__name">{{ nombre | strip }}</span>
+      </li>
+    {%- endfor -%}
+  </ul>
+{%- endif -%}

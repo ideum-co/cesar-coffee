@@ -118,3 +118,59 @@
   width: var(--cesar-mc-icon-size);
   max-width: 100%;
 }
+
+/* ---------------------------------------------------------------------------
+   Mapas de origen
+   Un producto puede venir de varios países, así que se listan en fila y se
+   parten a la siguiente si no caben.
+   --------------------------------------------------------------------------- */
+
+.cesar-origins {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--cc-space-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cesar-origins__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--cc-space-2);
+  /* El nombre no estira la columna más allá del mapa salvo que lo necesite. */
+  max-width: 12ch;
+  text-align: center;
+}
+
+.cesar-origins__map {
+  width: var(--cesar-origin-size, 72px);
+  height: var(--cesar-origin-size, 72px);
+  /* contain y no cover: un mapa recortado deja de ser reconocible. */
+  object-fit: contain;
+}
+
+.cesar-origins__name {
+  font-size: var(--cc-text-sm);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--cesar-mc-card-text, var(--cesar-sec-text, inherit));
+}
+
+/* Sin mapas la lista es sólo texto: en fila y separada por comas visuales, que
+   ocupa menos que una columna por país. */
+.cesar-origins--sin-mapa {
+  gap: var(--cc-space-2);
+}
+
+.cesar-origins--sin-mapa .cesar-origins__item {
+  max-width: none;
+}
+
+.cesar-origins--sin-mapa .cesar-origins__item:not(:last-child)::after {
+  content: '·';
+  margin-left: var(--cc-space-2);
+  opacity: 0.5;
+}

@@ -90,7 +90,29 @@
             {% endif %}
           >
             <div class="multicolumn-card content-container">
-              {%- if block.settings.image != blank -%}
+              {%- comment -%}
+                Orígenes del producto en lugar de la imagen del bloque. El
+                contenido lo pone el producto, no el bloque, así que una misma
+                card sirve para todo el catálogo sin editarla producto a
+                producto. Sólo aplica en la ficha: fuera de ella no hay producto
+                del que leer y se sigue usando la imagen.
+              {%- endcomment -%}
+              {%- liquid
+                assign pintar_origenes = false
+                if block.settings.show_origins and product != blank
+                  capture origenes_html
+                    render 'cesar-origins', product: product
+                  endcapture
+                  if origenes_html != blank
+                    assign pintar_origenes = true
+                  endif
+                endif
+              -%}
+              {%- if pintar_origenes -%}
+                <div class="multicolumn-card__image-wrapper multicolumn-card-spacing">
+                  {{ origenes_html }}
+                </div>
+              {%- elsif block.settings.image != blank -%}
                 {% if section.settings.image_ratio == 'adapt' or section.settings.image_ratio == 'circle' %}
                   {% assign spaced_image = true %}
                 {% endif %}
@@ -564,6 +586,13 @@
           "type": "image_picker",
           "id": "image",
           "label": "t:sections.multicolumn.blocks.column.settings.image.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_origins",
+          "label": "Mostrar los orígenes del producto",
+          "default": false,
+          "info": "Sólo en la ficha de producto. Sustituye la imagen del bloque por los mapas de los países de origen del producto que se esté viendo. Si el producto no tiene orígenes asignados, se usa la imagen."
         },
         {
           "type": "inline_richtext",
