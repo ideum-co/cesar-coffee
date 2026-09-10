@@ -1,0 +1,299 @@
+/**
+ * Fila de tarjetas con foto, rótulo encima y panel flotante.
+ *
+ * Las tarjetas tienen ancho fijo: cuando no caben, la fila se desplaza y asoma
+ * la siguiente, en lugar de estrecharlas hasta deformarlas.
+ */
+
+/* El borde incluido en el ancho a propósito: la fila calcula dónde empieza la
+   primera tarjeta a partir de este mismo tope, y con la caja de contenido el
+   máximo dejaría fuera los 24px de margen a cada lado. Serían 12px de desfase
+   entre el titular y las tarjetas, justo lo que se nota. */
+.cesar-fc__container--limited {
+  box-sizing: border-box;
+  max-width: var(--cesar-fc-max, none);
+}
+
+/* ---------- Encabezado ---------- */
+
+.cesar-fc__intro {
+  margin-bottom: var(--cc-space-12);
+}
+
+.cesar-fc__caption {
+  margin: 0 0 var(--cc-space-3);
+  font-size: var(--cc-text-body-lg);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--cesar-fc-caption, var(--cc-terracotta-text));
+}
+
+.cesar-fc__heading {
+  margin: 0;
+  font-family: var(--cc-font-sans, var(--cc-fallback-sans));
+  font-weight: var(--cc-font-heading-weight-black, 800);
+  font-size: var(--cesar-sec-heading-size, var(--cc-text-h2));
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--cesar-sec-heading, var(--cc-brown-700));
+}
+
+.cesar-fc__text {
+  margin-top: var(--cc-space-4);
+  font-size: var(--cesar-sec-text-size, var(--cc-text-body-lg));
+  line-height: 1.55;
+  color: var(--cesar-sec-text, var(--cc-text));
+}
+
+.cesar-sec--align-center .cesar-fc__text > * {
+  margin-inline: auto;
+}
+
+.cesar-sec--align-right .cesar-fc__text > * {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+/* ---------- La fila ---------- */
+
+/* Los elementos propios son en línea mientras no se diga lo contrario, y una
+   fila que se desplaza dentro de una caja en línea no funciona. */
+.cesar-fc__rail-wrap {
+  display: block;
+}
+
+.cesar-fc__rail {
+  display: flex;
+  gap: var(--cc-space-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  /* Con desplazamiento horizontal el navegador recorta también en vertical
+     (overflow-y pasa a auto por especificación). El panel y la sombra viven
+     dentro de la tarjeta justamente por eso. */
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  /* La barra se oculta: la fila ya se maneja con las flechas, con el dedo y
+     con el teclado, y una barra sobre las fotos ensucia el diseño. */
+  scrollbar-width: none;
+  padding-inline: var(--cc-gutter);
+  scroll-padding-inline-start: var(--cc-gutter);
+  scroll-padding-inline-end: var(--cc-gutter);
+}
+
+.cesar-fc__rail::-webkit-scrollbar {
+  display: none;
+}
+
+/* La primera tarjeta se alinea con el texto de arriba, pero la fila llega hasta
+   el borde de la pantalla: así la siguiente asoma y se entiende que hay más.
+   El 100% es el ancho de la sección, no del viewport, para no contar la barra
+   de desplazamiento vertical y provocar desbordamiento lateral. */
+.cesar-fc__rail--limited {
+  padding-inline-start: calc(max((100% - var(--cesar-fc-max, 1400px)) / 2, 0px) + var(--cc-gutter));
+  scroll-padding-inline-start: calc(max((100% - var(--cesar-fc-max, 1400px)) / 2, 0px) + var(--cc-gutter));
+}
+
+.cesar-fc__rail:focus-visible {
+  outline: 2px solid var(--cesar-sec-heading, var(--cc-brown-900));
+  outline-offset: -2px;
+}
+
+.cesar-fc__item {
+  flex: 0 0 auto;
+  width: var(--cesar-fc-card-width, 390px);
+  scroll-snap-align: start;
+}
+
+/* La última tarjeta ancla por su final, y no por su principio como el resto.
+   Cuando lo que sobra por desplazar es menos de una tarjeta —el caso normal,
+   con la última asomando— su punto de anclaje cae fuera del recorrido posible,
+   y al ser el anclaje obligatorio el navegador devuelve la fila al principio:
+   las flechas parecen no hacer nada. Con el final como ancla siempre hay un
+   punto alcanzable en el extremo. */
+.cesar-fc__item:last-child {
+  scroll-snap-align: end;
+}
+
+/* ---------- La tarjeta ---------- */
+
+.cesar-fc__card {
+  position: relative;
+  display: block;
+  height: var(--cesar-fc-card-height, 430px);
+  border-radius: var(--cesar-fc-radius, var(--cc-radius-lg));
+  overflow: hidden;
+  background-color: var(--cc-cream);
+}
+
+.cesar-fc__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cesar-fc__image--empty {
+  background-color: var(--cc-brown-500);
+}
+
+/* Velo sólo en la mitad superior, que es donde va el rótulo: cubrir la foto
+   entera apagaría la imagen sin necesidad. */
+.cesar-fc__scrim {
+  position: absolute;
+  inset: 0 0 40% 0;
+  background: linear-gradient(to bottom, rgba(20, 8, 3, var(--cesar-fc-scrim, 0.45)), rgba(20, 8, 3, 0));
+  pointer-events: none;
+}
+
+.cesar-fc__card-title {
+  position: absolute;
+  top: var(--cc-space-6);
+  left: var(--cc-space-6);
+  right: var(--cc-space-6);
+  margin: 0;
+  font-size: var(--cesar-fc-card-title-size, var(--cc-text-h3));
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--cesar-fc-card-title, #fff);
+}
+
+/* ---------- El panel ---------- */
+
+.cesar-fc__panel {
+  position: absolute;
+  right: var(--cc-space-4);
+  bottom: var(--cc-space-4);
+  left: var(--cc-space-4);
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--cc-space-3);
+  padding: var(--cc-space-4);
+  border-radius: var(--cc-radius-md);
+  background-color: var(--cesar-fc-panel-bg, rgba(255, 255, 255, 0.94));
+  color: var(--cesar-fc-panel-text, var(--cc-brown-900));
+}
+
+.cesar-fc__icon {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--cc-radius-pill);
+  background-color: var(--cesar-fc-icon-bg, var(--cc-cream-active));
+}
+
+.cesar-fc__icon img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.cesar-fc__panel-text {
+  margin: 0;
+  font-size: var(--cesar-fc-panel-size, var(--cc-text-body));
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.cesar-fc__link {
+  display: inline-block;
+  margin-top: var(--cc-space-2);
+  color: var(--cesar-sec-link, var(--cc-terracotta-text));
+  font-size: var(--cc-text-sm);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cesar-fc__link:hover {
+  color: var(--cesar-sec-link-hover, var(--cc-brown-900));
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cesar-fc__link:focus-visible {
+  outline: 2px solid var(--cesar-fc-panel-text, var(--cc-brown-900));
+  outline-offset: 2px;
+}
+
+/* ---------- Flechas ---------- */
+
+.cesar-fc__nav {
+  display: flex;
+  justify-content: center;
+  gap: var(--cc-space-3);
+  margin-top: var(--cc-space-8);
+}
+
+.cesar-fc__nav[hidden] {
+  display: none;
+}
+
+.cesar-fc__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* mínimo táctil */
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--cc-radius-pill);
+  background-color: var(--cc-cream);
+  color: var(--cc-brown-900);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background-color var(--cc-duration) var(--cc-ease),
+    opacity var(--cc-duration) var(--cc-ease);
+}
+
+.cesar-fc__arrow:hover {
+  background-color: var(--cc-cream-active);
+}
+
+.cesar-fc__arrow:focus-visible {
+  outline: 2px solid var(--cc-brown-900);
+  outline-offset: 2px;
+}
+
+/* En el extremo la flecha se desactiva en lugar de desaparecer: si se quitara,
+   la otra saltaría de sitio en cada desplazamiento. */
+.cesar-fc__arrow[disabled] {
+  opacity: 0.35;
+  cursor: default;
+}
+
+@media screen and (max-width: 749px) {
+  .cesar-fc__intro {
+    margin-bottom: var(--cc-space-8);
+  }
+
+  .cesar-fc__rail {
+    gap: var(--cc-space-4);
+  }
+
+  /* En móvil la tarjeta se adapta al ancho de la pantalla dejando que asome la
+     siguiente. El alto se mantiene: es lo que sostiene la composición. */
+  .cesar-fc__item {
+    width: min(var(--cesar-fc-card-width, 390px), 80vw);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cesar-fc__rail {
+    scroll-behavior: auto;
+  }
+
+  .cesar-fc__arrow {
+    transition: none;
+  }
+}
