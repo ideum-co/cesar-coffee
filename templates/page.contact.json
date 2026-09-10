@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -16,10 +25,234 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "rich_text_fELRb9": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_ayFbif": {
+          "type": "heading",
+          "settings": {
+            "heading": "Talk about your brand",
+            "heading_size": "h1"
+          }
+        },
+        "text_CPqE6P": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
+          }
+        },
+        "button_VmLdcN": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button label",
+            "button_link": "",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_ayFbif",
+        "text_CPqE6P",
+        "button_VmLdcN"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "cesar_tiers_fMYTqM": {
+      "type": "cesar-tiers",
+      "blocks": {
+        "tier_wnxTDV": {
+          "type": "tier",
+          "settings": {
+            "tier": "green",
+            "featured": false,
+            "title": "Green Line",
+            "text": "Everyday espresso, always on. The dependable base of the range.",
+            "button_label": "See Our Farms",
+            "button_link": "",
+            "bg_color": "",
+            "title_color": "",
+            "text_color": "",
+            "button_bg": "",
+            "button_text": ""
+          }
+        },
+        "tier_kxCcg4": {
+          "type": "tier",
+          "settings": {
+            "tier": "gold",
+            "featured": true,
+            "title": "Gold Line",
+            "text": "Rare allocation lots, the microlots that carry the story.",
+            "button_label": "See Our Farms",
+            "button_link": "",
+            "bg_color": "",
+            "title_color": "",
+            "text_color": "",
+            "button_bg": "",
+            "button_text": ""
+          }
+        },
+        "tier_qGEnRM": {
+          "type": "tier",
+          "settings": {
+            "tier": "silver",
+            "featured": false,
+            "title": "Silver Line",
+            "text": "Seasonal specialty from named producers, roasted for filter.",
+            "button_label": "See Our Farms",
+            "button_link": "",
+            "bg_color": "",
+            "title_color": "",
+            "text_color": "",
+            "button_bg": "",
+            "button_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "tier_wnxTDV",
+        "tier_kxCcg4",
+        "tier_qGEnRM"
+      ],
+      "name": "Cesar · Tiers",
+      "settings": {
+        "heading": "Three tiers, one clear range",
+        "button_label": "Shop All",
+        "button_link": "",
+        "color_scheme": "",
+        "limit_width": false,
+        "max_width": 1200,
+        "heading_color": "",
+        "heading_px": 0
+      }
+    },
+    "cesar_collection_row_Ynq93D": {
+      "type": "cesar-collection-row",
+      "blocks": {
+        "card_MUL8eq": {
+          "type": "card",
+          "settings": {
+            "title": "wholesale",
+            "text": "",
+            "link_label": "See Our Farms",
+            "link": ""
+          }
+        },
+        "card_R8XQA4": {
+          "type": "card",
+          "settings": {
+            "title": "white-label",
+            "text": "",
+            "link_label": "How We Roast",
+            "link": ""
+          }
+        },
+        "card_x39yRw": {
+          "type": "card",
+          "settings": {
+            "title": "co-roasting",
+            "text": "",
+            "link_label": "How We Roast",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_MUL8eq",
+        "card_R8XQA4",
+        "card_x39yRw"
+      ],
+      "name": "Cesar · Texto y carrusel",
+      "settings": {
+        "heading": "Retail proof. Trade ready.",
+        "text": "Wholesale roast-to-order, white-label roasting, co-roasting and roaster hire — for cafés, venues and roasters who want what's in the bag.",
+        "button_label": "Talk To Us About Trade",
+        "button_link": "",
+        "columns_desktop": 3,
+        "columns_mobile": "1",
+        "source": "blog",
+        "blog": "",
+        "articles_to_show": 6,
+        "article_button_label": "Read the story",
+        "show_excerpt": false,
+        "color_scheme": "",
+        "text_alignment": "left",
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "button_bg": "",
+        "button_text": ""
+      }
+    },
+    "cesar_product_faq_Bdk37T": {
+      "type": "cesar-product-faq",
+      "blocks": {
+        "question_DtfcVJ": {
+          "type": "question",
+          "settings": {
+            "question": "How should I store this?",
+            "answer": "<p>Keep the bag sealed, somewhere cool and dark. Away from the fridge — coffee picks up every smell around it.</p>",
+            "open_by_default": false
+          }
+        },
+        "question_fGCPAF": {
+          "type": "question",
+          "settings": {
+            "question": "How should I store this?",
+            "answer": "<p>Keep the bag sealed, somewhere cool and dark. Away from the fridge — coffee picks up every smell around it.</p>",
+            "open_by_default": false
+          }
+        },
+        "question_icVVwD": {
+          "type": "question",
+          "settings": {
+            "question": "How should I store this?",
+            "answer": "<p>Keep the bag sealed, somewhere cool and dark. Away from the fridge — coffee picks up every smell around it.</p>",
+            "open_by_default": false
+          }
+        }
+      },
+      "block_order": [
+        "question_DtfcVJ",
+        "question_fGCPAF",
+        "question_icVVwD"
+      ],
+      "name": "Cesar · Preguntas ficha",
+      "settings": {
+        "heading": "More About This Product",
+        "text": "",
+        "one_at_a_time": true,
+        "limit_width": false,
+        "max_width": 1400,
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "divider_color": "",
+        "heading_px": 0,
+        "question_px": 0,
+        "text_px": 0,
+        "color_scheme": ""
+      }
     }
   },
   "order": [
     "main",
-    "form"
+    "form",
+    "rich_text_fELRb9",
+    "cesar_tiers_fMYTqM",
+    "cesar_collection_row_Ynq93D",
+    "cesar_product_faq_Bdk37T"
   ]
 }
