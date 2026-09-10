@@ -28,13 +28,19 @@
 
 {%- liquid
   assign campo = product.metafields.cesar.origins
-  assign origenes = null
+  assign lista = null
+  assign unico = null
   assign nombres_sueltos = ''
 
   if campo.type == 'list.metaobject_reference'
-    assign origenes = campo.value
+    assign lista = campo.value
   elsif campo.type == 'metaobject_reference'
-    assign origenes = campo.value
+    comment
+      La definición del metafield se creó como referencia única. Shopify no
+      permite cambiarle el tipo, así que hay que rehacerla como lista para poder
+      asignar varios países; mientras tanto, esta rama pinta el que haya.
+    endcomment
+    assign unico = campo.value
   elsif campo != blank
     comment
       Texto plano como último recurso: sirve para tener el dato cargado antes
@@ -47,25 +53,15 @@
   assign lado = size | default: 72
 -%}
 
-{%- if origenes != blank -%}
+{%- if lista != blank or unico != blank -%}
   <ul class="cesar-origins {{ class }}" role="list" style="--cesar-origin-size: {{ lado }}px;">
-    {%- for origen in origenes -%}
-      {%- liquid
-        assign nombre = origen.name.value | default: origen.system.handle
-        assign mapa = origen.map.value
-      -%}
-      <li class="cesar-origins__item">
-        {%- if mapa != blank -%}
-          {%- comment -%}
-            Los mapas son SVG, y los SVG llegan como archivo genérico: no pasan
-            por image_url, que sólo transforma imágenes rasterizadas. Se usa la
-            url tal cual. El mapa es decorativo porque el nombre va al lado.
-          {%- endcomment -%}
-          <img class="cesar-origins__map" src="{{ mapa.url }}" alt="" loading="lazy" width="{{ lado }}" height="{{ lado }}">
-        {%- endif -%}
-        <span class="cesar-origins__name">{{ nombre }}</span>
-      </li>
-    {%- endfor -%}
+    {%- if lista != blank -%}
+      {%- for origen in lista -%}
+        {% render 'cesar-origin-item', origen: origen, lado: lado %}
+      {%- endfor -%}
+    {%- else -%}
+      {% render 'cesar-origin-item', origen: unico, lado: lado %}
+    {%- endif -%}
   </ul>
 {%- elsif nombres_sueltos.size > 0 -%}
   <ul class="cesar-origins cesar-origins--sin-mapa {{ class }}" role="list">

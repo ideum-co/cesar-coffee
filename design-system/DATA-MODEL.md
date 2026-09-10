@@ -137,6 +137,12 @@ Crear en **Configuración → Metafields y metaobjetos → Productos**.
 | `cesar.farm` | Metaobject reference → `farm` | No | Bloque "See Our Farms" |
 | `cesar.origin` | Single line text | No | `Cauca, Colombia` |
 | `cesar.origins` | **List of** metaobject references → `origin_country` | No | Mapas de origen en la ficha |
+
+> **Que sea lista, no referencia suelta.** Al crear la definición hay que elegir
+> *List of entries*; con *One entry* sólo se puede asignar un país y Shopify **no
+> permite cambiarle el tipo después**: hay que borrar la definición y rehacerla,
+> perdiendo los valores ya asignados. El tema pinta las dos formas, así que una
+> definición mal creada no se nota hasta que hace falta el segundo país.
 | `cesar.varietal` | Single line text | No | `Bourbon Rosado` |
 | `cesar.altitude` | Single line text | No | `1.750–1.900 msnm` |
 | `cesar.roast_profile` | Single line text | Sí | `Espresso` / `Filter` |

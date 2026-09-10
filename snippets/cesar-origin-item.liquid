@@ -1,0 +1,37 @@
+{% comment %}
+  Un país de origen: su mapa y su nombre.
+
+  Vive aparte de cesar-origins para que la lista y la referencia única compartan
+  exactamente el mismo marcado sin duplicarlo. Envolver un objeto suelto en un
+  array no se puede hacer con filtros de Liquid, y recorrerlo con un bucle
+  dependería de cómo trate el motor a un valor que no es lista: con dos llamadas
+  a esta plantilla el resultado es el mismo por las dos vías.
+
+  Acepta:
+    origen {Object} - entrada del metaobjeto origin_country
+    lado   {Number} - lado del mapa en px
+{% endcomment %}
+
+{%- liquid
+  assign nombre = origen.name.value | default: origen.system.handle
+  assign mapa = origen.map.value
+-%}
+
+<li class="cesar-origins__item">
+  {%- if mapa != blank -%}
+    {%- comment -%}
+      Los mapas son SVG, y los SVG llegan como archivo genérico: no pasan por
+      image_url, que sólo transforma imágenes rasterizadas. Se usa la url tal
+      cual. El mapa es decorativo porque el nombre va justo al lado.
+    {%- endcomment -%}
+    <img
+      class="cesar-origins__map"
+      src="{{ mapa.url }}"
+      alt=""
+      loading="lazy"
+      width="{{ lado }}"
+      height="{{ lado }}"
+    >
+  {%- endif -%}
+  <span class="cesar-origins__name">{{ nombre }}</span>
+</li>
