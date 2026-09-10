@@ -477,35 +477,16 @@ button.shopify-payment-button__button--unbranded {
   color: var(--cc-text-muted);
 }
 
-/* Sin reseñas, Judge.me deja el bloque vacío: sin esto quedaría un hueco
-   suelto entre las notas de cata y el precio. */
-/* Vacío no se oculta: si lo hiciera, el hueco de la fila desaparecería y las
-   cards de una misma fila dejarían de alinearse entre sí. Lo que se ve
-   entonces son las estrellas de reserva de abajo. */
+/* Judge.me esconde su propio badge en las cards con una regla inyectada en la
+   página: .jdgm-preview-badge[data-template="index"] { display: none !important }.
+   Sale de un ajuste suyo, no del tema. Se anula con más peso —tres clases y un
+   atributo frente a sus dos clases— para que las estrellas se vean también
+   fuera de la ficha.
 
-/* Reserva: cinco estrellas huecas y "No reviews". Se retiran en cuanto Judge.me
-   pinta algo dentro del bloque de arriba, que es su hermano inmediato. */
-.cesar-card__rating:not(:empty) + .cesar-card__stars {
-  display: none;
-}
-
-.cesar-card__stars {
-  display: flex;
-  align-items: center;
-  gap: 2px;
-  margin: var(--cc-space-2) 0 0;
-  color: var(--cc-text-muted);
-}
-
-.cesar-card__star {
-  width: 14px;
-  height: 14px;
-  flex: none;
-}
-
-.cesar-card__stars-text {
-  margin-left: var(--cc-space-2);
-  font-size: var(--cc-text-xs);
+   Con reseñas o sin ellas: la app pinta igualmente su fila, así que la card no
+   pierde el renglón y las de una misma fila siguen alineadas. */
+.cesar-card__rating.jdgm-widget.jdgm-preview-badge[data-template='index'] {
+  display: block !important;
 }
 
 /* ---------- Badges de línea ---------- */

@@ -231,29 +231,6 @@
                 >
                   {{- card_product.metafields.judgeme.badge -}}
                 </div>
-
-                {%- comment -%}
-                  Estrellas de reserva. Judge.me no pinta nada en un producto
-                  sin reseñas —salvo que se active esa opción en su panel—, y
-                  entonces la card perdía una línea y quedaba descuadrada
-                  respecto a las demás. Estas se ven mientras el bloque de
-                  arriba esté vacío y desaparecen solas en cuanto la app lo
-                  rellena; la regla que las oculta está en cesar-tokens.css.
-                {%- endcomment -%}
-                <div class="cesar-card__stars" aria-hidden="true">
-                  {%- for i in (1..5) -%}
-                    <svg class="cesar-card__star" viewBox="0 0 20 20" focusable="false">
-                      <path
-                        d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.4"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                  {%- endfor -%}
-                  <span class="cesar-card__stars-text">No reviews</span>
-                </div>
               {%- endif -%}
 
               {%- comment -%}
