@@ -24,7 +24,6 @@
     },
     "cesar_video_dYCDmU": {
       "type": "cesar-video",
-      "disabled": true,
       "name": "Cesar · Vídeo",
       "settings": {
         "video": "shopify://files/videos/15678786-hd_1280_720_24fps.mp4",
