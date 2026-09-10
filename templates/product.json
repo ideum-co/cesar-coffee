@@ -168,7 +168,7 @@
             "image": "shopify://shop_images/icon-colombia.svg",
             "show_origins": true,
             "title": "Origin & Process",
-            "text": "<p>Washed, clean and floral. Natural, red fruit and wine-like sweetness. Honey, balanced, syrupy body. Anaerobic, funky, fermented depth.</p>",
+            "text": "<p>Washed, clean and floral. Natural, red fruit and wine-like sweetness. Honey, balanced, syrupy body. Anaerobic, funky, fermented depth.</p>{{ product.metafields.shopify.country | metafield_tag: field: 'label' }}",
             "link_label": "",
             "link": ""
           }
