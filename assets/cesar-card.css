@@ -48,12 +48,71 @@
   background: var(--cc-brown-500);
 }
 
-.cesar-card__veil {
+/* Velo bajo el texto. No es decoración: en blanco sobre una fotografía
+   cualquiera el título no llega al contraste mínimo legible.
+
+   El selector lleva el padre por delante a propósito. base.css esconde todos
+   los div vacíos (`div:empty { display: none }`) y este lo está: sin una
+   declaración de display que gane a esa regla, el velo no se pintaba nunca. */
+.cesar-card .cesar-card__veil {
+  display: block;
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(180deg, rgba(20, 8, 3, 0) 40%, rgba(20, 8, 3, 0.9) 100%);
   pointer-events: none;
+  /* El desenfoque entra sólo por abajo, con una máscara que lo va soltando:
+     un corte recto delataría dónde empieza. */
+  -webkit-backdrop-filter: blur(var(--cesar-card-veil-blur, 8px));
+  backdrop-filter: blur(var(--cesar-card-veil-blur, 8px));
+  -webkit-mask-image: linear-gradient(
+    to top,
+    #000 0%,
+    #000 16%,
+    rgba(0, 0, 0, 0.72) 32%,
+    rgba(0, 0, 0, 0.38) 46%,
+    rgba(0, 0, 0, 0.14) 57%,
+    rgba(0, 0, 0, 0) 68%
+  );
+  mask-image: linear-gradient(
+    to top,
+    #000 0%,
+    #000 16%,
+    rgba(0, 0, 0, 0.72) 32%,
+    rgba(0, 0, 0, 0.38) 46%,
+    rgba(0, 0, 0, 0.14) 57%,
+    rgba(0, 0, 0, 0) 68%
+  );
+}
+
+/* La sombra va encima del desenfoque, en su propia capa. Los pasos no son
+   regulares: una rampa lineal deja una banda visible a media altura y el ojo
+   la lee como un borde. */
+.cesar-card .cesar-card__veil::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: var(--cesar-card-veil, 1);
+  background: linear-gradient(
+    to top,
+    rgba(20, 8, 3, 0.88) 0%,
+    rgba(20, 8, 3, 0.85) 12%,
+    rgba(20, 8, 3, 0.77) 24%,
+    rgba(20, 8, 3, 0.65) 36%,
+    rgba(20, 8, 3, 0.49) 48%,
+    rgba(20, 8, 3, 0.33) 60%,
+    rgba(20, 8, 3, 0.19) 72%,
+    rgba(20, 8, 3, 0.08) 84%,
+    rgba(20, 8, 3, 0.02) 93%,
+    rgba(20, 8, 3, 0) 100%
+  );
+}
+
+/* Sin soporte de desenfoque de fondo queda sólo el degradado, que es el que
+   sostiene el contraste de verdad. Se sube un poco para compensar. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .cesar-card .cesar-card__veil::after {
+    opacity: calc(var(--cesar-card-veil, 1) * 1.12);
+  }
 }
 
 .cesar-card__content {

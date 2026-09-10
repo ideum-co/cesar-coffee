@@ -31,6 +31,8 @@
   {% if section.settings.text_color != blank %}--cesar-sec-text: {{ section.settings.text_color }};{% endif %}
   {% if section.settings.button_bg != blank %}--cesar-btn-bg: {{ section.settings.button_bg }};{% endif %}
   {% if section.settings.button_text != blank %}--cesar-btn-text: {{ section.settings.button_text }};{% endif %}
+  --cesar-card-veil: {{ section.settings.overlay_strength | default: 100 | divided_by: 100.0 }};
+  --cesar-card-veil-blur: {{ section.settings.overlay_blur | default: 8 }}px;
 {%- endcapture -%}
 <div
   class="cesar-collection-row cc-section cesar-sec cesar-sec--align-{{ section.settings.text_alignment }} color-{{ section.settings.color_scheme }}"
@@ -257,6 +259,34 @@
       "label": "Mostrar un resumen bajo el título",
       "default": false,
       "info": "En el diseño la card lleva sólo el título y el botón."
+    },
+    {
+      "type": "header",
+      "content": "Velo sobre la foto"
+    },
+    {
+      "type": "paragraph",
+      "content": "El texto de las cards va en blanco sobre la fotografía. Bajar el velo puede dejarlo por debajo del contraste mínimo legible: compruébalo con la foto más clara que vayas a usar."
+    },
+    {
+      "type": "range",
+      "id": "overlay_strength",
+      "min": 0,
+      "max": 120,
+      "step": 5,
+      "unit": "%",
+      "label": "Intensidad",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "overlay_blur",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Desenfoque",
+      "default": 8
     },
     {
       "type": "color_scheme",
