@@ -38,6 +38,32 @@
   margin-right: 0;
 }
 
+/* Dentro del resumen, Dawn mete la etiqueta y el caret en un div. Se hace fila
+   con hueco para separarlos. */
+.facets .facets__summary > div {
+  display: flex;
+  align-items: center;
+  gap: var(--cc-space-2);
+}
+
+/* El caret venía en absoluto desde base.css (summary .icon-caret) y anclado al
+   borde derecho con right: 0. Estando fuera del flujo, el hueco de la fila no
+   le afectaba y quedaba pegado a la última letra y al borde de la píldora.
+   Devuelto al flujo, se coloca como un hijo más y el hueco sí cuenta. */
+.facets .facets__summary .icon-caret {
+  position: static;
+  flex: none;
+  width: 10px;
+  height: 6px;
+}
+
+/* Dawn le deja 1.5rem de margen inferior al resumen, pensado para su lista
+   vertical. Dentro de la píldora ese margen la descuadra respecto a las demás,
+   y la separación entre filtros ya la lleva el gap del contenedor. */
+.facets .facets__summary {
+  margin-bottom: 0;
+}
+
 .facets .facets__summary,
 .facet-filters__sort {
   border-radius: var(--cc-radius-md);
