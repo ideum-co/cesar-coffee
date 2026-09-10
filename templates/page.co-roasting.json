@@ -1,0 +1,234 @@
+{
+  "sections": {
+    "hero": {
+      "type": "cesar-hero",
+      "settings": {
+        "heading": "Co-roasting in North Williamstown",
+        "subheading": "Bring your green. Use our roastery, our profiles and our team — and walk out with coffee that carries your name on the bag.",
+        "button_label": "Book a roast day",
+        "button_link": "/pages/contact",
+        "button_label_2": "How it works",
+        "button_link_2": "#shopify-section-process",
+        "overlay_opacity": 45,
+        "text_alignment": "left",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "value": {
+      "type": "cesar-cards",
+      "settings": {
+        "heading": "Why roast with us",
+        "columns_desktop": 3,
+        "ratio": "square",
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "card-1": {
+          "type": "card",
+          "settings": {
+            "title": "A roastery you don't have to buy",
+            "text": "Production-grade equipment, licensed and ready. No lease, no install, no six-figure decision before your first bag."
+          }
+        },
+        "card-2": {
+          "type": "card",
+          "settings": {
+            "title": "Your profile, kept and repeatable",
+            "text": "We log every curve. The batch you approve in March is the batch you get in September."
+          }
+        },
+        "card-3": {
+          "type": "card",
+          "settings": {
+            "title": "Roast days that suit your volume",
+            "text": "From a single 20 kg trial to a standing weekly slot, you only book what you actually need."
+          }
+        }
+      },
+      "block_order": ["card-1", "card-2", "card-3"]
+    },
+    "process": {
+      "type": "cesar-steps",
+      "settings": {
+        "caption": "How it works",
+        "heading": "Four steps from green to pallet",
+        "text": "<p>Most partners are roasting with us within three weeks of the first call.</p>",
+        "layout": "row",
+        "text_alignment": "left",
+        "button_label": "Talk to our roaster",
+        "button_link": "/pages/contact",
+        "limit_width": true,
+        "max_width": 1400,
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "step-1": {
+          "type": "step",
+          "settings": {
+            "title": "Tell us about your coffee",
+            "text": "<p>Send the lot details, the volume you have in mind and the profile you are chasing. If you don't have green yet, we can source it with you.</p>"
+          }
+        },
+        "step-2": {
+          "type": "step",
+          "settings": {
+            "title": "Dial in the profile",
+            "text": "<p>We roast sample batches and cup them together until the curve is yours. Nothing goes to production before you sign it off.</p>"
+          }
+        },
+        "step-3": {
+          "type": "step",
+          "settings": {
+            "title": "Book your roast day",
+            "text": "<p>Pick a slot that fits your orders. You are welcome on the floor for every batch, or you can leave it with our team.</p>"
+          }
+        },
+        "step-4": {
+          "type": "step",
+          "settings": {
+            "title": "Pack, label and dispatch",
+            "text": "<p>Degassing, packing and labelling under your brand, ready for pickup in North Williamstown or freight across Australia.</p>"
+          }
+        }
+      },
+      "block_order": ["step-1", "step-2", "step-3", "step-4"]
+    },
+    "facility": {
+      "type": "cesar-feature-banner",
+      "settings": {
+        "height": "lg",
+        "content_alignment": "left",
+        "overlay_color": "#2d1206",
+        "overlay_opacity": 45,
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "caption": {
+          "type": "caption",
+          "settings": {
+            "caption": "The roastery"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Built for coffee that has to be the same every time"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Profile logging on every batch, colour and moisture checked before packing, and a cupping table you are always welcome at.</p>"
+          }
+        },
+        "buttons": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Visit the roastery",
+            "button_link_1": "/pages/contact"
+          }
+        }
+      },
+      "block_order": ["caption", "heading", "text", "buttons"]
+    },
+    "tiers": {
+      "type": "cesar-tiers",
+      "settings": {
+        "heading": "Pick the volume that fits",
+        "button_label": "Request pricing",
+        "button_link": "/pages/contact",
+        "limit_width": true,
+        "max_width": 1400,
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "tier-1": {
+          "type": "tier",
+          "settings": {
+            "tier": "green",
+            "title": "Trial roast",
+            "text": "One 20 kg batch, profile development and a cupping session. The way most partners start.",
+            "button_label": "Book a trial",
+            "button_link": "/pages/contact"
+          }
+        },
+        "tier-2": {
+          "type": "tier",
+          "settings": {
+            "tier": "gold",
+            "featured": true,
+            "title": "Standing slot",
+            "text": "A recurring roast day each week or fortnight, with your profiles stored and your packaging on site.",
+            "button_label": "Reserve a slot",
+            "button_link": "/pages/contact"
+          }
+        },
+        "tier-3": {
+          "type": "tier",
+          "settings": {
+            "tier": "silver",
+            "title": "Full production",
+            "text": "Larger runs with sourcing, warehousing and freight handled end to end by our team.",
+            "button_label": "Talk to us",
+            "button_link": "/pages/contact"
+          }
+        }
+      },
+      "block_order": ["tier-1", "tier-2", "tier-3"]
+    },
+    "faq": {
+      "type": "cesar-product-faq",
+      "settings": {
+        "heading": "Questions before you book",
+        "one_at_a_time": true,
+        "limit_width": true,
+        "max_width": 1000,
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "q-1": {
+          "type": "question",
+          "settings": {
+            "question": "What is the minimum volume?",
+            "answer": "<p>A single 20 kg batch. There is no annual commitment and no minimum number of roast days.</p>"
+          }
+        },
+        "q-2": {
+          "type": "question",
+          "settings": {
+            "question": "Can I bring my own green coffee?",
+            "answer": "<p>Yes. Deliver it to North Williamstown and we store it for you. If you would rather we sourced it, we can do that too.</p>"
+          }
+        },
+        "q-3": {
+          "type": "question",
+          "settings": {
+            "question": "Who owns the roast profile?",
+            "answer": "<p>You do. We keep it on file so your coffee is repeatable, and it leaves with you if you ever move on.</p>"
+          }
+        },
+        "q-4": {
+          "type": "question",
+          "settings": {
+            "question": "Do you handle packaging and labelling?",
+            "answer": "<p>We pack and label under your brand, including compliance details for retail in Australia. Bring your own bags or use ours.</p>"
+          }
+        }
+      },
+      "block_order": ["q-1", "q-2", "q-3", "q-4"]
+    },
+    "cta": {
+      "type": "cesar-banner",
+      "settings": {
+        "heading": "Let's roast a batch together",
+        "text": "<p>Tell us what you are working on and we will come back with a roast day and a price.</p>",
+        "button_label": "Start the conversation",
+        "link": "/pages/contact",
+        "text_alignment": "center",
+        "ratio": "wide",
+        "color_scheme": "scheme-3"
+      }
+    }
+  },
+  "order": ["hero", "value", "process", "facility", "tiers", "faq", "cta"]
+}

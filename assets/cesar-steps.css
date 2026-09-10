@@ -1,0 +1,231 @@
+/**
+ * Pasos numerados de un proceso.
+ *
+ * El número lo pone un contador de CSS a partir del orden real de la lista, así
+ * que reordenar o borrar pasos en el personalizador no deja huecos ni repetidos.
+ */
+
+.cesar-steps__container--limited {
+  max-width: var(--cesar-steps-max, none);
+}
+
+/* ---------- Encabezado ---------- */
+
+.cesar-steps__intro {
+  margin-bottom: var(--cc-space-16);
+}
+
+.cesar-steps__caption {
+  margin: 0 0 var(--cc-space-4);
+  font-size: var(--cc-text-sm);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cesar-sec-link, var(--cc-terracotta-text));
+}
+
+.cesar-steps__heading {
+  margin: 0;
+  font-family: var(--cc-font-sans, var(--cc-fallback-sans));
+  font-weight: var(--cc-font-heading-weight-black, 800);
+  font-size: var(--cesar-sec-heading-size, var(--cc-text-h2));
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--cesar-sec-heading, var(--cc-brown-700));
+}
+
+.cesar-steps__text {
+  margin-top: var(--cc-space-4);
+  font-size: var(--cesar-sec-text-size, var(--cc-text-body-lg));
+  line-height: 1.55;
+  color: var(--cesar-sec-text, var(--cc-text));
+}
+
+/* Los párrafos del tema llevan medida máxima (68ch). Al centrar o alinear a la
+   derecha el encabezado hay que mover también esa caja: si no, el texto queda
+   centrado dentro de un bloque que sigue pegado a la izquierda. */
+.cesar-sec--align-center .cesar-steps__text > * {
+  margin-inline: auto;
+}
+
+.cesar-sec--align-right .cesar-steps__text > * {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+/* ---------- Lista ---------- */
+
+.cesar-steps__list {
+  /* El contador se reinicia en la lista, no en la página: dos secciones de
+     pasos en la misma página empiezan cada una por uno. */
+  counter-reset: cesar-step;
+  display: grid;
+  gap: var(--cc-space-12) var(--cc-space-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Se reparten en tantas columnas como quepan con 260px de ancho útil. Al
+   estrecharse la ventana bajan de cuatro a tres, a dos y a una sin saltos. */
+.cesar-steps__list--row {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.cesar-steps__list--stack {
+  grid-template-columns: 1fr;
+}
+
+.cesar-steps__item {
+  position: relative;
+  padding-top: var(--cc-space-8);
+  border-top: 1px solid var(--cesar-steps-rule, var(--cc-border));
+}
+
+/* El número es decorativo: el orden ya lo lleva la lista, y repetirlo en voz
+   alta sólo añade ruido a quien escucha la página. */
+.cesar-steps__item::before {
+  content: counter(cesar-step, decimal-leading-zero);
+  counter-increment: cesar-step;
+  display: block;
+  margin-bottom: var(--cc-space-4);
+  font-family: var(--cc-font-display, var(--cc-fallback-display));
+  font-size: var(--cesar-steps-number-size, clamp(48px, 5vw, 76px));
+  font-weight: 400;
+  line-height: 0.85;
+  letter-spacing: -0.02em;
+  color: var(--cesar-steps-number, var(--cc-terracotta));
+}
+
+.cesar-steps__media {
+  margin-bottom: var(--cc-space-6);
+}
+
+.cesar-steps__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--cc-radius-md);
+}
+
+.cesar-steps__title {
+  margin: 0 0 var(--cc-space-3);
+  font-size: var(--cesar-steps-title-size, var(--cc-text-h3));
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--cesar-sec-heading, var(--cc-brown-700));
+}
+
+.cesar-steps__step-text {
+  font-size: var(--cesar-sec-text-size, var(--cc-text-body));
+  line-height: 1.55;
+  color: var(--cesar-sec-text, var(--cc-text));
+}
+
+.cesar-steps__step-text > :first-child {
+  margin-top: 0;
+}
+
+.cesar-steps__step-text > :last-child {
+  margin-bottom: 0;
+}
+
+.cesar-steps__link {
+  display: inline-block;
+  margin-top: var(--cc-space-4);
+  color: var(--cesar-sec-link, var(--cc-terracotta-text));
+  font-weight: 600;
+  text-underline-offset: 3px;
+}
+
+.cesar-steps__link:hover {
+  color: var(--cesar-sec-link-hover, var(--cc-brown-900));
+}
+
+/* ---------- Uno debajo de otro ---------- */
+
+/* Con un paso por fila el número se va al lado del texto: en una sola columna
+   ancha, encima quedaría un hueco enorme entre el número y lo que numera. */
+@media screen and (min-width: 750px) {
+  .cesar-steps__list--stack .cesar-steps__item {
+    display: grid;
+    grid-template-columns: minmax(120px, 160px) 1fr;
+    gap: var(--cc-space-8);
+    align-items: start;
+  }
+
+  .cesar-steps__list--stack .cesar-steps__item::before {
+    margin-bottom: 0;
+  }
+
+  /* La imagen y el texto comparten la segunda columna; sin esto la imagen
+     abriría una tercera y el texto se estrecharía. */
+  .cesar-steps__list--stack .cesar-steps__media,
+  .cesar-steps__list--stack .cesar-steps__body {
+    grid-column: 2;
+  }
+}
+
+/* ---------- Botón ---------- */
+
+.cesar-steps__actions {
+  margin-top: var(--cc-space-16);
+}
+
+.cesar-steps__button {
+  /* El tema deja los enlaces en content-box: sin esto, el ancho completo de
+     móvil se suma al relleno lateral y el botón se sale de la pantalla. */
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* mínimo táctil */
+  min-height: 44px;
+  padding: var(--cc-cta-padding-y) var(--cc-space-8);
+  border-radius: var(--cc-cta-radius);
+  background-color: var(--cesar-btn-bg, var(--cc-brown-900));
+  color: var(--cesar-btn-text, #fff);
+  font-size: var(--cc-cta-font-size);
+  font-weight: var(--cc-cta-weight);
+  line-height: var(--cc-cta-line);
+  letter-spacing: var(--cc-cta-letter-space);
+  text-decoration: none;
+  transition: opacity var(--cc-cta-transition) var(--cc-ease);
+}
+
+.cesar-steps__button:hover {
+  opacity: 0.85;
+}
+
+.cesar-steps__button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+@media screen and (max-width: 749px) {
+  .cesar-steps__intro {
+    margin-bottom: var(--cc-space-12);
+  }
+
+  .cesar-steps__list {
+    gap: var(--cc-space-8);
+  }
+
+  .cesar-steps__actions {
+    margin-top: var(--cc-space-12);
+  }
+
+  /* A ancho de móvil el botón ocupa la fila: centrado y estrecho queda a merced
+     del texto que lleve dentro. */
+  .cesar-steps__button {
+    display: flex;
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cesar-steps__button {
+    transition: none;
+  }
+}
