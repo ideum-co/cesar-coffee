@@ -3,183 +3,233 @@
     "hero": {
       "type": "cesar-hero",
       "settings": {
-        "heading": "Co-roasting in North Williamstown",
-        "subheading": "Bring your green. Use our roastery, our profiles and our team — and walk out with coffee that carries your name on the bag.",
-        "button_label": "Book a roast day",
+        "heading": "Co-roasting",
+        "subheading": "Access professional Loring S7 Nighthawk and S15 Falcon roasters with expert guidance from our team. No experience needed — we guide you through every step.",
+        "button_label": "Book a session",
         "button_link": "/pages/contact",
-        "button_label_2": "How it works",
-        "button_link_2": "#shopify-section-process",
+        "button_label_2": "Ask a question",
+        "button_link_2": "/pages/contact",
         "overlay_opacity": 45,
         "text_alignment": "left",
         "color_scheme": "scheme-1"
       }
     },
-    "value": {
-      "type": "cesar-cards",
+    "benefits": {
+      "type": "multicolumn",
       "settings": {
-        "heading": "Why roast with us",
-        "columns_desktop": 3,
-        "ratio": "square",
+        "title": "What You Get",
+        "heading_size": "h2",
+        "heading_alignment": "left",
+        "columns_desktop": 4,
+        "columns_mobile": "1",
+        "column_alignment": "left",
+        "background_style": "none",
+        "swipe_on_mobile": false,
+        "image_width": "third",
+        "image_ratio": "circle",
         "color_scheme": "scheme-1"
       },
       "blocks": {
-        "card-1": {
-          "type": "card",
+        "b-1": {
+          "type": "column",
           "settings": {
-            "title": "A roastery you don't have to buy",
-            "text": "Production-grade equipment, licensed and ready. No lease, no install, no six-figure decision before your first bag."
+            "title": "Machine access",
+            "text": "<p>Professional Loring roasters, ready to run.</p>"
           }
         },
-        "card-2": {
-          "type": "card",
+        "b-2": {
+          "type": "column",
           "settings": {
-            "title": "Your profile, kept and repeatable",
-            "text": "We log every curve. The batch you approve in March is the batch you get in September."
+            "title": "Expert guidance",
+            "text": "<p>Our team stays with you throughout the session.</p>"
           }
         },
-        "card-3": {
-          "type": "card",
+        "b-3": {
+          "type": "column",
           "settings": {
-            "title": "Roast days that suit your volume",
-            "text": "From a single 20 kg trial to a standing weekly slot, you only book what you actually need."
+            "title": "Roast development",
+            "text": "<p>Profile refinement support, batch after batch.</p>"
+          }
+        },
+        "b-4": {
+          "type": "column",
+          "settings": {
+            "title": "Skill building",
+            "text": "<p>Grow your own roasting capability as you go.</p>"
           }
         }
       },
-      "block_order": ["card-1", "card-2", "card-3"]
+      "block_order": ["b-1", "b-2", "b-3", "b-4"]
+    },
+    "equipment": {
+      "type": "cesar-collection-row",
+      "settings": {
+        "heading": "Equipment",
+        "text": "<p>Both feature digital profiling and automated controls.</p>",
+        "source": "blocks",
+        "columns_desktop": 2,
+        "columns_mobile": "1",
+        "text_alignment": "left",
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "m-1": {
+          "type": "card",
+          "settings": {
+            "title": "Loring S7 Nighthawk",
+            "text": "1.4–7kg batches, ideal for smaller runs and profile development."
+          }
+        },
+        "m-2": {
+          "type": "card",
+          "settings": {
+            "title": "Loring S15 Falcon",
+            "text": "3–15kg batches, ideal for production runs and wholesale volumes."
+          }
+        }
+      },
+      "block_order": ["m-1", "m-2"]
+    },
+    "pricing": {
+      "type": "cesar-pricing-table",
+      "settings": {
+        "heading": "Pricing",
+        "col_1_label": "Package",
+        "col_2_label": "Session length",
+        "col_3_label": "Price per kg",
+        "note": "<p>Pricing varies by bean selection and volume.</p>",
+        "included_heading": "Included",
+        "included_text": "<p>Access to roasters, destoner, espresso machine (San Remo D8 Pro) for cupping, on-site packing, private label support and green bean sourcing.</p>",
+        "text_alignment": "left",
+        "limit_width": true,
+        "max_width": 1100,
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "p-1": {
+          "type": "row",
+          "settings": {
+            "package": "Starter",
+            "length": "1 hour",
+            "price": "$26.00/kg"
+          }
+        },
+        "p-2": {
+          "type": "row",
+          "settings": {
+            "package": "Basic",
+            "length": "2 hours",
+            "price": "$24.90/kg"
+          }
+        },
+        "p-3": {
+          "type": "row",
+          "settings": {
+            "package": "Standard",
+            "length": "3 hours",
+            "price": "$24.13/kg"
+          }
+        },
+        "p-4": {
+          "type": "row",
+          "settings": {
+            "package": "Premium",
+            "length": "4 hours",
+            "price": "$23.13/kg"
+          }
+        }
+      },
+      "block_order": ["p-1", "p-2", "p-3", "p-4"]
+    },
+    "audience": {
+      "type": "multicolumn",
+      "settings": {
+        "title": "Who It's For",
+        "heading_size": "h2",
+        "heading_alignment": "left",
+        "columns_desktop": 3,
+        "columns_mobile": "1",
+        "column_alignment": "left",
+        "background_style": "primary",
+        "swipe_on_mobile": false,
+        "image_width": "third",
+        "image_ratio": "circle",
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "a-1": {
+          "type": "column",
+          "settings": {
+            "title": "Aspiring roasters",
+            "text": "<p>Learn on production equipment, with someone beside you.</p>"
+          }
+        },
+        "a-2": {
+          "type": "column",
+          "settings": {
+            "title": "Cafe owners",
+            "text": "<p>Roast your own house blend without buying a roastery.</p>"
+          }
+        },
+        "a-3": {
+          "type": "column",
+          "settings": {
+            "title": "Scale-up brands",
+            "text": "<p>Move to production volumes with packing and sourcing handled.</p>"
+          }
+        }
+      },
+      "block_order": ["a-1", "a-2", "a-3"]
     },
     "process": {
       "type": "cesar-steps",
       "settings": {
-        "caption": "How it works",
-        "heading": "Four steps from green to pallet",
-        "text": "<p>Most partners are roasting with us within three weeks of the first call.</p>",
+        "caption": "",
+        "heading": "How It Works",
         "layout": "row",
         "text_alignment": "left",
-        "button_label": "Talk to our roaster",
+        "button_label": "Book a session",
         "button_link": "/pages/contact",
         "limit_width": true,
         "max_width": 1400,
         "color_scheme": "scheme-1"
       },
       "blocks": {
-        "step-1": {
+        "s-1": {
           "type": "step",
           "settings": {
-            "title": "Tell us about your coffee",
-            "text": "<p>Send the lot details, the volume you have in mind and the profile you are chasing. If you don't have green yet, we can source it with you.</p>"
+            "title": "Introduction & safety briefing",
+            "text": "<p>We walk you through the roastery and how the session runs.</p>"
           }
         },
-        "step-2": {
+        "s-2": {
           "type": "step",
           "settings": {
-            "title": "Dial in the profile",
-            "text": "<p>We roast sample batches and cup them together until the curve is yours. Nothing goes to production before you sign it off.</p>"
+            "title": "Profile development",
+            "text": "<p>We shape the curve with you until the coffee tastes the way you want it.</p>"
           }
         },
-        "step-3": {
+        "s-3": {
           "type": "step",
           "settings": {
-            "title": "Book your roast day",
-            "text": "<p>Pick a slot that fits your orders. You are welcome on the floor for every batch, or you can leave it with our team.</p>"
+            "title": "Roasting session",
+            "text": "<p>You roast, with our team beside you for the whole session.</p>"
           }
         },
-        "step-4": {
+        "s-4": {
           "type": "step",
           "settings": {
-            "title": "Pack, label and dispatch",
-            "text": "<p>Degassing, packing and labelling under your brand, ready for pickup in North Williamstown or freight across Australia.</p>"
+            "title": "Packing",
+            "text": "<p>On-site packing, with private label support if you need it.</p>"
           }
         }
       },
-      "block_order": ["step-1", "step-2", "step-3", "step-4"]
-    },
-    "facility": {
-      "type": "cesar-feature-banner",
-      "settings": {
-        "height": "lg",
-        "content_alignment": "left",
-        "overlay_color": "#2d1206",
-        "overlay_opacity": 45,
-        "color_scheme": "scheme-1"
-      },
-      "blocks": {
-        "caption": {
-          "type": "caption",
-          "settings": {
-            "caption": "The roastery"
-          }
-        },
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Built for coffee that has to be the same every time"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Profile logging on every batch, colour and moisture checked before packing, and a cupping table you are always welcome at.</p>"
-          }
-        },
-        "buttons": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Visit the roastery",
-            "button_link_1": "/pages/contact"
-          }
-        }
-      },
-      "block_order": ["caption", "heading", "text", "buttons"]
-    },
-    "tiers": {
-      "type": "cesar-tiers",
-      "settings": {
-        "heading": "Pick the volume that fits",
-        "button_label": "Request pricing",
-        "button_link": "/pages/contact",
-        "limit_width": true,
-        "max_width": 1400,
-        "color_scheme": "scheme-1"
-      },
-      "blocks": {
-        "tier-1": {
-          "type": "tier",
-          "settings": {
-            "tier": "green",
-            "title": "Trial roast",
-            "text": "One 20 kg batch, profile development and a cupping session. The way most partners start.",
-            "button_label": "Book a trial",
-            "button_link": "/pages/contact"
-          }
-        },
-        "tier-2": {
-          "type": "tier",
-          "settings": {
-            "tier": "gold",
-            "featured": true,
-            "title": "Standing slot",
-            "text": "A recurring roast day each week or fortnight, with your profiles stored and your packaging on site.",
-            "button_label": "Reserve a slot",
-            "button_link": "/pages/contact"
-          }
-        },
-        "tier-3": {
-          "type": "tier",
-          "settings": {
-            "tier": "silver",
-            "title": "Full production",
-            "text": "Larger runs with sourcing, warehousing and freight handled end to end by our team.",
-            "button_label": "Talk to us",
-            "button_link": "/pages/contact"
-          }
-        }
-      },
-      "block_order": ["tier-1", "tier-2", "tier-3"]
+      "block_order": ["s-1", "s-2", "s-3", "s-4"]
     },
     "faq": {
       "type": "cesar-product-faq",
       "settings": {
-        "heading": "Questions before you book",
+        "heading": "FAQs",
         "one_at_a_time": true,
         "limit_width": true,
         "max_width": 1000,
@@ -189,29 +239,29 @@
         "q-1": {
           "type": "question",
           "settings": {
-            "question": "What is the minimum volume?",
-            "answer": "<p>A single 20 kg batch. There is no annual commitment and no minimum number of roast days.</p>"
+            "question": "Do I need to bring my own green beans?",
+            "answer": "<p>No — we can source them for you, or you're welcome to bring your own.</p>"
           }
         },
         "q-2": {
           "type": "question",
           "settings": {
-            "question": "Can I bring my own green coffee?",
-            "answer": "<p>Yes. Deliver it to North Williamstown and we store it for you. If you would rather we sourced it, we can do that too.</p>"
+            "question": "Will someone from the team be with me the whole time?",
+            "answer": "<p>Yes, our team stays with you throughout the session.</p>"
           }
         },
         "q-3": {
           "type": "question",
           "settings": {
-            "question": "Who owns the roast profile?",
-            "answer": "<p>You do. We keep it on file so your coffee is repeatable, and it leaves with you if you ever move on.</p>"
+            "question": "I've never roasted before — is that OK?",
+            "answer": "<p>Yes, no experience is needed.</p>"
           }
         },
         "q-4": {
           "type": "question",
           "settings": {
-            "question": "Do you handle packaging and labelling?",
-            "answer": "<p>We pack and label under your brand, including compliance details for retail in Australia. Bring your own bags or use ours.</p>"
+            "question": "What's the cancellation policy?",
+            "answer": "<p>Free rescheduling up to 48 hours before your session. Sessions cancelled within 48 hours are forfeited.</p>"
           }
         }
       },
@@ -220,9 +270,9 @@
     "cta": {
       "type": "cesar-banner",
       "settings": {
-        "heading": "Let's roast a batch together",
-        "text": "<p>Tell us what you are working on and we will come back with a roast day and a price.</p>",
-        "button_label": "Start the conversation",
+        "heading": "Book a session or ask a question",
+        "text": "<p>Tell us what you want to roast and we'll find you a slot.</p>",
+        "button_label": "Get in touch",
         "link": "/pages/contact",
         "text_alignment": "center",
         "ratio": "wide",
@@ -230,5 +280,5 @@
       }
     }
   },
-  "order": ["hero", "value", "process", "facility", "tiers", "faq", "cta"]
+  "order": ["hero", "benefits", "equipment", "pricing", "audience", "process", "faq", "cta"]
 }
