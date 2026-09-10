@@ -71,6 +71,35 @@ for f in sorted(pathlib.Path('sections').glob('*.liquid')):
     for pr in sch.get('presets', []):
         largo(pr.get('name'), 'preset')
 
+    # -----------------------------------------------------------------------
+    # Coherencia de los ajustes de rango.
+    # Shopify rechaza el archivo entero si el valor por defecto queda fuera de
+    # min/max, si no cae en un multiplo del paso, o si el rango pasa de 101
+    # posiciones. `shopify theme check` tampoco lo detecta: solo se ve en el
+    # registro de sincronizacion, y hasta entonces la seccion deja de
+    # actualizarse en la tienda sin que nada lo avise aqui.
+    # -----------------------------------------------------------------------
+    def rangos(ajustes, donde, _f=f):
+        for a in ajustes or []:
+            if not isinstance(a, dict) or a.get('type') != 'range':
+                continue
+            ident = a.get('id', '?')
+            try:
+                mn, mx, paso, dfl = a['min'], a['max'], a['step'], a['default']
+            except KeyError as e:
+                out.append(f"[{_f.name}] {donde} rango {ident}: falta {e.args[0]}")
+                continue
+            if not (mn <= dfl <= mx):
+                out.append(f"[{_f.name}] {donde} rango {ident}: default {dfl} fuera de {mn}-{mx}")
+            elif paso and round((dfl - mn) % paso, 6) != 0:
+                out.append(f"[{_f.name}] {donde} rango {ident}: default {dfl} no cae en un paso de {paso} desde {mn}")
+            if paso and (mx - mn) / paso > 101:
+                out.append(f"[{_f.name}] {donde} rango {ident}: {(mx - mn) / paso:.0f} posiciones (max 101)")
+
+    rangos(sch.get('settings'), 'ajustes')
+    for b in sch.get('blocks', []):
+        rangos(b.get('settings'), f"bloque {b.get('type')}")
+
 print("PROBLEMAS:" if out else "OK: todas las plantillas y groups validan")
 for p in out: print("  -",p)
 sys.exit(1 if out else 0)
