@@ -24,7 +24,12 @@
         "button_link": "shopify://collections/all",
         "button_label_2": "Our Story",
         "button_link_2": "shopify://pages/about-us",
-        "color_scheme": "scheme-1"
+        "color_scheme": "scheme-1",
+        "text_alignment": "left",
+        "heading_color": "#FDF5A6",
+        "heading_px": 0,
+        "subheading_color": "#FDF5A6",
+        "subheading_px": 0
       }
     },
     "cesar_video_dYCDmU": {
