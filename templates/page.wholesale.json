@@ -1,0 +1,131 @@
+{
+  "sections": {
+    "hero": {
+      "type": "cesar-hero",
+      "settings": {
+        "heading": "Wholesale",
+        "subheading": "Partner with excellence",
+        "button_label": "Contact our Wholesale team",
+        "button_link": "mailto:info@cesarscoffeecup.com?subject=Wholesale%20Enquiry",
+        "button_label_2": "Use our contact form",
+        "button_link_2": "/pages/contact",
+        "overlay_opacity": 45,
+        "text_alignment": "left",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "intro": {
+      "type": "rich-text",
+      "settings": {
+        "desktop_content_position": "left",
+        "content_alignment": "left",
+        "full_width": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 24
+      },
+      "blocks": {
+        "t-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>A direct lineage from farm to portafilter. We supply seasonal microlots and consistent house blends for cafés and businesses who care about transparency and ethics as much as flavour.</p>"
+          }
+        }
+      },
+      "block_order": ["t-1"]
+    },
+    "supply": {
+      "type": "multicolumn",
+      "settings": {
+        "title": "",
+        "heading_size": "h2",
+        "heading_alignment": "left",
+        "columns_desktop": 4,
+        "columns_mobile": "1",
+        "column_alignment": "left",
+        "background_style": "none",
+        "swipe_on_mobile": false,
+        "image_width": "third",
+        "image_ratio": "circle",
+        "color_scheme": "scheme-1",
+        "padding_top": 24,
+        "padding_bottom": 40
+      },
+      "blocks": {
+        "c-1": {
+          "type": "column",
+          "settings": {
+            "title": "Direct from origin",
+            "text": "<p>Premium green beans, sourced direct from origin, available year-round.</p>"
+          }
+        },
+        "c-2": {
+          "type": "column",
+          "settings": {
+            "title": "Microlots and blends",
+            "text": "<p>Seasonal microlots alongside consistent house blends.</p>"
+          }
+        },
+        "c-3": {
+          "type": "column",
+          "settings": {
+            "title": "Full traceability",
+            "text": "<p>Full traceability back to the farm on every lot.</p>"
+          }
+        },
+        "c-4": {
+          "type": "column",
+          "settings": {
+            "title": "Roasted in Melbourne",
+            "text": "<p>Melbourne-based roasting and local delivery, including the CBD.</p>"
+          }
+        }
+      },
+      "block_order": ["c-1", "c-2", "c-3", "c-4"]
+    },
+    "statement": {
+      "type": "cesar-feature-banner",
+      "settings": {
+        "height": "lg",
+        "content_alignment": "left",
+        "overlay_color": "#140803",
+        "overlay_opacity": 50,
+        "color_scheme": "scheme-4"
+      },
+      "blocks": {
+        "caption": {
+          "type": "caption",
+          "settings": {
+            "caption": "Wholesale",
+            "text_size": "md"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Melbourne's premier dedicated B2B roasting facility, empowering the next generation of independent coffee brands.",
+            "text_size": "lg"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Contact our wholesale team, or use our contact form and select “Wholesale” as your enquiry type.</p>",
+            "text_size": "md"
+          }
+        },
+        "buttons": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Contact our Wholesale team",
+            "button_link_1": "mailto:info@cesarscoffeecup.com?subject=Wholesale%20Enquiry",
+            "button_label_2": "Use our contact form",
+            "button_link_2": "/pages/contact"
+          }
+        }
+      },
+      "block_order": ["caption", "heading", "text", "buttons"]
+    }
+  },
+  "order": ["hero", "intro", "supply", "statement"]
+}
