@@ -417,6 +417,7 @@
         "card_3": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/co-roasting-home.webp",
             "title": "co-roasting",
             "text": "",
             "link_label": "How We Roast",
