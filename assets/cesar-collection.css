@@ -42,21 +42,29 @@
 .facets .facets__wrapper {
   gap: 6px;
   flex-wrap: nowrap;
+  /* Un contenedor que se desplaza recorta a sus hijos, y el panel de cada
+     filtro cuelga por debajo. No hay forma de salvarlo desde aquí: por
+     especificación, overflow-x: auto convierte el overflow-y: visible en auto,
+     de modo que el panel se recortaría igual. La solución está en el panel, que
+     al abrirse pasa a position: fixed y se coloca desde el script. */
   overflow-x: auto;
-  /* El panel de cada filtro cuelga hacia abajo, y un overflow-x recortaría
-     también en vertical. clip en un solo eje deja el otro libre. */
-  overflow-y: visible;
-  overflow-x: clip;
+  overflow-y: hidden;
   scrollbar-width: none;
-  /* Sitio para la flecha, sólo cuando hay algo que desplazar. */
   padding-right: 0;
 }
 
-/* clip no permite desplazar por script ni con gesto. Se usa auto en cuanto hay
-   desbordamiento, que es cuando el desplazamiento tiene sentido. */
 .cesar-rail[data-overflow] .facets__wrapper {
-  overflow-x: auto;
+  /* Sitio para la flecha, sólo cuando hay algo que desplazar. */
   padding-right: 52px;
+}
+
+/* Abierto, el panel sale del carril: en fijo ya no lo recorta nadie. Las
+   coordenadas las escribe cesar-filter-rail.js, que lo alinea con su filtro. */
+.cesar-rail .facets__disclosure[open] > .facets__display {
+  position: fixed;
+  top: auto;
+  left: auto;
+  z-index: 20;
 }
 
 .facets .facets__wrapper::-webkit-scrollbar {

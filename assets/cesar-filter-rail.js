@@ -18,7 +18,14 @@ class CesarFilterRail extends HTMLElement {
     this.next = this.querySelector('[data-rail-next]');
     if (!this.carril) return;
 
-    this.onScroll = () => this.actualizar();
+    this.onScroll = () => {
+      this.actualizar();
+      // Al desplazar, el filtro abierto se va de sitio. Se cierra en vez de
+      // perseguirlo: un panel flotando sobre un filtro que ya no está debajo
+      // desorienta más que desaparecer.
+      const abierto = this.querySelector('details[open]');
+      if (abierto) abierto.open = false;
+    };
     this.carril.addEventListener('scroll', this.onScroll, { passive: true });
 
     this.prev?.addEventListener('click', () => this.desplazar(-1));
@@ -33,12 +40,51 @@ class CesarFilterRail extends HTMLElement {
       Array.from(this.carril.children).forEach((hijo) => this.observer.observe(hijo));
     }
 
+    // El panel de cada filtro se saca del carril al abrirse. Dentro quedaría
+    // recortado: un contenedor que se desplaza recorta a sus hijos, y por
+    // especificación overflow-x: auto arrastra el eje vertical a auto por mucho
+    // que se le pida visible.
+    this.onToggle = (event) => {
+      const detalle = event.target;
+      if (!(detalle instanceof HTMLDetailsElement) || !this.contains(detalle)) return;
+      if (detalle.open) this.colocarPanel(detalle);
+    };
+    // toggle no burbujea, así que se escucha en fase de captura.
+    this.addEventListener('toggle', this.onToggle, true);
+
+    this.onViewportChange = () => {
+      const abierto = this.querySelector('details[open]');
+      if (abierto) this.colocarPanel(abierto);
+    };
+    window.addEventListener('resize', this.onViewportChange);
+    window.addEventListener('scroll', this.onViewportChange, { passive: true });
+
     this.actualizar();
   }
 
   disconnectedCallback() {
     this.carril?.removeEventListener('scroll', this.onScroll);
+    this.removeEventListener('toggle', this.onToggle, true);
+    window.removeEventListener('resize', this.onViewportChange);
+    window.removeEventListener('scroll', this.onViewportChange);
     this.observer?.disconnect();
+  }
+
+  /** Alinea el panel bajo su filtro, en coordenadas de ventana. */
+  colocarPanel(detalle) {
+    const panel = detalle.querySelector('.facets__display');
+    const resumen = detalle.querySelector('summary');
+    if (!panel || !resumen) return;
+
+    const r = resumen.getBoundingClientRect();
+    panel.style.top = `${r.bottom + 8}px`;
+
+    // Alineado a la izquierda del filtro, salvo que así se saliera por la
+    // derecha de la ventana: entonces se pega al borde con un margen.
+    const ancho = panel.offsetWidth;
+    const margen = 16;
+    const maximo = window.innerWidth - ancho - margen;
+    panel.style.left = `${Math.max(margen, Math.min(r.left, maximo))}px`;
   }
 
   /** Un paso deja a la vista algo de lo ya visto, para no perder el hilo. */
