@@ -1,0 +1,284 @@
+{
+  "sections": {
+    "hero": {
+      "type": "cesar-hero",
+      "settings": {
+        "heading": "Co-roasting",
+        "subheading": "Access professional Loring S7 Nighthawk and S15 Falcon roasters with expert guidance from our team. No experience needed — we guide you through every step.",
+        "button_label": "Book a session",
+        "button_link": "/pages/contact",
+        "button_label_2": "Ask a question",
+        "button_link_2": "/pages/contact",
+        "overlay_opacity": 45,
+        "text_alignment": "left",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "benefits": {
+      "type": "multicolumn",
+      "settings": {
+        "title": "What You Get",
+        "heading_size": "h2",
+        "heading_alignment": "left",
+        "columns_desktop": 4,
+        "columns_mobile": "1",
+        "column_alignment": "left",
+        "background_style": "none",
+        "swipe_on_mobile": false,
+        "image_width": "third",
+        "image_ratio": "circle",
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "b-1": {
+          "type": "column",
+          "settings": {
+            "title": "Machine access",
+            "text": "<p>Professional Loring roasters, ready to run.</p>"
+          }
+        },
+        "b-2": {
+          "type": "column",
+          "settings": {
+            "title": "Expert guidance",
+            "text": "<p>Our team stays with you throughout the session.</p>"
+          }
+        },
+        "b-3": {
+          "type": "column",
+          "settings": {
+            "title": "Roast development",
+            "text": "<p>Profile refinement support, batch after batch.</p>"
+          }
+        },
+        "b-4": {
+          "type": "column",
+          "settings": {
+            "title": "Skill building",
+            "text": "<p>Grow your own roasting capability as you go.</p>"
+          }
+        }
+      },
+      "block_order": ["b-1", "b-2", "b-3", "b-4"]
+    },
+    "equipment": {
+      "type": "cesar-collection-row",
+      "settings": {
+        "heading": "Equipment",
+        "text": "<p>Both feature digital profiling and automated controls.</p>",
+        "source": "blocks",
+        "columns_desktop": 2,
+        "columns_mobile": "1",
+        "text_alignment": "left",
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "m-1": {
+          "type": "card",
+          "settings": {
+            "title": "Loring S7 Nighthawk",
+            "text": "1.4–7kg batches, ideal for smaller runs and profile development."
+          }
+        },
+        "m-2": {
+          "type": "card",
+          "settings": {
+            "title": "Loring S15 Falcon",
+            "text": "3–15kg batches, ideal for production runs and wholesale volumes."
+          }
+        }
+      },
+      "block_order": ["m-1", "m-2"]
+    },
+    "pricing": {
+      "type": "cesar-pricing-table",
+      "settings": {
+        "heading": "Pricing",
+        "col_1_label": "Package",
+        "col_2_label": "Session length",
+        "col_3_label": "Price per kg",
+        "note": "<p>Pricing varies by bean selection and volume.</p>",
+        "included_heading": "Included",
+        "included_text": "<p>Access to roasters, destoner, espresso machine (San Remo D8 Pro) for cupping, on-site packing, private label support and green bean sourcing.</p>",
+        "text_alignment": "left",
+        "limit_width": true,
+        "max_width": 1100,
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "p-1": {
+          "type": "row",
+          "settings": {
+            "package": "Starter",
+            "length": "1 hour",
+            "price": "$26.00/kg"
+          }
+        },
+        "p-2": {
+          "type": "row",
+          "settings": {
+            "package": "Basic",
+            "length": "2 hours",
+            "price": "$24.90/kg"
+          }
+        },
+        "p-3": {
+          "type": "row",
+          "settings": {
+            "package": "Standard",
+            "length": "3 hours",
+            "price": "$24.13/kg"
+          }
+        },
+        "p-4": {
+          "type": "row",
+          "settings": {
+            "package": "Premium",
+            "length": "4 hours",
+            "price": "$23.13/kg"
+          }
+        }
+      },
+      "block_order": ["p-1", "p-2", "p-3", "p-4"]
+    },
+    "audience": {
+      "type": "multicolumn",
+      "settings": {
+        "title": "Who It's For",
+        "heading_size": "h2",
+        "heading_alignment": "left",
+        "columns_desktop": 3,
+        "columns_mobile": "1",
+        "column_alignment": "left",
+        "background_style": "primary",
+        "swipe_on_mobile": false,
+        "image_width": "third",
+        "image_ratio": "circle",
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "a-1": {
+          "type": "column",
+          "settings": {
+            "title": "Aspiring roasters",
+            "text": "<p>Learn on production equipment, with someone beside you.</p>"
+          }
+        },
+        "a-2": {
+          "type": "column",
+          "settings": {
+            "title": "Cafe owners",
+            "text": "<p>Roast your own house blend without buying a roastery.</p>"
+          }
+        },
+        "a-3": {
+          "type": "column",
+          "settings": {
+            "title": "Scale-up brands",
+            "text": "<p>Move to production volumes with packing and sourcing handled.</p>"
+          }
+        }
+      },
+      "block_order": ["a-1", "a-2", "a-3"]
+    },
+    "process": {
+      "type": "cesar-steps",
+      "settings": {
+        "caption": "",
+        "heading": "How It Works",
+        "layout": "row",
+        "text_alignment": "left",
+        "button_label": "Book a session",
+        "button_link": "/pages/contact",
+        "limit_width": true,
+        "max_width": 1400,
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "s-1": {
+          "type": "step",
+          "settings": {
+            "title": "Introduction & safety briefing",
+            "text": "<p>We walk you through the roastery and how the session runs.</p>"
+          }
+        },
+        "s-2": {
+          "type": "step",
+          "settings": {
+            "title": "Profile development",
+            "text": "<p>We shape the curve with you until the coffee tastes the way you want it.</p>"
+          }
+        },
+        "s-3": {
+          "type": "step",
+          "settings": {
+            "title": "Roasting session",
+            "text": "<p>You roast, with our team beside you for the whole session.</p>"
+          }
+        },
+        "s-4": {
+          "type": "step",
+          "settings": {
+            "title": "Packing",
+            "text": "<p>On-site packing, with private label support if you need it.</p>"
+          }
+        }
+      },
+      "block_order": ["s-1", "s-2", "s-3", "s-4"]
+    },
+    "faq": {
+      "type": "cesar-product-faq",
+      "settings": {
+        "heading": "FAQs",
+        "one_at_a_time": true,
+        "limit_width": true,
+        "max_width": 1000,
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "q-1": {
+          "type": "question",
+          "settings": {
+            "question": "Do I need to bring my own green beans?",
+            "answer": "<p>No — we can source them for you, or you're welcome to bring your own.</p>"
+          }
+        },
+        "q-2": {
+          "type": "question",
+          "settings": {
+            "question": "Will someone from the team be with me the whole time?",
+            "answer": "<p>Yes, our team stays with you throughout the session.</p>"
+          }
+        },
+        "q-3": {
+          "type": "question",
+          "settings": {
+            "question": "I've never roasted before — is that OK?",
+            "answer": "<p>Yes, no experience is needed.</p>"
+          }
+        },
+        "q-4": {
+          "type": "question",
+          "settings": {
+            "question": "What's the cancellation policy?",
+            "answer": "<p>Free rescheduling up to 48 hours before your session. Sessions cancelled within 48 hours are forfeited.</p>"
+          }
+        }
+      },
+      "block_order": ["q-1", "q-2", "q-3", "q-4"]
+    },
+    "cta": {
+      "type": "cesar-banner",
+      "settings": {
+        "heading": "Book a session or ask a question",
+        "text": "<p>Tell us what you want to roast and we'll find you a slot.</p>",
+        "button_label": "Get in touch",
+        "link": "/pages/contact",
+        "text_alignment": "center",
+        "ratio": "wide",
+        "color_scheme": "scheme-3"
+      }
+    }
+  },
+  "order": ["hero", "benefits", "equipment", "pricing", "audience", "process", "faq", "cta"]
+}

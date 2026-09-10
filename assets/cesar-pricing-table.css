@@ -1,0 +1,248 @@
+/**
+ * Tabla de precios por paquete.
+ */
+
+.cesar-pt__container--limited {
+  max-width: var(--cesar-pt-max, none);
+}
+
+/* ---------- Encabezado ---------- */
+
+.cesar-pt__intro {
+  margin-bottom: var(--cc-space-8);
+}
+
+.cesar-pt__heading {
+  margin: 0;
+  font-family: var(--cc-font-sans, var(--cc-fallback-sans));
+  font-weight: var(--cc-font-heading-weight-black, 800);
+  font-size: var(--cesar-sec-heading-size, var(--cc-text-h2));
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--cesar-sec-heading, var(--cc-brown-700));
+}
+
+.cesar-pt__text {
+  margin-top: var(--cc-space-4);
+  font-size: var(--cesar-sec-text-size, var(--cc-text-body-lg));
+  line-height: 1.55;
+  color: var(--cesar-sec-text, var(--cc-text));
+}
+
+/* Los párrafos del tema llevan medida máxima: al centrar o alinear a la derecha
+   hay que mover la caja, no sólo el texto de dentro. */
+.cesar-sec--align-center .cesar-pt__text > * {
+  margin-inline: auto;
+}
+
+.cesar-sec--align-right .cesar-pt__text > * {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+/* ---------- Tabla ---------- */
+
+/* Si la tabla no cabe, se desplaza dentro de su caja en vez de estirar la
+   página entera. */
+.cesar-pt__scroll {
+  overflow-x: auto;
+  border-radius: var(--cc-radius-md);
+}
+
+.cesar-pt__scroll:focus-visible {
+  outline: 2px solid var(--cesar-sec-heading, var(--cc-brown-900));
+  outline-offset: 2px;
+}
+
+.cesar-pt__table {
+  width: 100%;
+  /* Sin esto cada celda pinta su propio borde y las líneas salen dobles. */
+  border-collapse: collapse;
+  /* El nombre del paquete manda en el ancho; las otras dos columnas son cortas
+     y fijas, así los precios quedan alineados entre sí. */
+  table-layout: auto;
+  font-size: var(--cesar-sec-text-size, var(--cc-text-body));
+  color: var(--cesar-sec-text, var(--cc-text));
+  text-align: left;
+}
+
+.cesar-pt__table thead th {
+  padding: var(--cc-space-4) var(--cc-space-6);
+  background-color: var(--cesar-pt-head-bg, var(--cc-brown-900));
+  color: var(--cesar-pt-head-text, #fff);
+  font-size: var(--cc-text-sm);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.cesar-pt__table thead th:first-child {
+  border-start-start-radius: var(--cc-radius-md);
+}
+
+.cesar-pt__table thead th:last-child {
+  border-start-end-radius: var(--cc-radius-md);
+}
+
+.cesar-pt__table tbody th,
+.cesar-pt__table tbody td {
+  padding: var(--cc-space-6);
+  border-bottom: 1px solid var(--cesar-pt-rule, var(--cc-border));
+  vertical-align: baseline;
+}
+
+.cesar-pt__package {
+  font-weight: 700;
+  color: var(--cesar-sec-heading, var(--cc-brown-900));
+  /* El encabezado de fila hereda text-align:left de la tabla, pero algunos
+     navegadores siguen centrando th: se fija aquí. */
+  text-align: left;
+}
+
+.cesar-pt__badge {
+  display: inline-block;
+  margin-left: var(--cc-space-2);
+  padding: 2px var(--cc-space-2);
+  border-radius: var(--cc-radius-pill);
+  background-color: var(--cc-cream-active);
+  color: var(--cc-brown-900);
+  font-size: var(--cc-text-xs);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.cesar-pt__price {
+  font-size: var(--cesar-pt-price-size, var(--cc-text-body-lg));
+  font-weight: 700;
+  color: var(--cesar-sec-heading, var(--cc-brown-900));
+  white-space: nowrap;
+}
+
+.cesar-pt__col-price,
+.cesar-pt__table tbody td:last-child {
+  /* La columna del precio se queda pegada a la derecha; el ojo compara antes
+     una columna de cifras alineadas por su final. */
+  text-align: right;
+}
+
+/* La fila destacada se marca con fondo y con la etiqueta del bloque: quien no
+   distinga el color sigue leyendo por qué destaca. */
+.cesar-pt__row--highlight th,
+.cesar-pt__row--highlight td {
+  background-color: var(--cesar-pt-highlight, var(--cc-cream));
+}
+
+/* ---------- Nota y qué incluye ---------- */
+
+.cesar-pt__note {
+  margin-top: var(--cc-space-4);
+  font-size: var(--cc-text-sm);
+  line-height: 1.55;
+  color: var(--cesar-sec-text, var(--cc-text-muted));
+}
+
+.cesar-pt__included {
+  margin-top: var(--cc-space-12);
+  padding: var(--cc-space-8);
+  border-radius: var(--cc-radius-md);
+  background-color: var(--cesar-card-bg, var(--cc-cream));
+}
+
+.cesar-pt__included-heading {
+  margin: 0 0 var(--cc-space-3);
+  font-size: var(--cc-text-h3);
+  font-weight: 700;
+  color: var(--cesar-sec-heading, var(--cc-brown-700));
+}
+
+.cesar-pt__included-text {
+  font-size: var(--cesar-sec-text-size, var(--cc-text-body));
+  line-height: 1.55;
+  color: var(--cesar-sec-text, var(--cc-text));
+}
+
+.cesar-pt__included-text > :first-child {
+  margin-top: 0;
+}
+
+.cesar-pt__included-text > :last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- Botón ---------- */
+
+.cesar-pt__actions {
+  margin-top: var(--cc-space-12);
+}
+
+.cesar-pt__button {
+  /* El tema deja los enlaces en content-box: sin esto, el ancho completo de
+     móvil se suma al relleno lateral y el botón se sale de la pantalla. */
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* mínimo táctil */
+  min-height: 44px;
+  padding: var(--cc-cta-padding-y) var(--cc-space-8);
+  border-radius: var(--cc-cta-radius);
+  background-color: var(--cesar-btn-bg, var(--cc-brown-900));
+  color: var(--cesar-btn-text, #fff);
+  font-size: var(--cc-cta-font-size);
+  font-weight: var(--cc-cta-weight);
+  line-height: var(--cc-cta-line);
+  letter-spacing: var(--cc-cta-letter-space);
+  text-decoration: none;
+  transition: opacity var(--cc-cta-transition) var(--cc-ease);
+}
+
+.cesar-pt__button:hover {
+  opacity: 0.85;
+}
+
+.cesar-pt__button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+@media screen and (max-width: 749px) {
+  .cesar-pt__table {
+    font-size: var(--cc-text-sm);
+  }
+
+  .cesar-pt__table thead th,
+  .cesar-pt__table tbody th,
+  .cesar-pt__table tbody td {
+    padding: var(--cc-space-3) var(--cc-space-4);
+  }
+
+  /* Los rótulos de columna se parten en dos líneas. En una sola, "Session
+     length" solo ya deja la tabla más ancha que la pantalla y obliga a
+     desplazarla para leer los precios. El precio sí sigue entero. */
+  .cesar-pt__table thead th {
+    white-space: normal;
+  }
+
+  .cesar-pt__included {
+    padding: var(--cc-space-6);
+  }
+
+  .cesar-pt__actions {
+    margin-top: var(--cc-space-8);
+  }
+
+  .cesar-pt__button {
+    display: flex;
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cesar-pt__button {
+    transition: none;
+  }
+}
