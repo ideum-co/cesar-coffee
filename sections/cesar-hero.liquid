@@ -1,19 +1,106 @@
 {{ 'cesar-hero.css' | asset_url | stylesheet_tag }}
 
+{%- liquid
+  comment
+    Fondo del hero. La imagen manda siempre como póster y como respaldo: se
+    pinta debajo del vídeo, así que hay algo que ver mientras carga, si el
+    navegador bloquea la reproducción automática o si no hay vídeo.
+
+    Precedencia: vídeo alojado en Shopify, luego enlace de YouTube o Vimeo.
+  endcomment
+  assign hero_video = section.settings.video
+  assign hero_video_url = section.settings.video_url
+  assign hero_fondo = 'imagen'
+  if hero_video != blank
+    assign hero_fondo = 'archivo'
+  elsif hero_video_url != blank
+    assign hero_fondo = hero_video_url.type
+  endif
+-%}
+
+{%- if hero_fondo != 'imagen' -%}
+  <script src="{{ 'cesar-hero-video.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
 <div class="cesar-hero cesar-hero--text-{{ section.settings.text_color }} color-{{ section.settings.color_scheme }}">
-  {%- if section.settings.image != blank -%}
-    <div class="cesar-hero__media">
-      {{
-        section.settings.image
-        | image_url: width: 3200
-        | image_tag:
-          loading: 'eager',
-          fetchpriority: 'high',
-          sizes: '100vw',
-          widths: '600, 900, 1200, 1600, 2000, 2600, 3200',
-          class: 'cesar-hero__image',
-          alt: section.settings.image.alt
-      }}
+  {%- if section.settings.image != blank or hero_fondo != 'imagen' -%}
+    <cesar-hero-video class="cesar-hero__media" data-fondo="{{ hero_fondo }}">
+      {%- if section.settings.image != blank -%}
+        {{
+          section.settings.image
+          | image_url: width: 3200
+          | image_tag:
+            loading: 'eager',
+            fetchpriority: 'high',
+            sizes: '100vw',
+            widths: '600, 900, 1200, 1600, 2000, 2600, 3200',
+            class: 'cesar-hero__image',
+            alt: section.settings.image.alt
+        }}
+      {%- endif -%}
+
+      {%- comment -%}
+        Vídeo alojado en Shopify. Se construye a mano en vez de con video_tag
+        para poder fijar playsinline y quitar los controles: sin playsinline,
+        iOS abre el vídeo a pantalla completa en cuanto empieza.
+      {%- endcomment -%}
+      {%- if hero_fondo == 'archivo' -%}
+        <video
+          class="cesar-hero__video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          tabindex="-1"
+          aria-hidden="true"
+          {% if section.settings.image != blank %}
+            poster="{{ section.settings.image | image_url: width: 1600 }}"
+          {% endif %}
+        >
+          {%- for source in hero_video.sources -%}
+            {%- if source.format == 'mp4' -%}
+              <source src="{{ source.url }}" type="{{ source.mime_type }}">
+            {%- endif -%}
+          {%- endfor -%}
+        </video>
+      {%- elsif hero_fondo == 'youtube' or hero_fondo == 'vimeo' -%}
+        {%- comment -%}
+          De fondo hace falta silencio y bucle. YouTube sólo repite si se le
+          pasa playlist con el propio id; sin eso el vídeo se queda congelado
+          en el último fotograma.
+        {%- endcomment -%}
+        {%- liquid
+          if hero_fondo == 'youtube'
+            assign hero_src = 'https://www.youtube.com/embed/' | append: hero_video_url.id | append: '?autoplay=1&mute=1&controls=0&loop=1&playsinline=1&rel=0&modestbranding=1&disablekb=1&playlist=' | append: hero_video_url.id
+          else
+            assign hero_src = 'https://player.vimeo.com/video/' | append: hero_video_url.id | append: '?autoplay=1&muted=1&loop=1&background=1'
+          endif
+        -%}
+        <div class="cesar-hero__frame">
+          <iframe
+            class="cesar-hero__iframe"
+            src="{{ hero_src }}"
+            data-src="{{ hero_src }}"
+            title="{{ section.settings.video_description | default: section.settings.heading | escape }}"
+            allow="autoplay; encrypted-media"
+            frameborder="0"
+            tabindex="-1"
+            aria-hidden="true"
+          ></iframe>
+        </div>
+      {%- endif -%}
+
+      {%- comment -%}
+        Un fondo que se mueve solo tiene que poder detenerse: es un requisito
+        de accesibilidad para cualquier animación de más de cinco segundos.
+      {%- endcomment -%}
+      {%- if hero_fondo != 'imagen' -%}
+        <button type="button" class="cesar-hero__toggle" data-hero-toggle aria-pressed="false">
+          <span class="cesar-hero__toggle-icon" aria-hidden="true"></span>
+          <span class="visually-hidden" data-hero-toggle-label>Pause background video</span>
+        </button>
+      {%- endif -%}
       {%- if section.settings.overlay_opacity > 0 -%}
         {%- comment -%}
           Velo sobre la foto. No es decoración: sin él, el titular en terracota
@@ -25,7 +112,7 @@
           style="opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"
         ></div>
       {%- endif -%}
-    </div>
+    </cesar-hero-video>
   {%- endif -%}
 
   <div class="cesar-hero__inner cc-container">
@@ -88,6 +175,35 @@
       "info": "Cubre todo el hero. El texto va encima, así que conviene una foto con zona despejada a la izquierda."
     },
     {
+      "type": "header",
+      "content": "Vídeo de fondo"
+    },
+    {
+      "type": "paragraph",
+      "content": "Opcional. La imagen de arriba se sigue usando como póster mientras carga y como respaldo si el navegador bloquea la reproducción automática, así que conviene dejarla puesta. Va siempre en silencio y en bucle."
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Vídeo alojado en Shopify",
+      "info": "Tiene preferencia sobre el enlace de abajo."
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "accept": [
+        "youtube",
+        "vimeo"
+      ],
+      "label": "O enlace de YouTube / Vimeo"
+    },
+    {
+      "type": "text",
+      "id": "video_description",
+      "label": "Descripción del vídeo",
+      "info": "No se ve. La leen los lectores de pantalla para saber qué hay de fondo."
+    },
+    {
       "type": "range",
       "id": "overlay_opacity",
       "min": 0,
@@ -103,8 +219,14 @@
       "id": "text_color",
       "label": "Color del texto",
       "options": [
-        { "value": "brand", "label": "Terracota (fondo claro)" },
-        { "value": "light", "label": "Blanco (foto oscura)" }
+        {
+          "value": "brand",
+          "label": "Terracota (fondo claro)"
+        },
+        {
+          "value": "light",
+          "label": "Blanco (foto oscura)"
+        }
       ],
       "default": "brand"
     },

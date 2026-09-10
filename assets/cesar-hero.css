@@ -171,3 +171,118 @@
     );
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Vídeo de fondo
+   --------------------------------------------------------------------------- */
+
+/* cesar-hero-video es un elemento propio: sin display sería inline y no
+   generaría la caja que necesita el fondo. */
+cesar-hero-video.cesar-hero__media {
+  display: block;
+}
+
+.cesar-hero__video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  /* cover y no contain: el fondo llena la sección aunque la proporción del
+     vídeo no coincida con la de la pantalla. */
+  object-fit: cover;
+  object-position: center;
+}
+
+/* La imagen queda debajo del vídeo: hace de póster mientras carga y de
+   respaldo si el navegador bloquea la reproducción automática. */
+.cesar-hero__image {
+  z-index: 0;
+}
+
+.cesar-hero__video,
+.cesar-hero__frame {
+  z-index: 1;
+}
+
+/* En pausa se retira el vídeo y queda la imagen, que es el póster. */
+cesar-hero-video[paused] .cesar-hero__video,
+cesar-hero-video[paused] .cesar-hero__frame {
+  opacity: 0;
+}
+
+/* ---------- YouTube y Vimeo ----------
+   Un iframe no admite object-fit, así que se escala a mano: se le da la
+   proporción 16:9 en unidades de ventana y se toma la mayor de las dos
+   medidas, de modo que siempre desborda por un lado y nunca deja franjas. */
+
+.cesar-hero__frame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  /* El iframe no debe capturar el ratón: por encima va el contenido del hero,
+     y sin esto los botones quedarían sin recibir clics. */
+  pointer-events: none;
+}
+
+.cesar-hero__iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: 100vw;
+  height: 56.25vw;
+  min-width: 177.78vh;
+  min-height: 100%;
+  border: 0;
+}
+
+/* ---------- Botón de pausa ---------- */
+
+.cesar-hero__toggle {
+  position: absolute;
+  right: var(--cc-space-6);
+  bottom: var(--cc-space-6);
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  /* mínimo táctil */
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--cc-radius-pill);
+  background-color: rgba(20, 8, 3, 0.55);
+  color: #fff;
+  cursor: pointer;
+  transition: background-color var(--cc-duration) var(--cc-ease);
+}
+
+.cesar-hero__toggle:hover {
+  background-color: rgba(20, 8, 3, 0.8);
+}
+
+.cesar-hero__toggle:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+/* Dos barras cuando reproduce (pausar) y un triángulo en pausa (reanudar).
+   Se dibujan con bordes para no depender de ningún icono externo. */
+.cesar-hero__toggle-icon {
+  width: 12px;
+  height: 14px;
+  border-left: 4px solid currentColor;
+  border-right: 4px solid currentColor;
+}
+
+cesar-hero-video[paused] .cesar-hero__toggle-icon {
+  width: 0;
+  height: 0;
+  border-left: 12px solid currentColor;
+  border-right: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  /* El triángulo pesa a la izquierda; se recoloca para que se vea centrado. */
+  margin-left: 4px;
+}
