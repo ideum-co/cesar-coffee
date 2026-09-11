@@ -778,6 +778,85 @@ button.shopify-payment-button__button--unbranded {
   color: var(--cesar-sec-link, inherit);
 }
 
+/* ---- Menú de escritorio: negrita y flecha en vez de subrayado ----
+   Sólo el menú en línea de escritorio (.header__inline-menu); el cajón móvil
+   y los submenús desplegados siguen como en Dawn. Las reglas van con el
+   contenedor por delante para pesar más que las de base.css, que subrayan
+   en hover, en activo y con el desplegable abierto por tres vías distintas. */
+
+.header__inline-menu .header__menu-item {
+  position: relative;
+  /* Sitio a la derecha para la flecha, que va en posición absoluta y así no
+     mueve a los demás elementos al aparecer. */
+  padding-right: 2.6rem;
+  text-decoration: none;
+}
+
+.header__inline-menu .header__menu-item span {
+  display: inline-block;
+  font-weight: 400;
+  text-decoration: none;
+  transition: none;
+}
+
+.header__inline-menu .header__menu-item:hover span,
+.header__inline-menu .header__menu-item span.header__active-menu-item,
+.header__inline-menu details[open] > .header__menu-item span {
+  font-weight: 700;
+  text-decoration: none;
+  text-decoration-thickness: 0;
+}
+
+.header__inline-menu details[open] > .header__menu-item,
+.header__inline-menu .header__menu-item:hover .header__active-menu-item {
+  text-decoration: none;
+}
+
+/* La negrita es más ancha que la regular. Debajo del texto se pinta una copia
+   invisible en negrita, de alto cero, que fija el ancho del elemento: al pasar
+   el ratón el texto engorda pero el menú no se mueve. */
+.header__inline-menu .header__menu-item span[data-title]::after {
+  content: attr(data-title);
+  display: block;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+/* Flecha a la derecha, sólo en hover y en la página activa. Va como máscara
+   sobre currentColor: sigue el color del enlace, incluido el de hover. */
+.header__inline-menu a.header__menu-item::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 0.9rem;
+  width: 1.1em;
+  height: 1.1em;
+  background-color: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='%23000'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='%23000'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3'/%3E%3C/svg%3E") center / contain no-repeat;
+  opacity: 0;
+  transform: translate(-4px, -50%);
+  transition:
+    opacity var(--cc-duration) var(--cc-ease),
+    transform var(--cc-duration) var(--cc-ease);
+  pointer-events: none;
+}
+
+.header__inline-menu a.header__menu-item:hover::after,
+.header__inline-menu a.header__menu-item[aria-current='page']::after {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header__inline-menu a.header__menu-item::after {
+    transition: none;
+  }
+}
+
 /* ---------------------------------------------------------------------------
    Tamaños de texto por sección
    Van con selector de atributo y no con valor de reserva a propósito: si el

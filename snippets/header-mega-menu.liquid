@@ -17,6 +17,7 @@
                 class="header__menu-item list-menu__item link focus-inset"
               >
                 <span
+                  data-title="{{ link.title | escape }}"
                   {%- if link.child_active %}
                     class="header__active-menu-item"
                   {% endif %}
@@ -80,6 +81,7 @@
             {% endif %}
           >
             <span
+              data-title="{{ link.title | escape }}"
               {%- if link.current %}
                 class="header__active-menu-item"
               {% endif %}
