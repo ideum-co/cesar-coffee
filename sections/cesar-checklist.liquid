@@ -20,7 +20,7 @@
 >
   <div class="cesar-cl__container cc-container{% if section.settings.limit_width %} cesar-cl__container--limited{% endif %}">
     {%- if section.settings.caption != blank or section.settings.heading != blank or section.settings.text != blank -%}
-      <div class="cesar-cl__intro cesar-sec--align-{{ section.settings.text_alignment }}">
+      <div class="cesar-cl__intro cesar-sec--align-{{ section.settings.text_alignment }}" {% render 'cesar-motion', s: section.settings %}>
         {%- if section.settings.caption != blank -%}
           <p class="cesar-cl__caption">{{ section.settings.caption }}</p>
         {%- endif -%}
@@ -38,7 +38,7 @@
     {%- if section.blocks.size > 0 -%}
       <ul class="cesar-cl__list{% if section.settings.boxed %} cesar-cl__list--boxed{% endif %}" role="list">
         {%- for block in section.blocks -%}
-          <li class="cesar-cl__item" {{ block.shopify_attributes }}>
+          <li class="cesar-cl__item" {{ block.shopify_attributes }} {% render 'cesar-motion', s: section.settings, i: forloop.index0 %}>
             {%- comment -%}
               La marca es decorativa: el punto ya va en una lista, y anunciar
               "verificado" delante de cada uno sólo añadiría ruido.
@@ -62,7 +62,7 @@
     {%- endif -%}
 
     {%- if section.settings.button_label != blank -%}
-      <div class="cesar-cl__actions cesar-sec--align-{{ section.settings.text_alignment }}">
+      <div class="cesar-cl__actions cesar-sec--align-{{ section.settings.text_alignment }}" {% render 'cesar-motion', s: section.settings %}>
         <a href="{{ section.settings.button_link | default: '#' }}" class="cesar-cl__button">
           {{ section.settings.button_label }}
         </a>
@@ -166,6 +166,49 @@
       "label": "Tamaño del texto de entrada",
       "default": 0,
       "info": "0 = el del tema."
+    },
+    {
+      "type": "header",
+      "content": "Animación"
+    },
+    {
+      "type": "select",
+      "id": "motion_reveal",
+      "label": "Entrada al hacer scroll",
+      "options": [
+        {
+          "value": "none",
+          "label": "Sin animación"
+        },
+        {
+          "value": "fade-up",
+          "label": "Aparece subiendo"
+        },
+        {
+          "value": "fade",
+          "label": "Aparece"
+        },
+        {
+          "value": "zoom",
+          "label": "Aparece creciendo"
+        },
+        {
+          "value": "slide",
+          "label": "Entra desde la izquierda"
+        }
+      ],
+      "default": "fade-up"
+    },
+    {
+      "type": "checkbox",
+      "id": "motion_stagger",
+      "label": "Escalonar los elementos",
+      "default": true,
+      "info": "Cada elemento entra un poco después del anterior."
+    },
+    {
+      "type": "paragraph",
+      "content": "Si el sistema pide menos movimiento, no hay animación ni parallax: se ve todo quieto desde el principio."
     },
     {
       "type": "color_scheme",

@@ -1,0 +1,54 @@
+/**
+ * Animaciones de entrada y parallax de las secciones.
+ *
+ * El estado oculto sólo existe bajo `html.cesar-motion`, que pone el script
+ * cuando hay IntersectionObserver y el sistema no pide menos movimiento. Sin
+ * eso no hay clase, no hay estado oculto y todo se ve desde el primer momento:
+ * nada puede quedarse invisible por un fallo del JS.
+ */
+
+/* ---------- Entrada ---------- */
+
+.cesar-motion [data-cesar-reveal]:not([data-cesar-reveal='none']) {
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition-delay: var(--cesar-reveal-delay, 0ms);
+}
+
+.cesar-motion [data-cesar-reveal]:not([data-cesar-reveal='none']):not(.is-in) {
+  opacity: 0;
+}
+
+.cesar-motion [data-cesar-reveal='fade-up']:not(.is-in) {
+  transform: translate3d(0, 28px, 0);
+}
+
+.cesar-motion [data-cesar-reveal='zoom']:not(.is-in) {
+  transform: scale(0.96);
+}
+
+.cesar-motion [data-cesar-reveal='slide']:not(.is-in) {
+  transform: translate3d(-24px, 0, 0);
+}
+
+/* Al terminar, se retira la transición: un elemento que después cambie de
+   transform por su cuenta (una card en hover, la marquesina) no debe arrastrar
+   estos 0.9s. */
+.cesar-motion [data-cesar-reveal].is-in.is-done {
+  transition: none;
+}
+
+/* ---------- Parallax ---------- */
+
+/* El contenedor recorta: la imagen se mueve y va algo ampliada para que al
+   desplazarse no asome el fondo por los bordes. */
+.cesar-motion [data-cesar-parallax] {
+  overflow: hidden;
+}
+
+.cesar-motion [data-cesar-parallax] [data-cesar-parallax-el] {
+  transform: translate3d(0, var(--cesar-py, 0px), 0) scale(var(--cesar-pscale, 1.12));
+  transform-origin: center;
+  will-change: transform;
+}

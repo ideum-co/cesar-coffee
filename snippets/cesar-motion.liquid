@@ -1,0 +1,25 @@
+{% comment %}
+  Atributos de la animación de entrada de un elemento.
+
+  Se escribe dentro de la etiqueta de apertura:
+
+    <div class="..." {% render 'cesar-motion', s: section.settings, i: forloop.index0 %}>
+
+  Acepta:
+    s {Object} - section.settings, con motion_reveal y motion_stagger
+    i {Number} - posición dentro de una lista, para escalonar (opcional)
+
+  Sin JS, o con el sistema pidiendo menos movimiento, el atributo no hace nada:
+  el estado oculto sólo lo aplica cesar-motion.css cuando el html lleva la
+  clase que pone el script. El contenido nunca se queda invisible.
+{% endcomment %}
+
+{%- liquid
+  assign modo = s.motion_reveal | default: 'fade-up'
+  if modo != 'none'
+    echo 'data-cesar-reveal="' | append: modo | append: '"'
+    if i != blank and s.motion_stagger
+      echo ' data-cesar-reveal-i="' | append: i | append: '"'
+    endif
+  endif
+-%}

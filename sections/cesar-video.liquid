@@ -30,7 +30,7 @@
 >
   <div class="cesar-video__container{% if section.settings.limit_width %} cesar-video__container--limited{% endif %}">
     {%- if section.settings.heading != blank or section.settings.text != blank -%}
-      <div class="cesar-video__intro cesar-sec--align-{{ section.settings.text_alignment }}">
+      <div class="cesar-video__intro cesar-sec--align-{{ section.settings.text_alignment }}" {% render 'cesar-motion', s: section.settings, i: 0 %}>
         {%- if section.settings.heading != blank -%}
           <h2 class="cesar-video__heading">{{ section.settings.heading }}</h2>
         {%- endif -%}
@@ -43,6 +43,7 @@
 
     <deferred-media
       class="cesar-video__media deferred-media cesar-video__media--{{ section.settings.ratio }}"
+      {% render 'cesar-motion', s: section.settings, i: 1 %}
       data-media-id="{{ video_id }}"
     >
       {%- comment -%}
@@ -292,6 +293,42 @@
       "label": "Tamaño del texto",
       "default": 0,
       "info": "0 = el del tema."
+    },
+    {
+      "type": "header",
+      "content": "Animación"
+    },
+    {
+      "type": "select",
+      "id": "motion_reveal",
+      "label": "Entrada al hacer scroll",
+      "options": [
+        {
+          "value": "none",
+          "label": "Sin animación"
+        },
+        {
+          "value": "fade-up",
+          "label": "Aparece subiendo"
+        },
+        {
+          "value": "fade",
+          "label": "Aparece"
+        },
+        {
+          "value": "zoom",
+          "label": "Aparece creciendo"
+        },
+        {
+          "value": "slide",
+          "label": "Entra desde la izquierda"
+        }
+      ],
+      "default": "fade-up"
+    },
+    {
+      "type": "paragraph",
+      "content": "Si el sistema pide menos movimiento, no hay animación ni parallax: se ve todo quieto desde el principio."
     },
     {
       "type": "color_scheme",

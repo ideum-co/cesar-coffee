@@ -33,7 +33,7 @@
 >
   {%- if section.settings.caption != blank or section.settings.heading != blank or section.settings.text != blank -%}
     <div class="cc-container">
-      <div class="cesar-mq__intro cesar-sec--align-{{ section.settings.text_alignment }}">
+      <div class="cesar-mq__intro cesar-sec--align-{{ section.settings.text_alignment }}" {% render 'cesar-motion', s: section.settings %}>
         {%- if section.settings.caption != blank -%}
           <p class="cesar-mq__caption">{{ section.settings.caption }}</p>
         {%- endif -%}
@@ -51,6 +51,7 @@
 
   {%- if section.blocks.size > 0 -%}
     <cesar-line-marquee
+      {% render 'cesar-motion', s: section.settings %}
       class="cesar-mq__wrap cesar-mq__wrap--{{ section.settings.direction }}{% if section.settings.pause_on_hover %} cesar-mq__wrap--hover-pause{% endif %}"
       data-speed="{{ section.settings.speed }}"
     >
@@ -254,6 +255,42 @@
       "label": "Tamaño del texto de entrada",
       "default": 0,
       "info": "0 = el del tema."
+    },
+    {
+      "type": "header",
+      "content": "Animación"
+    },
+    {
+      "type": "select",
+      "id": "motion_reveal",
+      "label": "Entrada al hacer scroll",
+      "options": [
+        {
+          "value": "none",
+          "label": "Sin animación"
+        },
+        {
+          "value": "fade-up",
+          "label": "Aparece subiendo"
+        },
+        {
+          "value": "fade",
+          "label": "Aparece"
+        },
+        {
+          "value": "zoom",
+          "label": "Aparece creciendo"
+        },
+        {
+          "value": "slide",
+          "label": "Entra desde la izquierda"
+        }
+      ],
+      "default": "fade-up"
+    },
+    {
+      "type": "paragraph",
+      "content": "Si el sistema pide menos movimiento, no hay animación ni parallax: se ve todo quieto desde el principio."
     },
     {
       "type": "color_scheme",

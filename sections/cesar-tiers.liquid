@@ -17,7 +17,7 @@
     {% endif %}
   >
     {%- if section.settings.heading != blank or section.settings.button_label != blank -%}
-      <div class="cesar-tiers__header">
+      <div class="cesar-tiers__header" {% render 'cesar-motion', s: section.settings %}>
         {%- if section.settings.heading != blank -%}
           <h2 class="cc-h2 cesar-tiers__heading">{{ section.settings.heading }}</h2>
         {%- endif -%}
@@ -50,9 +50,10 @@
           class="cesar-tier cesar-tier--{{ block.settings.tier }}{% if block.settings.featured %} cesar-tier--featured{% endif %}"
           {% if tier_style != blank %}style="{{ tier_style | strip_newlines | strip }}"{% endif %}
           {{ block.shopify_attributes }}
+          {% render 'cesar-motion', s: section.settings, i: forloop.index0 %}
         >
           {%- if block.settings.image != blank -%}
-            <div class="cesar-tier__media">
+            <div class="cesar-tier__media" {% if section.settings.motion_parallax %}data-cesar-parallax="0.05" data-cesar-parallax-target=".cesar-tier__image"{% endif %}>
               {{
                 block.settings.image
                 | image_url: width: 800
@@ -112,6 +113,56 @@
       "type": "url",
       "id": "button_link",
       "label": "Enlace del botón"
+    },
+    {
+      "type": "header",
+      "content": "Animación"
+    },
+    {
+      "type": "select",
+      "id": "motion_reveal",
+      "label": "Entrada al hacer scroll",
+      "options": [
+        {
+          "value": "none",
+          "label": "Sin animación"
+        },
+        {
+          "value": "fade-up",
+          "label": "Aparece subiendo"
+        },
+        {
+          "value": "fade",
+          "label": "Aparece"
+        },
+        {
+          "value": "zoom",
+          "label": "Aparece creciendo"
+        },
+        {
+          "value": "slide",
+          "label": "Entra desde la izquierda"
+        }
+      ],
+      "default": "fade-up"
+    },
+    {
+      "type": "checkbox",
+      "id": "motion_stagger",
+      "label": "Escalonar los elementos",
+      "default": true,
+      "info": "Cada elemento entra un poco después del anterior."
+    },
+    {
+      "type": "checkbox",
+      "id": "motion_parallax",
+      "label": "Parallax en la imagen",
+      "default": false,
+      "info": "La imagen se desplaza más despacio que la página al hacer scroll."
+    },
+    {
+      "type": "paragraph",
+      "content": "Si el sistema pide menos movimiento, no hay animación ni parallax: se ve todo quieto desde el principio."
     },
     {
       "type": "color_scheme",

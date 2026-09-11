@@ -324,6 +324,28 @@
     {%- endcomment -%}
     {{ 'cesar-slider-dots.css' | asset_url | stylesheet_tag }}
     <script src="{{ 'cesar-slider-dots.js' | asset_url }}" defer="defer"></script>
+    {%- comment -%}
+      Entradas al hacer scroll y parallax de las secciones propias. Una sola
+      carga para todo el tema: cada sección sólo lleva atributos.
+    {%- endcomment -%}
+    {{ 'cesar-motion.css' | asset_url | stylesheet_tag }}
+    {%- comment -%}
+      La clase se pone aquí, antes del primer pintado, para que lo que va a
+      entrar animado no se vea un instante y luego desaparezca. Si el script
+      diferido no llegara a ejecutarse, a los tres segundos se retira la clase
+      y todo queda visible: nada depende de que el JS cargue.
+    {%- endcomment -%}
+    <script>
+      (function () {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        if (!('IntersectionObserver' in window)) return;
+        document.documentElement.classList.add('cesar-motion');
+        setTimeout(function () {
+          if (!window.cesarMotionReady) document.documentElement.classList.remove('cesar-motion');
+        }, 3000);
+      })();
+    </script>
+    <script src="{{ 'cesar-motion.js' | asset_url }}" defer="defer"></script>
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 
     {%- if settings.cart_type == 'drawer' -%}

@@ -18,7 +18,7 @@
 >
   <div class="cesar-team__container cc-container{% if section.settings.limit_width %} cesar-team__container--limited{% endif %}">
     {%- if section.settings.caption != blank or section.settings.heading != blank or section.settings.text != blank -%}
-      <div class="cesar-team__intro cesar-sec--align-{{ section.settings.text_alignment }}">
+      <div class="cesar-team__intro cesar-sec--align-{{ section.settings.text_alignment }}" {% render 'cesar-motion', s: section.settings %}>
         {%- if section.settings.caption != blank -%}
           <p class="cesar-team__caption">{{ section.settings.caption }}</p>
         {%- endif -%}
@@ -36,7 +36,7 @@
     {%- if section.blocks.size > 0 -%}
       <ul class="cesar-team__grid cesar-team__grid--{{ section.settings.ratio }}{% if section.settings.card_bg != blank %} cesar-team__grid--boxed{% endif %}" role="list">
         {%- for block in section.blocks -%}
-          <li class="cesar-team__member" {{ block.shopify_attributes }}>
+          <li class="cesar-team__member" {{ block.shopify_attributes }} {% render 'cesar-motion', s: section.settings, i: forloop.index0 %}>
             <div class="cesar-team__media">
               {%- if block.settings.image != blank -%}
                 {{
@@ -175,6 +175,49 @@
       "label": "Tamaño del texto",
       "default": 0,
       "info": "0 = el del tema."
+    },
+    {
+      "type": "header",
+      "content": "Animación"
+    },
+    {
+      "type": "select",
+      "id": "motion_reveal",
+      "label": "Entrada al hacer scroll",
+      "options": [
+        {
+          "value": "none",
+          "label": "Sin animación"
+        },
+        {
+          "value": "fade-up",
+          "label": "Aparece subiendo"
+        },
+        {
+          "value": "fade",
+          "label": "Aparece"
+        },
+        {
+          "value": "zoom",
+          "label": "Aparece creciendo"
+        },
+        {
+          "value": "slide",
+          "label": "Entra desde la izquierda"
+        }
+      ],
+      "default": "fade-up"
+    },
+    {
+      "type": "checkbox",
+      "id": "motion_stagger",
+      "label": "Escalonar los elementos",
+      "default": true,
+      "info": "Cada elemento entra un poco después del anterior."
+    },
+    {
+      "type": "paragraph",
+      "content": "Si el sistema pide menos movimiento, no hay animación ni parallax: se ve todo quieto desde el principio."
     },
     {
       "type": "color_scheme",

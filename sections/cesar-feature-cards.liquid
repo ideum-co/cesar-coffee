@@ -32,7 +32,7 @@
 >
   <div class="cesar-fc__container cc-container{% if section.settings.limit_width %} cesar-fc__container--limited{% endif %}">
     {%- if section.settings.caption != blank or section.settings.heading != blank -%}
-      <div class="cesar-fc__intro cesar-sec--align-{{ section.settings.text_alignment }}">
+      <div class="cesar-fc__intro cesar-sec--align-{{ section.settings.text_alignment }}" {% render 'cesar-motion', s: section.settings %}>
         {%- if section.settings.caption != blank -%}
           <p class="cesar-fc__caption">{{ section.settings.caption }}</p>
         {%- endif -%}
@@ -49,7 +49,7 @@
   </div>
 
   {%- if section.blocks.size > 0 -%}
-    <cesar-feature-cards class="cesar-fc__rail-wrap">
+    <cesar-feature-cards class="cesar-fc__rail-wrap" {% render 'cesar-motion', s: section.settings %}>
       {%- comment -%}
         La fila se desplaza con el teclado además de con las flechas, así que
         lleva tabindex y se anuncia como región con nombre: si no, quien navega
@@ -328,6 +328,42 @@
       "label": "Tamaño del texto de entrada",
       "default": 0,
       "info": "0 = el del tema."
+    },
+    {
+      "type": "header",
+      "content": "Animación"
+    },
+    {
+      "type": "select",
+      "id": "motion_reveal",
+      "label": "Entrada al hacer scroll",
+      "options": [
+        {
+          "value": "none",
+          "label": "Sin animación"
+        },
+        {
+          "value": "fade-up",
+          "label": "Aparece subiendo"
+        },
+        {
+          "value": "fade",
+          "label": "Aparece"
+        },
+        {
+          "value": "zoom",
+          "label": "Aparece creciendo"
+        },
+        {
+          "value": "slide",
+          "label": "Entra desde la izquierda"
+        }
+      ],
+      "default": "fade-up"
+    },
+    {
+      "type": "paragraph",
+      "content": "Si el sistema pide menos movimiento, no hay animación ni parallax: se ve todo quieto desde el principio."
     },
     {
       "type": "color_scheme",

@@ -9,7 +9,7 @@
   class="cesar-fbanner cesar-fbanner--{{ section.settings.height }} cesar-fbanner--align-{{ section.settings.content_alignment }} color-{{ section.settings.color_scheme }}"
 >
   {%- if section.settings.image != blank -%}
-    <div class="cesar-fbanner__media">
+    <div class="cesar-fbanner__media" {% if section.settings.motion_parallax %}data-cesar-parallax="0.08" data-cesar-parallax-target=".cesar-fbanner__image"{% endif %}>
       {{
         section.settings.image
         | image_url: width: 3200
@@ -35,7 +35,7 @@
   {%- endif -%}
 
   <div class="cesar-fbanner__inner cc-container">
-    <div class="cesar-fbanner__content">
+    <div class="cesar-fbanner__content" {% render 'cesar-motion', s: section.settings %}>
       {%- for block in section.blocks -%}
         {%- liquid
           assign color_style = ''
@@ -166,6 +166,56 @@
       "unit": "%",
       "label": "Intensidad",
       "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Animación"
+    },
+    {
+      "type": "select",
+      "id": "motion_reveal",
+      "label": "Entrada al hacer scroll",
+      "options": [
+        {
+          "value": "none",
+          "label": "Sin animación"
+        },
+        {
+          "value": "fade-up",
+          "label": "Aparece subiendo"
+        },
+        {
+          "value": "fade",
+          "label": "Aparece"
+        },
+        {
+          "value": "zoom",
+          "label": "Aparece creciendo"
+        },
+        {
+          "value": "slide",
+          "label": "Entra desde la izquierda"
+        }
+      ],
+      "default": "fade-up"
+    },
+    {
+      "type": "checkbox",
+      "id": "motion_stagger",
+      "label": "Escalonar los elementos",
+      "default": true,
+      "info": "Cada elemento entra un poco después del anterior."
+    },
+    {
+      "type": "checkbox",
+      "id": "motion_parallax",
+      "label": "Parallax en la imagen",
+      "default": true,
+      "info": "La imagen se desplaza más despacio que la página al hacer scroll."
+    },
+    {
+      "type": "paragraph",
+      "content": "Si el sistema pide menos movimiento, no hay animación ni parallax: se ve todo quieto desde el principio."
     },
     {
       "type": "color_scheme",

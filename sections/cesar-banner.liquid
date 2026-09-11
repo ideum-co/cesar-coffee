@@ -13,7 +13,7 @@
 >
   <div class="cc-container">
     {%- if section.settings.image != blank -%}
-      <div class="cesar-banner__media cesar-banner__media--{{ section.settings.ratio }}">
+      <div class="cesar-banner__media cesar-banner__media--{{ section.settings.ratio }}" {% render 'cesar-motion', s: section.settings, i: 0 %} {% if section.settings.motion_parallax %}data-cesar-parallax="0.06" data-cesar-parallax-target=".cesar-banner__image"{% endif %}>
         {%- if section.settings.link != blank -%}
           <a href="{{ section.settings.link }}" class="cesar-banner__media-link" tabindex="-1" aria-hidden="true">
         {%- endif -%}
@@ -38,7 +38,7 @@
       ve sobre la foto forma parte de la propia imagen, no es texto del tema:
       así no hay que pelear el contraste sobre la fotografía.
     {%- endcomment -%}
-    <div class="cesar-banner__content">
+    <div class="cesar-banner__content" {% render 'cesar-motion', s: section.settings, i: 1 %}>
       {%- if section.settings.heading != blank -%}
         <h2 class="cesar-banner__heading">{{ section.settings.heading }}</h2>
       {%- endif -%}
@@ -115,6 +115,49 @@
       "id": "link",
       "label": "Enlace",
       "info": "Se usa en el botón y hace la imagen clicable."
+    },
+    {
+      "type": "header",
+      "content": "Animación"
+    },
+    {
+      "type": "select",
+      "id": "motion_reveal",
+      "label": "Entrada al hacer scroll",
+      "options": [
+        {
+          "value": "none",
+          "label": "Sin animación"
+        },
+        {
+          "value": "fade-up",
+          "label": "Aparece subiendo"
+        },
+        {
+          "value": "fade",
+          "label": "Aparece"
+        },
+        {
+          "value": "zoom",
+          "label": "Aparece creciendo"
+        },
+        {
+          "value": "slide",
+          "label": "Entra desde la izquierda"
+        }
+      ],
+      "default": "fade-up"
+    },
+    {
+      "type": "checkbox",
+      "id": "motion_parallax",
+      "label": "Parallax en la imagen",
+      "default": true,
+      "info": "La imagen se desplaza más despacio que la página al hacer scroll."
+    },
+    {
+      "type": "paragraph",
+      "content": "Si el sistema pide menos movimiento, no hay animación ni parallax: se ve todo quieto desde el principio."
     },
     {
       "type": "color_scheme",

@@ -20,7 +20,7 @@
 >
   <div class="cesar-faq__container cc-container{% if section.settings.limit_width %} cesar-faq__container--limited{% endif %}">
     {%- if section.settings.heading != blank -%}
-      <div class="cesar-faq__intro">
+      <div class="cesar-faq__intro" {% render 'cesar-motion', s: section.settings %}>
         <h2 class="cesar-faq__heading">{{ section.settings.heading }}</h2>
 
         {%- if section.settings.text != blank -%}
@@ -39,6 +39,7 @@
             <details
               class="cesar-faq__item"
               {{ block.shopify_attributes }}
+              {% render 'cesar-motion', s: section.settings, i: forloop.index0 %}
               {% if block.settings.open_by_default %}open{% endif %}
             >
               <summary class="cesar-faq__question">
@@ -170,6 +171,49 @@
       "label": "Tamaño de las respuestas",
       "default": 0,
       "info": "0 = el del tema."
+    },
+    {
+      "type": "header",
+      "content": "Animación"
+    },
+    {
+      "type": "select",
+      "id": "motion_reveal",
+      "label": "Entrada al hacer scroll",
+      "options": [
+        {
+          "value": "none",
+          "label": "Sin animación"
+        },
+        {
+          "value": "fade-up",
+          "label": "Aparece subiendo"
+        },
+        {
+          "value": "fade",
+          "label": "Aparece"
+        },
+        {
+          "value": "zoom",
+          "label": "Aparece creciendo"
+        },
+        {
+          "value": "slide",
+          "label": "Entra desde la izquierda"
+        }
+      ],
+      "default": "fade-up"
+    },
+    {
+      "type": "checkbox",
+      "id": "motion_stagger",
+      "label": "Escalonar los elementos",
+      "default": true,
+      "info": "Cada elemento entra un poco después del anterior."
+    },
+    {
+      "type": "paragraph",
+      "content": "Si el sistema pide menos movimiento, no hay animación ni parallax: se ve todo quieto desde el principio."
     },
     {
       "type": "color_scheme",

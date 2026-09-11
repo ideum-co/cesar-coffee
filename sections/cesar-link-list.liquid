@@ -17,12 +17,12 @@
   <div class="cesar-link-list__inner">
     <div class="cesar-link-list__links">
       {%- if section.settings.heading != blank -%}
-        <h2 class="cesar-link-list__heading">{{ section.settings.heading }}</h2>
+        <h2 class="cesar-link-list__heading" {% render 'cesar-motion', s: section.settings %}>{{ section.settings.heading }}</h2>
       {%- endif -%}
 
       <ul class="cesar-link-list__items" role="list">
         {%- for block in section.blocks -%}
-          <li class="cesar-link-list__item" {{ block.shopify_attributes }}>
+          <li class="cesar-link-list__item" {{ block.shopify_attributes }} {% render 'cesar-motion', s: section.settings, i: forloop.index0 %}>
             <a href="{{ block.settings.link | default: '#' }}" class="cesar-link-list__link">
               {{- block.settings.label -}}
             </a>
@@ -32,7 +32,7 @@
     </div>
 
     {%- if section.settings.image != blank -%}
-      <div class="cesar-link-list__media">
+      <div class="cesar-link-list__media" {% render 'cesar-motion', s: section.settings %}>
         {{
           section.settings.image
           | image_url: width: 2000
@@ -79,6 +79,49 @@
         }
       ],
       "default": "right"
+    },
+    {
+      "type": "header",
+      "content": "Animación"
+    },
+    {
+      "type": "select",
+      "id": "motion_reveal",
+      "label": "Entrada al hacer scroll",
+      "options": [
+        {
+          "value": "none",
+          "label": "Sin animación"
+        },
+        {
+          "value": "fade-up",
+          "label": "Aparece subiendo"
+        },
+        {
+          "value": "fade",
+          "label": "Aparece"
+        },
+        {
+          "value": "zoom",
+          "label": "Aparece creciendo"
+        },
+        {
+          "value": "slide",
+          "label": "Entra desde la izquierda"
+        }
+      ],
+      "default": "fade-up"
+    },
+    {
+      "type": "checkbox",
+      "id": "motion_stagger",
+      "label": "Escalonar los elementos",
+      "default": true,
+      "info": "Cada elemento entra un poco después del anterior."
+    },
+    {
+      "type": "paragraph",
+      "content": "Si el sistema pide menos movimiento, no hay animación ni parallax: se ve todo quieto desde el principio."
     },
     {
       "type": "color_scheme",

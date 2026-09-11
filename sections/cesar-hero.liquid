@@ -39,7 +39,11 @@
   {% if hero_style != blank %}style="{{ hero_style | strip_newlines | strip }}"{% endif %}
 >
   {%- if section.settings.image != blank or hero_fondo != 'imagen' -%}
-    <cesar-hero-video class="cesar-hero__media" data-fondo="{{ hero_fondo }}">
+    <cesar-hero-video
+      class="cesar-hero__media"
+      data-fondo="{{ hero_fondo }}"
+      {% if section.settings.motion_parallax %}data-cesar-parallax="0.08" data-cesar-parallax-target=".cesar-hero__image, .cesar-hero__video, .cesar-hero__frame"{% endif %}
+    >
       {%- if section.settings.image != blank -%}
         {{
           section.settings.image
@@ -133,15 +137,15 @@
   <div class="cesar-hero__inner cc-container">
     <div class="cesar-hero__content">
       {%- if section.settings.heading != blank -%}
-        <h1 class="cc-display cesar-hero__heading">{{ section.settings.heading }}</h1>
+        <h1 class="cc-display cesar-hero__heading" {% render 'cesar-motion', s: section.settings, i: 0 %}>{{ section.settings.heading }}</h1>
       {%- endif -%}
 
       {%- if section.settings.subheading != blank -%}
-        <p class="cesar-hero__subheading">{{ section.settings.subheading }}</p>
+        <p class="cesar-hero__subheading" {% render 'cesar-motion', s: section.settings, i: 1 %}>{{ section.settings.subheading }}</p>
       {%- endif -%}
 
       {%- if section.settings.button_label != blank or section.settings.button_label_2 != blank -%}
-        <div class="cesar-hero__actions">
+        <div class="cesar-hero__actions" {% render 'cesar-motion', s: section.settings, i: 2 %}>
           {%- if section.settings.button_label != blank -%}
             <a
               href="{{ section.settings.button_link | default: '#' }}"
@@ -274,6 +278,56 @@
     {
       "type": "header",
       "content": "Estilo"
+    },
+    {
+      "type": "header",
+      "content": "Animación"
+    },
+    {
+      "type": "select",
+      "id": "motion_reveal",
+      "label": "Entrada al hacer scroll",
+      "options": [
+        {
+          "value": "none",
+          "label": "Sin animación"
+        },
+        {
+          "value": "fade-up",
+          "label": "Aparece subiendo"
+        },
+        {
+          "value": "fade",
+          "label": "Aparece"
+        },
+        {
+          "value": "zoom",
+          "label": "Aparece creciendo"
+        },
+        {
+          "value": "slide",
+          "label": "Entra desde la izquierda"
+        }
+      ],
+      "default": "fade-up"
+    },
+    {
+      "type": "checkbox",
+      "id": "motion_stagger",
+      "label": "Escalonar los elementos",
+      "default": true,
+      "info": "Cada elemento entra un poco después del anterior."
+    },
+    {
+      "type": "checkbox",
+      "id": "motion_parallax",
+      "label": "Parallax en la imagen",
+      "default": true,
+      "info": "La imagen se desplaza más despacio que la página al hacer scroll."
+    },
+    {
+      "type": "paragraph",
+      "content": "Si el sistema pide menos movimiento, no hay animación ni parallax: se ve todo quieto desde el principio."
     },
     {
       "type": "color_scheme",

@@ -11,6 +11,7 @@
     link        {String} - destino del botón y de la card
     sizes       {String} - atributo sizes para la imagen
     ratio       {String} - 'portrait' (3/4), 'square' o 'landscape' (4/3)
+    parallax    {Boolean} - la foto se desplaza más despacio que la página (opcional)
 {% endcomment %}
 
 {%- liquid
@@ -18,7 +19,10 @@
   assign card_sizes = sizes | default: '(min-width: 990px) 33vw, 90vw'
 -%}
 
-<div class="cesar-card cesar-card--{{ card_ratio }}">
+<div
+  class="cesar-card cesar-card--{{ card_ratio }}"
+  {% if parallax %}data-cesar-parallax="0.05" data-cesar-parallax-target=".cesar-card__image"{% endif %}
+>
   {%- if image != blank -%}
     {{
       image
