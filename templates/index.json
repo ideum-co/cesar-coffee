@@ -59,6 +59,68 @@
         "color_scheme": ""
       }
     },
+    "cesar_line_marquee_DbXTmg": {
+      "type": "cesar-line-marquee",
+      "blocks": {
+        "card_pw4NXE": {
+          "type": "card",
+          "settings": {
+            "title": "Green Line",
+            "text": "<p>Everyday espresso, always on.<br><strong>The dependable base of the range.</strong></p>",
+            "link": ""
+          }
+        },
+        "card_LDyL8K": {
+          "type": "card",
+          "settings": {
+            "title": "Gold Line",
+            "text": "<p>Rare allocation lots.<br><strong>The microlots that carry the story.</strong></p>",
+            "link": ""
+          }
+        },
+        "card_UaXGWQ": {
+          "type": "card",
+          "settings": {
+            "title": "Silver Line",
+            "text": "<p>Seasonal single origins.<br><strong>Bright, clean and traceable.</strong></p>",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_pw4NXE",
+        "card_LDyL8K",
+        "card_UaXGWQ"
+      ],
+      "name": "Cesar · Marquesina",
+      "settings": {
+        "caption": "",
+        "heading": "Three tiers, one clear range",
+        "text": "",
+        "text_alignment": "center",
+        "speed": 50,
+        "direction": "left",
+        "pause_on_hover": true,
+        "card_width": 400,
+        "gap": 32,
+        "card_padding": 40,
+        "card_radius": 24,
+        "stagger": 48,
+        "image_px": 200,
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "card_bg": "",
+        "card_border": "",
+        "card_title_color": "",
+        "card_text_color": "",
+        "heading_px": 0,
+        "card_title_px": 0,
+        "card_text_px": 0,
+        "text_px": 0,
+        "color_scheme": ""
+      }
+    },
     "tiers": {
       "type": "cesar-tiers",
       "blocks": {
@@ -119,6 +181,7 @@
         "gold",
         "silver"
       ],
+      "disabled": true,
       "settings": {
         "heading": "Three tiers, one clear range",
         "button_label": "Shop All",
@@ -267,6 +330,8 @@
         "heading": "",
         "columns_desktop": 2,
         "ratio": "tall",
+        "overlay_strength": 100,
+        "overlay_blur": 8,
         "color_scheme": "scheme-1"
       }
     },
@@ -462,6 +527,8 @@
         "articles_to_show": 6,
         "article_button_label": "Read the story",
         "show_excerpt": false,
+        "overlay_strength": 100,
+        "overlay_blur": 8,
         "color_scheme": "scheme-3",
         "text_alignment": "left",
         "bg_color": "",
@@ -475,6 +542,7 @@
   "order": [
     "hero",
     "cesar_video_dYCDmU",
+    "cesar_line_marquee_DbXTmg",
     "tiers",
     "more_than_a_bag",
     "the_range",
