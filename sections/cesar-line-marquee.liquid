@@ -1,0 +1,293 @@
+{{ 'cesar-line-marquee.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'cesar-line-marquee.js' | asset_url }}" defer="defer"></script>
+
+{%- comment -%}
+  Marquesina de cards en movimiento continuo. Pensada para las líneas de café
+  en la portada, pero sirve para cualquier fila corta de cosas con icono,
+  título y una frase.
+
+  El movimiento lo hace una animación de CSS sobre la pista; el JS sólo ajusta
+  la duración para que la velocidad sea la misma con tres cards que con ocho,
+  rellena la pista cuando hay pocas y maneja el botón de pausa. Sin JS la
+  marquesina se mueve igual, con una duración fija.
+{%- endcomment -%}
+
+{%- capture cesar_style -%}
+  {% render 'cesar-section-style', s: section.settings %}
+  --cesar-mq-gap: {{ section.settings.gap }}px;
+  --cesar-mq-card-width: {{ section.settings.card_width }}px;
+  --cesar-mq-radius: {{ section.settings.card_radius }}px;
+  --cesar-mq-stagger: {{ section.settings.stagger }}px;
+  --cesar-mq-image: {{ section.settings.image_px }}px;
+  --cesar-mq-pad: {{ section.settings.card_padding }}px;
+  {% if section.settings.card_title_color != blank %}--cesar-mq-title: {{ section.settings.card_title_color }};{% endif %}
+  {% if section.settings.card_text_color != blank %}--cesar-mq-text: {{ section.settings.card_text_color }};{% endif %}
+  {% if section.settings.card_border != blank %}--cesar-mq-border: {{ section.settings.card_border }};{% endif %}
+  {% if section.settings.card_title_px > 0 %}--cesar-mq-title-size: {{ section.settings.card_title_px }}px;{% endif %}
+  {% if section.settings.card_text_px > 0 %}--cesar-mq-text-size: {{ section.settings.card_text_px }}px;{% endif %}
+{%- endcapture -%}
+
+<div
+  class="cesar-mq cesar-sec cc-section color-{{ section.settings.color_scheme }}"
+  {% if cesar_style != blank %}style="{{ cesar_style | strip_newlines | strip }}"{% endif %}
+>
+  {%- if section.settings.caption != blank or section.settings.heading != blank or section.settings.text != blank -%}
+    <div class="cc-container">
+      <div class="cesar-mq__intro cesar-sec--align-{{ section.settings.text_alignment }}">
+        {%- if section.settings.caption != blank -%}
+          <p class="cesar-mq__caption">{{ section.settings.caption }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          <h2 class="cesar-mq__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+
+        {%- if section.settings.text != blank -%}
+          <div class="cesar-mq__text rte">{{ section.settings.text }}</div>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- if section.blocks.size > 0 -%}
+    <cesar-line-marquee
+      class="cesar-mq__wrap cesar-mq__wrap--{{ section.settings.direction }}{% if section.settings.pause_on_hover %} cesar-mq__wrap--hover-pause{% endif %}"
+      data-speed="{{ section.settings.speed }}"
+    >
+      {%- comment -%}
+        El movimiento lleva la pista completa dos veces: cuando la primera
+        copia sale por un lado, la segunda ya está entrando por el otro y la
+        vuelta al principio no se ve. La copia va oculta a las ayudas técnicas y
+        sin foco: es la misma lista otra vez.
+      {%- endcomment -%}
+      <div class="cesar-mq__track" data-mq-track>
+        <ul class="cesar-mq__list" role="list" data-mq-list>
+          {%- for block in section.blocks -%}
+            {% render 'cesar-marquee-card', block: block, copia: false %}
+          {%- endfor -%}
+        </ul>
+        <ul class="cesar-mq__list" role="presentation" aria-hidden="true" data-mq-clone>
+          {%- for block in section.blocks -%}
+            {% render 'cesar-marquee-card', block: block, copia: true %}
+          {%- endfor -%}
+        </ul>
+      </div>
+
+      {%- comment -%}
+        Un contenido que se mueve solo más de cinco segundos tiene que poder
+        detenerse: es un requisito de accesibilidad, no una opción de diseño.
+      {%- endcomment -%}
+      <button type="button" class="cesar-mq__toggle" data-mq-toggle aria-pressed="false">
+        <span class="cesar-mq__toggle-icon" aria-hidden="true"></span>
+        <span class="visually-hidden" data-mq-toggle-label>Pause animation</span>
+      </button>
+    </cesar-line-marquee>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Cesar · Marquesina",
+  "tag": "section",
+  "class": "cesar-line-marquee-section",
+  "settings": [
+    { "type": "text", "id": "caption", "label": "Antetítulo" },
+    { "type": "text", "id": "heading", "label": "Titular", "default": "Our coffee lines" },
+    { "type": "richtext", "id": "text", "label": "Texto" },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Alineación del encabezado",
+      "options": [
+        { "value": "left", "label": "Izquierda" },
+        { "value": "center", "label": "Centro" },
+        { "value": "right", "label": "Derecha" }
+      ],
+      "default": "center"
+    },
+    { "type": "header", "content": "Movimiento" },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 10,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Velocidad",
+      "info": "Píxeles por segundo. Se mantiene igual con tres cards o con diez.",
+      "default": 50
+    },
+    {
+      "type": "select",
+      "id": "direction",
+      "label": "Sentido",
+      "options": [
+        { "value": "left", "label": "Hacia la izquierda" },
+        { "value": "right", "label": "Hacia la derecha" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Detener al pasar el ratón",
+      "default": true
+    },
+    {
+      "type": "paragraph",
+      "content": "Siempre hay un botón para detener el movimiento, y si el sistema pide menos movimiento la fila se queda quieta y se desplaza con el dedo."
+    },
+    { "type": "header", "content": "Cards" },
+    {
+      "type": "range",
+      "id": "card_width",
+      "min": 220,
+      "max": 560,
+      "step": 10,
+      "unit": "px",
+      "label": "Ancho",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Separación entre cards",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "min": 16,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Relleno interior",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Redondeo",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "stagger",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Desnivel entre cards",
+      "info": "Una sí y una no bajan esta distancia, como en la referencia.",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "image_px",
+      "min": 80,
+      "max": 320,
+      "step": 10,
+      "unit": "px",
+      "label": "Alto de la imagen",
+      "default": 200
+    },
+    { "type": "header", "content": "Colores y tamaños" },
+    {
+      "type": "paragraph",
+      "content": "Todos opcionales. Vacíos o en 0, la sección usa su esquema de color y la escala tipográfica del tema."
+    },
+    { "type": "color", "id": "bg_color", "label": "Fondo de la sección" },
+    { "type": "color", "id": "heading_color", "label": "Titular" },
+    { "type": "color", "id": "text_color", "label": "Texto de entrada" },
+    { "type": "color", "id": "card_bg", "label": "Fondo de las cards" },
+    { "type": "color", "id": "card_border", "label": "Borde de las cards" },
+    { "type": "color", "id": "card_title_color", "label": "Título de las cards" },
+    { "type": "color", "id": "card_text_color", "label": "Texto de las cards" },
+    {
+      "type": "range",
+      "id": "heading_px",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Tamaño del titular",
+      "default": 0,
+      "info": "0 = el del tema."
+    },
+    {
+      "type": "range",
+      "id": "card_title_px",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño del título de las cards",
+      "default": 0,
+      "info": "0 = el del tema."
+    },
+    {
+      "type": "range",
+      "id": "card_text_px",
+      "min": 0,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño del texto de las cards",
+      "default": 0,
+      "info": "0 = el del tema."
+    },
+    {
+      "type": "range",
+      "id": "text_px",
+      "min": 0,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño del texto de entrada",
+      "default": 0,
+      "info": "0 = el del tema."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Imagen", "info": "Un PNG o SVG con fondo transparente queda como en la referencia." },
+        { "type": "text", "id": "title", "label": "Título", "default": "Green Line" },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Texto",
+          "default": "<p>Everyday espresso, always on.<br><strong>The dependable base of the range.</strong></p>"
+        },
+        { "type": "url", "id": "link", "label": "Enlace", "info": "Opcional. Con enlace, la card entera es clicable." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cesar · Marquesina",
+      "blocks": [
+        { "type": "card", "settings": { "title": "Green Line", "text": "<p>Everyday espresso, always on.<br><strong>The dependable base of the range.</strong></p>" } },
+        { "type": "card", "settings": { "title": "Gold Line", "text": "<p>Rare allocation lots.<br><strong>The microlots that carry the story.</strong></p>" } },
+        { "type": "card", "settings": { "title": "Silver Line", "text": "<p>Seasonal single origins.<br><strong>Bright, clean and traceable.</strong></p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

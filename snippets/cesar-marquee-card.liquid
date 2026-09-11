@@ -1,0 +1,49 @@
+{% comment %}
+  Una card de la marquesina.
+
+  Acepta:
+    block {Object}  - bloque de tipo card
+    copia {Boolean} - true en la segunda copia de la lista: el enlace pierde el
+                      foco de teclado, porque la copia va oculta a las ayudas
+                      técnicas y un enlace enfocable dentro sería una trampa.
+{% endcomment %}
+
+{%- liquid
+  assign tag = 'div'
+  if block.settings.link != blank
+    assign tag = 'a'
+  endif
+-%}
+
+<li class="cesar-mq__item" {% unless copia %}{{ block.shopify_attributes }}{% endunless %}>
+  <{{ tag }}
+    class="cesar-mq__card"
+    {% if tag == 'a' %}
+      href="{{ block.settings.link }}"
+      {% if copia %}tabindex="-1"{% endif %}
+    {% endif %}
+  >
+    {%- if block.settings.image != blank -%}
+      <div class="cesar-mq__media">
+        {{
+          block.settings.image
+          | image_url: width: 600
+          | image_tag:
+            loading: 'lazy',
+            sizes: '300px',
+            widths: '200, 300, 400, 600',
+            class: 'cesar-mq__image',
+            alt: block.settings.image.alt
+        }}
+      </div>
+    {%- endif -%}
+
+    {%- if block.settings.title != blank -%}
+      <h3 class="cesar-mq__title">{{ block.settings.title }}</h3>
+    {%- endif -%}
+
+    {%- if block.settings.text != blank -%}
+      <div class="cesar-mq__card-text rte">{{ block.settings.text }}</div>
+    {%- endif -%}
+  </{{ tag }}>
+</li>

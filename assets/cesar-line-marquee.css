@@ -1,0 +1,280 @@
+/**
+ * Marquesina de cards en movimiento continuo.
+ *
+ * La pista lleva la lista dos veces y se desplaza exactamente la mitad de su
+ * ancho: cuando la primera copia termina de salir, la segunda ocupa su sitio y
+ * la vuelta al principio no se ve.
+ */
+
+/* ---------- Encabezado ---------- */
+
+.cesar-mq__intro {
+  margin-bottom: var(--cc-space-12);
+}
+
+.cesar-mq__caption {
+  margin: 0 0 var(--cc-space-3);
+  font-size: var(--cc-text-body-lg);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--cesar-sec-link, var(--cc-terracotta-text));
+}
+
+.cesar-mq__heading {
+  margin: 0;
+  font-family: var(--cc-font-sans, var(--cc-fallback-sans));
+  font-weight: var(--cc-font-heading-weight-black, 800);
+  font-size: var(--cesar-sec-heading-size, var(--cc-text-h2));
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--cesar-sec-heading, var(--cc-brown-700));
+}
+
+.cesar-mq__text {
+  margin-top: var(--cc-space-4);
+  font-size: var(--cesar-sec-text-size, var(--cc-text-body-lg));
+  line-height: 1.55;
+  color: var(--cesar-sec-text, var(--cc-text));
+}
+
+.cesar-sec--align-center .cesar-mq__text > * {
+  margin-inline: auto;
+}
+
+.cesar-sec--align-right .cesar-mq__text > * {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+/* ---------- La pista ---------- */
+
+/* Los elementos propios son en línea mientras no se diga lo contrario. */
+.cesar-mq__wrap {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  /* Sitio para el desnivel de las cards impares y para que la sombra del
+     botón de pausa no se corte. */
+  padding-block: var(--cc-space-2) calc(var(--cesar-mq-stagger, 0px) + var(--cc-space-2));
+}
+
+.cesar-mq__track {
+  display: flex;
+  width: max-content;
+  /* La duración base vale para una pista de unos 2400px a 50px/s. El JS la
+     recalcula con el ancho real; sin JS el movimiento sigue, algo más rápido
+     o más lento según cuántas cards haya. */
+  animation: cesar-mq-scroll var(--cesar-mq-duration, 48s) linear infinite;
+}
+
+.cesar-mq__wrap--right .cesar-mq__track {
+  animation-direction: reverse;
+}
+
+/* Cada mitad lleva el hueco también al final: así la costura entre la última
+   card y la primera de la copia mide lo mismo que entre dos cualesquiera. */
+.cesar-mq__list {
+  display: flex;
+  flex: 0 0 auto;
+  gap: var(--cesar-mq-gap, 32px);
+  margin: 0;
+  padding: 0 var(--cesar-mq-gap, 32px) 0 0;
+  list-style: none;
+}
+
+@keyframes cesar-mq-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.cesar-mq__wrap--hover-pause:hover .cesar-mq__track,
+.cesar-mq__wrap:focus-within .cesar-mq__track,
+.cesar-mq__wrap[data-paused] .cesar-mq__track {
+  animation-play-state: paused;
+}
+
+/* ---------- Cards ---------- */
+
+.cesar-mq__item {
+  flex: 0 0 auto;
+  width: var(--cesar-mq-card-width, 400px);
+}
+
+/* Una sí y una no bajan un poco, como en la referencia: la fila deja de ser
+   una regla y respira. */
+.cesar-mq__item:nth-child(even) {
+  transform: translateY(var(--cesar-mq-stagger, 0px));
+}
+
+.cesar-mq__card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  padding: var(--cesar-mq-pad, 40px);
+  border: 1px solid var(--cesar-mq-border, transparent);
+  border-radius: var(--cesar-mq-radius, 24px);
+  background-color: var(--cesar-card-bg, var(--cc-cream));
+  color: inherit;
+  text-align: center;
+  text-decoration: none;
+}
+
+a.cesar-mq__card:hover .cesar-mq__title {
+  color: var(--cesar-sec-link, var(--cc-terracotta-text));
+}
+
+a.cesar-mq__card:focus-visible {
+  outline: 2px solid var(--cesar-mq-title, var(--cc-brown-900));
+  outline-offset: 3px;
+}
+
+.cesar-mq__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--cesar-mq-image, 200px);
+  margin-bottom: var(--cc-space-6);
+}
+
+.cesar-mq__image {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.cesar-mq__title {
+  margin: 0 0 var(--cc-space-2);
+  font-size: var(--cesar-mq-title-size, var(--cc-text-h3));
+  font-weight: var(--cc-font-heading-weight-black, 800);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--cesar-mq-title, var(--cc-brown-900));
+  transition: color var(--cc-duration) var(--cc-ease);
+}
+
+.cesar-mq__card-text {
+  font-size: var(--cesar-mq-text-size, var(--cc-text-body-lg));
+  line-height: 1.5;
+  color: var(--cesar-mq-text, var(--cc-brown-500));
+}
+
+.cesar-mq__card-text > :first-child {
+  margin-top: 0;
+}
+
+.cesar-mq__card-text > :last-child {
+  margin-bottom: 0;
+}
+
+/* La negrita dentro del texto va en el color del título: es el remate de
+   la frase, como en la referencia. */
+.cesar-mq__card-text strong {
+  font-weight: 600;
+  color: var(--cesar-mq-title, var(--cc-brown-900));
+}
+
+/* ---------- Botón de pausa ---------- */
+
+.cesar-mq__toggle {
+  position: absolute;
+  right: var(--cc-gutter);
+  bottom: var(--cc-space-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* mínimo táctil */
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--cc-radius-pill);
+  background-color: rgba(45, 18, 6, 0.55);
+  color: #fff;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity var(--cc-duration) var(--cc-ease);
+}
+
+/* Se muestra al pasar por encima o al llegar con el teclado; en pausa se
+   queda visible para que se vea cómo reanudar. */
+.cesar-mq__wrap:hover .cesar-mq__toggle,
+.cesar-mq__toggle:focus-visible,
+.cesar-mq__wrap[data-paused] .cesar-mq__toggle {
+  opacity: 1;
+}
+
+.cesar-mq__toggle:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* Icono de pausa: dos barras. Al pausar pasa a triángulo. */
+.cesar-mq__toggle-icon {
+  display: block;
+  width: 12px;
+  height: 14px;
+  border-left: 4px solid currentColor;
+  border-right: 4px solid currentColor;
+}
+
+.cesar-mq__wrap[data-paused] .cesar-mq__toggle-icon {
+  width: 0;
+  height: 0;
+  margin-left: 3px;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 12px solid currentColor;
+  border-right: 0;
+}
+
+/* ---------- Sin movimiento ---------- */
+
+/* Si el sistema pide menos movimiento, la pista se queda quieta y se
+   desplaza con el dedo o el teclado. La copia sobra y se quita. */
+@media (prefers-reduced-motion: reduce) {
+  .cesar-mq__wrap {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: thin;
+    padding-inline: var(--cc-gutter);
+  }
+
+  .cesar-mq__track {
+    animation: none;
+  }
+
+  .cesar-mq__list[aria-hidden='true'] {
+    display: none;
+  }
+
+  .cesar-mq__toggle {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .cesar-mq__intro {
+    margin-bottom: var(--cc-space-8);
+  }
+
+  .cesar-mq__item {
+    width: min(var(--cesar-mq-card-width, 400px), 78vw);
+  }
+
+  .cesar-mq__card {
+    padding: calc(var(--cesar-mq-pad, 40px) * 0.7);
+  }
+
+  .cesar-mq__media {
+    height: calc(var(--cesar-mq-image, 200px) * 0.75);
+  }
+}
