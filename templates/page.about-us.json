@@ -1,0 +1,179 @@
+{
+  "sections": {
+    "hero": {
+      "type": "cesar-hero",
+      "settings": {
+        "heading": "About Us",
+        "subheading": "Generations of Colombian coffee, roasted in Melbourne",
+        "overlay_opacity": 45,
+        "text_alignment": "left",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "intro": {
+      "type": "rich-text",
+      "settings": {
+        "desktop_content_position": "left",
+        "content_alignment": "left",
+        "full_width": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 16
+      },
+      "blocks": {
+        "t-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Cesar's Coffee Cup is built on generations of coffee-growing tradition in Colombia. We source direct from origin and roast to order at our facility in North Williamstown, Melbourne — traceable, seasonal coffee, in your hands within days.</p>"
+          }
+        }
+      },
+      "block_order": ["t-1"]
+    },
+    "story": {
+      "type": "image-with-text",
+      "settings": {
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "full_bleed": false
+      },
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Our Story",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>The business was started on a simple idea: quality coffee shouldn't be reserved for the well-capitalised. Our roots run through direct relationships with growers — including farms we work with directly — across Colombia, Panama, Brazil and Ethiopia. Every lot is traceable back to the producer behind it.</p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": ["heading", "text"]
+    },
+    "roastery": {
+      "type": "image-with-text",
+      "settings": {
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "full_bleed": false
+      },
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "The roastery",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We roast on Loring S7 Nighthawk and S15 Falcon roasters, with an IMF smart silo system and a Sanremo D8 Pro for cupping and quality control — the same equipment we use for our own range, we also make available to the brands we work alongside.</p>",
+            "text_style": "body"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Co-roasting",
+            "button_link": "/pages/co-roasting",
+            "button_style_secondary": true
+          }
+        }
+      },
+      "block_order": ["heading", "text", "button"]
+    },
+    "team": {
+      "type": "cesar-team",
+      "settings": {
+        "caption": "",
+        "heading": "The people behind the roast",
+        "text_alignment": "left",
+        "columns_desktop": 2,
+        "ratio": "portrait",
+        "limit_width": true,
+        "max_width": 1200,
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "m-1": {
+          "type": "member",
+          "settings": {
+            "name": "Cesar Mendieta",
+            "role": "Founder",
+            "bio": "<p>Cesar founded the business on his family's coffee-growing heritage in Colombia, bringing direct-from-origin sourcing and roasting to Melbourne.</p>"
+          }
+        },
+        "m-2": {
+          "type": "member",
+          "settings": {
+            "name": "Carlos Gallo",
+            "role": "Head of Coffee",
+            "bio": "<p>An agronomist and roaster, Carlos brings hands-on expertise to every roast profile and cupping session.</p>"
+          }
+        }
+      },
+      "block_order": ["m-1", "m-2"]
+    },
+    "apart": {
+      "type": "cesar-checklist",
+      "settings": {
+        "caption": "",
+        "heading": "What Sets Us Apart",
+        "text_alignment": "left",
+        "columns_desktop": 3,
+        "boxed": true,
+        "limit_width": true,
+        "max_width": 1400,
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "i-1": { "type": "item", "settings": { "text": "Direct origin sourcing with full traceability" } },
+        "i-2": { "type": "item", "settings": { "text": "Consistent, year-round supply" } },
+        "i-3": { "type": "item", "settings": { "text": "Flexible arrangements that work for small businesses, not just large ones" } },
+        "i-4": { "type": "item", "settings": { "text": "An end-to-end offer — sourcing, roasting, cupping and packaging" } },
+        "i-5": { "type": "item", "settings": { "text": "Custom roast profiles matched to your brand" } },
+        "i-6": { "type": "item", "settings": { "text": "Local Melbourne delivery and support" } }
+      },
+      "block_order": ["i-1", "i-2", "i-3", "i-4", "i-5", "i-6"]
+    },
+    "cta": {
+      "type": "cesar-banner",
+      "settings": {
+        "heading": "Come and see the roastery",
+        "text": "<p>Want to see the facility, taste the range or talk about co-roasting and wholesale?</p>",
+        "button_label": "Get in touch",
+        "link": "/pages/contact",
+        "text_alignment": "center",
+        "ratio": "wide",
+        "color_scheme": "scheme-3"
+      }
+    }
+  },
+  "order": ["hero", "intro", "story", "roastery", "team", "apart", "cta"]
+}

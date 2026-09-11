@@ -1,0 +1,180 @@
+/**
+ * Lista de puntos con marca de verificación, en rejilla.
+ */
+
+.cesar-cl__container--limited {
+  max-width: var(--cesar-cl-max, none);
+}
+
+/* ---------- Encabezado ---------- */
+
+.cesar-cl__intro {
+  margin-bottom: var(--cc-space-12);
+}
+
+.cesar-cl__caption {
+  margin: 0 0 var(--cc-space-3);
+  font-size: var(--cc-text-body-lg);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--cesar-sec-link, var(--cc-terracotta-text));
+}
+
+.cesar-cl__heading {
+  margin: 0;
+  font-family: var(--cc-font-sans, var(--cc-fallback-sans));
+  font-weight: var(--cc-font-heading-weight-black, 800);
+  font-size: var(--cesar-sec-heading-size, var(--cc-text-h2));
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--cesar-sec-heading, var(--cc-brown-700));
+}
+
+.cesar-cl__text {
+  margin-top: var(--cc-space-4);
+  font-size: var(--cesar-sec-text-size, var(--cc-text-body-lg));
+  line-height: 1.55;
+  color: var(--cesar-sec-text, var(--cc-text));
+}
+
+.cesar-sec--align-center .cesar-cl__text > * {
+  margin-inline: auto;
+}
+
+.cesar-sec--align-right .cesar-cl__text > * {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+/* ---------- Lista ---------- */
+
+.cesar-cl__list {
+  display: grid;
+  grid-template-columns: repeat(var(--cesar-cl-cols, 3), minmax(0, 1fr));
+  gap: var(--cc-space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cesar-cl__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--cc-space-3);
+  padding-block: var(--cc-space-2);
+}
+
+.cesar-cl__list--boxed .cesar-cl__item {
+  box-sizing: border-box;
+  padding: var(--cc-space-6);
+  border-radius: var(--cc-radius-md);
+  background-color: var(--cesar-card-bg, var(--cc-cream));
+}
+
+.cesar-cl__mark {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  /* Un pelo por encima de la primera línea de texto, para que la marca quede
+     centrada con ella y no con el bloque entero. */
+  margin-top: -2px;
+  border-radius: var(--cc-radius-pill);
+  background-color: var(--cesar-cl-mark-bg, var(--cc-green));
+  color: var(--cesar-cl-mark, #fff);
+}
+
+.cesar-cl__item-title {
+  margin: 0 0 var(--cc-space-1);
+  font-size: var(--cesar-cl-item-size, var(--cc-text-body-lg));
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--cesar-sec-heading, var(--cc-brown-900));
+}
+
+.cesar-cl__item-text {
+  margin: 0;
+  font-size: var(--cesar-cl-item-size, var(--cc-text-body));
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--cesar-sec-text, var(--cc-text));
+}
+
+/* Con título, el texto baja de peso: ya no es lo que encabeza el punto. */
+.cesar-cl__item-title + .cesar-cl__item-text {
+  font-weight: 400;
+  font-size: var(--cesar-sec-text-size, var(--cc-text-body));
+}
+
+/* ---------- Botón ---------- */
+
+.cesar-cl__actions {
+  margin-top: var(--cc-space-12);
+}
+
+.cesar-cl__button {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* mínimo táctil */
+  min-height: 44px;
+  padding: var(--cc-cta-padding-y) var(--cc-space-8);
+  border-radius: var(--cc-cta-radius);
+  background-color: var(--cesar-btn-bg, var(--cc-brown-900));
+  color: var(--cesar-btn-text, #fff);
+  font-size: var(--cc-cta-font-size);
+  font-weight: var(--cc-cta-weight);
+  line-height: var(--cc-cta-line);
+  letter-spacing: var(--cc-cta-letter-space);
+  text-decoration: none;
+  transition: opacity var(--cc-cta-transition) var(--cc-ease);
+}
+
+.cesar-cl__button:hover {
+  opacity: 0.85;
+}
+
+.cesar-cl__button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* En tableta, dos como mucho; si la sección está a una columna, se respeta. */
+@media screen and (max-width: 989px) {
+  .cesar-cl__list {
+    grid-template-columns: repeat(min(var(--cesar-cl-cols, 3), 2), minmax(0, 1fr));
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .cesar-cl__intro {
+    margin-bottom: var(--cc-space-8);
+  }
+
+  .cesar-cl__list {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--cc-space-3);
+  }
+
+  .cesar-cl__list--boxed .cesar-cl__item {
+    padding: var(--cc-space-4);
+  }
+
+  .cesar-cl__actions {
+    margin-top: var(--cc-space-8);
+  }
+
+  .cesar-cl__button {
+    display: flex;
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cesar-cl__button {
+    transition: none;
+  }
+}

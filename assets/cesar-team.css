@@ -1,0 +1,170 @@
+/**
+ * Equipo: retrato, nombre, cargo y una línea sobre cada persona.
+ */
+
+.cesar-team__container--limited {
+  max-width: var(--cesar-team-max, none);
+}
+
+/* ---------- Encabezado ---------- */
+
+.cesar-team__intro {
+  margin-bottom: var(--cc-space-12);
+}
+
+.cesar-team__caption {
+  margin: 0 0 var(--cc-space-3);
+  font-size: var(--cc-text-body-lg);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--cesar-sec-link, var(--cc-terracotta-text));
+}
+
+.cesar-team__heading {
+  margin: 0;
+  font-family: var(--cc-font-sans, var(--cc-fallback-sans));
+  font-weight: var(--cc-font-heading-weight-black, 800);
+  font-size: var(--cesar-sec-heading-size, var(--cc-text-h2));
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--cesar-sec-heading, var(--cc-brown-700));
+}
+
+.cesar-team__text {
+  margin-top: var(--cc-space-4);
+  font-size: var(--cesar-sec-text-size, var(--cc-text-body-lg));
+  line-height: 1.55;
+  color: var(--cesar-sec-text, var(--cc-text));
+}
+
+.cesar-sec--align-center .cesar-team__text > * {
+  margin-inline: auto;
+}
+
+.cesar-sec--align-right .cesar-team__text > * {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+/* ---------- Rejilla ---------- */
+
+.cesar-team__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cesar-team-cols, 2), minmax(0, 1fr));
+  gap: var(--cc-space-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Tope de 440px por columna: con dos personas en una pantalla ancha, sin él
+   cada retrato crecería hasta 700px y el par se leería como dos columnas
+   sueltas en vez de como un grupo. */
+.cesar-team__grid {
+  max-width: calc(var(--cesar-team-cols, 2) * 440px + (var(--cesar-team-cols, 2) - 1) * var(--cc-space-8));
+}
+
+/* Si el encabezado va centrado, la rejilla también. */
+.cesar-sec--align-center + .cesar-team__grid {
+  margin-inline: auto;
+}
+
+@media screen and (max-width: 989px) {
+  .cesar-team__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: none;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .cesar-team__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--cc-space-6);
+  }
+}
+
+/* ---------- Cada persona ---------- */
+
+.cesar-team__member {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cc-space-4);
+}
+
+.cesar-team__grid--boxed .cesar-team__member {
+  box-sizing: border-box;
+  padding: var(--cc-space-4);
+  border-radius: var(--cc-radius-lg);
+  background-color: var(--cesar-card-bg, var(--cc-cream));
+}
+
+.cesar-team__media {
+  border-radius: var(--cc-radius-md);
+  overflow: hidden;
+  background-color: var(--cc-cream);
+}
+
+.cesar-team__photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.cesar-team__grid--square .cesar-team__photo {
+  aspect-ratio: 1;
+}
+
+.cesar-team__grid--landscape .cesar-team__photo {
+  aspect-ratio: 4 / 3;
+}
+
+/* Sin retrato: la inicial en grande, sobre crema. */
+.cesar-team__photo--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--cc-font-display, var(--cc-fallback-display));
+  font-size: clamp(64px, 12vw, 140px);
+  line-height: 1;
+  color: var(--cc-brown-500);
+  background-color: var(--cc-cream-active);
+}
+
+.cesar-team__body {
+  padding-inline: var(--cc-space-1);
+}
+
+.cesar-team__name {
+  margin: 0;
+  font-size: var(--cesar-team-name-size, var(--cc-text-h3));
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--cesar-sec-heading, var(--cc-brown-900));
+}
+
+.cesar-team__role {
+  margin: var(--cc-space-1) 0 0;
+  font-size: var(--cc-text-sm);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cesar-team-role, var(--cc-terracotta-text));
+}
+
+.cesar-team__bio {
+  margin-top: var(--cc-space-3);
+  font-size: var(--cesar-sec-text-size, var(--cc-text-body));
+  line-height: 1.55;
+  color: var(--cesar-sec-text, var(--cc-text));
+}
+
+.cesar-team__bio > :first-child {
+  margin-top: 0;
+}
+
+.cesar-team__bio > :last-child {
+  margin-bottom: 0;
+}

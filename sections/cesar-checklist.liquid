@@ -1,0 +1,199 @@
+{{ 'cesar-checklist.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Lista de puntos con marca de verificación, en rejilla. Para enumerar lo que
+  se ofrece o lo que distingue: cosas cortas que no necesitan foto ni número.
+{%- endcomment -%}
+
+{%- capture cesar_style -%}
+  {% render 'cesar-section-style', s: section.settings %}
+  {% if section.settings.limit_width %}--cesar-cl-max: {{ section.settings.max_width }}px;{% endif %}
+  --cesar-cl-cols: {{ section.settings.columns_desktop }};
+  {% if section.settings.mark_color != blank %}--cesar-cl-mark: {{ section.settings.mark_color }};{% endif %}
+  {% if section.settings.mark_bg != blank %}--cesar-cl-mark-bg: {{ section.settings.mark_bg }};{% endif %}
+  {% if section.settings.item_px > 0 %}--cesar-cl-item-size: {{ section.settings.item_px }}px;{% endif %}
+{%- endcapture -%}
+
+<div
+  class="cesar-cl cesar-sec cc-section color-{{ section.settings.color_scheme }}"
+  {% if cesar_style != blank %}style="{{ cesar_style | strip_newlines | strip }}"{% endif %}
+>
+  <div class="cesar-cl__container cc-container{% if section.settings.limit_width %} cesar-cl__container--limited{% endif %}">
+    {%- if section.settings.caption != blank or section.settings.heading != blank or section.settings.text != blank -%}
+      <div class="cesar-cl__intro cesar-sec--align-{{ section.settings.text_alignment }}">
+        {%- if section.settings.caption != blank -%}
+          <p class="cesar-cl__caption">{{ section.settings.caption }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          <h2 class="cesar-cl__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+
+        {%- if section.settings.text != blank -%}
+          <div class="cesar-cl__text rte">{{ section.settings.text }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <ul class="cesar-cl__list{% if section.settings.boxed %} cesar-cl__list--boxed{% endif %}" role="list">
+        {%- for block in section.blocks -%}
+          <li class="cesar-cl__item" {{ block.shopify_attributes }}>
+            {%- comment -%}
+              La marca es decorativa: el punto ya va en una lista, y anunciar
+              "verificado" delante de cada uno sólo añadiría ruido.
+            {%- endcomment -%}
+            <span class="cesar-cl__mark" aria-hidden="true">
+              <svg viewBox="0 0 16 16" width="16" height="16" focusable="false">
+                <path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <div class="cesar-cl__body">
+              {%- if block.settings.title != blank -%}
+                <h3 class="cesar-cl__item-title">{{ block.settings.title }}</h3>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <p class="cesar-cl__item-text">{{ block.settings.text }}</p>
+              {%- endif -%}
+            </div>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if section.settings.button_label != blank -%}
+      <div class="cesar-cl__actions cesar-sec--align-{{ section.settings.text_alignment }}">
+        <a href="{{ section.settings.button_link | default: '#' }}" class="cesar-cl__button">
+          {{ section.settings.button_label }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cesar · Lista de puntos",
+  "tag": "section",
+  "class": "cesar-checklist-section",
+  "settings": [
+    { "type": "text", "id": "caption", "label": "Antetítulo" },
+    { "type": "text", "id": "heading", "label": "Titular", "default": "What sets us apart" },
+    { "type": "richtext", "id": "text", "label": "Texto" },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Alineación del encabezado",
+      "options": [
+        { "value": "left", "label": "Izquierda" },
+        { "value": "center", "label": "Centro" },
+        { "value": "right", "label": "Derecha" }
+      ],
+      "default": "left"
+    },
+    { "type": "header", "content": "Lista" },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "label": "Columnas en escritorio",
+      "default": 3
+    },
+    {
+      "type": "checkbox",
+      "id": "boxed",
+      "label": "Cada punto en una caja",
+      "default": true
+    },
+    { "type": "text", "id": "button_label", "label": "Botón bajo la lista" },
+    { "type": "url", "id": "button_link", "label": "Enlace del botón" },
+    { "type": "header", "content": "Ancho" },
+    { "type": "checkbox", "id": "limit_width", "label": "Limitar el ancho del contenido", "default": true },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 800,
+      "max": 2000,
+      "step": 20,
+      "unit": "px",
+      "label": "Ancho máximo",
+      "default": 1400
+    },
+    { "type": "header", "content": "Colores y tamaños" },
+    {
+      "type": "paragraph",
+      "content": "Todos opcionales. Vacíos o en 0, la sección usa su esquema de color y la escala tipográfica del tema."
+    },
+    { "type": "color", "id": "bg_color", "label": "Fondo de la sección" },
+    { "type": "color", "id": "heading_color", "label": "Titular" },
+    { "type": "color", "id": "text_color", "label": "Texto" },
+    { "type": "color", "id": "card_bg", "label": "Fondo de las cajas" },
+    { "type": "color", "id": "mark_color", "label": "Marca de verificación" },
+    { "type": "color", "id": "mark_bg", "label": "Fondo de la marca" },
+    { "type": "color", "id": "button_bg", "label": "Fondo del botón" },
+    { "type": "color", "id": "button_text", "label": "Texto del botón" },
+    {
+      "type": "range",
+      "id": "heading_px",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Tamaño del titular",
+      "default": 0,
+      "info": "0 = el del tema."
+    },
+    {
+      "type": "range",
+      "id": "item_px",
+      "min": 0,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño de cada punto",
+      "default": 0,
+      "info": "0 = el del tema."
+    },
+    {
+      "type": "range",
+      "id": "text_px",
+      "min": 0,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño del texto de entrada",
+      "default": 0,
+      "info": "0 = el del tema."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Punto",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Título", "info": "Opcional." },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto",
+          "default": "Direct origin sourcing with full traceability"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cesar · Lista de puntos",
+      "blocks": [{ "type": "item" }, { "type": "item" }, { "type": "item" }]
+    }
+  ]
+}
+{% endschema %}
