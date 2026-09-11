@@ -200,6 +200,7 @@
         "m-1": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/lorings.webp",
             "title": "Loring S7 Nighthawk",
             "text": "1.4–7kg batches, ideal for smaller runs and profile development.",
             "link_label": "See Our Farms",
