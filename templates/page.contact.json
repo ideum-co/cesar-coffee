@@ -64,6 +64,22 @@
       "settings": {
         "heading": "",
         "heading_size": "h1",
+        "text": "",
+        "enquiry_enabled": true,
+        "enquiry_label": "Enquiry type",
+        "enquiry_options": "General enquiry\nWholesale\nCo-roasting\nOrders and shipping",
+        "limit_width": true,
+        "max_width": 1200,
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "field_bg": "",
+        "field_border": "",
+        "card_bg": "",
+        "link_color": "",
+        "button_bg": "",
+        "button_text": "",
+        "text_px": 0,
         "color_scheme": "scheme-1",
         "padding_top": 36,
         "padding_bottom": 36
@@ -144,6 +160,7 @@
         "card_MUL8eq": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/banner-body-3.jpg",
             "title": "wholesale",
             "text": "",
             "link_label": "See Our Farms",
@@ -162,6 +179,7 @@
         "card_x39yRw": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/banner-co-roasting.webp",
             "title": "co-roasting",
             "text": "",
             "link_label": "How We Roast",
@@ -187,6 +205,8 @@
         "articles_to_show": 6,
         "article_button_label": "Read the story",
         "show_excerpt": false,
+        "overlay_strength": 100,
+        "overlay_blur": 8,
         "color_scheme": "",
         "text_alignment": "left",
         "bg_color": "",
