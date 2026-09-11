@@ -73,8 +73,9 @@
         "card_LDyL8K": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/badge-gold-line.svg",
             "title": "Gold Line",
-            "text": "<p>Rare allocation lots.<br><strong>The microlots that carry the story.</strong></p>",
+            "text": "<p>Rare allocation lots.<br/><strong>The microlots that carry the story.</strong></p>",
             "link": ""
           }
         },
