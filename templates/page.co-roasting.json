@@ -56,6 +56,7 @@
         "card_tjyFGk": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/roast-deveploment.webp",
             "title": "Roast development",
             "text": "Profile refinement support, batch after batch.",
             "link_label": "",
@@ -231,6 +232,8 @@
         "articles_to_show": 6,
         "article_button_label": "Read the story",
         "show_excerpt": false,
+        "overlay_strength": 100,
+        "overlay_blur": 8,
         "color_scheme": "scheme-1",
         "text_alignment": "left",
         "bg_color": "",
