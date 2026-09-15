@@ -19,6 +19,7 @@
   --cesar-mq-radius: {{ section.settings.card_radius }}px;
   --cesar-mq-stagger: {{ section.settings.stagger }}px;
   --cesar-mq-image: {{ section.settings.image_px }}px;
+  --cesar-mq-badge: {{ section.settings.badge_px | default: 170 }}px;
   --cesar-mq-pad: {{ section.settings.card_padding }}px;
   {% if section.settings.card_title_color != blank %}--cesar-mq-title: {{ section.settings.card_title_color }};{% endif %}
   {% if section.settings.card_text_color != blank %}--cesar-mq-text: {{ section.settings.card_text_color }};{% endif %}
@@ -193,12 +194,23 @@
     {
       "type": "range",
       "id": "image_px",
-      "min": 80,
-      "max": 320,
+      "min": 120,
+      "max": 400,
       "step": 10,
       "unit": "px",
-      "label": "Alto de la imagen",
-      "default": 200
+      "label": "Alto de la foto",
+      "info": "La mitad superior de la card, donde va la foto de fondo y el distintivo.",
+      "default": 240
+    },
+    {
+      "type": "range",
+      "id": "badge_px",
+      "min": 60,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "label": "Tamaño del distintivo",
+      "default": 170
     },
     { "type": "header", "content": "Colores y tamaños" },
     {
@@ -304,7 +316,8 @@
       "type": "card",
       "name": "Card",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Imagen", "info": "Un PNG o SVG con fondo transparente queda como en la referencia." },
+        { "type": "image_picker", "id": "background", "label": "Foto de fondo", "info": "A sangre en la mitad superior de la card." },
+        { "type": "image_picker", "id": "image", "label": "Distintivo de la línea", "info": "El SVG redondo de la línea. Va centrado sobre la foto." },
         { "type": "text", "id": "title", "label": "Título", "default": "Green Line" },
         {
           "type": "richtext",

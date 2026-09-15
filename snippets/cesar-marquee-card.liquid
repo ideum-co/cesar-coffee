@@ -23,36 +23,56 @@
       {% if copia %}tabindex="-1"{% endif %}
     {% endif %}
   >
-    {%- if block.settings.image != blank -%}
-      <div class="cesar-mq__media">
-        {%- comment -%}
-          Un SVG no se redimensiona en el CDN: se sirve tal cual, sin srcset.
-          Pedirle tamaños sólo genera direcciones que devuelven el mismo archivo.
-        {%- endcomment -%}
-        {%- if block.settings.image.src contains '.svg' -%}
-          <img
-            class="cesar-mq__image"
-            src="{{ block.settings.image | image_url: width: 600 }}"
-            alt="{{ block.settings.image.alt | escape }}"
-            loading="lazy"
-            width="300"
-            height="200"
-          >
-        {%- else -%}
-          {{
-            block.settings.image
-            | image_url: width: 600
-            | image_tag:
-              loading: 'lazy',
-              sizes: '300px',
-              widths: '200, 300, 400, 600',
-              class: 'cesar-mq__image',
-              alt: block.settings.image.alt
-          }}
-        {%- endif -%}
-      </div>
-    {%- endif -%}
+    {%- comment -%}
+      Mitad superior: la foto de fondo a sangre y, centrado encima, el
+      distintivo de la línea. Sin foto queda el crema de la card, y el
+      distintivo se ve igual que antes.
+    {%- endcomment -%}
+    <div class="cesar-mq__cover">
+      {%- if block.settings.background != blank -%}
+        {{
+          block.settings.background
+          | image_url: width: 1000
+          | image_tag:
+            loading: 'lazy',
+            sizes: '(min-width: 750px) 560px, 80vw',
+            widths: '400, 600, 800, 1000',
+            class: 'cesar-mq__bg',
+            alt: ''
+        }}
+      {%- endif -%}
 
+      {%- if block.settings.image != blank -%}
+        <div class="cesar-mq__badge">
+          {%- comment -%}
+            Un SVG no se redimensiona en el CDN: se sirve tal cual, sin srcset.
+          {%- endcomment -%}
+          {%- if block.settings.image.src contains '.svg' -%}
+            <img
+              class="cesar-mq__image"
+              src="{{ block.settings.image | image_url: width: 600 }}"
+              alt="{{ block.settings.image.alt | escape }}"
+              loading="lazy"
+              width="300"
+              height="300"
+            >
+          {%- else -%}
+            {{
+              block.settings.image
+              | image_url: width: 600
+              | image_tag:
+                loading: 'lazy',
+                sizes: '300px',
+                widths: '200, 300, 400, 600',
+                class: 'cesar-mq__image',
+                alt: block.settings.image.alt
+            }}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="cesar-mq__body">
     {%- if block.settings.title != blank -%}
       <h3 class="cesar-mq__title">{{ block.settings.title }}</h3>
     {%- endif -%}
@@ -60,5 +80,6 @@
     {%- if block.settings.text != blank -%}
       <div class="cesar-mq__card-text rte">{{ block.settings.text }}</div>
     {%- endif -%}
+    </div>
   </{{ tag }}>
 </li>
