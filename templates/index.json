@@ -511,6 +511,7 @@
         "card_1": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/poster-1.webp",
             "title": "wholesale",
             "text": "",
             "link_label": "Partner With Us",
