@@ -25,16 +25,31 @@
   >
     {%- if block.settings.image != blank -%}
       <div class="cesar-mq__media">
-        {{
-          block.settings.image
-          | image_url: width: 600
-          | image_tag:
-            loading: 'lazy',
-            sizes: '300px',
-            widths: '200, 300, 400, 600',
-            class: 'cesar-mq__image',
-            alt: block.settings.image.alt
-        }}
+        {%- comment -%}
+          Un SVG no se redimensiona en el CDN: se sirve tal cual, sin srcset.
+          Pedirle tamaños sólo genera direcciones que devuelven el mismo archivo.
+        {%- endcomment -%}
+        {%- if block.settings.image.src contains '.svg' -%}
+          <img
+            class="cesar-mq__image"
+            src="{{ block.settings.image | image_url: width: 600 }}"
+            alt="{{ block.settings.image.alt | escape }}"
+            loading="lazy"
+            width="300"
+            height="200"
+          >
+        {%- else -%}
+          {{
+            block.settings.image
+            | image_url: width: 600
+            | image_tag:
+              loading: 'lazy',
+              sizes: '300px',
+              widths: '200, 300, 400, 600',
+              class: 'cesar-mq__image',
+              alt: block.settings.image.alt
+          }}
+        {%- endif -%}
       </div>
     {%- endif -%}
 
