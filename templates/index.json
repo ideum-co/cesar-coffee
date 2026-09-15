@@ -66,55 +66,60 @@
     "cesar_line_marquee_DbXTmg": {
       "type": "cesar-line-marquee",
       "blocks": {
-        "card_pw4NXE": {
-          "type": "card",
-          "settings": {
-            "image": "shopify://shop_images/badge-green-line.svg",
-            "title": "Green Line",
-            "text": "<p>Everyday espresso, always on.<br/><strong>The dependable base of the range.</strong></p>",
-            "link": ""
-          }
-        },
         "card_LDyL8K": {
           "type": "card",
           "settings": {
+            "background": "shopify://shop_images/card-1.webp",
             "image": "shopify://shop_images/badge-gold-line.svg",
             "title": "Gold Line",
             "text": "<p>Rare allocation lots.<br/><strong>The microlots that carry the story.</strong></p>",
-            "link": ""
+            "link": "shopify://collections/gold-line"
+          }
+        },
+        "card_pw4NXE": {
+          "type": "card",
+          "settings": {
+            "background": "shopify://shop_images/card-5.webp",
+            "image": "shopify://shop_images/badge-green-line.svg",
+            "title": "Green Line",
+            "text": "<p>Everyday espresso, always on.<br/><strong>The dependable base of the range.</strong></p>",
+            "link": "shopify://collections/green-line"
           }
         },
         "card_UaXGWQ": {
           "type": "card",
           "settings": {
+            "background": "shopify://shop_images/card-2.webp",
             "image": "shopify://shop_images/badge-silver-line.svg",
             "title": "Silver Line",
             "text": "<p>Seasonal single origins.<br/><strong>Bright, clean and traceable.</strong></p>",
-            "link": ""
+            "link": "shopify://collections/silver-line"
           }
         },
         "card_4jRf4e": {
           "type": "card",
           "settings": {
+            "background": "shopify://shop_images/card-3.webp",
             "image": "shopify://shop_images/badge-blue-line.svg",
             "title": "Blue Line",
             "text": "<p>Everyday espresso, always on.<br/><strong>The dependable base of the range.</strong></p>",
-            "link": ""
+            "link": "shopify://collections/blue-line"
           }
         },
         "card_aQhzWr": {
           "type": "card",
           "settings": {
+            "background": "shopify://shop_images/card-4.webp",
             "image": "shopify://shop_images/badge-red-line.svg",
             "title": "Red Line",
             "text": "<p>Everyday espresso, always on.<br/><strong>The dependable base of the range.</strong></p>",
-            "link": ""
+            "link": "shopify://collections/red-line"
           }
         }
       },
       "block_order": [
-        "card_pw4NXE",
         "card_LDyL8K",
+        "card_pw4NXE",
         "card_UaXGWQ",
         "card_4jRf4e",
         "card_aQhzWr"
@@ -134,6 +139,7 @@
         "card_radius": 24,
         "stagger": 48,
         "image_px": 200,
+        "badge_px": 170,
         "bg_color": "",
         "heading_color": "",
         "text_color": "",
@@ -505,6 +511,7 @@
         "card_1": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/poster-1.webp",
             "title": "wholesale",
             "text": "",
             "link_label": "Partner With Us",

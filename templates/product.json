@@ -115,24 +115,24 @@
         "question_mydECY": {
           "type": "question",
           "settings": {
-            "question": "How should I store this?",
-            "answer": "<p>Keep the bag sealed, somewhere cool and dark. Away from the fridge — coffee picks up every smell around it.</p>",
+            "question": "What grind size should I choose for my brew method?",
+            "answer": "<p>Choose <strong>Whole Beans</strong> if you have a grinder at home for maximum freshness. Otherwise, select <strong>Espresso</strong> for espresso machines and Moka pots, <strong>Filter</strong> for V60 or AeroPress, and <strong>Coarse / Plunger</strong> for French Press or Cold Brew.</p>",
             "open_by_default": false
           }
         },
         "question_DQWEzm": {
           "type": "question",
           "settings": {
-            "question": "How should I store this?",
-            "answer": "<p>Keep the bag sealed, somewhere cool and dark. Away from the fridge — coffee picks up every smell around it.</p>",
+            "question": "How recently was this coffee roasted?",
+            "answer": "<p>We roast in small batches multiple times a week. Your coffee is dispatched within <strong>24–48 hours of roasting</strong> to ensure you receive it at peak freshness.</p>",
             "open_by_default": false
           }
         },
         "question_TNgbpk": {
           "type": "question",
           "settings": {
-            "question": "How should I store this?",
-            "answer": "<p>Keep the bag sealed, somewhere cool and dark. Away from the fridge — coffee picks up every smell around it.</p>",
+            "question": "Is this coffee best suited for milk-based drinks or black coffee?",
+            "answer": "<p>Check the flavor profile on the product label. Our <strong>Espresso Blends</strong> are crafted to cut through milk perfectly for Flat Whites and Lattes, while our <strong>Single Origins</strong> shine best as black espresso or filter brews.</p>",
             "open_by_default": false
           }
         }
@@ -156,6 +156,8 @@
         "heading_px": 0,
         "question_px": 0,
         "text_px": 0,
+        "motion_reveal": "fade-up",
+        "motion_stagger": true,
         "color_scheme": ""
       }
     },
@@ -266,6 +268,100 @@
         "arrow_icon": "",
         "heading_px": 66,
         "text_px": 0,
+        "motion_reveal": "fade-up",
+        "motion_stagger": true,
+        "color_scheme": ""
+      }
+    },
+    "cesar_line_marquee_WhaG6J": {
+      "type": "cesar-line-marquee",
+      "blocks": {
+        "card_M6iPXt": {
+          "type": "card",
+          "settings": {
+            "background": "shopify://shop_images/card-5.webp",
+            "image": "shopify://shop_images/badge-green-line.svg",
+            "title": "Green Line",
+            "text": "<p>Everyday espresso, always on.<br/><strong>The dependable base of the range.</strong></p>",
+            "link": ""
+          }
+        },
+        "card_UeRBVA": {
+          "type": "card",
+          "settings": {
+            "background": "shopify://shop_images/card-1.webp",
+            "image": "shopify://shop_images/badge-gold-line.svg",
+            "title": "Gold Line",
+            "text": "<p>Rare allocation lots.<br/><strong>The microlots that carry the story.</strong></p>",
+            "link": ""
+          }
+        },
+        "card_WGLQ9C": {
+          "type": "card",
+          "settings": {
+            "background": "shopify://shop_images/card-2.webp",
+            "image": "shopify://shop_images/badge-silver-line.svg",
+            "title": "Silver Line",
+            "text": "<p>Seasonal single origins.<br/><strong>Bright, clean and traceable.</strong></p>",
+            "link": ""
+          }
+        },
+        "card_W8dyRE": {
+          "type": "card",
+          "settings": {
+            "background": "shopify://shop_images/card-3.webp",
+            "image": "shopify://shop_images/badge-blue-line.svg",
+            "title": "Green Line",
+            "text": "<p>Everyday espresso, always on.<br/><strong>The dependable base of the range.</strong></p>",
+            "link": ""
+          }
+        },
+        "card_gPtNXB": {
+          "type": "card",
+          "settings": {
+            "background": "shopify://shop_images/card-4.webp",
+            "image": "shopify://shop_images/badge-red-line.svg",
+            "title": "Red line",
+            "text": "<p>Everyday espresso, always on.<br/><strong>The dependable base of the range.</strong></p>",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_M6iPXt",
+        "card_UeRBVA",
+        "card_WGLQ9C",
+        "card_W8dyRE",
+        "card_gPtNXB"
+      ],
+      "name": "Cesar · Marquesina",
+      "settings": {
+        "caption": "",
+        "heading": "Our coffee lines",
+        "text": "",
+        "text_alignment": "center",
+        "speed": 50,
+        "direction": "left",
+        "pause_on_hover": true,
+        "card_width": 400,
+        "gap": 32,
+        "card_padding": 40,
+        "card_radius": 24,
+        "stagger": 48,
+        "image_px": 240,
+        "badge_px": 170,
+        "bg_color": "#5c8a6e",
+        "heading_color": "#fdf5a6",
+        "text_color": "",
+        "card_bg": "",
+        "card_border": "",
+        "card_title_color": "",
+        "card_text_color": "",
+        "heading_px": 66,
+        "card_title_px": 0,
+        "card_text_px": 0,
+        "text_px": 0,
+        "motion_reveal": "fade-up",
         "color_scheme": ""
       }
     },
@@ -329,10 +425,14 @@
         "gold",
         "silver"
       ],
+      "disabled": true,
       "settings": {
         "heading": "Three tiers, one clear range",
         "button_label": "Shop All",
         "button_link": "",
+        "motion_reveal": "fade-up",
+        "motion_stagger": true,
+        "motion_parallax": false,
         "color_scheme": "scheme-3",
         "limit_width": true,
         "max_width": 1200,
@@ -364,6 +464,7 @@
         "text_color": "",
         "heading_px": 0,
         "text_px": 0,
+        "motion_reveal": "fade-up",
         "color_scheme": ""
       }
     },
@@ -420,6 +521,9 @@
         "verified_label": "Verified User",
         "qa_button_label": "Ask a question",
         "qa_button_link": "",
+        "qa_form_heading": "Ask a question",
+        "qa_form_submit": "Send question",
+        "qa_form_success": "Thanks — we will get back to you.",
         "limit_width": true,
         "max_width": 1400,
         "bg_color": "",
@@ -466,6 +570,7 @@
     "cesar_product_faq_UaBRNr",
     "product_features",
     "cesar_suggested_A9fCn4",
+    "cesar_line_marquee_WhaG6J",
     "tiers",
     "cesar_video_ttK3ca",
     "cesar_reviews_tabs_DUtbdX",
