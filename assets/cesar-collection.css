@@ -399,11 +399,19 @@
 }
 
 /* Dawn subraya la opción al pasar el ratón y al enfocar el input. Aquí el
-   estado ya se ve con el fondo, así que el subrayado sobra. */
+   estado ya se ve con el fondo, así que el subrayado sobra. Las reglas llevan
+   un nivel más que las de Dawn (.facets-layout-list .facets__label:hover
+   .facet-checkbox__text-label): component-facets.css carga después de esta
+   hoja y a igual peso ganaba por orden, y el subrayado volvía. */
+.facets__display .facets-layout-list .facets__label:hover .facet-checkbox__text-label,
+.facets__display .facets-layout-list .facets__label input:focus ~ .facet-checkbox__text-label,
 .facets__display .facets__label:hover .facet-checkbox__text-label,
 .facets__display .facets__label input:focus ~ .facet-checkbox__text-label,
 .facets__display .facets__label:hover,
-.facets__display .facets__label:focus-within {
+.facets__display .facets__label:focus-within,
+.mobile-facets .facets-layout-list .mobile-facets__label:hover .facet-checkbox__text-label,
+.mobile-facets .facets-layout-list .mobile-facets__label input:focus ~ .facet-checkbox__text-label,
+.mobile-facets .mobile-facets__label:hover .facet-checkbox__text-label {
   text-decoration: none;
 }
 
@@ -417,31 +425,46 @@
 }
 
 /* ---------- Recuento ----------
-   Disco al final de la fila en vez de un número entre paréntesis pegado al
-   nombre: separa el dato de la etiqueta y da un punto de anclaje visual a la
-   derecha, que es lo que ordena la lista cuando los nombres son de largos muy
-   distintos. */
-.facets__display .cesar-facet__count {
+   Pastilla pequeña al final de la fila en vez de un número entre paréntesis
+   pegado al nombre. Va en tinta suave, no en marrón macizo: siete discos
+   oscuros en una lista pesaban más que las propias opciones. Al marcar la
+   opción, la pastilla se invierte y es la que señala la selección. Misma
+   regla para el panel de escritorio y el cajón de móvil. */
+.facets__display .cesar-facet__count,
+.mobile-facets .cesar-facet__count {
   flex: none;
   margin-left: auto;
-  display: grid;
+  display: inline-grid;
   place-items: center;
-  min-width: 28px;
-  height: 28px;
-  padding-inline: 6px;
+  min-width: 22px;
+  height: 22px;
+  padding-inline: 7px;
   border-radius: var(--cc-radius-pill);
-  background-color: var(--cc-brown-900);
-  color: #fff;
+  background-color: rgba(45, 18, 6, 0.08);
+  color: var(--cc-brown-900);
   font-size: var(--cc-text-xs);
-  font-weight: 700;
-  /* Cifras de ancho fijo: sin esto los discos de una misma lista bailan de
-     ancho entre un 1 y un 8. */
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0;
+  /* Cifras de ancho fijo: sin esto las pastillas de una misma lista bailan
+     de ancho entre un 1 y un 8. */
   font-variant-numeric: tabular-nums;
+  transition:
+    background-color var(--cc-duration) var(--cc-ease),
+    color var(--cc-duration) var(--cc-ease);
 }
 
-/* Sin resultados el disco pierde peso: la opción sigue ahí pero no invita. */
-.facets__display .facets__label.disabled .cesar-facet__count {
-  background-color: var(--cc-border);
+.facets__display .facets__label:has(:checked) .cesar-facet__count,
+.mobile-facets .mobile-facets__label:has(:checked) .cesar-facet__count {
+  background-color: var(--cc-brown-900);
+  color: #fff;
+}
+
+/* Sin resultados la pastilla pierde peso: la opción sigue ahí pero no invita. */
+.facets__display .facets__label.disabled .cesar-facet__count,
+.mobile-facets .mobile-facets__label.disabled .cesar-facet__count {
+  background-color: transparent;
+  box-shadow: inset 0 0 0 1px var(--cc-border);
   color: var(--cc-text-muted);
 }
 
@@ -544,8 +567,31 @@
   background-color: var(--cc-bg);
 }
 
+/* La fila del cajón es la misma que la del panel de escritorio: flex, con el
+   nombre estirándose y el recuento pegado al borde derecho. Sin esto el
+   recuento salía como texto suelto detrás del nombre ("Washed (Wet)11"). */
+.mobile-facets .mobile-facets__label {
+  display: flex;
+  align-items: center;
+  gap: var(--cc-space-3);
+  padding: var(--cc-space-2) var(--cc-space-3);
+  border-radius: var(--cc-radius-sm);
+  font-size: var(--cc-text-body);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.mobile-facets .mobile-facets__label .facet-checkbox__text {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  gap: var(--cc-space-3);
+  min-width: 0;
+}
+
 .mobile-facets .mobile-facets__label:hover,
-.mobile-facets .mobile-facets__label:has(:checked) {
+.mobile-facets .mobile-facets__label:has(:checked),
+.mobile-facets .mobile-facets__label:has(:focus-visible) {
   background-color: var(--cc-cream-active);
 }
 
