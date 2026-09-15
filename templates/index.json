@@ -69,8 +69,9 @@
         "card_pw4NXE": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/badge-green-line.svg",
             "title": "Green Line",
-            "text": "<p>Everyday espresso, always on.<br><strong>The dependable base of the range.</strong></p>",
+            "text": "<p>Everyday espresso, always on.<br/><strong>The dependable base of the range.</strong></p>",
             "link": ""
           }
         },
@@ -86,8 +87,27 @@
         "card_UaXGWQ": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/badge-silver-line.svg",
             "title": "Silver Line",
-            "text": "<p>Seasonal single origins.<br><strong>Bright, clean and traceable.</strong></p>",
+            "text": "<p>Seasonal single origins.<br/><strong>Bright, clean and traceable.</strong></p>",
+            "link": ""
+          }
+        },
+        "card_4jRf4e": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/badge-blue-line.svg",
+            "title": "Blue Line",
+            "text": "<p>Everyday espresso, always on.<br/><strong>The dependable base of the range.</strong></p>",
+            "link": ""
+          }
+        },
+        "card_aQhzWr": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/badge-red-line.svg",
+            "title": "Red Line",
+            "text": "<p>Everyday espresso, always on.<br/><strong>The dependable base of the range.</strong></p>",
             "link": ""
           }
         }
@@ -95,7 +115,9 @@
       "block_order": [
         "card_pw4NXE",
         "card_LDyL8K",
-        "card_UaXGWQ"
+        "card_UaXGWQ",
+        "card_4jRf4e",
+        "card_aQhzWr"
       ],
       "name": "Cesar · Marquesina",
       "settings": {
