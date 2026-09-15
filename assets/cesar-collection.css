@@ -223,9 +223,57 @@
 /* El estado se comunica con el fondo, no con un subrayado: dentro de una
    píldora el subrayado se lee como enlace y compite con el propio relleno. */
 .facets .facets__summary:hover .facets__summary-label,
-.facets .facets__disclosure[open] .facets__summary-label,
-.mobile-facets__open:hover .mobile-facets__open-label {
+.facets .facets__disclosure[open] .facets__summary-label {
   text-decoration: none;
+}
+
+/* ---------- Botón de filtros en móvil ----------
+   La misma píldora que los filtros de escritorio. Las reglas llevan el
+   contenedor por delante a propósito: component-facets.css carga después de
+   esta hoja, así que a igual especificidad ganaría Dawn, y Dawn subraya la
+   etiqueta al pasar por encima. */
+.mobile-facets__wrapper .mobile-facets__open {
+  box-sizing: border-box;
+  width: auto;
+  min-height: 44px;
+  padding: var(--cc-space-2) var(--cc-space-4);
+  gap: var(--cc-space-2);
+  border: 1px solid transparent;
+  border-radius: var(--cc-radius-md);
+  background-color: var(--cc-cream);
+  color: var(--cc-brown-900);
+  font-size: var(--cc-text-body);
+  font-weight: 500;
+  transition: background-color var(--cc-duration) var(--cc-ease);
+}
+
+/* Dawn separa icono y etiqueta con un margen; aquí lo hace el gap. */
+.mobile-facets__wrapper .mobile-facets__open > * + * {
+  margin-left: 0;
+}
+
+.mobile-facets__wrapper .mobile-facets__open-wrapper:hover .mobile-facets__open,
+.mobile-facets__wrapper .mobile-facets__disclosure[open] .mobile-facets__open {
+  background-color: var(--cc-cream-active);
+  color: var(--cc-brown-900);
+}
+
+.mobile-facets__wrapper .mobile-facets__open:hover .mobile-facets__open-label,
+.mobile-facets__wrapper .mobile-facets__open-wrapper:hover .mobile-facets__open-label {
+  text-decoration: none;
+}
+
+/* El icono es SVG con trazo propio; Dawn lo pinta con el color de enlace. */
+.mobile-facets__wrapper .mobile-facets__open line,
+.mobile-facets__wrapper .mobile-facets__open circle,
+.mobile-facets__wrapper .mobile-facets__open:hover line,
+.mobile-facets__wrapper .mobile-facets__open:hover circle {
+  stroke: var(--cc-brown-900);
+}
+
+.mobile-facets__wrapper .mobile-facets__open-wrapper:focus-visible {
+  outline: 2px solid var(--cc-brown-900);
+  outline-offset: 2px;
 }
 
 .facets .facets__disclosure[open] .facets__summary,
