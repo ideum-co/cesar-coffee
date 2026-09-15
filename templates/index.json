@@ -24,6 +24,9 @@
         "button_link": "shopify://collections/all",
         "button_label_2": "Our Story",
         "button_link_2": "shopify://pages/about-us",
+        "motion_reveal": "fade-up",
+        "motion_stagger": true,
+        "motion_parallax": true,
         "color_scheme": "scheme-1",
         "text_alignment": "left",
         "heading_color": "#fdf5a6",
@@ -56,6 +59,7 @@
         "text_color": "",
         "heading_px": 0,
         "text_px": 0,
+        "motion_reveal": "fade-up",
         "color_scheme": ""
       }
     },
@@ -119,6 +123,7 @@
         "card_title_px": 0,
         "card_text_px": 0,
         "text_px": 0,
+        "motion_reveal": "fade-up",
         "color_scheme": ""
       }
     },
@@ -187,6 +192,9 @@
         "heading": "Three tiers, one clear range",
         "button_label": "Shop All",
         "button_link": "shopify://collections/all",
+        "motion_reveal": "fade-up",
+        "motion_stagger": true,
+        "motion_parallax": false,
         "color_scheme": "scheme-1",
         "limit_width": true,
         "max_width": 1200,
@@ -290,6 +298,8 @@
         "text": "Taste what process alone can do to a single lot — Bourbon Rosado finished four ways: washed, natural, honey and anaerobic. Four 100g bags, one story.",
         "button_label": "Shop The Flight",
         "link": "/search?q=Bourbon+Rosado&type=product",
+        "motion_reveal": "fade-up",
+        "motion_parallax": true,
         "color_scheme": "scheme-1",
         "text_alignment": "left",
         "bg_color": "",
@@ -333,6 +343,9 @@
         "ratio": "tall",
         "overlay_strength": 100,
         "overlay_blur": 8,
+        "motion_reveal": "fade-up",
+        "motion_stagger": true,
+        "motion_parallax": false,
         "color_scheme": "scheme-1"
       }
     },
@@ -390,6 +403,9 @@
         "content_alignment": "center",
         "overlay_color": "#140803",
         "overlay_opacity": 40,
+        "motion_reveal": "fade-up",
+        "motion_stagger": true,
+        "motion_parallax": true,
         "color_scheme": ""
       }
     },
@@ -451,6 +467,8 @@
         "heading": "",
         "image": "shopify://shop_images/banner-main.webp",
         "image_position": "right",
+        "motion_reveal": "fade-up",
+        "motion_stagger": true,
         "color_scheme": "scheme-1",
         "text_alignment": "center",
         "bg_color": "",
@@ -530,6 +548,8 @@
         "show_excerpt": false,
         "overlay_strength": 100,
         "overlay_blur": 8,
+        "motion_reveal": "fade-up",
+        "motion_stagger": true,
         "color_scheme": "scheme-3",
         "text_alignment": "left",
         "bg_color": "",
