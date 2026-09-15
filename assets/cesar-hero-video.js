@@ -40,11 +40,30 @@ class CesarHeroVideo extends HTMLElement {
     this.motion.addEventListener('change', this.onMotionChange);
 
     if (this.motion.matches) this.setPaused(true);
+
+    // El vídeo se muestra sólo cuando está reproduciendo de verdad; hasta
+    // entonces queda la imagen debajo. Si el navegador bloquea la
+    // reproducción automática el evento no llega y la imagen se queda: es el
+    // comportamiento que se quiere, no un fallo.
+    if (this.video) {
+      this.onPlaying = () => this.setAttribute('playing', '');
+      this.video.addEventListener('playing', this.onPlaying);
+      if (!this.video.paused && this.video.readyState >= 3) this.onPlaying();
+    }
+
+    // Un iframe no avisa de cuándo empieza a reproducir. Se muestra al cargar,
+    // con un margen para que el reproductor pinte el primer fotograma.
+    if (this.iframe) {
+      this.onFrameLoad = () => setTimeout(() => this.setAttribute('playing', ''), 400);
+      this.iframe.addEventListener('load', this.onFrameLoad);
+    }
   }
 
   disconnectedCallback() {
     this.toggle?.removeEventListener('click', this.onToggle);
     this.motion?.removeEventListener('change', this.onMotionChange);
+    this.video?.removeEventListener('playing', this.onPlaying);
+    this.iframe?.removeEventListener('load', this.onFrameLoad);
   }
 
   get paused() {

@@ -207,10 +207,36 @@ cesar-hero-video.cesar-hero__media {
   z-index: 1;
 }
 
-/* En pausa se retira el vídeo y queda la imagen, que es el póster. */
+/* El vídeo entra en fundido sobre la imagen cuando de verdad está
+   reproduciendo, no cuando el navegador decide pintarlo: así el cambio de
+   póster a vídeo es una disolución y no un salto. El atributo lo pone el
+   script en el evento `playing`. Sin script (elemento sin definir) el vídeo
+   se muestra directamente, para que nunca quede oculto por un fallo del JS. */
+.cesar-hero__video,
+.cesar-hero__frame {
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+
+cesar-hero-video[playing] .cesar-hero__video,
+cesar-hero-video[playing] .cesar-hero__frame,
+cesar-hero-video:not(:defined) .cesar-hero__video,
+cesar-hero-video:not(:defined) .cesar-hero__frame {
+  opacity: 1;
+}
+
+/* En pausa se retira el vídeo y queda la imagen, que es el póster. Va después
+   de la regla de reproducción para ganarle con la misma especificidad. */
 cesar-hero-video[paused] .cesar-hero__video,
 cesar-hero-video[paused] .cesar-hero__frame {
   opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cesar-hero__video,
+  .cesar-hero__frame {
+    transition: none;
+  }
 }
 
 /* ---------- YouTube y Vimeo ----------

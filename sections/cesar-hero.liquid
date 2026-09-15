@@ -64,24 +64,49 @@
         iOS abre el vídeo a pantalla completa en cuanto empieza.
       {%- endcomment -%}
       {%- if hero_fondo == 'archivo' -%}
+        {%- liquid
+          comment
+            Shopify genera varias versiones del mismo vídeo (2160, 1080, 720…).
+            Si se listan todas, el navegador coge la primera que sabe
+            reproducir, que suele ser la más pesada: tarda en arrancar y el
+            cambio del póster al vídeo se nota como un salto. Se elige una sola,
+            la mayor que no pase de 1080 líneas: de fondo y a sangre no se
+            distingue más, y pesa la cuarta parte que la de 2160.
+          endcomment
+          assign hero_fuente = blank
+          for source in hero_video.sources
+            if source.format != 'mp4'
+              continue
+            endif
+            if source.height > 1080
+              continue
+            endif
+            if hero_fuente == blank or source.height > hero_fuente.height
+              assign hero_fuente = source
+            endif
+          endfor
+          if hero_fuente == blank
+            for source in hero_video.sources
+              if source.format == 'mp4'
+                assign hero_fuente = source
+                break
+              endif
+            endfor
+          endif
+        -%}
         <video
           class="cesar-hero__video"
           autoplay
           muted
           loop
           playsinline
-          preload="metadata"
+          preload="auto"
           tabindex="-1"
           aria-hidden="true"
-          {% if section.settings.image != blank %}
-            poster="{{ section.settings.image | image_url: width: 1600 }}"
-          {% endif %}
         >
-          {%- for source in hero_video.sources -%}
-            {%- if source.format == 'mp4' -%}
-              <source src="{{ source.url }}" type="{{ source.mime_type }}">
-            {%- endif -%}
-          {%- endfor -%}
+          {%- if hero_fuente != blank -%}
+            <source src="{{ hero_fuente.url }}" type="{{ hero_fuente.mime_type }}">
+          {%- endif -%}
         </video>
       {%- elsif hero_fondo == 'youtube' or hero_fondo == 'vimeo' -%}
         {%- comment -%}
