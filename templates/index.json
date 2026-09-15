@@ -326,7 +326,7 @@
         "text": "Taste what process alone can do to a single lot — Bourbon Rosado finished four ways: washed, natural, honey and anaerobic. Four 100g bags, one story.",
         "button_label": "Shop The Flight",
         "link": "/search?q=Bourbon+Rosado&type=product",
-        "motion_reveal": "fade-up",
+        "motion_reveal": "zoom",
         "motion_parallax": true,
         "color_scheme": "scheme-1",
         "text_alignment": "left",
