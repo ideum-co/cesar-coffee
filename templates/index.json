@@ -69,6 +69,7 @@
         "card_pw4NXE": {
           "type": "card",
           "settings": {
+            "background": "shopify://shop_images/card-5.webp",
             "image": "shopify://shop_images/badge-green-line.svg",
             "title": "Green Line",
             "text": "<p>Everyday espresso, always on.<br/><strong>The dependable base of the range.</strong></p>",
