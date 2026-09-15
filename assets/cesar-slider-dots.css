@@ -67,6 +67,27 @@
   scroll-margin-left: 0;
 }
 
+/* ---------- Holgura vertical ----------
+   La lista es el contenedor de desplazamiento (overflow-x: auto), y un
+   contenedor así recorta también en vertical: overflow-y pasa a auto por
+   especificación. Todo lo que la card pinte fuera de su fila —el borde
+   superior con el distintivo, la sombra— quedaba cortado. Quitar el overflow
+   arregla el recorte pero mata el carrusel: sin contenedor de desplazamiento
+   las flechas y los puntos no tienen qué mover y las cards se salen por la
+   derecha. En vez de eso se le da holgura: relleno arriba y abajo compensado
+   con margen negativo, de modo que la caja que recorta crece pero el sitio que
+   ocupa en la página es el mismo. */
+/* Con el padre por delante: component-slider.css carga después de esta hoja y
+   a igual peso su margin-bottom de 1rem ganaría al negativo de aquí. */
+.cesar-slider__viewport > .cesar-slider.slider--desktop,
+.cesar-slider__viewport > .cesar-slider.slider--tablet {
+  --cesar-slider-holgura: 120px;
+  padding-block: var(--cesar-slider-holgura);
+  margin-block: calc(-1 * var(--cesar-slider-holgura));
+  /* Dawn deja 1rem debajo; con el margen negativo ya no hace falta. */
+  margin-bottom: calc(-1 * var(--cesar-slider-holgura));
+}
+
 /* ---------- Flechas flotantes sobre las cards ----------
    Van dentro del viewport, centradas verticalmente sobre las cards y no en la
    fila de puntos. Cada una aparece sólo si queda contenido hacia ese lado:
