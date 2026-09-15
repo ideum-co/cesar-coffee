@@ -78,6 +78,7 @@
         "card_LDyL8K": {
           "type": "card",
           "settings": {
+            "background": "shopify://shop_images/card-1.webp",
             "image": "shopify://shop_images/badge-gold-line.svg",
             "title": "Gold Line",
             "text": "<p>Rare allocation lots.<br/><strong>The microlots that carry the story.</strong></p>",
@@ -87,6 +88,7 @@
         "card_UaXGWQ": {
           "type": "card",
           "settings": {
+            "background": "shopify://shop_images/card-2.webp",
             "image": "shopify://shop_images/badge-silver-line.svg",
             "title": "Silver Line",
             "text": "<p>Seasonal single origins.<br/><strong>Bright, clean and traceable.</strong></p>",
@@ -96,6 +98,7 @@
         "card_4jRf4e": {
           "type": "card",
           "settings": {
+            "background": "shopify://shop_images/card-3.webp",
             "image": "shopify://shop_images/badge-blue-line.svg",
             "title": "Blue Line",
             "text": "<p>Everyday espresso, always on.<br/><strong>The dependable base of the range.</strong></p>",
@@ -105,6 +108,7 @@
         "card_aQhzWr": {
           "type": "card",
           "settings": {
+            "background": "shopify://shop_images/card-4.webp",
             "image": "shopify://shop_images/badge-red-line.svg",
             "title": "Red Line",
             "text": "<p>Everyday espresso, always on.<br/><strong>The dependable base of the range.</strong></p>",
@@ -134,6 +138,7 @@
         "card_radius": 24,
         "stagger": 48,
         "image_px": 200,
+        "badge_px": 170,
         "bg_color": "",
         "heading_color": "",
         "text_color": "",
