@@ -66,16 +66,6 @@
     "cesar_line_marquee_DbXTmg": {
       "type": "cesar-line-marquee",
       "blocks": {
-        "card_pw4NXE": {
-          "type": "card",
-          "settings": {
-            "background": "shopify://shop_images/card-5.webp",
-            "image": "shopify://shop_images/badge-green-line.svg",
-            "title": "Green Line",
-            "text": "<p>Everyday espresso, always on.<br/><strong>The dependable base of the range.</strong></p>",
-            "link": ""
-          }
-        },
         "card_LDyL8K": {
           "type": "card",
           "settings": {
@@ -83,6 +73,16 @@
             "image": "shopify://shop_images/badge-gold-line.svg",
             "title": "Gold Line",
             "text": "<p>Rare allocation lots.<br/><strong>The microlots that carry the story.</strong></p>",
+            "link": ""
+          }
+        },
+        "card_pw4NXE": {
+          "type": "card",
+          "settings": {
+            "background": "shopify://shop_images/card-5.webp",
+            "image": "shopify://shop_images/badge-green-line.svg",
+            "title": "Green Line",
+            "text": "<p>Everyday espresso, always on.<br/><strong>The dependable base of the range.</strong></p>",
             "link": ""
           }
         },
@@ -118,8 +118,8 @@
         }
       },
       "block_order": [
-        "card_pw4NXE",
         "card_LDyL8K",
+        "card_pw4NXE",
         "card_UaXGWQ",
         "card_4jRf4e",
         "card_aQhzWr"
