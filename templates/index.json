@@ -521,6 +521,7 @@
         "card_2": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/coffee-beat.png",
             "title": "white label",
             "text": "",
             "link_label": "Talk Private Label",
