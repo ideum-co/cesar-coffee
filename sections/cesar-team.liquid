@@ -39,6 +39,7 @@
           <li class="cesar-team__member" {{ block.shopify_attributes }} {% render 'cesar-motion', s: section.settings, i: forloop.index0 %}>
             <div class="cesar-team__media">
               {%- if block.settings.image != blank -%}
+                {%- assign alt_retrato = block.settings.image.alt | default: block.settings.name -%}
                 {{
                   block.settings.image
                   | image_url: width: 1000
@@ -47,7 +48,7 @@
                     sizes: '(min-width: 990px) 33vw, 90vw',
                     widths: '300, 500, 700, 1000',
                     class: 'cesar-team__photo',
-                    alt: block.settings.image.alt | default: block.settings.name
+                    alt: alt_retrato
                 }}
               {%- else -%}
                 {%- comment -%}

@@ -44,7 +44,9 @@
   object-fit: cover;
 }
 
-.cesar-card__image--empty {
+/* div vacío: base.css lo escondería (div:empty { display: none }). */
+.cesar-card .cesar-card__image--empty {
+  display: block;
   background: var(--cc-brown-500);
 }
 

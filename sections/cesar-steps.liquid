@@ -44,7 +44,7 @@
         Lista ordenada y no una serie de divs: el orden es parte del contenido,
         y así se anuncia como "paso 2 de 4" sin depender de lo que se ve.
       {%- endcomment -%}
-      <ol class="cesar-steps__list cesar-steps__list--{{ section.settings.layout }}">
+      <ol class="cesar-steps__list cesar-steps__list--{{ section.settings.layout }}" role="list">
         {%- for block in section.blocks -%}
           <li class="cesar-steps__item" {{ block.shopify_attributes }} {% render 'cesar-motion', s: section.settings, i: forloop.index0 %}>
             {%- if block.settings.image != blank -%}

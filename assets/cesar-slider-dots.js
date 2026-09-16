@@ -61,14 +61,18 @@ class CesarSliderDots extends HTMLElement {
     }
 
     this.setAttribute('role', 'group');
-    if (!this.hasAttribute('aria-label')) this.setAttribute('aria-label', 'Paginación del carrusel');
+    // Las cadenas salen de locales vía theme.liquid, con reserva en inglés.
+    const textos = window.accessibilityStrings || {};
+    const nombre = textos.cesarSliderName || 'Slider';
+    const de = textos.cesarSliderOf || 'of';
+    if (!this.hasAttribute('aria-label')) this.setAttribute('aria-label', nombre);
 
     this.innerHTML = '';
     for (let i = 1; i <= total; i += 1) {
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'cesar-dot';
-      button.setAttribute('aria-label', `Ir a la diapositiva ${i} de ${total}`);
+      button.setAttribute('aria-label', `${nombre} ${i} ${de} ${total}`);
       button.addEventListener('click', () => this.goTo(i));
       this.appendChild(button);
     }

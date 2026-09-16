@@ -62,12 +62,11 @@
   display: block;
 }
 
+/* La región que se desplaza es un div y la lista va dentro: con role="region"
+   puesto en el propio ul, los li quedaban como elementos de lista sin lista. */
 .cesar-fc__rail {
-  display: flex;
-  gap: var(--cc-space-6);
+  display: block;
   margin: 0;
-  padding: 0;
-  list-style: none;
   overflow-x: auto;
   /* Con desplazamiento horizontal el navegador recorta también en vertical
      (overflow-y pasa a auto por especificación). El panel y la sombra viven
@@ -85,6 +84,15 @@
 
 .cesar-fc__rail::-webkit-scrollbar {
   display: none;
+}
+
+.cesar-fc__list {
+  display: flex;
+  gap: var(--cc-space-6);
+  width: max-content;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 /* La primera tarjeta se alinea con el texto de arriba, pero la fila llega hasta
@@ -136,13 +144,18 @@
   object-fit: cover;
 }
 
-.cesar-fc__image--empty {
+/* Display explícito y con el padre por delante: base.css esconde los div
+   vacíos (div:empty { display: none }) y tanto el velo como el hueco sin foto
+   lo son. Sin esto el rótulo blanco caía sin velo, o sobre crema, invisible. */
+.cesar-fc__card .cesar-fc__image--empty {
+  display: block;
   background-color: var(--cc-brown-500);
 }
 
 /* Velo sólo en la mitad superior, que es donde va el rótulo: cubrir la foto
    entera apagaría la imagen sin necesidad. */
-.cesar-fc__scrim {
+.cesar-fc__card .cesar-fc__scrim {
+  display: block;
   position: absolute;
   inset: 0 0 40% 0;
   background: linear-gradient(to bottom, rgba(20, 8, 3, var(--cesar-fc-scrim, 0.45)), rgba(20, 8, 3, 0));

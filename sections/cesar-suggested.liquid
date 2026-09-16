@@ -151,7 +151,7 @@
             {%- endif -%}
           </slider-component>
         {%- elsif automatico == false -%}
-          <p class="cesar-sug__empty">Elige una colección en los ajustes de la sección.</p>
+          <p class="cesar-sug__empty">{%- if request.design_mode -%}Elige una colección en los ajustes de la sección.{%- endif -%}</p>
         {%- endif -%}
       </div>
     </div>

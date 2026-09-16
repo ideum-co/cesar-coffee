@@ -55,21 +55,19 @@
         lleva tabindex y se anuncia como región con nombre: si no, quien navega
         con teclado no puede llegar a las tarjetas que quedan fuera de vista.
       {%- endcomment -%}
-      <ul
+      <div
         class="cesar-fc__rail{% if section.settings.limit_width %} cesar-fc__rail--limited{% endif %}"
         role="region"
         tabindex="0"
         aria-label="{{ section.settings.heading | default: 'Cards' | escape }}"
         data-fc-rail
       >
+      <ul class="cesar-fc__list" role="list">
         {%- for block in section.blocks -%}
           {%- liquid
-            assign icono = block.settings.icon
             assign icono_src = ''
-            if icono.url != blank
-              assign icono_src = icono.url
-            elsif icono != blank
-              assign icono_src = icono | image_url: width: 96
+            if block.settings.icon != blank
+              assign icono_src = block.settings.icon | image_url: width: 96
             endif
           -%}
           <li class="cesar-fc__item" {{ block.shopify_attributes }}>
@@ -132,6 +130,7 @@
           </li>
         {%- endfor -%}
       </ul>
+      </div>
 
       {%- comment -%}
         Las flechas se ocultan solas cuando todas las tarjetas caben, que es

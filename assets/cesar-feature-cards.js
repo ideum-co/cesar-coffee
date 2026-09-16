@@ -41,7 +41,8 @@ class CesarFeatureCards extends HTMLElement {
     const tarjeta = this.rail.querySelector('.cesar-fc__item');
     if (!tarjeta) return this.rail.clientWidth;
 
-    const hueco = parseFloat(getComputedStyle(this.rail).columnGap) || 0;
+    const lista = this.rail.querySelector('.cesar-fc__list') || this.rail;
+    const hueco = parseFloat(getComputedStyle(lista).columnGap) || 0;
     return tarjeta.getBoundingClientRect().width + hueco;
   }
 

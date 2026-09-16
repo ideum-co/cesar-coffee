@@ -341,7 +341,9 @@
         if (!('IntersectionObserver' in window)) return;
         document.documentElement.classList.add('cesar-motion');
         setTimeout(function () {
-          if (!window.cesarMotionReady) document.documentElement.classList.remove('cesar-motion');
+          if (window.cesarMotionReady) return;
+          window.cesarMotionOff = true;
+          document.documentElement.classList.remove('cesar-motion');
         }, 3000);
       })();
     </script>
@@ -458,6 +460,8 @@
         recipientFormExpanded: `{{ 'recipient.form.expanded' | t }}`,
         recipientFormCollapsed: `{{ 'recipient.form.collapsed' | t }}`,
         countrySelectorSearchCount: `{{ 'localization.country_results_count' | t: count: '[count]' }}`,
+        cesarSliderName: `{{ 'general.slider.name' | t }}`,
+        cesarSliderOf: `{{ 'general.slider.of' | t }}`,
       };
     </script>
 

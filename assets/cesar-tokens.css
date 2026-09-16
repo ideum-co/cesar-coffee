@@ -429,13 +429,6 @@ button.shopify-payment-button__button--unbranded {
   padding: var(--cc-space-4) var(--cc-space-4) var(--cc-space-2);
 }
 
-/* El badge de línea se renderiza dentro de .card__inner (el área de imagen),
-   que con este reordenamiento queda debajo del texto: el badge cae sobre la
-   bolsa, como en el diseño, y no interfiere con el título. */
-.card__inner {
-  position: relative;
-}
-
 .card__heading {
   font-family: var(--cc-font-sans, var(--cc-fallback-sans));
   /* Dos puntos por debajo del cuerpo: en la card el nombre convive con las

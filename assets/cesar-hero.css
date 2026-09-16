@@ -30,7 +30,11 @@
 
 /* Velo de legibilidad. El color depende del color del texto: se oscurece bajo
    texto claro y se aclara bajo texto de marca. */
-.cesar-hero__scrim {
+/* Con el padre por delante y display explícito: base.css esconde todos los
+   div vacíos (div:empty { display: none }) y el velo lo es. Sin esto el ajuste
+   "Velo sobre la imagen" no hacía nada y el titular caía sobre la foto. */
+.cesar-hero .cesar-hero__scrim {
+  display: block;
   position: absolute;
   inset: 0;
   pointer-events: none;
@@ -80,7 +84,15 @@
   }
 }
 
+/* El contenedor cubre todo el hero y tapaba el botón de pausa del vídeo, que
+   vive en la capa de fondo: los clics no le llegaban. El contenedor deja pasar
+   el puntero y sólo el bloque de texto lo captura. */
+.cesar-hero__inner {
+  pointer-events: none;
+}
+
 .cesar-hero__content {
+  pointer-events: auto;
   position: relative;
   /* Por encima de la imagen de fondo. El z-index del contenedor debería
      bastar, pero se pone también aquí: cualquier transform o filter en un

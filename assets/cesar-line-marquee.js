@@ -20,6 +20,16 @@ class CesarLineMarquee extends HTMLElement {
     if (!this.track || !this.lista || !this.copia) return;
 
     this.velocidad = parseFloat(this.dataset.speed) || 50;
+
+    // Con menos movimiento pedido, la fila es una lista quieta que se
+    // desplaza a mano: no se rellena con copias (se verían repetidas) y se
+    // hace enfocable para poder desplazarla con el teclado.
+    this.quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (this.quieto) {
+      this.setAttribute('tabindex', '0');
+      this.setAttribute('role', 'region');
+      if (!this.hasAttribute('aria-label')) this.setAttribute('aria-label', 'Coffee lines');
+    }
     this.boton?.addEventListener('click', () => this.alternar());
 
     // Las imágenes cambian el ancho de la pista al cargar, y el editor lo
@@ -61,6 +71,7 @@ class CesarLineMarquee extends HTMLElement {
    * hay que clonar sin fin.
    */
   rellenar() {
+    if (this.quieto) return;
     const originales = [...this.lista.children].filter((li) => !li.dataset.mqRelleno);
     if (!originales.length) return;
 

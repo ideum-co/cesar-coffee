@@ -19,6 +19,10 @@
   const reducido = window.matchMedia('(prefers-reduced-motion: reduce)');
   if (reducido.matches || !('IntersectionObserver' in window)) return;
 
+  // Si el guardián de theme.liquid ya retiró la clase por tardar demasiado, no
+  // se vuelve a poner: lo que ya se veía se escondería y reaparecería.
+  if (window.cesarMotionOff) return;
+
   const html = document.documentElement;
   html.classList.add('cesar-motion');
   // Avisa al guardián de theme.liquid de que el script ha llegado.
@@ -128,7 +132,23 @@
     prepararParallax(raiz);
   };
 
-  const arrancar = () => preparar(document);
+  const arrancar = () => {
+    preparar(document);
+
+    // Lo que llega después de cargar —los recomendados que Dawn trae por
+    // fetch, un cajón que se abre— también lleva atributos, y sin observar
+    // el DOM se quedaría oculto para siempre bajo html.cesar-motion.
+    if ('MutationObserver' in window) {
+      new MutationObserver((cambios) => {
+        cambios.forEach((cambio) => {
+          cambio.addedNodes.forEach((nodo) => {
+            if (nodo.nodeType !== 1) return;
+            preparar(nodo.matches('[data-cesar-reveal], [data-cesar-parallax]') ? nodo.parentNode : nodo);
+          });
+        });
+      }).observe(document.body, { childList: true, subtree: true });
+    }
+  };
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', arrancar);
   } else {
