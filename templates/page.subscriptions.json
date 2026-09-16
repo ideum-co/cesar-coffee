@@ -1,0 +1,242 @@
+{
+  "sections": {
+    "hero": {
+      "type": "cesar-hero",
+      "settings": {
+        "heading": "Build your plan",
+        "subheading": "Choose your tier, set your frequency, and skip or pause anytime. Fresh coffee on your schedule, not ours.",
+        "button_label": "Start Your Subscription",
+        "button_link": "/collections/all",
+        "button_label_2": "How it works",
+        "button_link_2": "#shopify-section-how",
+        "overlay_opacity": 45,
+        "text_alignment": "left",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "how": {
+      "type": "cesar-steps",
+      "settings": {
+        "caption": "How it works",
+        "heading": "Coffee that turns up before you run out",
+        "text": "<p>Every subscription is roasted to order in North Williamstown and dispatched within days. Change, skip or cancel from your account, no calls needed.</p>",
+        "layout": "row",
+        "text_alignment": "left",
+        "limit_width": true,
+        "max_width": 1400,
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "s-1": {
+          "type": "step",
+          "settings": {
+            "title": "Choose your tier",
+            "text": "<p>Green, Silver or Gold Line — or the Bourbon Rosado Flight if you want to taste the range.</p>"
+          }
+        },
+        "s-2": {
+          "type": "step",
+          "settings": {
+            "title": "Set your frequency",
+            "text": "<p>Every week, fortnight or month. Most homes land on a bag a fortnight.</p>"
+          }
+        },
+        "s-3": {
+          "type": "step",
+          "settings": {
+            "title": "Skip or pause anytime",
+            "text": "<p>Going away? Skip a delivery or pause the plan from your account. It picks up where you left it.</p>"
+          }
+        },
+        "s-4": {
+          "type": "step",
+          "settings": {
+            "title": "Save on every order",
+            "text": "<p>The discount applies to every delivery while the plan is active, on top of any sale price.</p>"
+          }
+        }
+      },
+      "block_order": ["s-1", "s-2", "s-3", "s-4"]
+    },
+    "plans": {
+      "type": "cesar-pricing-table",
+      "settings": {
+        "heading": "Subscription savings",
+        "text": "<p>Pick how you want to pay. The longer the commitment, the bigger the saving on every bag.</p>",
+        "col_1_label": "Plan",
+        "col_2_label": "How you pay",
+        "col_3_label": "You save",
+        "note": "<p>Savings apply to the subscribed products on every delivery. Prepaid plans are billed once up front and can't be paused, but you can move delivery dates.</p>",
+        "included_heading": "Every plan includes",
+        "included_text": "<p>Free delivery across Melbourne on orders over $50, first access to seasonal microlots, and a free bag on every fifth delivery.</p>",
+        "button_label": "Start Your Subscription",
+        "button_link": "/collections/all",
+        "text_alignment": "left",
+        "limit_width": true,
+        "max_width": 1100,
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "p-1": {
+          "type": "row",
+          "settings": {
+            "package": "Flexible",
+            "length": "Pay per delivery, cancel anytime",
+            "price": "Save 10%"
+          }
+        },
+        "p-2": {
+          "type": "row",
+          "settings": {
+            "package": "3 months",
+            "length": "Prepaid, billed once",
+            "price": "Save 15%",
+            "badge": "Most popular",
+            "highlight": true
+          }
+        },
+        "p-3": {
+          "type": "row",
+          "settings": {
+            "package": "6 months",
+            "length": "Prepaid, billed once",
+            "price": "Save 18%"
+          }
+        },
+        "p-4": {
+          "type": "row",
+          "settings": {
+            "package": "12 months",
+            "length": "Prepaid, billed once",
+            "price": "Save 20%"
+          }
+        }
+      },
+      "block_order": ["p-1", "p-2", "p-3", "p-4"]
+    },
+    "flight": {
+      "type": "cesar-feature-banner",
+      "settings": {
+        "height": "lg",
+        "content_alignment": "left",
+        "overlay_color": "#140803",
+        "overlay_opacity": 45,
+        "color_scheme": "scheme-4"
+      },
+      "blocks": {
+        "caption": {
+          "type": "caption",
+          "settings": {
+            "caption": "Four processes, one origin",
+            "text_size": "md"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "The Bourbon Rosado Flight",
+            "text_size": "lg"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Bourbon Rosado finished four ways: washed, natural, honey and anaerobic. Subscribe to the Flight and taste how process changes a coffee, delivered on your schedule.</p>",
+            "text_size": "md"
+          }
+        },
+        "buttons": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Subscribe to the Flight",
+            "button_link_1": "/collections/all"
+          }
+        }
+      },
+      "block_order": ["caption", "heading", "text", "buttons"]
+    },
+    "included": {
+      "type": "cesar-checklist",
+      "settings": {
+        "caption": "",
+        "heading": "Why subscribe",
+        "text_alignment": "left",
+        "columns_desktop": 3,
+        "boxed": true,
+        "limit_width": true,
+        "max_width": 1400,
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "i-1": { "type": "item", "settings": { "text": "Roasted to order — never sitting on a shelf" } },
+        "i-2": { "type": "item", "settings": { "text": "Skip, pause or swap your coffee from your account" } },
+        "i-3": { "type": "item", "settings": { "text": "Save 10–20% on every delivery" } },
+        "i-4": { "type": "item", "settings": { "text": "Free Melbourne delivery over $50" } },
+        "i-5": { "type": "item", "settings": { "text": "First access to seasonal microlots" } },
+        "i-6": { "type": "item", "settings": { "text": "A free bag on every fifth delivery" } }
+      },
+      "block_order": ["i-1", "i-2", "i-3", "i-4", "i-5", "i-6"]
+    },
+    "faq": {
+      "type": "cesar-product-faq",
+      "settings": {
+        "heading": "Subscription FAQs",
+        "one_at_a_time": true,
+        "limit_width": true,
+        "max_width": 1000,
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "q-1": {
+          "type": "question",
+          "settings": {
+            "question": "Can I change my coffee between deliveries?",
+            "answer": "<p>Yes. Swap the coffee, the grind or the size from your account before the next delivery is roasted.</p>"
+          }
+        },
+        "q-2": {
+          "type": "question",
+          "settings": {
+            "question": "How do I skip or pause?",
+            "answer": "<p>From your account, up to 48 hours before a delivery is due. Skipping moves that delivery to the next date; pausing holds the plan until you resume it.</p>"
+          }
+        },
+        "q-3": {
+          "type": "question",
+          "settings": {
+            "question": "Is there a minimum commitment?",
+            "answer": "<p>The Flexible plan has none — cancel anytime. Prepaid plans are billed once for the term you choose and end automatically unless you renew.</p>"
+          }
+        },
+        "q-4": {
+          "type": "question",
+          "settings": {
+            "question": "When is my card charged?",
+            "answer": "<p>Flexible plans are charged when each delivery is roasted. Prepaid plans are charged once, when you subscribe.</p>"
+          }
+        },
+        "q-5": {
+          "type": "question",
+          "settings": {
+            "question": "Does the discount stack with sales?",
+            "answer": "<p>Yes. The subscription saving applies to the current price of the coffee, including sale prices.</p>"
+          }
+        }
+      },
+      "block_order": ["q-1", "q-2", "q-3", "q-4", "q-5"]
+    },
+    "cta": {
+      "type": "cesar-banner",
+      "settings": {
+        "heading": "Fresh coffee on your schedule",
+        "text": "<p>Choose a tier, pick a frequency and we'll take care of the rest.</p>",
+        "button_label": "Start Your Subscription",
+        "link": "/collections/all",
+        "text_alignment": "center",
+        "ratio": "wide",
+        "color_scheme": "scheme-3"
+      }
+    }
+  },
+  "order": ["hero", "how", "plans", "flight", "included", "faq", "cta"]
+}
