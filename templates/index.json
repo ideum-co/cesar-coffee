@@ -408,7 +408,7 @@
           "type": "buttons",
           "settings": {
             "button_label_1": "Start Your Subscription",
-            "button_link_1": "shopify://collections/all",
+            "button_link_1": "shopify://pages/subscriptions",
             "button_bg_1": "#2d1206",
             "button_text_1": "#ffffff",
             "button_label_2": "",
