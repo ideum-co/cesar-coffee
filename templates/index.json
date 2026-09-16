@@ -430,8 +430,8 @@
         "height": "lg",
         "content_alignment": "center",
         "overlay_color": "#140803",
-        "overlay_opacity": 40,
-        "motion_reveal": "fade-up",
+        "overlay_opacity": 90,
+        "motion_reveal": "zoom",
         "motion_stagger": true,
         "motion_parallax": true,
         "color_scheme": ""
