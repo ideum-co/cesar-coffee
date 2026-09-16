@@ -14,7 +14,7 @@
       "settings": {
         "heading": "Strong roots. Direct from origin.",
         "subheading": "Colombian coffee, sourced direct from origin and roasted to order in Melbourne.",
-        "image": "shopify://shop_images/hero.webp",
+        "image": "shopify://shop_images/bannere-body.webp",
         "video": "shopify://files/videos/15678786-hd_1280_720_24fps.mp4",
         "video_url": "",
         "video_description": "",
@@ -312,7 +312,7 @@
         "quick_add": "standard",
         "columns_mobile": "1",
         "swipe_on_mobile": true,
-        "padding_top": 72,
+        "padding_top": 88,
         "padding_bottom": 72,
         "card_bg": "#ffffff"
       }
@@ -326,7 +326,7 @@
         "text": "Taste what process alone can do to a single lot — Bourbon Rosado finished four ways: washed, natural, honey and anaerobic. Four 100g bags, one story.",
         "button_label": "Shop The Flight",
         "link": "/search?q=Bourbon+Rosado&type=product",
-        "motion_reveal": "fade-up",
+        "motion_reveal": "zoom",
         "motion_parallax": true,
         "color_scheme": "scheme-1",
         "text_alignment": "left",
@@ -521,6 +521,7 @@
         "card_2": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/coffee-beat.png",
             "title": "white label",
             "text": "",
             "link_label": "Talk Private Label",
