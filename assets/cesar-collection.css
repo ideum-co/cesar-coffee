@@ -505,9 +505,12 @@
   outline-offset: 2px;
 }
 
-/* Dawn dibuja su propia marca en un SVG junto al input; con la casilla ya
-   dibujada, ese icono sobraría y se solaparía. */
-.facets__display .facets__label > svg {
+/* Dawn dibuja su propia marca junto al input: el cuadro es un SVG suelto y la
+   marca de verificación va dentro de un div .svg-wrapper. Con la casilla ya
+   dibujada sobran los dos; escondiendo sólo el SVG, la marca seguía saliendo
+   al lado de la casilla al marcar la opción. */
+.facets__display .facets__label > svg,
+.facets__display .facets__label > .svg-wrapper {
   display: none;
 }
 
@@ -601,8 +604,13 @@
 }
 
 /* La casilla del cajón lleva el mismo tratamiento que la de escritorio: Dawn
-   la esconde tras un SVG con fondo de esquema, que es lo que salía en negro. */
-.mobile-facets .mobile-facets__label > svg {
+   la esconde tras un SVG con fondo de esquema, que es lo que salía en negro.
+   En el cajón la marca es un SVG suelto, no va en un div; se cubren las dos
+   formas por si Dawn cambia el marcado. El resaltado de fila de Dawn también
+   sobra: el fondo de la fila marcada ya lo pone esta hoja. */
+.mobile-facets .mobile-facets__label > svg,
+.mobile-facets .mobile-facets__label > .svg-wrapper,
+.mobile-facets .mobile-facets__label > .mobile-facets__highlight {
   display: none;
 }
 
