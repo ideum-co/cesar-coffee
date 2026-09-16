@@ -771,6 +771,28 @@ button.shopify-payment-button__button--unbranded {
   color: var(--cesar-sec-link, inherit);
 }
 
+/* ---- Panel de cuenta (<shopify-account>) ----
+   El panel que abre el icono de cuenta lo pinta un componente de Shopify en
+   su propio shadow DOM y sólo admite variables. Dawn se las pasa como
+   rgb(var(--color-background)), que aquí no resuelve y el panel salía negro.
+   Con el padre por delante para pesar más que la regla en línea de la sección
+   de cabecera (shopify-account.header__icon), que carga después. */
+.header shopify-account.header__icon {
+  --shopify-account-color-background: var(--cc-cream);
+  --shopify-account-color-text: var(--cc-brown-900);
+  --shopify-account-color-text-subdued: var(--cc-brown-500);
+  --shopify-account-color-border: var(--cc-border);
+  --shopify-account-color-card-background: var(--cc-surface);
+  --shopify-account-color-card-text: var(--cc-brown-900);
+  --shopify-account-color-control-background: var(--cc-surface);
+  --shopify-account-color-control-text: var(--cc-brown-900);
+  --shopify-account-color-accent: var(--cc-brown-900);
+  --shopify-account-color-accent-text: #fff;
+  --shopify-account-radius-dialog: var(--cc-radius-lg);
+  --shopify-account-radius-input: var(--cc-radius-sm);
+  --shopify-account-radius-button: var(--cc-cta-radius);
+}
+
 /* ---- Menú de escritorio: negrita y flecha en vez de subrayado ----
    Sólo el menú en línea de escritorio (.header__inline-menu); el cajón móvil
    y los submenús desplegados siguen como en Dawn. Las reglas van con el
