@@ -443,22 +443,22 @@
         "green": {
           "type": "link",
           "settings": {
-            "label": "Green",
-            "link": "shopify://collections/all"
+            "label": "Blue",
+            "link": "shopify://collections/blue-line"
           }
         },
         "silver": {
           "type": "link",
           "settings": {
             "label": "Silver",
-            "link": "shopify://collections/all"
+            "link": "shopify://collections/silver-line"
           }
         },
         "gold": {
           "type": "link",
           "settings": {
             "label": "Gold",
-            "link": "shopify://collections/all"
+            "link": "shopify://collections/gold-line"
           }
         },
         "flight": {
@@ -472,7 +472,7 @@
           "type": "link",
           "settings": {
             "label": "Subscriptions",
-            "link": "shopify://collections/all"
+            "link": "shopify://pages/subscriptions"
           }
         },
         "wholesale": {
