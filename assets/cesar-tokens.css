@@ -787,6 +787,40 @@ button.shopify-payment-button__button--unbranded {
   color: var(--cc-brown-900);
 }
 
+/* ---- Cajón del menú en móvil ----
+   Mismo origen que el panel de cuenta y los filtros: Dawn pinta el cajón con
+   rgb(var(--color-background)), que aquí no resuelve y salía negro. Con el
+   elemento padre por delante para pesar más que las reglas de Dawn
+   (.menu-drawer, .gradient, .menu-drawer__menu-item:hover), que cargan
+   después en el cuerpo. */
+header-drawer .menu-drawer,
+.js header-drawer .menu-drawer__submenu {
+  background: var(--cc-cream);
+  color: var(--cc-brown-900);
+}
+
+header-drawer .menu-drawer__menu-item {
+  color: var(--cc-brown-900);
+  font-weight: 500;
+}
+
+header-drawer .menu-drawer__menu-item--active,
+header-drawer .menu-drawer__menu-item:hover,
+header-drawer .menu-drawer__menu-item:focus,
+header-drawer .menu-drawer__close-button:hover,
+header-drawer .menu-drawer__close-button:focus {
+  color: var(--cc-brown-900);
+  background-color: var(--cc-cream-active);
+}
+
+header-drawer .menu-drawer__menu-item--active {
+  font-weight: 700;
+}
+
+header-drawer .menu-drawer__utility-links {
+  background-color: var(--cc-cream-active);
+}
+
 /* ---- Panel de cuenta (<shopify-account>) ----
    El panel que abre el icono de cuenta lo pinta un componente de Shopify en
    su propio shadow DOM y sólo admite variables. Dawn se las pasa como
