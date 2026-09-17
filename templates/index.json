@@ -110,8 +110,8 @@
           "type": "card",
           "settings": {
             "background": "shopify://shop_images/card-4.webp",
-            "image": "shopify://shop_images/badge-red-line.svg",
-            "title": "Red Line",
+            "image": "shopify://shop_images/badge-red-line_a3ffc2c7-c3b6-4e52-aa1d-a7fbebafba97.svg",
+            "title": "Hero Line",
             "text": "<p>Everyday espresso, always on.<br/><strong>The dependable base of the range.</strong></p>",
             "link": "shopify://collections/red-line"
           }
@@ -408,7 +408,7 @@
           "type": "buttons",
           "settings": {
             "button_label_1": "Start Your Subscription",
-            "button_link_1": "shopify://collections/all",
+            "button_link_1": "shopify://pages/subscriptions",
             "button_bg_1": "#2d1206",
             "button_text_1": "#ffffff",
             "button_label_2": "",
@@ -443,22 +443,22 @@
         "green": {
           "type": "link",
           "settings": {
-            "label": "Green",
-            "link": "shopify://collections/all"
+            "label": "Blue",
+            "link": "shopify://collections/blue-line"
           }
         },
         "silver": {
           "type": "link",
           "settings": {
             "label": "Silver",
-            "link": "shopify://collections/all"
+            "link": "shopify://collections/silver-line"
           }
         },
         "gold": {
           "type": "link",
           "settings": {
             "label": "Gold",
-            "link": "shopify://collections/all"
+            "link": "shopify://collections/gold-line"
           }
         },
         "flight": {
@@ -472,7 +472,7 @@
           "type": "link",
           "settings": {
             "label": "Subscriptions",
-            "link": "shopify://collections/all"
+            "link": "shopify://pages/subscriptions"
           }
         },
         "wholesale": {
