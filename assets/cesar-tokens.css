@@ -771,6 +771,22 @@ button.shopify-payment-button__button--unbranded {
   color: var(--cesar-sec-link, inherit);
 }
 
+/* ---- Campos de formulario, en todo el tema ----
+   Dawn pinta los campos con rgb(var(--color-background)), que sólo resuelve
+   dentro de un esquema de color. Fuera de uno —el panel de filtros de precio
+   es el caso visible— cae a negro. Aquí se fija el fondo y el texto de todos
+   los campos de una vez, con los colores de marca: sirve para el precio de
+   los filtros, la búsqueda, la cantidad, la newsletter y las cuentas. Va con
+   los mismos selectores que Dawn y carga después de base.css, así que gana. */
+.field__input,
+.select__select,
+.text-area,
+.customer .field input,
+.customer select {
+  background-color: var(--cc-surface);
+  color: var(--cc-brown-900);
+}
+
 /* ---- Panel de cuenta (<shopify-account>) ----
    El panel que abre el icono de cuenta lo pinta un componente de Shopify en
    su propio shadow DOM y sólo admite variables. Dawn se las pasa como
