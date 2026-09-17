@@ -110,8 +110,8 @@
           "type": "card",
           "settings": {
             "background": "shopify://shop_images/card-4.webp",
-            "image": "shopify://shop_images/badge-red-line.svg",
-            "title": "Red Line",
+            "image": "shopify://shop_images/badge-red-line_a3ffc2c7-c3b6-4e52-aa1d-a7fbebafba97.svg",
+            "title": "Heo Line",
             "text": "<p>Everyday espresso, always on.<br/><strong>The dependable base of the range.</strong></p>",
             "link": "shopify://collections/red-line"
           }
