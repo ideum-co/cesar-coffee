@@ -78,6 +78,7 @@
         },
         "card_pw4NXE": {
           "type": "card",
+          "disabled": true,
           "settings": {
             "background": "shopify://shop_images/card-5.webp",
             "image": "shopify://shop_images/badge-green-line.svg",
@@ -113,7 +114,7 @@
             "image": "shopify://shop_images/badge-red-line_a3ffc2c7-c3b6-4e52-aa1d-a7fbebafba97.svg",
             "title": "Hero Line",
             "text": "<p>Everyday espresso, always on.<br/><strong>The dependable base of the range.</strong></p>",
-            "link": "shopify://collections/red-line"
+            "link": "shopify://collections/hero-line"
           }
         }
       },

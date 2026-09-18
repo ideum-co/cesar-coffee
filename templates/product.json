@@ -31,6 +31,10 @@
           "type": "rating",
           "settings": {}
         },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
         "description": {
           "type": "description",
           "settings": {
@@ -79,6 +83,7 @@
         "origin",
         "title",
         "rating",
+        "price",
         "description",
         "variant_picker",
         "subscriptions_app_block_gfYQbR",
@@ -171,7 +176,7 @@
             "image": "shopify://shop_images/icon-colombia.svg",
             "show_origins": true,
             "title": "Origin & Process",
-            "text": "<p>Washed, clean and floral. Natural, red fruit and wine-like sweetness. Honey, balanced, syrupy body. Anaerobic, funky, fermented depth.</p>{{ product.metafields.shopify.country | metafield_tag: field: 'label' }}",
+            "text": "<p>{{ product.metafields.custom.origin_process | metafield_tag }}</p>",
             "link_label": "",
             "link": ""
           }
@@ -193,7 +198,7 @@
             "image": "shopify://shop_images/icon-coffee-beans.svg",
             "show_origins": false,
             "title": "Roast & Dispatch",
-            "text": "<p>Roasted to order in North Williamstown. Ships within days of roasting, never off a shelf.</p>",
+            "text": "<p>{{ product.metafields.custom.roast_dispatch | metafield_tag }}</p>",
             "link_label": "",
             "link": ""
           }
@@ -279,6 +284,7 @@
       "blocks": {
         "card_M6iPXt": {
           "type": "card",
+          "disabled": true,
           "settings": {
             "background": "shopify://shop_images/card-5.webp",
             "image": "shopify://shop_images/badge-green-line.svg",
@@ -294,7 +300,7 @@
             "image": "shopify://shop_images/badge-gold-line.svg",
             "title": "Gold Line",
             "text": "<p>Rare allocation lots.<br/><strong>The microlots that carry the story.</strong></p>",
-            "link": ""
+            "link": "shopify://collections/gold-line"
           }
         },
         "card_WGLQ9C": {
@@ -304,7 +310,7 @@
             "image": "shopify://shop_images/badge-silver-line.svg",
             "title": "Silver Line",
             "text": "<p>Seasonal single origins.<br/><strong>Bright, clean and traceable.</strong></p>",
-            "link": ""
+            "link": "shopify://collections/silver-line"
           }
         },
         "card_W8dyRE": {
@@ -312,19 +318,19 @@
           "settings": {
             "background": "shopify://shop_images/card-3.webp",
             "image": "shopify://shop_images/badge-blue-line.svg",
-            "title": "Green Line",
+            "title": "Blue Line",
             "text": "<p>Everyday espresso, always on.<br/><strong>The dependable base of the range.</strong></p>",
-            "link": ""
+            "link": "shopify://collections/blue-line"
           }
         },
         "card_gPtNXB": {
           "type": "card",
           "settings": {
             "background": "shopify://shop_images/card-4.webp",
-            "image": "shopify://shop_images/badge-red-line.svg",
-            "title": "Red line",
+            "image": "shopify://shop_images/badge-red-line_a3ffc2c7-c3b6-4e52-aa1d-a7fbebafba97.svg",
+            "title": "Hero line",
             "text": "<p>Everyday espresso, always on.<br/><strong>The dependable base of the range.</strong></p>",
-            "link": ""
+            "link": "shopify://collections/hero-line"
           }
         }
       },
