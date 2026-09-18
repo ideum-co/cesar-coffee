@@ -31,6 +31,10 @@
           "type": "rating",
           "settings": {}
         },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
         "description": {
           "type": "description",
           "settings": {
@@ -79,6 +83,7 @@
         "origin",
         "title",
         "rating",
+        "price",
         "description",
         "variant_picker",
         "subscriptions_app_block_gfYQbR",
