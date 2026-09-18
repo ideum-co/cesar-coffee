@@ -78,6 +78,7 @@
         },
         "card_pw4NXE": {
           "type": "card",
+          "disabled": true,
           "settings": {
             "background": "shopify://shop_images/card-5.webp",
             "image": "shopify://shop_images/badge-green-line.svg",
