@@ -35,7 +35,7 @@
         "button_VmLdcN": {
           "type": "button",
           "settings": {
-            "button_label": "Button label",
+            "button_label": "",
             "button_link": "",
             "button_style_secondary": false,
             "button_label_2": "",
@@ -245,7 +245,7 @@
             "title": "wholesale",
             "text": "",
             "link_label": "See Our Farms",
-            "link": ""
+            "link": "shopify://pages/wholesale"
           }
         },
         "card_R8XQA4": {
@@ -265,7 +265,7 @@
             "title": "co-roasting",
             "text": "",
             "link_label": "How We Roast",
-            "link": ""
+            "link": "shopify://pages/co-roasting"
           }
         }
       },
