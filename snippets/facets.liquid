@@ -91,7 +91,10 @@
                   {%- for value in filter.active_values -%}
                     <facet-remove>
                       <a href="{{ value.url_to_remove }}" class="active-facets__button active-facets__button--light">
-                        <span class="active-facets__button-inner button button--tertiary">
+                        <span
+                          class="active-facets__button-inner button button--tertiary"
+                          {%- if value.swatch.color %} style="--cesar-line-color: rgb({{ value.swatch.color.rgb }});"{% endif -%}
+                        >
                           {{ filter.label | escape }}: {{ value.label | escape }}
                           <span class="svg-wrapper">
                             {{- 'icon-close-small.svg' | inline_asset_content -}}
@@ -247,22 +250,39 @@
 
                             <li class="list-menu__item facets__item{% if forloop.index > show_more_number and filter_type == 'vertical' %} show-more-item hidden{% endif %}">
                               {%- if presentation == 'swatch' -%}
-                                <div class="{{ label_class }}">
-                                  <div class="swatch-input-wrapper">
-                                    {% render 'swatch-input',
-                                      id: input_id,
-                                      type: 'checkbox',
-                                      name: value.param_name,
-                                      value: value.value,
-                                      product_form_id: 'FacetFiltersForm',
-                                      swatch: value.swatch,
-                                      checked: value.active,
-                                      disabled: is_disabled
-                                    %}
-                                  </div>
-
+                                {%- comment -%}
+                                  Fila del filtro de línea. Una sola etiqueta envuelve disco, texto y
+                                  recuento: antes el disco llevaba su propia etiqueta y el texto quedaba
+                                  fuera, así que sólo el disco respondía al clic. El color de la línea viaja
+                                  como variable para pintar la fila entera al pasar por encima o marcarla.
+                                {%- endcomment -%}
+                                {%- liquid
+                                  assign line_color = ''
+                                  if value.swatch.color
+                                    assign line_color = 'rgb(' | append: value.swatch.color.rgb | append: ')'
+                                  endif
+                                -%}
+                                <label
+                                  for="{{ input_id }}"
+                                  class="{{ label_class }} cesar-facet--swatch"
+                                  {% if line_color != blank %}style="--cesar-line-color: {{ line_color }};"{% endif %}
+                                >
+                                  <input
+                                    type="checkbox"
+                                    id="{{ input_id }}"
+                                    name="{{ value.param_name }}"
+                                    value="{{ value.value }}"
+                                    form="FacetFiltersForm"
+                                    class="swatch-input__input"
+                                    {% if value.active %}checked{% endif %}
+                                    {% if is_disabled %}disabled{% endif %}
+                                  >
+                                  <span class="swatch-input-wrapper">
+                                    {% render 'swatch', swatch: value.swatch %}
+                                  </span>
+                                
                                   {{ text_value }}
-                                </div>
+                                </label>
                               {%- else -%}
                                 <label for="{{ input_id }}" class="{{ label_class }}">
                                   <input
@@ -389,7 +409,10 @@
                 {%- for value in filter.active_values -%}
                   <facet-remove>
                     <a href="{{ value.url_to_remove }}" class="active-facets__button active-facets__button--light">
-                      <span class="active-facets__button-inner button button--tertiary">
+                      <span
+                        class="active-facets__button-inner button button--tertiary"
+                        {%- if value.swatch.color %} style="--cesar-line-color: rgb({{ value.swatch.color.rgb }});"{% endif -%}
+                      >
                         {{ filter.label | escape }}: {{ value.label | escape }}
                         <span class="svg-wrapper">
                           {{- 'icon-close-small.svg' | inline_asset_content -}}
@@ -648,22 +671,39 @@
 
                               <li class="mobile-facets__item list-menu__item">
                                 {% if presentation == 'swatch' %}
-                                  <div class="{{ label_class }}">
-                                    <div class="swatch-input-wrapper">
-                                      {% render 'swatch-input',
-                                        id: input_id,
-                                        type: 'checkbox',
-                                        name: value.param_name,
-                                        value: value.value,
-                                        product_form_id: 'FacetFiltersFormMobile',
-                                        swatch: value.swatch,
-                                        checked: value.active,
-                                        disabled: is_disabled
-                                      %}
-                                    </div>
-
+                                  {%- comment -%}
+                                    Fila del filtro de línea. Una sola etiqueta envuelve disco, texto y
+                                    recuento: antes el disco llevaba su propia etiqueta y el texto quedaba
+                                    fuera, así que sólo el disco respondía al clic. El color de la línea viaja
+                                    como variable para pintar la fila entera al pasar por encima o marcarla.
+                                  {%- endcomment -%}
+                                  {%- liquid
+                                    assign line_color = ''
+                                    if value.swatch.color
+                                      assign line_color = 'rgb(' | append: value.swatch.color.rgb | append: ')'
+                                    endif
+                                  -%}
+                                  <label
+                                    for="{{ input_id }}"
+                                    class="{{ label_class }} cesar-facet--swatch"
+                                    {% if line_color != blank %}style="--cesar-line-color: {{ line_color }};"{% endif %}
+                                  >
+                                    <input
+                                      type="checkbox"
+                                      id="{{ input_id }}"
+                                      name="{{ value.param_name }}"
+                                      value="{{ value.value }}"
+                                      form="FacetFiltersFormMobile"
+                                      class="swatch-input__input"
+                                      {% if value.active %}checked{% endif %}
+                                      {% if is_disabled %}disabled{% endif %}
+                                    >
+                                    <span class="swatch-input-wrapper">
+                                      {% render 'swatch', swatch: value.swatch %}
+                                    </span>
+                                  
                                     {{ text_value }}
-                                  </div>
+                                  </label>
                                 {% else %}
                                   <label for="{{ input_id }}" class="{{ label_class }}">
                                     <input
