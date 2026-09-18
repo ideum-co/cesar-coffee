@@ -17,6 +17,7 @@
         "brand": {
           "type": "brand",
           "settings": {
+            "logo_invert": false,
             "address": "<p>19 Churchill St,<br/>North Williamstown,<br/>VIC 3016<br/>Mon–Fri 8:00 AM–5:00 PM</p>",
             "show_social": true,
             "social_heading": "Follow Us"
@@ -25,10 +26,11 @@
         "newsletter": {
           "type": "newsletter",
           "settings": {
+            "heading": "",
             "email_label": "Email Address",
             "show_phone": false,
             "phone_label": "Mobile Number",
-            "legal": "<p>By submitting this form, you agree to receive recurring automated marketing emails from Cesar's Coffee Cup at the address you provide. Consent is not a condition of purchase. We may share your info with service providers per our Privacy Policy. Unsubscribe at any time.</p>",
+            "legal": "<p>By submitting this form, you agree to receive recurring automated marketing emails from <em>Cesar's Coffee Cup </em>at the address you provide. Consent is not a condition of purchase. We may share your info with service providers per our Privacy Policy. Unsubscribe at any time.</p>",
             "button_label": "Subscribe"
           }
         },
@@ -47,15 +49,23 @@
           }
         }
       },
-      "block_order": ["brand", "newsletter", "menu_story", "menu_help"],
+      "block_order": [
+        "brand",
+        "newsletter",
+        "menu_story",
+        "menu_help"
+      ],
       "settings": {
         "color_scheme": "scheme-4",
         "bottom_color_scheme": "scheme-3",
-        "copyright_name": "Cesar's Coffee Shop",
+        "copyright_name": "Cesar's Coffee Cup",
         "rights_text": "All Rights Reserved",
-        "disclaimer": "All product names, images and details on this site are for illustrative purposes only and may vary from the final product."
+        "disclaimer": "All product names, images and details on this site are for illustrative purposes only and may vary from the final product.",
+        "policy_menu": ""
       }
     }
   },
-  "order": ["footer"]
+  "order": [
+    "footer"
+  ]
 }
