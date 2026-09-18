@@ -142,16 +142,97 @@
         "tier_kxCcg4",
         "tier_qGEnRM"
       ],
+      "disabled": true,
       "name": "Cesar · Tiers",
       "settings": {
         "heading": "Three tiers, one clear range",
         "button_label": "Shop All",
         "button_link": "",
+        "motion_reveal": "fade-up",
+        "motion_stagger": true,
+        "motion_parallax": false,
         "color_scheme": "",
         "limit_width": false,
         "max_width": 1200,
         "heading_color": "",
         "heading_px": 0
+      }
+    },
+    "cesar_line_marquee_witTGg": {
+      "type": "cesar-line-marquee",
+      "blocks": {
+        "card_6KTzXe": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/badge-blue-line.svg",
+            "title": "Blue Line",
+            "text": "<p>Everyday espresso, always on.<br/><strong>The dependable base of the range.</strong></p>",
+            "link": ""
+          }
+        },
+        "card_GWzD84": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/badge-gold-line.svg",
+            "title": "Gold Line",
+            "text": "<p>Rare allocation lots.<br/><strong>The microlots that carry the story.</strong></p>",
+            "link": ""
+          }
+        },
+        "card_gJhFmd": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/badge-silver-line.svg",
+            "title": "Silver Line",
+            "text": "<p>Seasonal single origins.<br/><strong>Bright, clean and traceable.</strong></p>",
+            "link": ""
+          }
+        },
+        "card_ib6ygW": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/badge-red-line_a3ffc2c7-c3b6-4e52-aa1d-a7fbebafba97.svg",
+            "title": "Hero Line",
+            "text": "<p>Everyday espresso, always on.<br/><strong>The dependable base of the range.</strong></p>",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_6KTzXe",
+        "card_GWzD84",
+        "card_gJhFmd",
+        "card_ib6ygW"
+      ],
+      "name": "Cesar · Marquesina",
+      "settings": {
+        "caption": "",
+        "heading": "Our coffee lines",
+        "text": "",
+        "text_alignment": "center",
+        "speed": 50,
+        "direction": "left",
+        "pause_on_hover": true,
+        "card_width": 400,
+        "gap": 32,
+        "card_padding": 40,
+        "card_radius": 24,
+        "stagger": 48,
+        "image_px": 240,
+        "badge_px": 170,
+        "bg_color": "",
+        "heading_color": "",
+        "text_color": "",
+        "card_bg": "",
+        "card_border": "",
+        "card_title_color": "",
+        "card_text_color": "",
+        "heading_px": 0,
+        "card_title_px": 0,
+        "card_text_px": 0,
+        "text_px": 0,
+        "motion_reveal": "fade-up",
+        "color_scheme": ""
       }
     },
     "cesar_collection_row_Ynq93D": {
@@ -207,6 +288,8 @@
         "show_excerpt": false,
         "overlay_strength": 100,
         "overlay_blur": 8,
+        "motion_reveal": "fade-up",
+        "motion_stagger": true,
         "color_scheme": "",
         "text_alignment": "left",
         "bg_color": "",
@@ -263,6 +346,8 @@
         "heading_px": 0,
         "question_px": 0,
         "text_px": 0,
+        "motion_reveal": "fade-up",
+        "motion_stagger": true,
         "color_scheme": ""
       }
     }
@@ -272,6 +357,7 @@
     "rich_text_fELRb9",
     "form",
     "cesar_tiers_fMYTqM",
+    "cesar_line_marquee_witTGg",
     "cesar_collection_row_Ynq93D",
     "cesar_product_faq_Bdk37T"
   ]
