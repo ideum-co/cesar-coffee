@@ -318,8 +318,8 @@
         "limit_width": true,
         "max_width": 1100,
         "bg_color": "",
-        "heading_color": "#4E3625",
-        "text_color": "#4E3625",
+        "heading_color": "#4e3625",
+        "text_color": "#4e3625",
         "head_bg": "",
         "head_text": "",
         "rule_color": "",
@@ -339,6 +339,7 @@
         "a-1": {
           "type": "column",
           "settings": {
+            "image": "shopify://shop_images/banner-co-roasting.webp",
             "show_origins": false,
             "title": "Aspiring roasters",
             "text": "<p>Learn on production equipment, with someone beside you.</p>",
@@ -349,6 +350,7 @@
         "a-2": {
           "type": "column",
           "settings": {
+            "image": "shopify://shop_images/banner-main.webp",
             "show_origins": false,
             "title": "Cafe owners",
             "text": "<p>Roast your own house blend without buying a roastery.</p>",
@@ -359,6 +361,7 @@
         "a-3": {
           "type": "column",
           "settings": {
+            "image": "shopify://shop_images/card-3.webp",
             "show_origins": false,
             "title": "Scale-up brands",
             "text": "<p>Move to production volumes with packing and sourcing handled.</p>",
@@ -377,8 +380,8 @@
         "heading_size": "h2",
         "image_width": "third",
         "image_ratio": "circle",
-        "button_label": "Button label",
-        "button_link": "",
+        "button_label": "Contact",
+        "button_link": "shopify://pages/contact",
         "columns_desktop": 3,
         "column_alignment": "left",
         "background_style": "primary",
