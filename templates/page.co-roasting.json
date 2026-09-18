@@ -23,6 +23,9 @@
         "button_link": "/pages/contact",
         "button_label_2": "Ask a question",
         "button_link_2": "/pages/contact",
+        "motion_reveal": "fade-up",
+        "motion_stagger": true,
+        "motion_parallax": true,
         "color_scheme": "scheme-1",
         "text_alignment": "left",
         "heading_color": "#5c8a6e",
@@ -106,6 +109,7 @@
         "card_title_px": 0,
         "panel_px": 0,
         "text_px": 0,
+        "motion_reveal": "fade-up",
         "color_scheme": ""
       }
     },
@@ -210,6 +214,7 @@
         "m-2": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/Loring_S15_Falcon_Image.webp",
             "title": "Loring S15 Falcon",
             "text": "3–15kg batches, ideal for production runs and wholesale volumes.",
             "link_label": "See Our Farms",
@@ -235,6 +240,8 @@
         "show_excerpt": false,
         "overlay_strength": 100,
         "overlay_blur": 8,
+        "motion_reveal": "fade-up",
+        "motion_stagger": true,
         "color_scheme": "scheme-1",
         "text_alignment": "left",
         "bg_color": "",
@@ -309,8 +316,8 @@
         "limit_width": true,
         "max_width": 1100,
         "bg_color": "",
-        "heading_color": "",
-        "text_color": "",
+        "heading_color": "#4E3625",
+        "text_color": "#4E3625",
         "head_bg": "",
         "head_text": "",
         "rule_color": "",
@@ -320,6 +327,7 @@
         "heading_px": 0,
         "text_px": 0,
         "price_px": 0,
+        "motion_reveal": "fade-up",
         "color_scheme": "scheme-1"
       }
     },
@@ -463,6 +471,8 @@
         "number_px": 0,
         "step_title_px": 0,
         "text_px": 0,
+        "motion_reveal": "fade-up",
+        "motion_stagger": true,
         "color_scheme": "scheme-1"
       }
     },
@@ -521,6 +531,8 @@
         "heading_px": 0,
         "question_px": 0,
         "text_px": 0,
+        "motion_reveal": "fade-up",
+        "motion_stagger": true,
         "color_scheme": "scheme-1"
       }
     },
@@ -532,6 +544,8 @@
         "text": "<p>Tell us what you want to roast and we'll find you a slot.</p>",
         "button_label": "Get in touch",
         "link": "/pages/contact",
+        "motion_reveal": "fade-up",
+        "motion_parallax": true,
         "color_scheme": "scheme-3",
         "text_alignment": "center",
         "bg_color": "",
