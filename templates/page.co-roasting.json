@@ -50,7 +50,7 @@
         "card_b7Bkf9": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/SYLO_SYSTEM.webp",
+            "image": "shopify://shop_images/banner-main.webp",
             "title": "Expert guidance",
             "text": "Our team stays with you throughout the session.",
             "link_label": "",
@@ -70,6 +70,7 @@
         "card_W9z9mn": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/SYLO_SYSTEM.webp",
             "title": "Skill building",
             "text": "Grow your own roasting capability as you go.",
             "link_label": "",
