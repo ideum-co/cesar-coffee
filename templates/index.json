@@ -113,7 +113,7 @@
             "background": "shopify://shop_images/card-4.webp",
             "image": "shopify://shop_images/badge-red-line_a3ffc2c7-c3b6-4e52-aa1d-a7fbebafba97.svg",
             "title": "Hero Line",
-            "text": "<p>Everyday espresso, always on.<br/><strong>The dependable base of the range.</strong></p>",
+            "text": "<p>Our signature Castillo lot.<br/><strong>Regeneratively grown, lab-tested clean.</strong></p>",
             "link": "shopify://collections/hero-line"
           }
         }
@@ -128,7 +128,7 @@
       "name": "Cesar · Marquesina",
       "settings": {
         "caption": "",
-        "heading": "Three tiers, one clear range",
+        "heading": "Four lines, one clear range",
         "text": "",
         "text_alignment": "center",
         "speed": 50,
