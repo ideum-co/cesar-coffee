@@ -58,9 +58,9 @@
         "tiers": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "What's the difference between Green, Silver and Gold?",
+            "heading": "What's the difference between Blue, Silver, Gold and Hero?",
             "icon": "check_mark",
-            "row_content": "<p>Green is the everyday espresso base of the range. Silver is seasonal specialty from named producers, roasted for filter. Gold is rare allocation lots — the microlots that carry the story.</p>",
+            "row_content": "<p>Blue is the everyday espresso base of the range. Silver is seasonal specialty from named producers, roasted for filter. Gold is rare allocation lots — the microlots that carry the story. Hero is our regeneratively grown, lab-tested signature lot.</p>",
             "page": ""
           }
         },
