@@ -28,9 +28,9 @@
         "motion_parallax": true,
         "color_scheme": "scheme-1",
         "text_alignment": "left",
-        "heading_color": "#FDF5A6",
+        "heading_color": "#fdf5a6",
         "heading_px": 0,
-        "subheading_color": "#FFFFFF",
+        "subheading_color": "#ffffff",
         "subheading_px": 0
       }
     },
@@ -50,7 +50,7 @@
         "card_b7Bkf9": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/banner-main.webp",
+            "image": "shopify://shop_images/rosting.webp",
             "title": "Expert guidance",
             "text": "Our team stays with you throughout the session.",
             "link_label": "",
