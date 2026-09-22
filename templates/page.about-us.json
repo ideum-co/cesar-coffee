@@ -40,7 +40,7 @@
         "t-1": {
           "type": "text",
           "settings": {
-            "text": "<p>Cesar's Coffee Cup is built on generations of coffee-growing tradition in Colombia. We source direct from origin and roast to order at our facility in North Williamstown, Melbourne — traceable, seasonal coffee, in your hands within days.</p>"
+            "text": "<p>César’s Coffee Cup connects coffee lovers directly with the people and places behind exceptional coffee.</p><p>With roots in Colombia and a family history in coffee growing, we source directly from growers we know and work with, including coffee from César’s own farm. Our relationships extend across Colombia and other renowned coffee-growing regions, giving us access to distinctive, traceable coffees selected for their quality, character and origin.</p>"
           }
         }
       },
@@ -61,6 +61,7 @@
       "blocks": {
         "heading": {
           "type": "heading",
+          "disabled": true,
           "settings": {
             "heading": "Our Story",
             "heading_size": "h1",
@@ -70,7 +71,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>The business was started on a simple idea: quality coffee shouldn't be reserved for the well-capitalised. Our roots run through direct relationships with growers — including farms we work with directly — across Colombia, Panama, Brazil and Ethiopia. Every lot is traceable back to the producer behind it.</p>",
+            "text": "<p>By working closer to the source, we know where our coffee comes from, who grew it and the story behind each lot. It also allows us to build long-term relationships with producers and bring their coffee to Australia with fewer steps in between.</p><p>From our roastery in North Williamstown, Melbourne, we roast to order and supply coffee to roasters, cafés, businesses and people brewing at home. Whether it’s green coffee for a roaster, a wholesale program for a café, or freshly roasted beans delivered to your door, the connection to origin remains the same.</p><p>From our growers to your cup.</p>",
             "text_style": "body",
             "color": ""
           }
@@ -110,7 +111,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>We roast on Loring S7 Nighthawk and S15 Falcon roasters, with an IMF smart silo system and a Sanremo D8 Pro for cupping and quality control — the same equipment we use for our own range, we also make available to the brands we work alongside.</p>",
+            "text": "<p>We roast on <strong>Loring S7 Nighthawk and S15 Falcon roasters</strong>, supported by an <strong>IMF smart silo system</strong> and <strong>Sanremo D8 Pro</strong> for cupping and quality control. The same professional equipment we use to roast and refine our own coffees is also available to the brands we work alongside through our co-roasting services.</p>",
             "text_style": "body",
             "color": ""
           }
