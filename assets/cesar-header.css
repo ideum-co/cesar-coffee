@@ -172,33 +172,67 @@ body:has(.header-wrapper--transparent) main[data-template='index'] > .shopify-se
 }
 
 /* ---- Texto claro sobre el velo ----
-   Con el velo oscuro, el marrón de marca deja de leerse: el menú, el logotipo
-   y los iconos pasan a blanco. Se limita a cuando la banda se pinta de verdad
-   —portada con header transparente, o el modo de todo el sitio—; con la
-   búsqueda abierta el header recupera fondo claro y el texto vuelve al suyo.
+   No siempre: en una página interna, con el header en reposo sobre el fondo
+   claro de la página, el texto tiene que ser el oscuro de marca. El claro se
+   reserva para cuando el header flota sobre contenido que no controla:
 
-   Va con más peso que las reglas de color por sección de cesar-tokens.css
-   (.cesar-sec .header__menu-item), que si no ganarían por orden de carga. */
-.header-wrapper--blur-light:not(.header-wrapper--search-open).cesar-sec .header__menu-item,
-.header-wrapper--blur-light:not(.header-wrapper--search-open).cesar-sec .header__menu-item:hover,
-.header-wrapper--blur-light:not(.header-wrapper--search-open).cesar-sec .header__active-menu-item,
-.header-wrapper--blur-light:not(.header-wrapper--search-open).cesar-sec .header__heading-link,
-.header-wrapper--blur-light:not(.header-wrapper--search-open).cesar-sec .header__heading-link:hover,
-.header-wrapper--blur-light:not(.header-wrapper--search-open).cesar-sec .header__icon,
-.header-wrapper--blur-light:not(.header-wrapper--search-open).cesar-sec .header__icon:hover {
-  color: #fff;
+     - la portada, donde va sobre el hero (.header-wrapper--transparent);
+     - cualquier página con el header fijado al hacer scroll, que es cuando
+       pasa por encima de fotos y secciones oscuras.
+
+   Con la búsqueda abierta el header recupera fondo claro y el texto vuelve al
+   suyo en los dos casos.
+
+   El color viaja en una variable y no en cada regla: así la condición se
+   escribe una vez y los elementos sólo la consumen, con la reserva de siempre
+   cuando no está puesta. */
+.header-wrapper--blur-light.header-wrapper--transparent:not(.header-wrapper--search-open),
+:is(.shopify-section-header-sticky, .shopify-section-header-hidden)
+  .header-wrapper--blur-light:not(.header-wrapper--search-open) {
+  --cesar-header-ink: #fff;
+}
+
+/* El velo lleva un suelo de opacidad cuando el texto va en claro: el ajuste de
+   tinte sirve para matizar, pero por debajo de este valor el blanco no se
+   sostiene sobre una foto clara. */
+.header-wrapper--blur-light.header-wrapper--transparent:not(.header-wrapper--search-open) .cesar-header-blur::after,
+:is(.shopify-section-header-sticky, .shopify-section-header-hidden)
+  .header-wrapper--blur-light:not(.header-wrapper--search-open)
+  .cesar-header-blur::after {
+  background: linear-gradient(
+    to bottom,
+    rgb(var(--cesar-blur-tint-rgb, 20 8 3) / max(var(--cesar-blur-tint-alpha, 0), 0.55)) 0%,
+    rgb(var(--cesar-blur-tint-rgb, 20 8 3) / 0) 100%
+  );
+}
+
+/* Las dos clases del envoltorio pesan más que las reglas de color por sección
+   de cesar-tokens.css (.cesar-sec .header__menu-item), que si no ganarían por
+   orden de carga. Sin la variable puesta, la reserva es exactamente el valor
+   que usan aquellas. */
+.header-wrapper--blur-light.cesar-sec .header__menu-item,
+.header-wrapper--blur-light.cesar-sec .header__menu-item:hover,
+.header-wrapper--blur-light.cesar-sec .header__active-menu-item,
+.header-wrapper--blur-light.cesar-sec .header__heading-link,
+.header-wrapper--blur-light.cesar-sec .header__heading-link:hover,
+.header-wrapper--blur-light.cesar-sec .header__icon,
+.header-wrapper--blur-light.cesar-sec .header__icon:hover {
+  color: var(--cesar-header-ink, var(--cesar-sec-link, inherit));
 }
 
 /* La flecha del menú es una máscara sobre currentColor, así que sigue sola.
-   El subrayado del elemento activo y el foco también pasan a blanco. */
-.header-wrapper--blur-light:not(.header-wrapper--search-open) .header__menu-item:focus-visible,
-.header-wrapper--blur-light:not(.header-wrapper--search-open) .header__icon:focus-visible {
-  outline-color: #fff;
+   El foco también toma la tinta del momento. */
+.header-wrapper--blur-light .header__menu-item:focus-visible,
+.header-wrapper--blur-light .header__icon:focus-visible {
+  outline-color: var(--cesar-header-ink, currentColor);
 }
 
-/* El logotipo en imagen no cambia de color: se le da un poco de sombra para
-   que no se pierda sobre un fondo claro que haya quedado debajo del velo. */
-.header-wrapper--blur-light:not(.header-wrapper--search-open) .header__heading-logo {
+/* El logotipo en imagen no cambia de color: con la tinta clara se le da un
+   poco de sombra para que no se pierda sobre una zona clara del fondo. */
+.header-wrapper--blur-light.header-wrapper--transparent:not(.header-wrapper--search-open) .header__heading-logo,
+:is(.shopify-section-header-sticky, .shopify-section-header-hidden)
+  .header-wrapper--blur-light:not(.header-wrapper--search-open)
+  .header__heading-logo {
   filter: drop-shadow(0 1px 6px rgba(20, 8, 3, 0.35));
 }
 
