@@ -21,6 +21,8 @@ class CesarSizeSelect extends HTMLElement {
     this.select?.removeEventListener('change', this.onSelectChange);
     document.removeEventListener('click', this.onDocumentClick);
     this.removeEventListener('keydown', this.onKeyDown);
+    window.removeEventListener('scroll', this.colocar);
+    window.removeEventListener('resize', this.colocar);
   }
 
   get abierto() {
@@ -47,6 +49,13 @@ class CesarSizeSelect extends HTMLElement {
     this.panel = document.createElement('div');
     this.panel.className = 'cesar-size__panel';
     this.panel.hidden = true;
+
+    // La capa superior del navegador: ahí el panel se pinta por encima de todo
+    // el documento, sin depender de z-index ni de qué ancestro haya creado un
+    // contexto de apilado. Sin soporte, el panel se queda donde está y se
+    // apoya en el z-index de la hoja.
+    this.enCapaSuperior = typeof this.panel.showPopover === 'function';
+    if (this.enCapaSuperior) this.panel.setAttribute('popover', 'manual');
 
     const cabecera = document.createElement('div');
     cabecera.className = 'cesar-size__header';
@@ -103,14 +112,49 @@ class CesarSizeSelect extends HTMLElement {
   abrir() {
     this.setAttribute('open', '');
     this.panel.hidden = false;
+    if (this.enCapaSuperior) {
+      this.panel.showPopover();
+      this.colocar();
+      // En la capa superior el panel ya no se mueve con la página: hay que
+      // recolocarlo mientras esté abierto.
+      window.addEventListener('scroll', this.colocar, { passive: true });
+      window.addEventListener('resize', this.colocar);
+    }
     this.boton.setAttribute('aria-expanded', 'true');
     const marcada = this.lista.querySelector('[aria-selected="true"]') || this.primera;
     marcada?.focus();
   }
 
+  /** Coloca el panel bajo el disparador, en coordenadas de la ventana. */
+  colocar = () => {
+    if (!this.abierto || !this.enCapaSuperior) return;
+
+    const b = this.boton.getBoundingClientRect();
+    const alto = this.panel.offsetHeight;
+    const ancho = this.panel.offsetWidth;
+    const margen = 8;
+
+    // Si no cabe por abajo, se abre hacia arriba; y nunca se sale por los lados.
+    const cabeAbajo = b.bottom + margen + alto <= window.innerHeight;
+    const top = cabeAbajo ? b.bottom + margen : Math.max(margen, b.top - margen - alto);
+    const left = Math.min(Math.max(margen, b.left), Math.max(margen, window.innerWidth - ancho - margen));
+
+    this.panel.style.top = `${Math.round(top)}px`;
+    this.panel.style.left = `${Math.round(left)}px`;
+  };
+
   cerrar(devolverFoco = false) {
     if (!this.abierto) return;
     this.removeAttribute('open');
+    if (this.enCapaSuperior) {
+      this.panel.hidePopover();
+      // Las coordenadas se borran al cerrar: si no, quedarían puestas para un
+      // camino que ya no las usa.
+      this.panel.style.top = '';
+      this.panel.style.left = '';
+      window.removeEventListener('scroll', this.colocar);
+      window.removeEventListener('resize', this.colocar);
+    }
     this.panel.hidden = true;
     this.boton.setAttribute('aria-expanded', 'false');
     // Al cerrar con teclado o con la X el foco vuelve al disparador; al elegir

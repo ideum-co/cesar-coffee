@@ -393,7 +393,34 @@ cesar-size-select .select {
   outline-offset: 4px;
 }
 
-/* ---------- Panel ---------- */
+/* ---------- Panel ----------
+   El panel abierto se quedaba por debajo de las secciones siguientes de la
+   ficha. Un z-index más alto no basta: la columna de información crea su
+   propio contexto de apilado (Dawn le deja una animación con `forwards`, así
+   que el transform final queda aplicado), y dentro de un contexto el z-index
+   sólo compite con los hermanos.
+
+   Con soporte, el panel se pinta en la capa superior del navegador, que va
+   por encima de todo el documento pase lo que pase con los contextos; el JS
+   le da las coordenadas. Sin soporte se queda donde está, y entonces sí hace
+   falta elevar el contenedor entero, que es lo único que puede competir con
+   las secciones de abajo. */
+.product__info-wrapper:has(cesar-size-select[open]),
+.product__info-container:has(cesar-size-select[open]) {
+  position: relative;
+  z-index: 20;
+}
+
+/* En la capa superior el panel se posiciona respecto a la ventana y no
+   respecto al disparador: las coordenadas las pone el script. */
+.cesar-size__panel:popover-open {
+  position: fixed;
+  margin: 0;
+  inset: auto;
+  padding: 0;
+  border: 0;
+  overflow: visible;
+}
 
 .cesar-size__panel {
   position: absolute;
