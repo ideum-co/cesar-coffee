@@ -17,8 +17,8 @@
         "image": "shopify://shop_images/banner-co-roasting.webp",
         "video_url": "",
         "video_description": "",
-        "overlay_opacity": 45,
-        "text_color": "brand",
+        "overlay_opacity": 65,
+        "text_color": "light",
         "button_label": "Book a session",
         "button_link": "/pages/contact",
         "button_label_2": "Ask a question",
@@ -28,9 +28,9 @@
         "motion_parallax": true,
         "color_scheme": "scheme-1",
         "text_alignment": "left",
-        "heading_color": "#5c8a6e",
+        "heading_color": "#FDF5A6",
         "heading_px": 0,
-        "subheading_color": "#5c8a6e",
+        "subheading_color": "#FFFFFF",
         "subheading_px": 0
       }
     },
