@@ -84,6 +84,12 @@
    El bloque de botones no tiene clase propia, así que se localiza por contener
    el formulario de producto. */
 .product__info-container {
+  /* Ancho fijo para la cantidad: la columna 1 del grid mide esto, y es lo que
+     hay que compensar para sacar a la izquierda lo que cuelga bajo el botón
+     (pago rápido, recogida en tienda). Con la columna en `auto` ese ancho no
+     se puede conocer desde el CSS. */
+  --cesar-qty-width: 140px;
+
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   align-items: start;
@@ -117,12 +123,37 @@
   grid-column: 2;
 }
 
+.product-form__quantity .quantity {
+  width: var(--cesar-qty-width, 140px);
+}
+
 .product-form__quantity .quantity,
 .cesar-buybox .product-form__submit {
   box-sizing: border-box;
   height: var(--cesar-buy-height, 56px);
   min-height: var(--cesar-buy-height, 56px);
   padding-block: 0;
+}
+
+/* ---------- Lo que cuelga bajo el botón ----------
+   El bloque de compra vive en la columna 2 del grid, junto a la cantidad, y
+   eso es lo que se quiere para "Add to cart". Pero el botón de pago rápido y
+   la recogida en tienda no son parte de esa fila: deben empezar donde empieza
+   el resto de la ficha. Se sacan a la izquierda el ancho de la columna de la
+   cantidad más el hueco. No se puede resolver con grid: están dentro del
+   formulario, que no puede salir de su columna. */
+.cesar-buybox .shopify-payment-button,
+.cesar-buybox .product__pickup-availabilities,
+.cesar-buybox shopify-payment-terms {
+  margin-left: calc(-1 * (var(--cesar-qty-width, 140px) + var(--cc-space-3)));
+}
+
+/* El aviso de impuestos y envío va con el resto del texto, a la izquierda.
+   Dawn lo sube 1.4rem para pegarlo al precio, lo que aquí lo monta sobre él:
+   el espaciado entre bloques ya lo pone el gap del grid. */
+.product__info-container .product__tax {
+  margin-top: 0;
+  text-align: left;
 }
 
 /* product-form es un elemento propio de Dawn. Sin display declarado es inline,
