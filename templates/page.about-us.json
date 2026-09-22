@@ -14,11 +14,11 @@
       "settings": {
         "heading": "About Us",
         "subheading": "Generations of Colombian coffee, roasted in Melbourne",
-        "image": "shopify://shop_images/banner-main.webp",
+        "image": "shopify://shop_images/VENTANAS_PANORAMIC.webp",
         "video_url": "",
         "video_description": "",
-        "overlay_opacity": 45,
-        "text_color": "brand",
+        "overlay_opacity": 0,
+        "text_color": "light",
         "button_label": "Shop The Range",
         "button_link": "",
         "button_label_2": "Our Story",
@@ -37,19 +37,36 @@
     "intro": {
       "type": "rich-text",
       "blocks": {
+        "heading_TXNgxN": {
+          "type": "heading",
+          "settings": {
+            "heading": "César’s Coffee Cup",
+            "heading_size": "h1"
+          }
+        },
+        "caption_77mqcH": {
+          "type": "caption",
+          "settings": {
+            "caption": "connects coffee lovers directly with the people and places behind exceptional coffee.",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "small"
+          }
+        },
         "t-1": {
           "type": "text",
           "settings": {
-            "text": "<p>Cesar's Coffee Cup is built on generations of coffee-growing tradition in Colombia. We source direct from origin and roast to order at our facility in North Williamstown, Melbourne — traceable, seasonal coffee, in your hands within days.</p>"
+            "text": "<p>With roots in Colombia and a family history in coffee growing, we source directly from growers we know and work with, including coffee from César’s own farm. Our relationships extend across Colombia and other renowned coffee-growing regions, giving us access to distinctive, traceable coffees selected for their quality, character and origin.</p><p></p>"
           }
         }
       },
       "block_order": [
+        "heading_TXNgxN",
+        "caption_77mqcH",
         "t-1"
       ],
       "settings": {
-        "desktop_content_position": "left",
-        "content_alignment": "left",
+        "desktop_content_position": "center",
+        "content_alignment": "center",
         "color_scheme": "scheme-1",
         "full_width": true,
         "padding_top": 40,
@@ -61,6 +78,7 @@
       "blocks": {
         "heading": {
           "type": "heading",
+          "disabled": true,
           "settings": {
             "heading": "Our Story",
             "heading_size": "h1",
@@ -70,7 +88,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>The business was started on a simple idea: quality coffee shouldn't be reserved for the well-capitalised. Our roots run through direct relationships with growers — including farms we work with directly — across Colombia, Panama, Brazil and Ethiopia. Every lot is traceable back to the producer behind it.</p>",
+            "text": "<p>By working closer to the source, we know where our coffee comes from, who grew it and the story behind each lot. It also allows us to build long-term relationships with producers and bring their coffee to Australia with fewer steps in between.</p><p>From our roastery in North Williamstown, Melbourne, we roast to order and supply coffee to roasters, cafés, businesses and people brewing at home. Whether it’s green coffee for a roaster, a wholesale program for a café, or freshly roasted beans delivered to your door, the connection to origin remains the same.</p><p>From our growers to your cup.</p>",
             "text_style": "body",
             "color": ""
           }
@@ -81,6 +99,7 @@
         "text"
       ],
       "settings": {
+        "image": "shopify://shop_images/Our-Story.webp",
         "height": "adapt",
         "desktop_image_width": "medium",
         "layout": "image_first",
@@ -110,7 +129,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>We roast on Loring S7 Nighthawk and S15 Falcon roasters, with an IMF smart silo system and a Sanremo D8 Pro for cupping and quality control — the same equipment we use for our own range, we also make available to the brands we work alongside.</p>",
+            "text": "<p>We roast on <strong>Loring S7 Nighthawk and S15 Falcon roasters</strong>, supported by an <strong>IMF smart silo system</strong> and <strong>Sanremo D8 Pro</strong> for cupping and quality control. The same professional equipment we use to roast and refine our own coffees is also available to the brands we work alongside through our co-roasting services.</p>",
             "text_style": "body",
             "color": ""
           }
@@ -132,6 +151,7 @@
         "button"
       ],
       "settings": {
+        "image": "shopify://shop_images/rosting.webp",
         "height": "adapt",
         "desktop_image_width": "medium",
         "layout": "text_first",
@@ -153,6 +173,7 @@
         "m-1": {
           "type": "member",
           "settings": {
+            "image": "shopify://shop_images/cesar.webp",
             "name": "Cesar Mendieta",
             "role": "Founder",
             "bio": "<p>Cesar founded the business on his family's coffee-growing heritage in Colombia, bringing direct-from-origin sourcing and roasting to Melbourne.</p>"
@@ -161,6 +182,7 @@
         "m-2": {
           "type": "member",
           "settings": {
+            "image": "shopify://shop_images/carlos.webp",
             "name": "Carlos Gallo",
             "role": "Head of Coffee",
             "bio": "<p>An agronomist and roaster, Carlos brings hands-on expertise to every roast profile and cupping session.</p>"

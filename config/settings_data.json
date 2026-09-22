@@ -109,7 +109,8 @@
       ".page-width .rte,.rte p {margin: 0 auto;}",
       "h1.main-page-title {text-align: center;}",
       ".contact.page-width {max-width: 800px; margin: 0 auto;}",
-      ".product__tax.caption.rte, #more-payment-options-link {display: none;}"
+      ".product__tax.caption.rte,#more-payment-options-link {display: none;}",
+      ".rich-text__text p {margin-top: 24px !important;}"
     ]
   }
 }
