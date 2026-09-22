@@ -23,6 +23,9 @@
         "button_link": "/pages/contact",
         "button_label_2": "Ask a question",
         "button_link_2": "/pages/contact",
+        "motion_reveal": "fade-up",
+        "motion_stagger": true,
+        "motion_parallax": true,
         "color_scheme": "scheme-1",
         "text_alignment": "left",
         "heading_color": "#5c8a6e",
@@ -47,6 +50,7 @@
         "card_b7Bkf9": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/banner-main.webp",
             "title": "Expert guidance",
             "text": "Our team stays with you throughout the session.",
             "link_label": "",
@@ -66,6 +70,7 @@
         "card_W9z9mn": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/SYLO_SYSTEM.webp",
             "title": "Skill building",
             "text": "Grow your own roasting capability as you go.",
             "link_label": "",
@@ -106,6 +111,7 @@
         "card_title_px": 0,
         "panel_px": 0,
         "text_px": 0,
+        "motion_reveal": "fade-up",
         "color_scheme": ""
       }
     },
@@ -210,6 +216,7 @@
         "m-2": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/Loring_S15_Falcon_Image.webp",
             "title": "Loring S15 Falcon",
             "text": "3–15kg batches, ideal for production runs and wholesale volumes.",
             "link_label": "See Our Farms",
@@ -235,6 +242,8 @@
         "show_excerpt": false,
         "overlay_strength": 100,
         "overlay_blur": 8,
+        "motion_reveal": "fade-up",
+        "motion_stagger": true,
         "color_scheme": "scheme-1",
         "text_alignment": "left",
         "bg_color": "",
@@ -309,8 +318,8 @@
         "limit_width": true,
         "max_width": 1100,
         "bg_color": "",
-        "heading_color": "",
-        "text_color": "",
+        "heading_color": "#4e3625",
+        "text_color": "#4e3625",
         "head_bg": "",
         "head_text": "",
         "rule_color": "",
@@ -320,6 +329,7 @@
         "heading_px": 0,
         "text_px": 0,
         "price_px": 0,
+        "motion_reveal": "fade-up",
         "color_scheme": "scheme-1"
       }
     },
@@ -329,6 +339,7 @@
         "a-1": {
           "type": "column",
           "settings": {
+            "image": "shopify://shop_images/banner-co-roasting.webp",
             "show_origins": false,
             "title": "Aspiring roasters",
             "text": "<p>Learn on production equipment, with someone beside you.</p>",
@@ -339,6 +350,7 @@
         "a-2": {
           "type": "column",
           "settings": {
+            "image": "shopify://shop_images/banner-main.webp",
             "show_origins": false,
             "title": "Cafe owners",
             "text": "<p>Roast your own house blend without buying a roastery.</p>",
@@ -349,6 +361,7 @@
         "a-3": {
           "type": "column",
           "settings": {
+            "image": "shopify://shop_images/card-3.webp",
             "show_origins": false,
             "title": "Scale-up brands",
             "text": "<p>Move to production volumes with packing and sourcing handled.</p>",
@@ -367,8 +380,8 @@
         "heading_size": "h2",
         "image_width": "third",
         "image_ratio": "circle",
-        "button_label": "Button label",
-        "button_link": "",
+        "button_label": "Contact",
+        "button_link": "shopify://pages/contact",
         "columns_desktop": 3,
         "column_alignment": "left",
         "background_style": "primary",
@@ -463,6 +476,8 @@
         "number_px": 0,
         "step_title_px": 0,
         "text_px": 0,
+        "motion_reveal": "fade-up",
+        "motion_stagger": true,
         "color_scheme": "scheme-1"
       }
     },
@@ -521,6 +536,8 @@
         "heading_px": 0,
         "question_px": 0,
         "text_px": 0,
+        "motion_reveal": "fade-up",
+        "motion_stagger": true,
         "color_scheme": "scheme-1"
       }
     },
@@ -532,6 +549,8 @@
         "text": "<p>Tell us what you want to roast and we'll find you a slot.</p>",
         "button_label": "Get in touch",
         "link": "/pages/contact",
+        "motion_reveal": "fade-up",
+        "motion_parallax": true,
         "color_scheme": "scheme-3",
         "text_alignment": "center",
         "bg_color": "",

@@ -22,20 +22,20 @@
         "heading_ayFbif": {
           "type": "heading",
           "settings": {
-            "heading": "Talk about your brand",
+            "heading": "Strong roots. Direct from origin.",
             "heading_size": "h1"
           }
         },
         "text_CPqE6P": {
           "type": "text",
           "settings": {
-            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
+            "text": "<p>Built on generations of coffee-growing tradition in Colombia, Cesar's Coffee Cup connects you with exceptional coffee sourced directly from origin. Through trusted relationships with producers across the world's leading regions, we deliver traceable, high-quality coffee, sorted into three clear tiers: Blue, Silver, Hero and Gold.</p>"
           }
         },
         "button_VmLdcN": {
           "type": "button",
           "settings": {
-            "button_label": "Button label",
+            "button_label": "",
             "button_link": "",
             "button_style_secondary": false,
             "button_label_2": "",
@@ -142,11 +142,15 @@
         "tier_kxCcg4",
         "tier_qGEnRM"
       ],
+      "disabled": true,
       "name": "Cesar · Tiers",
       "settings": {
         "heading": "Three tiers, one clear range",
         "button_label": "Shop All",
         "button_link": "",
+        "motion_reveal": "fade-up",
+        "motion_stagger": true,
+        "motion_parallax": false,
         "color_scheme": "",
         "limit_width": false,
         "max_width": 1200,
@@ -154,117 +158,151 @@
         "heading_px": 0
       }
     },
-    "cesar_collection_row_Ynq93D": {
-      "type": "cesar-collection-row",
-      "blocks": {
-        "card_MUL8eq": {
-          "type": "card",
-          "settings": {
-            "image": "shopify://shop_images/banner-body-3.jpg",
-            "title": "wholesale",
-            "text": "",
-            "link_label": "See Our Farms",
-            "link": ""
-          }
-        },
-        "card_R8XQA4": {
-          "type": "card",
-          "settings": {
-            "title": "white-label",
-            "text": "",
-            "link_label": "How We Roast",
-            "link": ""
-          }
-        },
-        "card_x39yRw": {
-          "type": "card",
-          "settings": {
-            "image": "shopify://shop_images/banner-co-roasting.webp",
-            "title": "co-roasting",
-            "text": "",
-            "link_label": "How We Roast",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "card_MUL8eq",
-        "card_R8XQA4",
-        "card_x39yRw"
-      ],
-      "name": "Cesar · Texto y carrusel",
-      "settings": {
-        "heading": "Retail proof. Trade ready.",
-        "text": "Wholesale roast-to-order, white-label roasting, co-roasting and roaster hire — for cafés, venues and roasters who want what's in the bag.",
-        "button_label": "Talk To Us About Trade",
-        "button_link": "",
-        "columns_desktop": 3,
-        "columns_mobile": "1",
-        "source": "blog",
-        "blog": "",
-        "articles_to_show": 6,
-        "article_button_label": "Read the story",
-        "show_excerpt": false,
-        "overlay_strength": 100,
-        "overlay_blur": 8,
-        "color_scheme": "",
-        "text_alignment": "left",
-        "bg_color": "",
-        "heading_color": "",
-        "text_color": "",
-        "button_bg": "",
-        "button_text": ""
-      }
+    "cesar_line_marquee_witTGg": {
+    "type": "cesar-line-marquee",
+    "blocks": {
+    "card_6KTzXe": {
+    "type": "card",
+    "settings": {
+    "background": "shopify://shop_images/card-3.webp",
+    "image": "shopify://shop_images/badge-blue-line.svg",
+    "title": "Blue Line",
+    "text": "<p>Everyday espresso, always on.<br/><strong>The dependable base of the range.</strong></p>",
+    "link": ""
+    }
     },
-    "cesar_product_faq_Bdk37T": {
-      "type": "cesar-product-faq",
-      "blocks": {
-        "question_DtfcVJ": {
-          "type": "question",
-          "settings": {
-            "question": "How should I store this?",
-            "answer": "<p>Keep the bag sealed, somewhere cool and dark. Away from the fridge — coffee picks up every smell around it.</p>",
-            "open_by_default": false
-          }
-        },
-        "question_fGCPAF": {
-          "type": "question",
-          "settings": {
-            "question": "How should I store this?",
-            "answer": "<p>Keep the bag sealed, somewhere cool and dark. Away from the fridge — coffee picks up every smell around it.</p>",
-            "open_by_default": false
-          }
-        },
-        "question_icVVwD": {
-          "type": "question",
-          "settings": {
-            "question": "How should I store this?",
-            "answer": "<p>Keep the bag sealed, somewhere cool and dark. Away from the fridge — coffee picks up every smell around it.</p>",
-            "open_by_default": false
-          }
-        }
-      },
-      "block_order": [
-        "question_DtfcVJ",
-        "question_fGCPAF",
-        "question_icVVwD"
-      ],
-      "name": "Cesar · Preguntas ficha",
-      "settings": {
-        "heading": "More About This Product",
-        "text": "",
-        "one_at_a_time": true,
-        "limit_width": false,
-        "max_width": 1400,
-        "bg_color": "",
-        "heading_color": "",
-        "text_color": "",
-        "divider_color": "",
-        "heading_px": 0,
-        "question_px": 0,
-        "text_px": 0,
-        "color_scheme": ""
-      }
+    "card_GWzD84": {
+    "type": "card",
+    "settings": {
+    "background": "shopify://shop_images/card-1.webp",
+    "image": "shopify://shop_images/badge-gold-line.svg",
+    "title": "Gold Line",
+    "text": "<p>Rare allocation lots.<br/><strong>The microlots that carry the story.</strong></p>",
+    "link": ""
+    }
+    },
+    "card_gJhFmd": {
+    "type": "card",
+    "settings": {
+    "background": "shopify://shop_images/card-2.webp",
+    "image": "shopify://shop_images/badge-silver-line.svg",
+    "title": "Silver Line",
+    "text": "<p>Seasonal single origins.<br/><strong>Bright, clean and traceable.</strong></p>",
+    "link": ""
+    }
+    },
+    "card_ib6ygW": {
+    "type": "card",
+    "settings": {
+    "background": "shopify://shop_images/card-4.webp",
+    "image": "shopify://shop_images/badge-red-line_a3ffc2c7-c3b6-4e52-aa1d-a7fbebafba97.svg",
+    "title": "Hero Line",
+    "text": "<p>Our signature Castillo lot.<br/><strong>Regeneratively grown, lab-tested clean.</strong></p>",
+    "link": ""
+    }
+    }
+    },
+    "block_order": [
+    "card_6KTzXe",
+    "card_GWzD84",
+    "card_gJhFmd",
+    "card_ib6ygW"
+    ],
+    "name": "Cesar · Marquesina",
+    "settings": {
+    "caption": "",
+    "heading": "Our coffee lines",
+    "text": "",
+    "text_alignment": "center",
+    "speed": 50,
+    "direction": "left",
+    "pause_on_hover": true,
+    "card_width": 400,
+    "gap": 32,
+    "card_padding": 40,
+    "card_radius": 24,
+    "stagger": 48,
+    "image_px": 240,
+    "badge_px": 170,
+    "bg_color": "",
+    "heading_color": "",
+    "text_color": "",
+    "card_bg": "",
+    "card_border": "",
+    "card_title_color": "",
+    "card_text_color": "",
+    "heading_px": 0,
+    "card_title_px": 0,
+    "card_text_px": 0,
+    "text_px": 0,
+    "motion_reveal": "fade-up",
+    "color_scheme": ""
+    }
+    },
+    "cesar_collection_row_Ynq93D": {
+    "type": "cesar-collection-row",
+    "blocks": {
+    "card_MUL8eq": {
+    "type": "card",
+    "settings": {
+    "image": "shopify://shop_images/banner-body-3.jpg",
+    "title": "wholesale",
+    "text": "",
+    "link_label": "See Our Farms",
+    "link": "shopify://pages/wholesale"
+    }
+    },
+    "card_R8XQA4": {
+    "type": "card",
+    "settings": {
+    "image": "shopify://shop_images/card-1.webp",
+    "title": "white-label",
+    "text": "",
+    "link_label": "How We Roast",
+    "link": ""
+    }
+    },
+    "card_x39yRw": {
+    "type": "card",
+    "settings": {
+    "image": "shopify://shop_images/banner-co-roasting.webp",
+    "title": "co-roasting",
+    "text": "",
+    "link_label": "How We Roast",
+    "link": "shopify://pages/co-roasting"
+    }
+    }
+    },
+    "block_order": [
+    "card_MUL8eq",
+    "card_R8XQA4",
+    "card_x39yRw"
+    ],
+    "name": "Cesar · Texto y carrusel",
+    "settings": {
+    "heading": "Retail proof. Trade ready.",
+    "text": "Wholesale roast-to-order, white-label roasting, co-roasting and roaster hire — for cafés, venues and roasters who want what's in the bag.",
+    "button_label": "Talk To Us About Trade",
+    "button_link": "",
+    "columns_desktop": 3,
+    "columns_mobile": "1",
+    "source": "blog",
+    "blog": "",
+    "articles_to_show": 6,
+    "article_button_label": "Read the story",
+    "show_excerpt": false,
+    "overlay_strength": 100,
+    "overlay_blur": 8,
+    "motion_reveal": "fade-up",
+    "motion_stagger": true,
+    "color_scheme": "",
+    "text_alignment": "left",
+    "bg_color": "",
+    "heading_color": "",
+    "text_color": "",
+    "button_bg": "",
+    "button_text": ""
+    }
     }
   },
   "order": [
@@ -272,7 +310,7 @@
     "rich_text_fELRb9",
     "form",
     "cesar_tiers_fMYTqM",
-    "cesar_collection_row_Ynq93D",
-    "cesar_product_faq_Bdk37T"
+    "cesar_line_marquee_witTGg",
+    "cesar_collection_row_Ynq93D"
   ]
 }
