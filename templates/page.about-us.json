@@ -133,6 +133,7 @@
         "button"
       ],
       "settings": {
+        "image": "shopify://shop_images/rosting.webp",
         "height": "adapt",
         "desktop_image_width": "medium",
         "layout": "text_first",
@@ -154,6 +155,7 @@
         "m-1": {
           "type": "member",
           "settings": {
+            "image": "shopify://shop_images/cesar.webp",
             "name": "Cesar Mendieta",
             "role": "Founder",
             "bio": "<p>Cesar founded the business on his family's coffee-growing heritage in Colombia, bringing direct-from-origin sourcing and roasting to Melbourne.</p>"
@@ -162,6 +164,7 @@
         "m-2": {
           "type": "member",
           "settings": {
+            "image": "shopify://shop_images/carlos.webp",
             "name": "Carlos Gallo",
             "role": "Head of Coffee",
             "bio": "<p>An agronomist and roaster, Carlos brings hands-on expertise to every roast profile and cupping session.</p>"
