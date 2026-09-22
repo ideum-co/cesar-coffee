@@ -171,6 +171,37 @@ body:has(.header-wrapper--transparent) main[data-template='index'] > .shopify-se
   background: transparent;
 }
 
+/* ---- Texto claro sobre el velo ----
+   Con el velo oscuro, el marrón de marca deja de leerse: el menú, el logotipo
+   y los iconos pasan a blanco. Se limita a cuando la banda se pinta de verdad
+   —portada con header transparente, o el modo de todo el sitio—; con la
+   búsqueda abierta el header recupera fondo claro y el texto vuelve al suyo.
+
+   Va con más peso que las reglas de color por sección de cesar-tokens.css
+   (.cesar-sec .header__menu-item), que si no ganarían por orden de carga. */
+.header-wrapper--blur-light:not(.header-wrapper--search-open).cesar-sec .header__menu-item,
+.header-wrapper--blur-light:not(.header-wrapper--search-open).cesar-sec .header__menu-item:hover,
+.header-wrapper--blur-light:not(.header-wrapper--search-open).cesar-sec .header__active-menu-item,
+.header-wrapper--blur-light:not(.header-wrapper--search-open).cesar-sec .header__heading-link,
+.header-wrapper--blur-light:not(.header-wrapper--search-open).cesar-sec .header__heading-link:hover,
+.header-wrapper--blur-light:not(.header-wrapper--search-open).cesar-sec .header__icon,
+.header-wrapper--blur-light:not(.header-wrapper--search-open).cesar-sec .header__icon:hover {
+  color: #fff;
+}
+
+/* La flecha del menú es una máscara sobre currentColor, así que sigue sola.
+   El subrayado del elemento activo y el foco también pasan a blanco. */
+.header-wrapper--blur-light:not(.header-wrapper--search-open) .header__menu-item:focus-visible,
+.header-wrapper--blur-light:not(.header-wrapper--search-open) .header__icon:focus-visible {
+  outline-color: #fff;
+}
+
+/* El logotipo en imagen no cambia de color: se le da un poco de sombra para
+   que no se pierda sobre un fondo claro que haya quedado debajo del velo. */
+.header-wrapper--blur-light:not(.header-wrapper--search-open) .header__heading-logo {
+  filter: drop-shadow(0 1px 6px rgba(20, 8, 3, 0.35));
+}
+
 /* El contenido del header va por encima de la banda. */
 .header-wrapper--transparent .header,
 .header-wrapper--blur-all .header {

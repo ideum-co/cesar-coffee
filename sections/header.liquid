@@ -155,7 +155,7 @@
   {% if header_tag == 'sticky-header' %}
     data-sticky-type="{{ section.settings.sticky_header_type }}"
   {% endif %}
-  class="cesar-sec header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}{% if header_transparent %} header-wrapper--transparent{% endif %}{% if section.settings.blur_scope == 'all' and section.settings.enable_blur and section.settings.blur_strength > 0 %} header-wrapper--blur-all{% endif %}"
+  class="cesar-sec header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}{% if header_transparent %} header-wrapper--transparent{% endif %}{% if section.settings.blur_scope == 'all' and section.settings.enable_blur and section.settings.blur_strength > 0 %} header-wrapper--blur-all{% endif %}{% if section.settings.blur_light_text and section.settings.enable_blur %} header-wrapper--blur-light{% endif %}"
   {% if cesar_style != blank %}style="{{ cesar_style | strip_newlines | strip }}"{% endif %}
 >
   {%- liquid
@@ -850,11 +850,18 @@
       "type": "range",
       "id": "blur_tint_opacity",
       "min": 0,
-      "max": 70,
+      "max": 90,
       "step": 5,
       "unit": "%",
       "label": "Intensidad del tinte",
       "default": 20
+    },
+    {
+      "type": "checkbox",
+      "id": "blur_light_text",
+      "label": "Texto claro sobre el velo",
+      "default": false,
+      "info": "El menú y los iconos pasan a blanco. Sólo tiene sentido con un tinte oscuro y bastante intensidad: comprueba que se lea sobre la página más clara del sitio."
     }
   ],
   "blocks": [
