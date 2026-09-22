@@ -14,11 +14,11 @@
       "settings": {
         "heading": "About Us",
         "subheading": "Generations of Colombian coffee, roasted in Melbourne",
-        "image": "shopify://shop_images/banner-main.webp",
+        "image": "shopify://shop_images/VENTANAS_PANORAMIC.webp",
         "video_url": "",
         "video_description": "",
-        "overlay_opacity": 45,
-        "text_color": "brand",
+        "overlay_opacity": 0,
+        "text_color": "light",
         "button_label": "Shop The Range",
         "button_link": "",
         "button_label_2": "Our Story",
@@ -99,6 +99,7 @@
         "text"
       ],
       "settings": {
+        "image": "shopify://shop_images/Our-Story.webp",
         "height": "adapt",
         "desktop_image_width": "medium",
         "layout": "image_first",
