@@ -43,7 +43,7 @@
         "menu": "main-menu-1",
         "menu_type_desktop": "dropdown",
         "sticky_header_type": "on-scroll-up",
-        "show_line_separator": false,
+        "show_line_separator": true,
         "color_scheme": "scheme-2",
         "transparent_on_home": true,
         "menu_color_scheme": "scheme-2",
@@ -61,7 +61,8 @@
         "blur_strength": 8,
         "blur_height": 160,
         "blur_tint": "#140803",
-        "blur_tint_opacity": 20
+        "blur_tint_opacity": 20,
+        "blur_light_text": true
       }
     }
   },
