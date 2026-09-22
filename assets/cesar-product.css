@@ -148,6 +148,109 @@
   margin-left: calc(-1 * (var(--cesar-qty-width, 140px) + var(--cc-space-3)));
 }
 
+/* ---------- Recogida en tienda ----------
+   El marcado lo sirve Shopify y no se puede tocar, así que se le da forma
+   desde aquí: una tarjeta crema con la marca de verificación en verde dentro
+   de su disco, el estado en marrón y el enlace en terracota, como el resto
+   del sistema. */
+.cesar-buybox .product__pickup-availabilities {
+  display: block;
+  margin-top: var(--cc-space-2);
+}
+
+.cesar-buybox .pickup-availability-preview {
+  box-sizing: border-box;
+  align-items: flex-start;
+  gap: var(--cc-space-3);
+  padding: var(--cc-space-4) var(--cc-space-6);
+  border: 1px solid var(--cc-border);
+  border-radius: var(--cc-radius-md);
+  background-color: var(--cc-cream);
+}
+
+/* El icono va dentro de un disco: en la tarjeta, un tilde suelto se lee como
+   un adorno y no como el estado que es. */
+.cesar-buybox .pickup-availability-preview > .svg-wrapper {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin-top: 1px;
+  border-radius: var(--cc-radius-pill);
+  background-color: var(--cc-green);
+  color: #fff;
+}
+
+.cesar-buybox .pickup-availability-preview > .svg-wrapper .icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* Disponible en verde; sin existencias, en el gris apagado del sistema. */
+.cesar-buybox .pickup-availability-preview:has(.icon-unavailable) > .svg-wrapper {
+  background-color: var(--cc-brown-500);
+}
+
+.cesar-buybox .pickup-availability-info {
+  min-width: 0;
+}
+
+/* Dawn deja 0.6rem bajo cada línea; aquí el ritmo lo lleva el sistema. */
+.cesar-buybox .pickup-availability-info > * {
+  margin: 0;
+}
+
+/* La primera línea es el estado: es lo que hay que leer primero. */
+.cesar-buybox .pickup-availability-info > :first-child {
+  font-size: var(--cc-text-body);
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--cc-brown-900);
+}
+
+.cesar-buybox .pickup-availability-info > :nth-child(2) {
+  margin-top: 2px;
+  font-size: var(--cc-text-sm);
+  line-height: 1.4;
+  color: var(--cc-text-muted);
+}
+
+.cesar-buybox .pickup-availability-button {
+  /* mínimo táctil, sin que el enlace se separe del texto de arriba */
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  margin-top: var(--cc-space-1);
+  padding: 0;
+  color: var(--cc-terracotta-text);
+  font-size: var(--cc-text-sm);
+  font-weight: 600;
+  letter-spacing: 0;
+  text-underline-offset: 3px;
+}
+
+.cesar-buybox .pickup-availability-button:hover {
+  color: var(--cc-brown-900);
+}
+
+.cesar-buybox .pickup-availability-button:focus-visible {
+  outline: 2px solid var(--cc-brown-900);
+  outline-offset: 2px;
+}
+
+/* El cajón que abre "View store information" lo pinta Dawn con el fondo del
+   esquema de color, que es la variable que aquí no resuelve y deja el panel
+   en negro. Mismo caso que los filtros y el menú. */
+pickup-availability-drawer {
+  background-color: var(--cc-cream);
+  color: var(--cc-brown-900);
+}
+
+pickup-availability-drawer .pickup-availability-drawer-button {
+  color: var(--cc-brown-900);
+}
+
 /* El aviso de impuestos y envío va con el resto del texto, a la izquierda.
    Dawn lo sube 1.4rem para pegarlo al precio, lo que aquí lo monta sobre él:
    el espaciado entre bloques ya lo pone el gap del grid. */
