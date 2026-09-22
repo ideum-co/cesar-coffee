@@ -46,6 +46,7 @@
       "block_order": [
         "t-1"
       ],
+      "disabled": true,
       "settings": {
         "desktop_content_position": "left",
         "content_alignment": "left",
@@ -148,7 +149,7 @@
         "caption": {
           "type": "caption",
           "settings": {
-            "caption": "Wholesale",
+            "caption": "Crafted Quality, Consistent Supply - Wholesale Specialty Coffee",
             "text_size": "md",
             "color": ""
           }
@@ -156,7 +157,7 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Melbourne's premier dedicated B2B roasting facility, empowering the next generation of independent coffee brands.",
+            "heading": "Join our wholesale program and bring the taste of authentic specialty coffee to your customers. Partner with us to enjoy premium beans, consistent quality, and reliable support.",
             "text_size": "lg",
             "color": ""
           }
@@ -172,7 +173,7 @@
         "buttons": {
           "type": "buttons",
           "settings": {
-            "button_label_1": "Contact our Wholesale team",
+            "button_label_1": "Contact us to get started.",
             "button_link_1": "mailto:info@cesarscoffeecup.com?subject=Wholesale%20Enquiry",
             "button_bg_1": "",
             "button_text_1": "",
