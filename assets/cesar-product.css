@@ -572,8 +572,12 @@ cesar-size-select .select {
   overflow: hidden;
   /* Columna con cabecera fija y lista que encoge: el tope de alto lo pone el
      hueco que hay bajo el disparador, que mide el script al abrir. Así el
-     panel siempre cabe donde se abre y nunca hace falta darle la vuelta. */
-  display: flex;
+     panel siempre cabe donde se abre y nunca hace falta darle la vuelta.
+
+     El `display` NO va aquí: declarado en la regla base ganaba al display:none
+     del atributo hidden y al del popover cerrado, así que el panel quedaba
+     dibujado aun cerrado —invisible por la opacidad— encima de los controles,
+     y se tragaba el clic del propio disparador. Sólo se declara al abrir. */
   flex-direction: column;
   max-height: var(--cesar-size-hueco, none);
 
@@ -590,6 +594,17 @@ cesar-size-select .select {
     transform 200ms var(--cc-ease),
     display 200ms allow-discrete,
     overlay 200ms allow-discrete;
+}
+
+/* Cerrado no ocupa nada: el atributo hidden en el camino de reserva, y la
+   regla del navegador para un popover cerrado en el otro. */
+.cesar-size__panel[hidden] {
+  display: none;
+}
+
+cesar-size-select[open] .cesar-size__panel,
+.cesar-size__panel:popover-open {
+  display: flex;
 }
 
 cesar-size-select[open] .cesar-size__panel {
