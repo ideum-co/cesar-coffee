@@ -111,6 +111,7 @@ class CesarSizeSelect extends HTMLElement {
   }
 
   abrir() {
+    this.yaDesplazado = false;
     this.panel.hidden = false;
     if (this.enCapaSuperior) {
       this.panel.showPopover();
@@ -131,27 +132,45 @@ class CesarSizeSelect extends HTMLElement {
     marcada?.focus({ preventScroll: true });
   }
 
-  /** Coloca el panel bajo el disparador, en coordenadas de la ventana. */
+  /**
+   * Coloca el panel pegado bajo el disparador, en coordenadas de la ventana.
+   *
+   * Siempre debajo, nunca arriba: abrirlo hacia el otro lado según el hueco
+   * hacía que la lista apareciera cada vez en un sitio distinto —a veces
+   * encima de la cabecera— y se perdía la relación con el campo que se está
+   * eligiendo. Cuando no cabe entero, en vez de darle la vuelta se recorta su
+   * alto y la lista se desplaza por dentro.
+   */
   colocar = () => {
     // Se comprueba el panel y no el atributo `open` del elemento: al abrir hay
     // que colocarlo ANTES de marcar `open`, para que la animación de entrada
     // arranque ya en su sitio. Con la condición sobre `open` no se colocaba.
     if (!this.enCapaSuperior || !this.panel.matches(':popover-open')) return;
 
-    const b = this.boton.getBoundingClientRect();
-    const alto = this.panel.offsetHeight;
-    const ancho = this.panel.offsetWidth;
     const margen = 8;
+    let b = this.boton.getBoundingClientRect();
 
-    // Si no cabe por abajo, se abre hacia arriba; y nunca se sale por los lados.
-    const cabeAbajo = b.bottom + margen + alto <= window.innerHeight;
-    const top = cabeAbajo ? b.bottom + margen : Math.max(margen, b.top - margen - alto);
+    // Con muy poco hueco por debajo el panel quedaría en una rendija. Antes de
+    // colocarlo se sube la página para dejarle sitio; el disparador queda a un
+    // tercio de la pantalla, que es donde se espera encontrarlo.
+    const hueco = () => window.innerHeight - b.bottom - margen * 2;
+    if (hueco() < CesarSizeSelect.ALTO_MINIMO && !this.yaDesplazado) {
+      this.yaDesplazado = true;
+      window.scrollBy({ top: b.top - window.innerHeight / 3, behavior: 'instant' });
+      b = this.boton.getBoundingClientRect();
+    }
+
+    // El alto disponible manda sobre el tope del diseño: la lista se desplaza
+    // por dentro y el panel nunca se sale de la pantalla. Se mide DESPUÉS del
+    // posible desplazamiento, y sin forzar el mínimo: si la página ya estaba
+    // al final y no se pudo subir más, vale más un panel bajo que uno que se
+    // sale de la pantalla.
+    this.panel.style.setProperty('--cesar-size-hueco', `${Math.max(0, Math.round(hueco()))}px`);
+
+    const ancho = this.panel.offsetWidth;
     const left = Math.min(Math.max(margen, b.left), Math.max(margen, window.innerWidth - ancho - margen));
 
-    // El sentido lo lee el CSS para que el panel nazca del lado del
-    // disparador y no contra él.
-    this.panel.dataset.dir = cabeAbajo ? 'down' : 'up';
-    this.panel.style.top = `${Math.round(top)}px`;
+    this.panel.style.top = `${Math.round(b.bottom + margen)}px`;
     this.panel.style.left = `${Math.round(left)}px`;
   };
 
@@ -232,6 +251,9 @@ class CesarSizeSelect extends HTMLElement {
     });
   }
 }
+
+/** Alto mínimo utilizable del panel: por debajo, se le hace sitio. */
+CesarSizeSelect.ALTO_MINIMO = 240;
 
 if (!customElements.get('cesar-size-select')) {
   customElements.define('cesar-size-select', CesarSizeSelect);

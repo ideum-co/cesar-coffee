@@ -570,6 +570,12 @@ cesar-size-select .select {
   /* Recorta las filas contra el radio: sin esto la primera y la última se
      salen por las esquinas. */
   overflow: hidden;
+  /* Columna con cabecera fija y lista que encoge: el tope de alto lo pone el
+     hueco que hay bajo el disparador, que mide el script al abrir. Así el
+     panel siempre cabe donde se abre y nunca hace falta darle la vuelta. */
+  display: flex;
+  flex-direction: column;
+  max-height: var(--cesar-size-hueco, none);
 
   /* ---- Entrada y salida ----
      El panel nace un poco arriba y algo encogido, y cae a su sitio. La
@@ -586,13 +592,6 @@ cesar-size-select .select {
     overlay 200ms allow-discrete;
 }
 
-/* Cuando se abre hacia arriba, nace desde abajo: el movimiento sale del
-   disparador y no contra él. */
-.cesar-size__panel[data-dir='up'] {
-  transform: translateY(6px) scale(0.98);
-  transform-origin: bottom left;
-}
-
 cesar-size-select[open] .cesar-size__panel {
   opacity: 1;
   transform: none;
@@ -604,10 +603,6 @@ cesar-size-select[open] .cesar-size__panel {
   cesar-size-select[open] .cesar-size__panel {
     opacity: 0;
     transform: translateY(-6px) scale(0.98);
-  }
-
-  cesar-size-select[open] .cesar-size__panel[data-dir='up'] {
-    transform: translateY(6px) scale(0.98);
   }
 }
 
@@ -625,18 +620,24 @@ cesar-size-select[open] .cesar-size__panel {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Fija dentro del panel: con la lista desplazándose, el título y la X
-     tienen que seguir a la vista. */
-  position: sticky;
-  top: 0;
-  z-index: 1;
+  /* Fuera del área que se desplaza: con la lista desplazándose, el título y
+     la X tienen que seguir a la vista. */
+  flex: none;
   padding: var(--cc-space-4) var(--cc-space-12);
   background-color: var(--cc-cream);
 }
 
 /* La lista se desplaza dentro del panel en vez de estirarlo: con siete
-   molidos el panel llegaba a tapar la cabecera del sitio. */
+   molidos el panel llegaba a tapar la cabecera del sitio.
+
+   Al tope del diseño se le suma el hueco real que hay bajo el disparador, que
+   mide el script al abrir (menos el alto de la cabecera del panel). Así el
+   panel siempre cabe donde se abre y nunca hay que darle la vuelta. */
 .cesar-size__list {
+  /* flex:1 con min-height:0 para que pueda encogerse por debajo del alto de
+     su contenido; sin el min-height, un hijo flexible no baja de ahí. */
+  flex: 1 1 auto;
+  min-height: 0;
   max-height: min(52vh, 420px);
   overflow-y: auto;
   /* El desplazamiento no se propaga a la página al llegar al final. */
