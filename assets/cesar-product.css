@@ -553,7 +553,6 @@ cesar-size-select .select {
   inset: auto;
   padding: 0;
   border: 0;
-  overflow: visible;
 }
 
 .cesar-size__panel {
@@ -568,15 +567,80 @@ cesar-size-select .select {
   border-radius: var(--cc-radius-lg);
   background-color: var(--cc-cream);
   box-shadow: 0 18px 40px rgba(20, 8, 3, 0.18);
+  /* Recorta las filas contra el radio: sin esto la primera y la última se
+     salen por las esquinas. */
   overflow: hidden;
+
+  /* ---- Entrada y salida ----
+     El panel nace un poco arriba y algo encogido, y cae a su sitio. La
+     transición incluye `display` y `overlay` con allow-discrete: son
+     propiedades discretas, y sin eso el navegador quita el panel de la capa
+     superior en el primer fotograma y la salida no llega a verse. */
+  opacity: 0;
+  transform: translateY(-6px) scale(0.98);
+  transform-origin: top left;
+  transition:
+    opacity 160ms var(--cc-ease),
+    transform 200ms var(--cc-ease),
+    display 200ms allow-discrete,
+    overlay 200ms allow-discrete;
+}
+
+/* Cuando se abre hacia arriba, nace desde abajo: el movimiento sale del
+   disparador y no contra él. */
+.cesar-size__panel[data-dir='up'] {
+  transform: translateY(6px) scale(0.98);
+  transform-origin: bottom left;
+}
+
+cesar-size-select[open] .cesar-size__panel {
+  opacity: 1;
+  transform: none;
+}
+
+/* El estado de partida de la animación de entrada. Va después de la regla de
+   abierto para que el navegador lo tome como punto inicial. */
+@starting-style {
+  cesar-size-select[open] .cesar-size__panel {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+
+  cesar-size-select[open] .cesar-size__panel[data-dir='up'] {
+    transform: translateY(6px) scale(0.98);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cesar-size__panel {
+    transform: none;
+    transition:
+      opacity 1ms linear,
+      display 1ms allow-discrete,
+      overlay 1ms allow-discrete;
+  }
 }
 
 .cesar-size__header {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  /* Fija dentro del panel: con la lista desplazándose, el título y la X
+     tienen que seguir a la vista. */
+  position: sticky;
+  top: 0;
+  z-index: 1;
   padding: var(--cc-space-4) var(--cc-space-12);
+  background-color: var(--cc-cream);
+}
+
+/* La lista se desplaza dentro del panel en vez de estirarlo: con siete
+   molidos el panel llegaba a tapar la cabecera del sitio. */
+.cesar-size__list {
+  max-height: min(52vh, 420px);
+  overflow-y: auto;
+  /* El desplazamiento no se propaga a la página al llegar al final. */
+  overscroll-behavior: contain;
 }
 
 .cesar-size__title {
@@ -633,15 +697,27 @@ cesar-size-select .select {
   cursor: pointer;
 }
 
-.cesar-size__option:hover {
-  background-color: rgba(45, 18, 6, 0.04);
+.cesar-size__option {
+  transition: background-color 120ms var(--cc-ease);
 }
 
-/* La fila elegida se marca con un contorno completo, no sólo con el círculo:
-   el color por sí solo no debe ser el único indicador. */
+.cesar-size__option:hover {
+  background-color: rgba(45, 18, 6, 0.06);
+}
+
+/* La fila elegida: fondo propio y una barra de acento a la izquierda. Antes
+   llevaba un borde completo de 2px, que se leía como un recuadro de error y
+   además cambiaba el alto de la fila —el borde sustituía a la línea de 1px de
+   arriba— así que las filas saltaban al abrir. La barra va en box-shadow
+   interior: no ocupa sitio, no desplaza nada, y sigue habiendo un indicador
+   que no depende sólo del color (la barra más el círculo relleno). */
 .cesar-size__option[aria-selected='true'] {
-  border: 2px solid var(--cc-brown-900);
   background-color: var(--cc-surface);
+  box-shadow: inset 3px 0 0 var(--cc-brown-900);
+}
+
+.cesar-size__option[aria-selected='true'] .cesar-size__option-label {
+  font-weight: 700;
 }
 
 .cesar-size__option:focus-visible {

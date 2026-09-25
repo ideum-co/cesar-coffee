@@ -23,6 +23,7 @@ class CesarSizeSelect extends HTMLElement {
     this.removeEventListener('keydown', this.onKeyDown);
     window.removeEventListener('scroll', this.colocar);
     window.removeEventListener('resize', this.colocar);
+    clearTimeout(this.tempSalida);
   }
 
   get abierto() {
@@ -110,24 +111,32 @@ class CesarSizeSelect extends HTMLElement {
   }
 
   abrir() {
-    this.setAttribute('open', '');
     this.panel.hidden = false;
     if (this.enCapaSuperior) {
       this.panel.showPopover();
+      // Se coloca antes de marcar `open`: la animación de entrada tiene que
+      // arrancar desde el sitio definitivo, o el panel cruzaría la pantalla.
       this.colocar();
       // En la capa superior el panel ya no se mueve con la página: hay que
       // recolocarlo mientras esté abierto.
       window.addEventListener('scroll', this.colocar, { passive: true });
       window.addEventListener('resize', this.colocar);
     }
+    this.setAttribute('open', '');
     this.boton.setAttribute('aria-expanded', 'true');
+
+    // preventScroll: el foco se mueve por accesibilidad, no para llevar la
+    // página a ningún sitio. Sin esto el navegador salta al abrir con ratón.
     const marcada = this.lista.querySelector('[aria-selected="true"]') || this.primera;
-    marcada?.focus();
+    marcada?.focus({ preventScroll: true });
   }
 
   /** Coloca el panel bajo el disparador, en coordenadas de la ventana. */
   colocar = () => {
-    if (!this.abierto || !this.enCapaSuperior) return;
+    // Se comprueba el panel y no el atributo `open` del elemento: al abrir hay
+    // que colocarlo ANTES de marcar `open`, para que la animación de entrada
+    // arranque ya en su sitio. Con la condición sobre `open` no se colocaba.
+    if (!this.enCapaSuperior || !this.panel.matches(':popover-open')) return;
 
     const b = this.boton.getBoundingClientRect();
     const alto = this.panel.offsetHeight;
@@ -139,27 +148,45 @@ class CesarSizeSelect extends HTMLElement {
     const top = cabeAbajo ? b.bottom + margen : Math.max(margen, b.top - margen - alto);
     const left = Math.min(Math.max(margen, b.left), Math.max(margen, window.innerWidth - ancho - margen));
 
+    // El sentido lo lee el CSS para que el panel nazca del lado del
+    // disparador y no contra él.
+    this.panel.dataset.dir = cabeAbajo ? 'down' : 'up';
     this.panel.style.top = `${Math.round(top)}px`;
     this.panel.style.left = `${Math.round(left)}px`;
   };
 
   cerrar(devolverFoco = false) {
     if (!this.abierto) return;
+    // Quitar `open` dispara la salida; el panel sigue visible hasta que la
+    // transición termina, porque `display` y `overlay` van con allow-discrete.
     this.removeAttribute('open');
+
     if (this.enCapaSuperior) {
       this.panel.hidePopover();
-      // Las coordenadas se borran al cerrar: si no, quedarían puestas para un
-      // camino que ya no las usa.
-      this.panel.style.top = '';
-      this.panel.style.left = '';
       window.removeEventListener('scroll', this.colocar);
       window.removeEventListener('resize', this.colocar);
+    } else {
+      // Sin capa superior no hay allow-discrete que valga: se espera a que la
+      // transición acabe para esconderlo, o la salida no se vería.
+      this.esperarSalida();
     }
-    this.panel.hidden = true;
+
     this.boton.setAttribute('aria-expanded', 'false');
     // Al cerrar con teclado o con la X el foco vuelve al disparador; al elegir
     // una talla no, porque Dawn recarga la sección y el foco se perdería igual.
     if (devolverFoco) this.boton.focus();
+  }
+
+  /** Esconde el panel cuando termina la animación de salida. */
+  esperarSalida() {
+    clearTimeout(this.tempSalida);
+    const fin = () => {
+      if (!this.abierto) this.panel.hidden = true;
+    };
+    this.panel.addEventListener('transitionend', fin, { once: true });
+    // Reserva por si la transición no llega a correr (pestaña oculta, menos
+    // movimiento pedido): el panel tiene que esconderse igual.
+    this.tempSalida = setTimeout(fin, 320);
   }
 
   elegir(valor) {
