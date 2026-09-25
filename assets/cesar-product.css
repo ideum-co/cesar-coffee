@@ -638,6 +638,9 @@ cesar-size-select[open] .cesar-size__panel {
   /* Fuera del área que se desplaza: con la lista desplazándose, el título y
      la X tienen que seguir a la vista. */
   flex: none;
+  /* Ancla de la X, que va en absoluto con top:50%. Sin esto se cuelga del
+     panel entero y aterriza en mitad de la lista. */
+  position: relative;
   padding: var(--cc-space-4) var(--cc-space-12);
   background-color: var(--cc-cream);
 }
