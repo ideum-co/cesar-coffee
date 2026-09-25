@@ -12,12 +12,21 @@ class CesarSizeSelect extends HTMLElement {
     if (!this.select) return;
 
     this.construir();
+
+    // Toda la píldora abre el selector, no sólo el texto: el botón mide lo que
+    // mide su contenido, así que en el campo ancho la mayor parte del recuadro
+    // quedaba muerta. El contenedor es de Dawn y no se puede envolver, así que
+    // se escucha en él.
+    this.pildora = this.closest('.product-form__input--dropdown') || this;
+    this.pildora.addEventListener('click', this.onPildoraClick);
+
     this.select.addEventListener('change', this.onSelectChange);
     document.addEventListener('click', this.onDocumentClick);
     this.addEventListener('keydown', this.onKeyDown);
   }
 
   disconnectedCallback() {
+    this.pildora?.removeEventListener('click', this.onPildoraClick);
     this.select?.removeEventListener('change', this.onSelectChange);
     document.removeEventListener('click', this.onDocumentClick);
     this.removeEventListener('keydown', this.onKeyDown);
@@ -124,6 +133,10 @@ class CesarSizeSelect extends HTMLElement {
       window.addEventListener('resize', this.colocar);
     }
     this.setAttribute('open', '');
+    // La clase va en la píldora, que es el padre: el estilo del aro no puede
+    // depender de :has() sobre un atributo que cambia en caliente, porque el
+    // navegador no siempre reevalúa la regla.
+    this.pildora?.classList.add('cesar-dropdown--open');
     this.boton.setAttribute('aria-expanded', 'true');
 
     // preventScroll: el foco se mueve por accesibilidad, no para llevar la
@@ -190,6 +203,7 @@ class CesarSizeSelect extends HTMLElement {
       this.esperarSalida();
     }
 
+    this.pildora?.classList.remove('cesar-dropdown--open');
     this.boton.setAttribute('aria-expanded', 'false');
     // Al cerrar con teclado o con la X el foco vuelve al disparador; al elegir
     // una talla no, porque Dawn recarga la sección y el foco se perdería igual.
@@ -219,8 +233,20 @@ class CesarSizeSelect extends HTMLElement {
 
   onSelectChange = () => this.sincronizar();
 
+  onPildoraClick = (event) => {
+    // El botón y el panel se manejan solos: aquí sólo llega lo que queda de
+    // píldora alrededor (el relleno y la etiqueta).
+    if (event.target.closest('.cesar-size__trigger, .cesar-size__panel')) return;
+    this.alternar();
+  };
+
   onDocumentClick = (event) => {
-    if (this.abierto && !this.contains(event.target)) this.cerrar();
+    if (!this.abierto) return;
+    // La píldora es el PADRE del elemento, así que un clic en su relleno cae
+    // fuera de `this`: sin contarla, abrir desde ahí cerraba en el mismo
+    // gesto. El panel sí es descendiente aunque viva en la capa superior.
+    const dentro = this.contains(event.target) || this.pildora?.contains(event.target);
+    if (!dentro) this.cerrar();
   };
 
   onKeyDown = (event) => {

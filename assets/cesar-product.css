@@ -321,6 +321,40 @@ pickup-availability-drawer .pickup-availability-drawer-button {
   background-color: rgba(45, 18, 6, 0.06);
 }
 
+/* ---------- La píldora entera abre el selector ----------
+   El botón mide lo que mide su texto, así que en el campo ancho la mayor
+   parte del recuadro no respondía. El clic lo recoge el script; aquí va lo
+   que lo hace evidente: el cursor en todo el recuadro y el aro de estado.
+
+   El aro va en box-shadow y no en border: un borde cambiaría el tamaño del
+   recuadro al aparecer y los dos campos bailarían. */
+.product-form__input--dropdown:has(.cesar-size__trigger) {
+  cursor: pointer;
+  box-shadow: inset 0 0 0 0 transparent;
+  transition:
+    box-shadow 140ms var(--cc-ease),
+    background-color 140ms var(--cc-ease);
+}
+
+.product-form__input--dropdown:has(.cesar-size__trigger):hover {
+  background-color: rgba(45, 18, 6, 0.09);
+}
+
+/* Abierto o enfocado con el teclado: aro de marca completo. El foco del botón
+   deja de dibujar el suyo, que quedaría dentro de este.
+
+   La clase de abierto la pone el script: con :has() sobre el atributo el
+   navegador no siempre reevalúa la regla al cambiarlo en caliente. */
+.product-form__input--dropdown.cesar-dropdown--open,
+.product-form__input--dropdown:has(.cesar-size__trigger:focus-visible) {
+  background-color: rgba(45, 18, 6, 0.09);
+  box-shadow: inset 0 0 0 2px var(--cc-brown-900);
+}
+
+.product-form__input--dropdown:has(.cesar-size__trigger) .cesar-size__trigger:focus-visible {
+  outline: none;
+}
+
 .product-form__input--dropdown .form__label {
   display: block;
   margin: 0 0 2px;
