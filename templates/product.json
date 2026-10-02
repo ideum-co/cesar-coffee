@@ -186,7 +186,7 @@
           "settings": {
             "image": "shopify://shop_images/icon-coffee-beans-1.svg",
             "show_origins": false,
-            "title": "Tasting Notes",
+            "title": "Tasting Notes&nbsp;",
             "text": "{{ product.metafields.custom.coffee_notes | metafield_tag }}",
             "link_label": "",
             "link": ""
