@@ -14,6 +14,10 @@
   margin-block: var(--cc-space-6);
 }
 
+.cesar-purchase[hidden] {
+  display: none;
+}
+
 /* ---------- Tarjeta ---------- */
 
 .cesar-purchase__option-wrap,

@@ -37,13 +37,16 @@
   endfor
 -%}
 
-{%- if has_plans -%}
   <cesar-purchase-options
+    id="CesarPurchase-{{ section_id }}-{{ block.id }}"
     class="cesar-purchase"
     data-section="{{ section_id }}"
+    {% unless has_plans %}hidden{% endunless %}
     {{ block.shopify_attributes }}
   >
+    {%- if has_plans -%}
     {%- comment -%} Compra única {%- endcomment -%}
+    {%- unless product.requires_selling_plan -%}
     <label class="cesar-purchase__option" for="CesarOneTime-{{ section_id }}">
       <input
         type="radio"
@@ -57,6 +60,7 @@
       <span class="cesar-purchase__label">{{ block.settings.one_time_label }}</span>
       <span class="cesar-purchase__price">{{ variant.price | money }}</span>
     </label>
+    {%- endunless -%}
 
     {%- comment -%} Suscripción {%- endcomment -%}
     {%- assign first_allocation = allocations[0] -%}
@@ -68,6 +72,7 @@
           name="cesar-purchase-{{ section_id }}"
           value="{{ first_allocation.selling_plan.id }}"
           data-plan="{{ first_allocation.selling_plan.id }}"
+          {% if product.requires_selling_plan %}checked{% endif %}
         >
         <span class="cesar-purchase__dot" aria-hidden="true"></span>
         <span class="cesar-purchase__label">{{ block.settings.subscribe_label }}</span>
@@ -122,5 +127,5 @@
       Shopify lo interpreta como suscripción sólo si lleva un id de plan.
     {%- endcomment -%}
     <input type="hidden" name="selling_plan" value="" form="{{ product_form_id }}" data-selling-plan>
+    {%- endif -%}
   </cesar-purchase-options>
-{%- endif -%}

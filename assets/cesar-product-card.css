@@ -187,6 +187,11 @@
 
 .cesar-pcard__size,
 .cesar-pcard__submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
   pointer-events: auto;
 }
 

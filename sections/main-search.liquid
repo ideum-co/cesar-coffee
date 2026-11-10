@@ -274,6 +274,7 @@
                         {%- capture product_settings -%}{%- if section.settings.product_show_vendor -%}vendor,{%- endif -%}title,price{%- endcapture -%}
                         {% render 'card-product',
                           card_product: item,
+                          section_id: section.id,
                           media_aspect_ratio: section.settings.image_ratio,
                           image_shape: section.settings.image_shape,
                           show_secondary_image: section.settings.show_secondary_image,

@@ -109,6 +109,7 @@
                   <li id="Slide-{{ section.id }}-{{ forloop.index }}" class="grid__item slider__slide" {% render 'cesar-motion', s: section.settings, i: forloop.index0 %}>
                     {% render 'card-product',
                       card_product: producto,
+                      section_id: section.id,
                       media_aspect_ratio: section.settings.image_ratio,
                       show_secondary_image: section.settings.show_secondary_image,
                       show_vendor: section.settings.show_vendor,

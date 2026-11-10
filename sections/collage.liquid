@@ -93,8 +93,10 @@
               </div>
             {%- when 'product' -%}
               {%- assign placeholder_image = 'product-apparel-' | append: placeholder_image_index -%}
+              {% assign card_section_id = section.id | append: '-' | append: block.id %}
               {% render 'card-product',
                 card_product: block.settings.product,
+                section_id: card_section_id,
                 media_aspect_ratio: 'adapt',
                 show_secondary_image: block.settings.second_image,
                 extend_height: true,

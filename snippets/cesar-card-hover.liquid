@@ -36,11 +36,16 @@
     assign has_sizes = true
   endif
 
+  assign requires_options = false
+  if card_product.options_with_values.size > 1 or card_product.requires_selling_plan
+    assign requires_options = true
+  endif
+
   assign hover_media = card_product.media[1] | default: card_product.featured_media
   assign form_id = 'CesarCardForm-' | append: section_id | append: '-' | append: card_product.id
 -%}
 
-<div class="cesar-pcard__hover" aria-hidden="true" data-cesar-card-hover>
+<div class="cesar-pcard__hover" data-cesar-card-hover>
   {%- if hover_media != blank -%}
     {{
       hover_media
@@ -60,6 +65,11 @@
     añadido, perdiendo el sitio donde estaba el cliente.
   {%- endcomment -%}
   <cesar-card-picker class="cesar-pcard__panel" data-url="{{ card_product.url }}">
+    {%- if requires_options and card_product.available -%}
+      <a class="cesar-pcard__submit" href="{{ card_product.url }}" aria-label="{{ 'products.product.choose_options' | t | escape }}: {{ card_product.title | escape }}">
+        {{ 'products.product.choose_options' | t }}
+      </a>
+    {%- else -%}
     <product-form data-section-id="{{ section_id }}">
       <div class="product-form__error-message-wrapper cesar-pcard__error" role="alert" hidden>
         <span class="product-form__error-message"></span>
@@ -148,5 +158,6 @@
       </button>
     {%- endform -%}
     </product-form>
+    {%- endif -%}
   </cesar-card-picker>
 </div>

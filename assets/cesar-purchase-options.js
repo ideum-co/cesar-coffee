@@ -9,19 +9,45 @@
  */
 class CesarPurchaseOptions extends HTMLElement {
   connectedCallback() {
+    this.bindControls();
+    this.addEventListener('change', this.onChange);
+    this.unsubscribeVariant?.();
+    this.unsubscribeVariant = subscribe(PUB_SUB_EVENTS.variantChange, this.onVariantChange);
+  }
+
+  bindControls() {
     this.hidden_input = this.querySelector('[data-selling-plan]');
     this.detail = this.querySelector('[data-detail]');
     this.frequency = this.querySelector('[data-frequency]');
     this.subPrice = this.querySelector('[data-sub-price]');
     if (!this.hidden_input) return;
 
-    this.addEventListener('change', this.onChange);
     this.sync();
   }
 
   disconnectedCallback() {
     this.removeEventListener('change', this.onChange);
+    this.unsubscribeVariant?.();
   }
+
+  onVariantChange = ({ data }) => {
+    if (String(data.sectionId) !== this.dataset.section) return;
+    const updated = data.html.getElementById(this.id);
+    if (!updated) return;
+    const previousPlan = this.hidden_input?.value;
+    this.innerHTML = updated.innerHTML;
+    this.hidden = updated.hidden;
+    this.bindControls();
+    if (!previousPlan || !this.hidden_input) return;
+    const radio = [...this.querySelectorAll('input[data-plan]')].find((input) => input.dataset.plan === previousPlan);
+    const option = this.frequency && [...this.frequency.options].find((item) => item.value === previousPlan);
+    if (radio || option) {
+      if (option) this.frequency.value = previousPlan;
+      const subscription = radio || this.querySelector('input[data-plan]:not([data-plan=""])');
+      if (subscription) subscription.checked = true;
+      this.sync();
+    }
+  };
 
   onChange = (event) => {
     // Al cambiar la frecuencia, la opción de suscripción pasa a estar elegida:
@@ -34,7 +60,8 @@ class CesarPurchaseOptions extends HTMLElement {
   };
 
   sync() {
-    const selected = this.querySelector('input[type="radio"]:checked');
+    if (!this.hidden_input) return;
+    const selected = [...this.querySelectorAll('input[type="radio"]')].find((input) => input.checked);
     const isSubscription = !!(selected && selected.dataset.plan);
 
     let plan = isSubscription ? selected.dataset.plan : '';
