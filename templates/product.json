@@ -553,23 +553,11 @@
             "date": "",
             "answered_by": "Cesar's Coffee Cup"
           }
-        },
-        "question_q4WrX8": {
-          "type": "question",
-          "settings": {
-            "question": "How long does the coffee stay fresh?",
-            "answer": "<p>Best within four weeks of the roast date printed on the bag. After that it is still safe to drink, just less aromatic.</p>",
-            "author": "",
-            "verified": true,
-            "date": "",
-            "answered_by": "Cesar's Coffee Cup"
-          }
         }
       },
       "block_order": [
         "judge_me_reviews_review_widget_Feh7Dm",
-        "question_LwPdfe",
-        "question_q4WrX8"
+        "question_LwPdfe"
       ],
       "name": "Cesar · Reseñas y Q&A",
       "settings": {
@@ -578,7 +566,7 @@
         "text_alignment": "center",
         "reviews_label": "Reviews",
         "reviews_title": "From Our Community",
-        "reviews_source": "judgeme",
+        "reviews_source": "app_block",
         "qa_label": "Q&A",
         "qa_title": "Questions & Answers",
         "verified_label": "Verified User",
