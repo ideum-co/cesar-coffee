@@ -1,7 +1,8 @@
 .cesar-story { display: block; background: var(--story-bg); color: var(--story-text); padding: var(--story-padding) 24px; }
 .cesar-story__container { max-width: var(--story-width); margin-inline: auto; }
 .cesar-story__heading { color: var(--story-title); font-size: var(--story-heading-size); text-align: var(--story-align); margin: 0 0 32px; }
-.cesar-story__track { position: relative; display: flex; align-items: stretch; gap: 24px; overflow-x: auto; padding-block: 4px 16px; scrollbar-width: thin; }
+.cesar-story__track { position: relative; display: flex; align-items: stretch; gap: 24px; overflow-x: auto; padding-block: 4px 16px; scrollbar-width: none; }
+.cesar-story__track::-webkit-scrollbar { display: none; }
 .cesar-story__card { box-sizing: border-box; flex: 0 0 calc((100% - 24px) / 3); min-width: 0; padding: 32px; border-radius: var(--story-radius); background: var(--story-card); transition: flex-basis 650ms cubic-bezier(.22,1,.36,1); }
 .cesar-story__card.is-open { flex-basis: calc((100% - 24px) * 2 / 3); }
 .cesar-story__card { position: relative; }
