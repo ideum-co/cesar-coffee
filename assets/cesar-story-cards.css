@@ -6,6 +6,8 @@
 .cesar-story__card.is-open { flex-basis: calc((100% - 24px) * 2 / 3); }
 .cesar-story__icon { display: block; width: var(--story-icon); height: var(--story-icon); object-fit: contain; margin-bottom: 28px; }
 .cesar-story__title { color: var(--story-title); font-size: var(--story-title-size); line-height: 1.2; margin: 0 0 12px; }
+.cesar-story .cesar-story__body,
+.cesar-story .cesar-story__body p { max-width: none; width: 100%; margin-inline: 0; }
 .cesar-story__body { font-size: var(--story-body-size); line-height: 1.7; }
 .cesar-story__body > :first-child { margin-top: 0; }
 .cesar-story__body > :last-child { margin-bottom: 0; }
@@ -15,9 +17,15 @@
 .cesar-story__navigation { display: flex; justify-content: flex-end; gap: 12px; margin-top: 12px; }
 .cesar-story__navigation button { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid currentColor; border-radius: 50%; background: var(--story-card); color: var(--story-link); cursor: pointer; font-size: 22px; }
 .cesar-story__navigation button:disabled { opacity: .35; cursor: default; }
-.cesar-story__toggle { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; padding: 8px 0; border: 0; background: transparent; color: var(--story-link); font: inherit; font-size: 14px; font-weight: 600; text-decoration: underline; text-underline-offset: 5px; cursor: pointer; }
+.cesar-story__toggle { display: flex; width: fit-content; margin-left: auto; align-items: center; justify-content: flex-end; gap: 12px; min-height: 44px; padding: 8px 0; border: 0; background: transparent; color: var(--story-link); font: inherit; font-size: 14px; font-weight: 600; text-decoration: none; cursor: pointer; }
+.cesar-story__toggle [data-story-label] { text-decoration: underline; text-underline-offset: 5px; }
+.cesar-story__toggle:hover [data-story-label] { text-decoration-thickness: 2px; }
+.cesar-story__toggle:active { opacity: .75; }
 .cesar-story__toggle:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
-.cesar-story__toggle span:last-child { font-size: 20px; transition: transform 450ms; }
+.cesar-story__toggle span:last-child { position: relative; display: block; flex: 0 0 16px; width: 16px; height: 16px; font-size: 0; text-decoration: none; transition: transform 450ms; }
+.cesar-story__toggle span:last-child::before,
+.cesar-story__toggle span:last-child::after { content: ''; position: absolute; top: 50%; left: 50%; width: 12px; height: 2px; background: currentColor; transform: translate(-50%, -50%); }
+.cesar-story__toggle span:last-child::after { transform: translate(-50%, -50%) rotate(90deg); }
 .cesar-story__card.is-open .cesar-story__toggle span:last-child { transform: rotate(45deg); }
 .cesar-story__body.is-entering { animation: story-reveal 500ms cubic-bezier(.22,1,.36,1) both; }
 @keyframes story-reveal { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
