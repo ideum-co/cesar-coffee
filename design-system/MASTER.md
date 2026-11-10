@@ -163,7 +163,7 @@ Sistema tomado del `.cta` de la referencia, normalizado a la base de 1440px
 | `--cc-cta-font-size` | 16px | `--font-size` |
 | `--cc-cta-line` | 1.3 | `--base-line: 1.3rem` |
 | `--cc-cta-weight` | 700 | `--font-bold` |
-| `--cc-cta-transition` | 0.35s | `--transition-speed` |
+| `--cc-cta-transition` | 220ms | Alias de `--cc-duration` compartido |
 
 El padding conserva la referencia, con un mínimo visual de **44px** compartido
 por `.cc-btn` y los botones nativos. El token `--cc-control-height-sm` evita que
@@ -225,9 +225,28 @@ Sin sombras decorativas. Las cards se separan del fondo por color
 
 ## 6. Movimiento
 
-Duración 150–300ms, `ease-out` al entrar. Solo `transform` y `opacity`.
-Sin parallax. `prefers-reduced-motion` desactiva toda animación de entrada
-(Dawn ya trae `animations_reveal_on_scroll`; se respeta el media query).
+| Interacción | Duración | Propósito |
+|---|---|---|
+| Colores/estado de CTA | 220ms (`--cc-duration`) | Respuesta a hover y pulsación |
+| Entrada de sección | 550ms (`--cc-motion-reveal-duration`) | Jerarquía al entrar en pantalla |
+| Escalonado | Pasos de 60ms, máximo 240ms | Secuencia sin retrasar listas largas |
+| Descripción expandible | 450ms | Apertura/cierre de lectura |
+| Coffee stories | 650ms | Expansión de la card seleccionada aprobada |
+
+Las entradas animan `transform` y `opacity`; los botones enumeran propiedades
+visuales y no usan `transition: all`. Las expansiones de lectura/cards son
+excepciones de layout existentes y se deben comprobar con texto largo en móvil.
+El foco de teclado revela inmediatamente los ancestros animados.
+
+El parallax es opcional por sección y sólo calcula los contenedores en pantalla.
+Se conserva donde el comerciante lo ha activado; no se añade a secciones nuevas
+por defecto. `prefers-reduced-motion` mantiene visible todo el contenido,
+desactiva entradas/parallax/feedback de movimiento y desplaza filtros y Coffee
+stories de forma instantánea. El carrusel conserva su animación aprobada en modo
+normal; al terminar la expansión ajusta la posición a la geometría final.
+
+Sin JavaScript, Coffee stories muestra todo el texto como artículos apilados,
+sin extractos duplicados ni controles de apertura/navegación inertes.
 
 ---
 

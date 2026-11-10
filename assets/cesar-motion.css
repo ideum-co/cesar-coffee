@@ -9,15 +9,20 @@
 
 /* ---------- Entrada ---------- */
 
+@media (prefers-reduced-motion: no-preference) {
 .cesar-motion [data-cesar-reveal]:not([data-cesar-reveal='none']) {
   transition:
-    opacity 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
-    transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
+    opacity var(--cc-motion-reveal-duration, 550ms) var(--cc-ease),
+    transform var(--cc-motion-reveal-duration, 550ms) var(--cc-ease);
   transition-delay: var(--cesar-reveal-delay, 0ms);
 }
 
 .cesar-motion [data-cesar-reveal]:not([data-cesar-reveal='none']):not(.is-in) {
   opacity: 0;
+}
+
+.cesar-motion [data-cesar-reveal].is-in {
+  opacity: 1;
 }
 
 .cesar-motion [data-cesar-reveal='fade-up']:not(.is-in) {
@@ -34,7 +39,7 @@
 
 /* Al terminar, se retira la transición: un elemento que después cambie de
    transform por su cuenta (una card en hover, la marquesina) no debe arrastrar
-   estos 0.9s. */
+   la duración de entrada. */
 .cesar-motion [data-cesar-reveal].is-in.is-done {
   transition: none;
 }
@@ -51,4 +56,18 @@
   transform: translate3d(0, var(--cesar-py, 0px), 0) scale(var(--cesar-pscale, 1.12));
   transform-origin: center;
   will-change: transform;
+}
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.cesar-motion [data-cesar-reveal]:not([data-cesar-reveal='none']) {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  html.cesar-motion [data-cesar-parallax] [data-cesar-parallax-el] {
+    transform: none;
+    will-change: auto;
+  }
 }

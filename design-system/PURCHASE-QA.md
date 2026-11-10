@@ -43,3 +43,12 @@ control heights, heading leading, merchant buy-height overrides and preservation
 of product-card dimensions. Happy DOM does not perform browser layout: clipping,
 actual text wrapping, gestures, visual alignment and live app CSS remain manual
 browser checks. It is not a visual regression screenshot suite.
+
+## Motion and interaction checks
+
+`motion-regression.test.mjs` checks reduced-motion media queries, capped reveal
+delays, keyboard visibility, filter listener cleanup, non-JavaScript story text,
+CTA transition properties and final carousel alignment. Scroll methods and
+offset positions are controlled test boundaries because Happy DOM has no layout
+engine. Real smoothness, frame rate, horizontal scrolling and resize behaviour
+still require browser verification. The approved 650ms story expansion is kept.

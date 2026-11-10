@@ -76,7 +76,7 @@
   --cc-cta-line: 1.3;
   --cc-cta-weight: 700;
   --cc-cta-letter-space: -0.01em;
-  --cc-cta-transition: 0.35s;
+  --cc-cta-transition: var(--cc-duration);
 
   /* ---- Forma ---- */
   --cc-radius-sm: 8px;
@@ -107,6 +107,9 @@
   /* ---- Movimiento ---- */
   --cc-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --cc-duration: 220ms;
+  --cc-motion-reveal-duration: 550ms;
+  --cc-motion-stagger-step: 60ms;
+  --cc-motion-stagger-max: 240ms;
 }
 
 /* Las familias de marca son las del sitio, también para los componentes
@@ -306,7 +309,12 @@ h3,
   text-decoration: none;
   cursor: pointer;
   border: none;
-  transition: all var(--cc-cta-transition);
+  transition:
+    background-color var(--cc-duration) var(--cc-ease),
+    color var(--cc-duration) var(--cc-ease),
+    border-color var(--cc-duration) var(--cc-ease),
+    box-shadow var(--cc-duration) var(--cc-ease),
+    transform var(--cc-duration) var(--cc-ease);
 }
 
 /* La superficie interactiva sigue el mismo mínimo que el botón. */
@@ -384,7 +392,37 @@ button.shopify-payment-button__button--unbranded {
   font-weight: var(--cc-cta-weight);
   line-height: var(--cc-cta-line);
   letter-spacing: var(--cc-cta-letter-space);
-  transition: all var(--cc-cta-transition);
+  transition:
+    background-color var(--cc-duration) var(--cc-ease),
+    color var(--cc-duration) var(--cc-ease),
+    border-color var(--cc-duration) var(--cc-ease),
+    box-shadow var(--cc-duration) var(--cc-ease),
+    transform var(--cc-duration) var(--cc-ease);
+}
+
+.cc-btn:active:not(:disabled):not([aria-disabled='true']),
+.button:active:not(:disabled):not([aria-disabled='true']) {
+  transform: translateY(1px);
+}
+
+.cc-btn:disabled,
+.button:disabled {
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cc-btn,
+  .button,
+  .shopify-challenge__button,
+  .customer button,
+  button.shopify-payment-button__button--unbranded {
+    transition: none;
+  }
+
+  .cc-btn:active:not(:disabled):not([aria-disabled='true']),
+  .button:active:not(:disabled):not([aria-disabled='true']) {
+    transform: none;
+  }
 }
 
 /* ---------- Chips de filtro ---------- */

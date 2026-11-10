@@ -6,8 +6,8 @@
 .cesar-story__card { box-sizing: border-box; flex: 0 0 calc((100% - 24px) / 3); min-width: 0; padding: 32px; border-radius: var(--story-radius); background: var(--story-card); transition: flex-basis 650ms cubic-bezier(.22,1,.36,1); }
 .cesar-story__card.is-open { flex-basis: calc((100% - 24px) * 2 / 3); }
 .cesar-story__card { position: relative; }
-.cesar-story__card:not(.is-open) { cursor: pointer; }
-.cesar-story__card:not(.is-open) .cesar-story__toggle::after { content: ''; position: absolute; inset: 0; z-index: 1; border-radius: var(--story-radius); }
+.cesar-story--ready .cesar-story__card:not(.is-open) { cursor: pointer; }
+.cesar-story--ready .cesar-story__card:not(.is-open) .cesar-story__toggle::after { content: ''; position: absolute; inset: 0; z-index: 1; border-radius: var(--story-radius); }
 .cesar-story__card:not(.is-open):has(.cesar-story__toggle:hover) [data-story-label] { text-decoration-thickness: 2px; }
 .cesar-story__card:not(.is-open):has(.cesar-story__toggle:focus-visible) { outline: 2px solid var(--story-link); outline-offset: -3px; }
 .cesar-story__icon { display: block; width: var(--story-icon); height: var(--story-icon); object-fit: contain; margin-bottom: 28px; }
@@ -17,12 +17,15 @@
 .cesar-story__body { font-size: var(--story-body-size); line-height: 1.7; }
 .cesar-story__body > :first-child { margin-top: 0; }
 .cesar-story__body > :last-child { margin-bottom: 0; }
-.cesar-story__card:not(.is-open) .cesar-story__body { display: none; }
-.cesar-story__preview { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; overflow: hidden; font-size: var(--story-body-size); line-height: 1.7; margin: 0 0 12px; }
+.cesar-story--ready .cesar-story__card:not(.is-open) .cesar-story__body { display: none; }
+.cesar-story__preview { display: none; -webkit-box-orient: vertical; -webkit-line-clamp: 4; overflow: hidden; font-size: var(--story-body-size); line-height: 1.7; margin: 0 0 12px; }
+.cesar-story--ready .cesar-story__card:not(.is-open) .cesar-story__preview { display: -webkit-box; }
 .cesar-story__card.is-open .cesar-story__preview { display: none; }
 .cesar-story__navigation { display: flex; justify-content: flex-end; gap: 12px; margin-top: 12px; }
 .cesar-story__navigation button { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid currentColor; border-radius: 50%; background: var(--story-card); color: var(--story-link); cursor: pointer; font-size: 22px; }
 .cesar-story__navigation button:disabled { opacity: .35; cursor: default; }
+.cesar-story__navigation button:not(:disabled):hover { background: var(--story-link); color: var(--story-card); }
+.cesar-story__navigation button:focus-visible { outline: 2px solid var(--story-link); outline-offset: 3px; }
 .cesar-story__toggle { display: flex; width: fit-content; margin-left: auto; align-items: center; justify-content: flex-end; gap: 12px; min-height: 44px; padding: 8px 0; border: 0; background: transparent; color: var(--story-link); font: inherit; font-size: 14px; font-weight: 600; text-decoration: none; cursor: pointer; }
 .cesar-story__toggle [data-story-label] { text-decoration: underline; text-underline-offset: 5px; }
 .cesar-story__toggle:hover [data-story-label] { text-decoration-thickness: 2px; }
@@ -38,3 +41,6 @@
 @media (max-width: 989px) { .cesar-story__card { padding: 24px; } }
 @media (max-width: 749px) { .cesar-story { padding-inline: 20px; } .cesar-story__track { gap: 16px; } .cesar-story__card { flex: 0 0 65%; min-width: 0; } .cesar-story__card.is-open { flex: 0 0 90%; } }
 @media (prefers-reduced-motion: reduce) { .cesar-story__card, .cesar-story__toggle span:last-child { transition: none; } .cesar-story__body.is-entering { animation: none; } }
+.cesar-story:not(.cesar-story--ready) .cesar-story__track { display: grid; grid-template-columns: 1fr; overflow: visible; }
+.cesar-story:not(.cesar-story--ready) .cesar-story__toggle,
+.cesar-story:not(.cesar-story--ready) .cesar-story__navigation { display: none; }

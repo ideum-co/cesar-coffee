@@ -3,6 +3,7 @@ if (!customElements.get('cesar-story-cards')) {
     connectedCallback() {
       this.abort?.abort();
       this.abort = new AbortController();
+      this.classList.add('cesar-story--ready');
       this.addEventListener('click', (event) => {
         const navigation = event.target.closest('[data-story-direction]');
         if (navigation) {
@@ -16,13 +17,20 @@ if (!customElements.get('cesar-story-cards')) {
         if (button) this.open(button.closest('[data-story-card]'));
       }, { signal: this.abort.signal });
       this.updateNavigation();
-      requestAnimationFrame(() => this.reveal(this.querySelector('.is-open'), false));
+      this.initialFrame = requestAnimationFrame(() => this.reveal(this.querySelector('.is-open'), false));
+      this.addEventListener('transitionend', (event) => {
+        if (event.propertyName !== 'flex-basis' || !event.target.matches('[data-story-card].is-open')) return;
+        this.reveal(event.target, true);
+      }, { signal: this.abort.signal });
       this.addEventListener('shopify:block:select', (event) => {
         const card = event.target.closest('[data-story-card]');
         if (card) this.open(card);
       }, { signal: this.abort.signal });
     }
-    disconnectedCallback() { this.abort?.abort(); }
+    disconnectedCallback() {
+      this.abort?.abort();
+      cancelAnimationFrame(this.initialFrame);
+    }
     open(selected) {
       if (selected.classList.contains('is-open')) return;
       this.querySelectorAll('[data-story-card]').forEach((card) => {

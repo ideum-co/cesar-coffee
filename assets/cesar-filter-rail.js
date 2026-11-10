@@ -28,8 +28,10 @@ class CesarFilterRail extends HTMLElement {
     };
     this.carril.addEventListener('scroll', this.onScroll, { passive: true });
 
-    this.prev?.addEventListener('click', () => this.desplazar(-1));
-    this.next?.addEventListener('click', () => this.desplazar(1));
+    this.onPrevious = () => this.desplazar(-1);
+    this.onNext = () => this.desplazar(1);
+    this.prev?.addEventListener('click', this.onPrevious);
+    this.next?.addEventListener('click', this.onNext);
 
     // El ancho disponible cambia al redimensionar, y el del contenido al
     // aplicar un filtro: la fila de resultados se vuelve a pintar con otros
@@ -64,6 +66,8 @@ class CesarFilterRail extends HTMLElement {
 
   disconnectedCallback() {
     this.carril?.removeEventListener('scroll', this.onScroll);
+    this.prev?.removeEventListener('click', this.onPrevious);
+    this.next?.removeEventListener('click', this.onNext);
     this.removeEventListener('toggle', this.onToggle, true);
     window.removeEventListener('resize', this.onViewportChange);
     window.removeEventListener('scroll', this.onViewportChange);
@@ -90,7 +94,8 @@ class CesarFilterRail extends HTMLElement {
   /** Un paso deja a la vista algo de lo ya visto, para no perder el hilo. */
   desplazar(sentido) {
     const paso = Math.max(this.carril.clientWidth * 0.8, 200);
-    this.carril.scrollBy({ left: paso * sentido, behavior: 'smooth' });
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.carril.scrollBy({ left: paso * sentido, behavior: reduced ? 'instant' : 'smooth' });
   }
 
   actualizar() {

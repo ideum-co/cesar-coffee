@@ -28,17 +28,25 @@
   // Avisa al guardián de theme.liquid de que el script ha llegado.
   window.cesarMotionReady = true;
 
-  const PASO_MS = 90;
+  const tokens = getComputedStyle(html);
+  const PASO_MS = parseFloat(tokens.getPropertyValue('--cc-motion-stagger-step')) || 60;
+  const MAX_DELAY_MS = parseFloat(tokens.getPropertyValue('--cc-motion-stagger-max')) || 240;
+  const REVEAL_MS = parseFloat(tokens.getPropertyValue('--cc-motion-reveal-duration')) || 550;
 
   /* ---------- Entradas ---------- */
 
   const mostrar = (el) => {
+    if (el.classList.contains('is-in')) return;
     el.classList.add('is-in');
-    // Tras la transición se retira, para que el elemento vuelva a ser un
-    // elemento normal (hover, marquesina...) sin arrastrar estos 0.9s.
-    el.addEventListener('transitionend', () => el.classList.add('is-done'), { once: true });
-    // Reserva por si no llega el evento (elemento sin transición visible).
-    setTimeout(() => el.classList.add('is-done'), 1400);
+    const terminar = (event) => {
+      if (event && event.target !== el) return;
+      el.classList.add('is-done');
+      el.removeEventListener('transitionend', terminar);
+      clearTimeout(timer);
+    };
+    const delay = parseFloat(el.style.getPropertyValue('--cesar-reveal-delay')) || 0;
+    const timer = setTimeout(terminar, REVEAL_MS + delay + 100);
+    el.addEventListener('transitionend', terminar);
   };
 
   const observadorEntrada = new IntersectionObserver(
@@ -59,7 +67,7 @@
       if (el.dataset.cesarReveal === 'none' || el.classList.contains('is-in')) return;
 
       const i = parseInt(el.dataset.cesarRevealI, 10);
-      if (!Number.isNaN(i)) el.style.setProperty('--cesar-reveal-delay', `${i * PASO_MS}ms`);
+      if (!Number.isNaN(i)) el.style.setProperty('--cesar-reveal-delay', `${Math.min(MAX_DELAY_MS, Math.max(0, i) * PASO_MS)}ms`);
 
       // Lo que ya está en pantalla al cargar se muestra en cuanto el
       // observador lo vea; lo que está por debajo espera al scroll.
@@ -94,7 +102,7 @@
   };
 
   const programar = () => {
-    if (pendiente) return;
+    if (pendiente || reducido.matches || !activos.size) return;
     pendiente = true;
     requestAnimationFrame(pintar);
   };
@@ -134,6 +142,14 @@
 
   const arrancar = () => {
     preparar(document);
+    document.addEventListener('focusin', (event) => {
+      let el = event.target.closest('[data-cesar-reveal]');
+      while (el) {
+        el.classList.add('is-in', 'is-done');
+        observadorEntrada.unobserve(el);
+        el = el.parentElement?.closest('[data-cesar-reveal]');
+      }
+    });
 
     // Lo que llega después de cargar —los recomendados que Dawn trae por
     // fetch, un cajón que se abre— también lleva atributos, y sin observar
@@ -150,7 +166,7 @@
     }
   };
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', arrancar);
+    document.addEventListener('DOMContentLoaded', arrancar, { once: true });
   } else {
     arrancar();
   }
