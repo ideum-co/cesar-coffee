@@ -9,6 +9,7 @@
         <article class="cesar-story__card{% if forloop.index == active_index %} is-open{% endif %}" data-story-card {{ block.shopify_attributes }}>
           {% if block.settings.icon != blank %}{{ block.settings.icon | image_url: width: 240 | image_tag: class: 'cesar-story__icon', loading: 'lazy', alt: '' }}{% endif %}
           <h3 class="cesar-story__title">{{ block.settings.title | escape }}</h3>
+          <p class="cesar-story__preview">{{ block.settings.text | strip_html | truncate: 240 | escape }}</p>
           <div id="Story-{{ section.id }}-{{ block.id }}" class="cesar-story__body rte">{{ block.settings.text }}</div>
           <button class="cesar-story__toggle" type="button" data-story-toggle aria-controls="Story-{{ section.id }}-{{ block.id }}" aria-expanded="{% if forloop.index == active_index %}true{% else %}false{% endif %}">
             <span data-story-label>{% if forloop.index == active_index %}{{ section.settings.less_label | escape }}{% else %}{{ section.settings.more_label | escape }}{% endif %}</span><span aria-hidden="true">+</span>
@@ -16,6 +17,12 @@
         </article>
       {% endfor %}
     </div>
+    {% if section.blocks.size > 1 %}
+      <div class="cesar-story__navigation">
+        <button type="button" data-story-direction="-1" aria-label="Previous card">&#8592;</button>
+        <button type="button" data-story-direction="1" aria-label="Next card">&#8594;</button>
+      </div>
+    {% endif %}
   </div>
 </cesar-story-cards>
 {% schema %}
