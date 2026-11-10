@@ -4,6 +4,11 @@
 .cesar-story__track { position: relative; display: flex; align-items: stretch; gap: 24px; overflow-x: auto; padding-block: 4px 16px; scrollbar-width: thin; }
 .cesar-story__card { box-sizing: border-box; flex: 0 0 calc((100% - 24px) / 3); min-width: 0; padding: 32px; border-radius: var(--story-radius); background: var(--story-card); transition: flex-basis 650ms cubic-bezier(.22,1,.36,1); }
 .cesar-story__card.is-open { flex-basis: calc((100% - 24px) * 2 / 3); }
+.cesar-story__card { position: relative; }
+.cesar-story__card:not(.is-open) { cursor: pointer; }
+.cesar-story__card:not(.is-open) .cesar-story__toggle::after { content: ''; position: absolute; inset: 0; z-index: 1; border-radius: var(--story-radius); }
+.cesar-story__card:not(.is-open):has(.cesar-story__toggle:hover) [data-story-label] { text-decoration-thickness: 2px; }
+.cesar-story__card:not(.is-open):has(.cesar-story__toggle:focus-visible) { outline: 2px solid var(--story-link); outline-offset: -3px; }
 .cesar-story__icon { display: block; width: var(--story-icon); height: var(--story-icon); object-fit: contain; margin-bottom: 28px; }
 .cesar-story__title { color: var(--story-title); font-size: var(--story-title-size); line-height: 1.2; margin: 0 0 12px; }
 .cesar-story .cesar-story__body,
