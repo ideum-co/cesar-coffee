@@ -82,7 +82,7 @@ diferenciada por peso y ancho — no por mezcla de familias.
 | Rol | Familia | Peso | Uso |
 |---|---|---|---|
 | Display | **Bebas Neue** | 400 | Hero. Mayúsculas, `line-height: 0.9`. Sólo tiene un peso: pedirle 700 lo engorda sintéticamente. |
-| Heading | **Helvetica Neue** → Inter | 700–800 | Títulos. `letter-spacing: -0.03em`, `line-height: 0.88`. |
+| Heading | **Helvetica Neue** → Inter | 700–800 | Títulos. `letter-spacing: -0.03em`, `line-height: 1.1`. |
 | Body | **Helvetica Neue** → Inter | 400 | Texto corrido. `line-height: 1.55`. |
 | Label | Helvetica Neue → Inter | 500–700 | Nav, botones, chips. |
 
@@ -165,9 +165,10 @@ Sistema tomado del `.cta` de la referencia, normalizado a la base de 1440px
 | `--cc-cta-weight` | 700 | `--font-bold` |
 | `--cc-cta-transition` | 0.35s | `--transition-speed` |
 
-Da un botón de **37px de alto**, igual que la referencia. Como está por debajo
-del mínimo táctil, `.cc-btn::after` extiende el área de toque a 44px sin tocar
-el tamaño visual ni el layout.
+El padding conserva la referencia, con un mínimo visual de **44px** compartido
+por `.cc-btn` y los botones nativos. El token `--cc-control-height-sm` evita que
+las dos familias tengan alturas distintas. Se usa `border-box` para que un
+botón secundario con borde no crezca respecto al primario.
 
 Los botones nativos de Dawn comparten estos tokens. Se les quita el
 `min-width: 120px` que traen (deforma los botones cortos del diseño) y se les
@@ -175,8 +176,19 @@ deja `min-height: 44px`, porque ahí no hay un pseudo-elemento libre que usar.
 
 ### Titulares
 
-Interlineado **0.88** y tracking **-0.03em** en los titulares grandes (la
-referencia usa 0.85 y -0.03em). Peso 800–900.
+Interlineado **1.1** (`--cc-leading-heading`) y tracking **-0.03em** en los
+titulares compartidos para dar aire a textos multilínea. El display del hero
+conserva su interlineado **0.9**. Los títulos de card de producto conservan
+**14px / 1.25**. El cuerpo usa **1.55** (`--cc-leading-body`).
+
+| Rol de control | Token | Valor |
+|---|---|---|
+| CTA compacto y búsqueda | `--cc-control-height-sm` | 44px |
+| Campos y envío de contacto/newsletter | `--cc-control-height-md` | 48px |
+| Cantidad y Add to cart en PDP | `--cc-control-height-lg` | 56px |
+
+La PDP conserva la prioridad de `--cesar-buy-height` si se configura. Los
+textareas mantienen su alto multilínea; no se fuerzan a 48px.
 
 | Token | Valor | Uso |
 |---|---|---|
@@ -186,7 +198,10 @@ referencia usa 0.85 y -0.03em). Peso 800–900.
 | `--cc-radius-pill` | 999px | Chips activos, badges |
 
 Espaciado en ritmo de 4/8px: `4 8 12 16 24 32 48 64 96 128`.
-Separación vertical entre secciones: 96px desktop / 56px móvil.
+Separación vertical de `.cc-section`: 96px desktop / 56px móvil. La separación
+de título a contenido compartida por Tiers y Cards es 32px
+(`--cc-section-heading-gap`). Los paddings configurados en secciones nativas y
+los tamaños/colores elegidos en el personalizador no se reescriben.
 Ancho de contenido: 1400px (el diseño usa layouts anchos, no los 1200 de Dawn).
 
 Sin sombras decorativas. Las cards se separan del fondo por color
@@ -202,7 +217,7 @@ Sin sombras decorativas. Las cards se separan del fondo por color
   notas de cata en gris, rating con estrellas, precio. Sin sombra.
 - **Chip de filtro** — píldora. Inactivo: `--cc-cream` con texto marrón.
   Activo: `--cc-brown-700` con texto blanco y una "×" para limpiar.
-- **Botón primario** — marrón `#2D1206`, texto blanco, radio `sm`, padding 12/24.
+- **Botón primario** — marrón `#2D1206`, texto blanco, radio `sm`, padding mediante los tokens CTA y mínimo 44px.
 - **Botón secundario** — borde de 1.5px marrón sobre transparente.
 - **Banner de sección** — bloque a sangre con titular en `--cc-yellow` sobre verde.
 

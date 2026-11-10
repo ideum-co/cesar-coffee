@@ -56,6 +56,12 @@
   font-size: var(--cc-text-body);
 }
 
+.cesar-contact input.field__input,
+.cesar-contact .select__select {
+  height: var(--cc-control-height-md);
+  min-height: var(--cc-control-height-md);
+}
+
 .cesar-contact .select__select {
   /* En base.css el select se queda en 12px y a un 75% de opacidad, que junto
      al fondo claro no llega al contraste mínimo. */
@@ -117,7 +123,7 @@
      pequeño de la página. */
   min-width: 160px;
   /* mínimo táctil */
-  min-height: 48px;
+  min-height: var(--cc-control-height-md);
   background-color: var(--cesar-btn-bg, var(--cc-brown-900));
   color: var(--cesar-btn-text, #fff);
 }

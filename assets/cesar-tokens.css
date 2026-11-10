@@ -55,6 +55,11 @@
   --cc-text-body: 16px;
   --cc-text-sm: 14px;
   --cc-text-xs: 12px;
+  --cc-leading-heading: 1.1;
+  --cc-leading-body: 1.55;
+  --cc-control-height-sm: 44px;
+  --cc-control-height-md: 48px;
+  --cc-control-height-lg: 56px;
 
   /* ---- Botones ----
      Valores tomados del sistema de la referencia, normalizados a la base de
@@ -87,11 +92,13 @@
   --cc-space-6: 24px;
   --cc-space-8: 32px;
   --cc-space-12: 48px;
+  --cc-space-14: 56px;
   --cc-space-16: 64px;
   --cc-space-24: 96px;
   --cc-space-32: 128px;
 
   --cc-section-gap: var(--cc-space-24);
+  --cc-section-heading-gap: var(--cc-space-8);
   /* Layout a sangre: la referencia no pone tope de ancho, sólo gutters
      constantes de ~21-23px. El gutter y el hueco del grid son la misma unidad. */
   --cc-content-width: none;
@@ -117,6 +124,7 @@
    solo al enfocar un input. Se fija en 16px en todos los tamaños. */
 body {
   font-size: var(--cc-text-body);
+  line-height: var(--cc-leading-body);
 }
 
 /* ---------- Titulares de las secciones nativas de Dawn ----------
@@ -138,7 +146,7 @@ h5,
 .h5 {
   font-weight: var(--cc-font-heading-weight-black, 800);
   letter-spacing: -0.03em;
-  line-height: 1;
+  line-height: var(--cc-leading-heading);
 }
 
 .h0 {
@@ -162,7 +170,7 @@ h3,
 
 @media screen and (max-width: 749px) {
   :root {
-    --cc-section-gap: var(--cc-space-12);
+    --cc-section-gap: var(--cc-space-14);
     --cc-gutter: 20px;
   }
 }
@@ -187,7 +195,7 @@ h3,
   font-family: var(--cc-font-sans, var(--cc-fallback-sans));
   font-weight: var(--cc-font-heading-weight-black, 800);
   letter-spacing: -0.03em;
-  line-height: 0.88;
+  line-height: var(--cc-leading-heading);
   color: var(--cc-brown-700);
   margin: 0;
 }
@@ -211,7 +219,7 @@ h3,
 
 .cc-body {
   font-size: var(--cc-text-body);
-  line-height: 1.55;
+  line-height: var(--cc-leading-body);
   color: var(--cc-text);
   /* 65-75 caracteres por línea */
   max-width: 68ch;
@@ -279,6 +287,8 @@ h3,
 
 .cc-btn {
   position: relative;
+  box-sizing: border-box;
+  min-height: var(--cc-control-height-sm);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -299,15 +309,14 @@ h3,
   transition: all var(--cc-cta-transition);
 }
 
-/* El botón de la referencia mide ~37px de alto, por debajo del mínimo táctil.
-   Se conserva el tamaño visual y se extiende sólo el área de toque. */
+/* La superficie interactiva sigue el mismo mínimo que el botón. */
 .cc-btn::after {
   content: '';
   position: absolute;
   inset: 50% 0 auto;
   translate: 0 -50%;
   height: 100%;
-  min-height: 44px;
+  min-height: var(--cc-control-height-sm);
 }
 
 
@@ -363,12 +372,13 @@ h3,
 .shopify-challenge__button,
 .customer button,
 button.shopify-payment-button__button--unbranded {
+  box-sizing: border-box;
   padding: var(--cc-cta-padding-y) var(--cc-cta-padding-x);
   /* Dawn fuerza 120px de ancho mínimo, que deforma los botones cortos del
      diseño. El alto sí se mantiene en el mínimo táctil de 44px (la referencia
      usa 37px, pero el padding y el radio se respetan). */
   min-width: 0;
-  min-height: 44px;
+  min-height: var(--cc-control-height-sm);
   border-radius: var(--cc-cta-radius);
   font-size: var(--cc-cta-font-size);
   font-weight: var(--cc-cta-weight);

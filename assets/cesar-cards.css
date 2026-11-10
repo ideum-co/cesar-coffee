@@ -4,11 +4,11 @@
  */
 
 .cesar-cards__heading {
-  margin: 0 0 var(--cc-space-8);
+  margin: 0 0 var(--cc-section-heading-gap);
   font-family: var(--cc-font-sans, var(--cc-fallback-sans));
   font-size: var(--cc-text-h2);
   font-weight: var(--cc-font-heading-weight-black, 800);
-  line-height: 0.95;
+  line-height: var(--cc-leading-heading);
   letter-spacing: -0.03em;
   color: var(--cc-brown-700);
 }

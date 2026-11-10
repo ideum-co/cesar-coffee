@@ -3,8 +3,7 @@
  *
  * Se despliega desde el header como una fila a todo el ancho: lupa a la
  * izquierda, input que ocupa todo el hueco y botón "Search" a la derecha.
- * Medidas tomadas de la referencia: input y botón de 37px, texto de 16px,
- * lupa de 17px, fila de 89px de alto.
+ * Input y botón comparten el token compacto de 44px, con texto de 16px.
  *
  * Dawn ya usa <details> para abrirla, así que el estado abierto es
  * details[open] y no hace falta JS adicional.
@@ -119,7 +118,7 @@
 .search-modal__content .search__input {
   flex: 1 1 auto;
   min-width: 0;
-  height: 37px;
+  height: var(--cc-control-height-sm);
   padding: 0 var(--cc-space-3);
   background: transparent;
   border: 0;
@@ -172,7 +171,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 37px;
+  height: var(--cc-control-height-sm);
   width: auto;
   padding: var(--cc-cta-padding-y) var(--cc-space-6);
   background-color: var(--cc-brown-900);
@@ -196,8 +195,7 @@
   outline-offset: 3px;
 }
 
-/* Igual que el resto de botones: el alto visual es el del diseño y el área
-   táctil se extiende a 44px sin mover el layout. */
+/* La superficie interactiva comparte el mínimo de los botones compactos. */
 .search-modal__content .search__button::after {
   content: '';
   position: absolute;

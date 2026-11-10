@@ -8,7 +8,7 @@
   font-size: var(--cc-text-h1);
   font-weight: var(--cc-font-heading-weight-black, 800);
   letter-spacing: -0.03em;
-  line-height: 1;
+  line-height: var(--cc-leading-heading);
   color: var(--cc-brown-700);
 }
 
@@ -130,8 +130,8 @@
 .product-form__quantity .quantity,
 .cesar-buybox .product-form__submit {
   box-sizing: border-box;
-  height: var(--cesar-buy-height, 56px);
-  min-height: var(--cesar-buy-height, 56px);
+  height: var(--cesar-buy-height, var(--cc-control-height-lg));
+  min-height: var(--cesar-buy-height, var(--cc-control-height-lg));
   padding-block: 0;
 }
 

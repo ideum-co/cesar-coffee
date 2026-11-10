@@ -13,7 +13,7 @@ Install `liquidjs@10.30.1` and `happy-dom@21.0.4` in a temporary directory
 theme root:
 
 ```sh
-CESAR_TEST_DEPS=/absolute/path/to/test/node_modules node --test design-system/purchase-regression.test.mjs
+CESAR_TEST_DEPS=/absolute/path/to/test/node_modules node --test design-system/*.test.mjs
 python3 design-system/validate-templates.py
 shopify theme check --fail-level error
 ```
@@ -34,3 +34,12 @@ shopify theme check --fail-level error
 - Verify cart drawer, quantity, rejected additions and return focus on mobile/desktop.
 
 No subscription app block or merchant template is enabled by this changeset.
+
+## Shared UI style checks
+
+`ui-consistency.test.mjs` checks resolved CSS properties in Happy DOM with the
+real base stylesheet and custom styles. It covers desktop/mobile media queries,
+control heights, heading leading, merchant buy-height overrides and preservation
+of product-card dimensions. Happy DOM does not perform browser layout: clipping,
+actual text wrapping, gestures, visual alignment and live app CSS remain manual
+browser checks. It is not a visual regression screenshot suite.

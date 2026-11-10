@@ -107,7 +107,8 @@
 
 .cesar-newsletter__input {
   width: 100%;
-  min-height: 44px;
+  box-sizing: border-box;
+  min-height: var(--cc-control-height-md);
   padding: var(--cc-space-2) 0;
   background: transparent;
   border: 0;
@@ -146,14 +147,15 @@
 }
 
 .cesar-newsletter__button {
-  min-height: 44px;
+  box-sizing: border-box;
+  min-height: var(--cc-control-height-md);
   padding: var(--cc-space-3) var(--cc-space-6);
   background-color: var(--cc-cream);
   color: var(--cc-brown-900);
   border: 0;
   border-radius: var(--cc-radius-sm);
   font-family: inherit;
-  font-size: var(--cc-text-sm);
+  font-size: var(--cc-cta-font-size);
   font-weight: 600;
   cursor: pointer;
   transition: background-color var(--cc-duration) var(--cc-ease);
