@@ -212,6 +212,11 @@
 
 .search-modal__content .reset__button {
   flex: 0 0 auto;
+  position: relative;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  left: auto;
   width: 44px;
   height: 44px;
   color: var(--cc-brown-500);

@@ -37,6 +37,13 @@ test('search input and submit use the same 44px control height', () => {
   assert.equal(css('.search__button').height, '44px');
 });
 
+test('header search reset stays in flow instead of overlapping the submit target', () => {
+  const css = fixture('<div class="search-modal__content"><form class="search search-modal__form"><div class="field"><input class="search__input field__input"><button type="reset" class="reset__button field__button">Clear</button><button class="search__button field__button">Search</button></div></form></div>', ['cesar-search.css', 'component-search.css']);
+  assert.equal(css('.reset__button').position, 'relative');
+  assert.equal(css('.reset__button').right, 'auto');
+  assert.equal(css('.reset__button').top, 'auto');
+});
+
 test('contact fields and submit share the 48px form minimum', () => {
   const css = fixture('<div class="cesar-contact"><input class="field__input"><select class="select__select"></select><button class="cesar-contact__submit">Send</button></div>', ['cesar-contact.css']);
   assert.equal(css('.field__input').minHeight, '48px');
