@@ -195,6 +195,11 @@
   pointer-events: auto;
 }
 
+.card-wrapper.product-card-wrapper a.cesar-pcard__submit,
+.card-wrapper.product-card-wrapper a.cesar-pcard__submit:hover {
+  text-decoration: none;
+}
+
 /* ---------- Lista de tamaños ---------- */
 
 .cesar-pcard__sizes {

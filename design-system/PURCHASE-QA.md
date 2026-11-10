@@ -44,6 +44,11 @@ of product-card dimensions. Happy DOM does not perform browser layout: clipping,
 actual text wrapping, gestures, visual alignment and live app CSS remain manual
 browser checks. It is not a visual regression screenshot suite.
 
+The underline state tests substitute `:hover` with a fixture attribute in test
+stylesheet copies to exercise the cascade, including Dawn's late-loaded card
+stylesheet. They do not emulate a real pointer or verify painted text-decoration
+propagation; those checks still require a browser.
+
 ## Motion and interaction checks
 
 `motion-regression.test.mjs` checks reduced-motion media queries, capped reveal

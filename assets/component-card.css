@@ -401,7 +401,7 @@
     transform: scale(1.03);
   }
 
-  .underline-links-hover:hover a {
+  .underline-links-hover a:hover:not(.button):not(.cc-btn):not(.cesar-pcard__submit) {
     text-decoration: underline;
     text-underline-offset: 0.3rem;
   }

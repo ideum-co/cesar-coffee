@@ -211,6 +211,15 @@ Sin sombras decorativas. Las cards se separan del fondo por color
 
 ## 5. Componentes clave
 
+### Enlaces y botones
+
+Los enlaces de texto no llevan subrayado en reposo; lo muestran al hacer hover.
+Los CTA visuales (incluido Choose options en cards) no llevan subrayado en
+ningún estado. Las cards completas enlazadas mantienen su tratamiento visual,
+sin subrayar todo su contenido. See more es una acción de texto: sólo su etiqueta
+se subraya en hover, nunca el icono. Se conservan los indicadores de foco y los
+tachados de precios anteriores o variantes agotadas.
+
 - **Badge de línea** — círculo (Gold/Green/Silver) en la esquina superior derecha
   de cada card de producto. SVG de marca, no generado por CSS.
 - **Card de producto** — fondo blanco, radio `md`, imagen sobre blanco, título,

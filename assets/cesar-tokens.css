@@ -122,6 +122,33 @@
   --font-heading-family: var(--cc-fallback-sans);
 }
 
+body a:any-link,
+body .link,
+body .underlined-link,
+body .header__active-menu-item {
+  text-decoration: none;
+}
+
+body a:any-link:hover,
+body .link:hover,
+body .underlined-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+body :is(a, button):is(.button, .cc-btn, .cesar-pcard__submit, .cesar-fbanner__button, .cesar-cl__button, .cesar-pt__button, .cesar-steps__button, .cesar-sug__button, .cesar-card__link, .cesar-mq__card),
+body :is(a, button):is(.button, .cc-btn, .cesar-pcard__submit, .cesar-fbanner__button, .cesar-cl__button, .cesar-pt__button, .cesar-steps__button, .cesar-sug__button, .cesar-card__link, .cesar-mq__card):hover {
+  text-decoration: none;
+}
+
+body details[open] > .header__menu-item {
+  text-decoration: none;
+}
+
+body details[open] > .header__menu-item:hover {
+  text-decoration: underline;
+}
+
 /* Dawn deja el cuerpo en 15px por debajo de 750px y sólo sube a 16px en
    desktop. Va al revés de lo que conviene: por debajo de 16px, iOS hace zoom
    solo al enfocar un input. Se fija en 16px en todos los tamaños. */
