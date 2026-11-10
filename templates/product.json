@@ -167,6 +167,61 @@
         "color_scheme": ""
       }
     },
+    "cesar_story_cards_QkMr8F": {
+      "type": "cesar-story-cards",
+      "blocks": {
+        "story_WBxGVh": {
+          "type": "story",
+          "settings": {
+            "icon": "shopify://shop_images/icon-colombia.svg",
+            "title": "Origin & Process",
+            "text": "<p>{{ product.metafields.custom.origin_process | metafield_tag }}</p>"
+          }
+        },
+        "story_U8dfte": {
+          "type": "story",
+          "settings": {
+            "icon": "shopify://shop_images/icon-coffee-beans-1.svg",
+            "title": "Tasting Notes",
+            "text": "{{ product.metafields.custom.coffee_notes | metafield_tag }}"
+          }
+        },
+        "story_Red434": {
+          "type": "story",
+          "settings": {
+            "icon": "shopify://shop_images/icon-coffee-beans.svg",
+            "title": "Roast & Dispatch",
+            "text": "<p>{{ product.metafields.custom.roast_dispatch | metafield_tag }}</p>"
+          }
+        }
+      },
+      "block_order": [
+        "story_WBxGVh",
+        "story_U8dfte",
+        "story_Red434"
+      ],
+      "name": "Cesar · Coffee stories",
+      "settings": {
+        "heading": "",
+        "active_card": 1,
+        "more_label": "See more",
+        "less_label": "Currently reading",
+        "limit_width": false,
+        "max_width": 1400,
+        "padding": 40,
+        "radius": 32,
+        "icon_size": 80,
+        "heading_size": 40,
+        "title_size": 24,
+        "text_size": 16,
+        "alignment": "left",
+        "bg": "#EBEBED",
+        "card_bg": "#FFFFFF",
+        "title_color": "#4A3120",
+        "text_color": "#4A3120",
+        "link_color": "#4A3120"
+      }
+    },
     "product_features": {
       "type": "multicolumn",
       "blocks": {
@@ -209,6 +264,7 @@
         "notes",
         "roast"
       ],
+      "disabled": true,
       "settings": {
         "title": "",
         "heading_size": "h0",
@@ -575,6 +631,7 @@
   "order": [
     "main",
     "cesar_product_faq_UaBRNr",
+    "cesar_story_cards_QkMr8F",
     "product_features",
     "cesar_suggested_A9fCn4",
     "cesar_line_marquee_WhaG6J",
