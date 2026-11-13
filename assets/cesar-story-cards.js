@@ -17,6 +17,13 @@ if (!customElements.get('cesar-story-cards')) {
         if (button) this.open(button.closest('[data-story-card]'));
       }, { signal: this.abort.signal });
       this.updateNavigation();
+      const track = this.querySelector('.cesar-story__track');
+      track.addEventListener('scrollend', () => {
+        if (!matchMedia('(max-width: 749px)').matches) return;
+        const start = track.getBoundingClientRect().left;
+        const visible = [...track.children].find((card) => Math.abs(card.getBoundingClientRect().left - start) < 2);
+        if (visible) this.open(visible, false);
+      }, { signal: this.abort.signal });
       this.initialFrame = requestAnimationFrame(() => this.reveal(this.querySelector('.is-open'), false));
       this.addEventListener('transitionend', (event) => {
         if (event.propertyName !== 'flex-basis' || !event.target.matches('[data-story-card].is-open')) return;
@@ -31,7 +38,7 @@ if (!customElements.get('cesar-story-cards')) {
       this.abort?.abort();
       cancelAnimationFrame(this.initialFrame);
     }
-    open(selected) {
+    open(selected, scroll = true) {
       if (selected.classList.contains('is-open')) return;
       this.querySelectorAll('[data-story-card]').forEach((card) => {
         const active = card === selected;
@@ -42,7 +49,7 @@ if (!customElements.get('cesar-story-cards')) {
         card.querySelector('.cesar-story__body').classList.toggle('is-entering', active);
       });
       this.updateNavigation();
-      this.reveal(selected, true);
+      if (scroll) this.reveal(selected, true);
     }
     updateNavigation() {
       const cards = [...this.querySelectorAll('[data-story-card]')];
@@ -57,7 +64,8 @@ if (!customElements.get('cesar-story-cards')) {
       const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
       const cards = [...track.children];
       const index = cards.indexOf(selected);
-      const target = index === cards.length - 1 && index > 0 ? cards[index - 1] : selected;
+      const singleCard = matchMedia('(max-width: 749px)').matches;
+      const target = !singleCard && index === cards.length - 1 && index > 0 ? cards[index - 1] : selected;
       track.scrollTo({ left: target.offsetLeft, behavior: !animate || reduced ? 'instant' : 'smooth' });
     }
   });
