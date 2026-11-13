@@ -1,6 +1,6 @@
 <product-info
   id="MainProduct-{{ section.id }}"
-  class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}"
+  class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }} cesar-pdp"
   data-section="{{ section.id }}"
   data-product-id="{{ product.id }}"
   data-update-url="true"
@@ -121,6 +121,20 @@
                       price_class: 'price--large'
                     -%}
                   </div>
+                  {%- liquid
+                    assign notes_field = product.metafields.cesar.tasting_notes | default: product.metafields.custom.cesar_tasting_notes
+                    assign notes = notes_field.value
+                    if notes_field.type == 'list.metaobject_reference'
+                      assign notes = notes_field.value | map: 'name' | map: 'value' | compact | join: ' · '
+                    elsif notes_field.type contains 'list.'
+                      assign notes = notes | join: ' · '
+                    endif
+                  -%}
+                  {%- if notes != blank -%}
+                    <p class="cesar-pdp__mobile-notes">
+                      <strong>{{ 'products.product.tastes_like' | t }}:</strong> {{ notes | escape }}
+                    </p>
+                  {%- endif -%}
                   {%- if product.quantity_price_breaks_configured? -%}
                     <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
                       <span>{{ 'products.product.volume_pricing.note' | t }}</span>

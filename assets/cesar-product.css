@@ -60,6 +60,43 @@
   overflow: hidden;
 }
 
+.cesar-pdp__mobile-notes {
+  display: none;
+}
+
+@media screen and (max-width: 749px) {
+  .cesar-pdp .product__media-wrapper .product-media-container.media-type-image {
+    width: 100%;
+  }
+
+  .cesar-pdp .product__media-wrapper .media-type-image .product__media {
+    padding-top: 0;
+    height: clamp(190px, 36vh, 290px);
+    height: clamp(190px, 36svh, 290px);
+  }
+
+  .cesar-pdp .product__media-wrapper .media-type-image .product__media img {
+    object-fit: contain;
+  }
+
+  .cesar-pdp .product__media-wrapper .product__modal-opener--image .product__media-zoom-none,
+  .cesar-pdp .product__media-wrapper .product__modal-opener--image .product__media-icon--none {
+    display: flex;
+  }
+
+  .cesar-pdp .product__media-wrapper .product__modal-opener--image .product__media-icon {
+    opacity: 1;
+    pointer-events: none;
+  }
+
+  .cesar-pdp .cesar-pdp__mobile-notes {
+    display: block;
+    margin-block: var(--cc-space-2);
+    font-size: var(--cc-text-body);
+    overflow-wrap: anywhere;
+  }
+}
+
 /* Bloque de la app de suscripciones (Shopify Subscriptions).
    Se añade desde el personalizador como bloque de app; aquí sólo se le da
    el contenedor de marca para que no desentone. */
